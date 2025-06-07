@@ -99,21 +99,9 @@
         "/var/log"
         "/srv"
       ];
-      users.erik = {
-        home = "/home/erik";
-      };
     };
   };
   programs.fuse.userAllowOther = true;
-  system.activationScripts.persistent-dirs.text = let
-    mkHomePersist = user:
-      lib.optionalString user.createHome ''
-        mkdir -p /persist/home/erik
-        chown erik:erik /persist/home/erik
-        chmod 755 /persist/home/erik
-      '';
-    users = lib.attrValues config.users.users;
-  in lib.concatLines (map mkHomePersist users);
 
   # Sudo settings
   security.sudo = {
