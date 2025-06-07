@@ -102,6 +102,9 @@
     };
   };
   programs.fuse.userAllowOther = true;
+  systemd.tmpfiles.rules = [
+    "d /persist/home/erik 0755 erik erik -"
+  ];
 
   # Sudo settings
   security.sudo = {
