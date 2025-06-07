@@ -23,7 +23,7 @@
       mkdir /tmp -p
       MNTPOINT=$(mktemp -d)
       (
-        mount -t btrfs -o subvol=/ /dev/disk/by-label/${config.networking.hostName} "$MNTPOINT"
+        mount -t btrfs -o subvol=/ /dev/disk/by-label/xps "$MNTPOINT"
         trap 'umount "$MNTPOINT"' EXIT
 
         echo "Creating needed directories"
@@ -45,7 +45,6 @@
   environment = {
     defaultPackages = lib.mkForce [];
     systemPackages = with pkgs; [
-      bashInteractive
       btrfs-progs
       coreutils
       ffmpeg
@@ -61,20 +60,6 @@
       unzip
       zip
     ];
-  };
-
-  # Font settings
-  fonts = {
-    packages = with pkgs; [
-      font-awesome
-      nerd-fonts.noto
-      nerd-fonts.hack
-    ];
-    fontconfig.defaultFonts = {
-      serif = [ "NotoSerif Nerd Font" ];
-      sansSerif = [ "NotoSans Nerd Font" ];
-      monospace = [ "Hack Nerd Font Mono" ];
-    };
   };
 
   # Locale settings
@@ -110,7 +95,7 @@
       directories = [
         "/var/lib/systemd"
         "/var/lib/nixos"
-        "/etc/nixos-config"
+        "/etc/nixos"
         "/var/log"
         "/srv"
       ];
@@ -123,9 +108,9 @@
   system.activationScripts.persistent-dirs.text = let
     mkHomePersist = user:
       lib.optionalString user.createHome ''
-        mkdir -p /persist/${user.home}
-        chown ${user.name}:${user.group} /persist/${user.home}
-        chmod ${user.homeMode} /persist/${user.home}
+        mkdir -p /persist/home/erik
+        chown erik:erik /persist/home/erik
+        chmod 755 /persist/home/erik
       '';
     users = lib.attrValues config.users.users;
   in lib.concatLines (map mkHomePersist users);
@@ -172,20 +157,11 @@
         inputs.impermanence.nixosModules.home-manager.impermanence
       ];
 
-      nix = {
-        package = pkgs.nix;
-        settings = {
-          experimental-features = [ "nix-command" "flakes" ];
-          warn-dirty = false;
-        };
-      };
-
       home = {
         username = "erik";
         homeDirectory = "/home/erik";
         stateVersion = "25.11";
-        sessionPath = [ "$HOME/.local/bin" ];
-        sessionVariables = { NH_FLAKE = "$HOME/workspace/nixos"; };
+        sessionPath = [ "/home/erik/.local/bin" ];
       };
 
       home.persistence."/persist/home/erik" = {
@@ -195,14 +171,13 @@
           "documents"
           "downloads"
           "music"
-          "nixos-config"
           "pictures"
           "public"
-          "templates"
           "videos"
           "workspace"
           ".local/bin"
           ".local/share/nix"
+          ".ssh"
         ];
       };
 
@@ -212,58 +187,14 @@
         home-manager.enable = true;
       };
 
-      home.packages = with pkgs; [
-        alejandra
-        bash-language-server
-        nh
-        nix-search-tv
-        nixd
-        prettierd
-      ];
-
       programs.bash = {
         enable = true;
-        shellAliases = {
-          ".." = "cd ..";
-          "..." = "cd ../..";
-          ls = "lsd";
-          ll = "lsd -l";
-          la = "lsd -a";
-          lla = "lsd -la";
-          lt = "lsd --tree";
-        };
-      };
-
-      programs.btop.enable = true;
-      programs.direnv.enable = true;
-      programs.fzf.enable = true;
-
-      programs.gh = {
-        enable = true;
-        settings = {
-          git_protocol = "ssh";
-          editor = "nvim";
-        };
       };
 
       programs.git = {
         enable = true;
-        userName = "Erik";
-        userEmail = "ek@ek.com";
-      };
-
-      programs.lazygit.enable = true;
-
-      programs.neovim = {
-        enable = true;
-        viAlias = true;
-        vimAlias = true;
-        withNodeJs = true;
-        extraConfig = ''
-          lua << EOF
-          require("erik")
-          EOF
-        '';
+        userName = "Erik Kowald";
+        userEmail = "ek01992@proton.me";
       };
     };
   };

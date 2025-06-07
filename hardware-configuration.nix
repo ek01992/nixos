@@ -20,7 +20,7 @@
         "sd_mod"
         "ahci"
       ];
-      kernelModules = [ "kvm-intel" ];
+      kernelModules = [ "" ];
       supportedFilesystems = [ "btrfs" ];
     };
     loader = {
