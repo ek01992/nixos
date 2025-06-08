@@ -49,22 +49,11 @@ in
                     mountpoint = "/swap";
                     mountOptions = [ "noatime" ];
                   };
-
-                  # This is the blank snapshot for your ephemeral root setup
-                  "/@blank" = { };
                 };
               };
             };
           };
         };
-      };
-    };
-    # Define the swap file within the @swap subvolume
-    swap = {
-      swapfile = {
-        type = "swap";
-        file = "/swap/swapfile";
-        size = "8G";
       };
     };
   };
