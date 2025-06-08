@@ -20,8 +20,7 @@
         "sd_mod"
         "ahci"
       ];
-      kernelModules = [  ];
-      supportedFilesystems = [ "btrfs" ];
+      kernelModules = ["kvm-intel"];
     };
     loader = {
       systemd-boot = {
@@ -32,41 +31,17 @@
     };
   };
 
-  fileSystems = {
-    "/boot" = {
-      device = "/dev/disk/by-label/ESP";
-      fsType = "vfat";
-    };
-    "/" = {
-      device = "/dev/disk/by-label/xps";
-      fsType = "btrfs";
-      options = [ "subvol=@" "compress=zstd" ];
-    };
-
-    "/nix" = {
-      device = "/dev/disk/by-label/xps";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" "noatime" "compress=zstd" ];
-    };
-
-    "/persist" = {
-      device = "/dev/disk/by-label/xps";
-      fsType = "btrfs";
-      options = [ "subvol=@persist" "compress=zstd" ];
-      neededForBoot = true;
-    };
-
-    "/swap" = {
-      device = "/dev/disk/by-label/xps";
-      fsType = "btrfs";
-      options = [ "subvol=@swap" "noatime" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/ESP";
+    fsType = "vfat";
   };
 
-  swapDevices = [{
-    device = "/swap/swapfile";
-    size = 8196;
-  }];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 8196;
+    }
+  ];
 
   nixpkgs.hostPlatform.system = "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = true;

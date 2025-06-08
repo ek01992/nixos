@@ -4,9 +4,32 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  phase1Systemd = config.boot.initrd.systemd.enable;
+  wipeScript = ''
+    mkdir /tmp -p
+    MNTPOINT=$(mktemp -d)
+    (
+      mount -t btrfs -o subvol=/ /dev/disk/by-label/xps "$MNTPOINT"
+      trap 'umount "$MNTPOINT"' EXIT
+
+      echo "Creating needed directories"
+      mkdir -p "$MNTPOINT"/persist/var/{log,lib/{nixos,systemd}}
+
+      echo "Cleaning root subvolume"
+      btrfs subvolume list -o "$MNTPOINT/@" | cut -f9 -d ' ' | sort |
+      while read -r subvolume; do
+        btrfs subvolume delete "$MNTPOINT/$subvolume"
+      done && btrfs subvolume delete "$MNTPOINT/@"
+
+      echo "Restoring blank subvolume"
+      btrfs subvolume snapshot "$MNTPOINT/@blank" "$MNTPOINT/@"
+    )
+  '';
+in {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix
     inputs.impermanence.nixosModules.impermanence
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -18,33 +41,51 @@
   hardware.enableRedistributableFirmware = true;
 
   # Bootloader and ephemeral root settings from the old hardware config
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [ "console=tty1" ];
-    loader.timeout = 5;
+  boot.initrd = {
+    supportedFilesystems = ["btrfs"];
+    postDeviceCommands = lib.mkIf (!phase1Systemd) (lib.mkBefore wipeScript);
+    systemd.services.restore-root = lib.mkIf phase1Systemd {
+      description = "Rollback btrfs rootfs";
+      wantedBy = ["initrd.target"];
+      requires = [
+        "dev-disk-by\\x2dlabel-xps.device"
+      ];
+      after = [
+        "dev-disk-by\\x2dlabel-xps.device"
+        "systemd-cryptsetup@xps.service"
+      ];
+      before = ["sysroot.mount"];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = wipeScript;
+    };
+  };
 
-    initrd.postDeviceCommands = let
-    wipeScript = ''
-      mkdir /tmp -p
-      MNTPOINT=$(mktemp -d)
-      (
-        mount -t btrfs -o subvol=/ /dev/disk/by-label/xps "$MNTPOINT"
-        trap 'umount "$MNTPOINT"' EXIT
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/xps";
+      fsType = "btrfs";
+      options = ["subvol=@" "compress=zstd"];
+    };
 
-        echo "Creating needed directories"
-        mkdir -p "$MNTPOINT"/persist/var/{log,lib/{nixos,systemd}}
+    "/nix" = {
+      device = "/dev/disk/by-label/xps";
+      fsType = "btrfs";
+      options = ["subvol=@nix" "noatime" "compress=zstd"];
+    };
 
-        echo "Cleaning root subvolume"
-        btrfs subvolume list -o "$MNTPOINT/@" | cut -f9 -d ' ' | sort |
-        while read -r subvolume; do
-          btrfs subvolume delete "$MNTPOINT/$subvolume"
-        done && btrfs subvolume delete "$MNTPOINT/@"
+    "/persist" = {
+      device = "/dev/disk/by-label/xps";
+      fsType = "btrfs";
+      options = ["subvol=@persist" "compress=zstd"];
+      neededForBoot = true;
+    };
 
-        echo "Restoring blank subvolume"
-        btrfs subvolume snapshot "$MNTPOINT/@blank" "$MNTPOINT/@"
-      )
-    '';
-    in lib.mkBefore wipeScript;
+    "/swap" = {
+      device = "/dev/disk/by-label/xps";
+      fsType = "btrfs";
+      options = ["subvol=@swap" "noatime"];
+    };
   };
 
   # Environment settings
@@ -160,7 +201,8 @@
         username = "erik";
         homeDirectory = "/home/erik";
         stateVersion = "25.11";
-        sessionPath = [ "/home/erik/.local/bin" ];
+        sessionPath = ["$HOME/.local/bin"];
+        sessionVariables = {NH_FLAKE = "$HOME/workspace/nixos";};
       };
 
       home.persistence."/persist/home/erik" = {
