@@ -4,7 +4,7 @@ let
   # IMPORTANT: Change this to the actual device path for your main drive.
   # You can find it by running `ls -l /dev/disk/by-id/`.
   # Pick the one that corresponds to your main NVMe or SSD.
-  mainDisk = "/dev/disk/by-id/nvme-e.g.-your-disk-id";
+  mainDisk = "/dev/disk/by-id/nvme-ESE2A047-M24_NVMe_Phison_1024GB_9AB4072506F500088240";
 in
 {
   disko.devices = {
