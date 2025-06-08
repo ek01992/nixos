@@ -1,53 +1,47 @@
-{ pkgs, ... }:
-
-let
-  # IMPORTANT: Change this to the actual device path for your main drive.
-  # You can find it by running `ls -l /dev/disk/by-id/`.
-  # Pick the one that corresponds to your main NVMe or SSD.
-  mainDisk = "/dev/disk/by-id/nvme-ESE2A047-M24_NVMe_Phison_1024GB_9AB4072506F500088240";
-in
+{ ... }:
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = mainDisk;
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              size = "1G";
+              priority = 1;
+              name = "ESP";
+              start = "1M";
+              size = "512M";
               type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
+                mountOptions = [ "umask=0077" ];
               };
             };
             root = {
               size = "100%";
               content = {
                 type = "btrfs";
-                label = "xps"; # Set the btrfs filesystem label
-
-                # Create the main subvolumes
+                extraArgs = ["-f"];
                 subvolumes = {
                   "/@" = {
                     mountpoint = "/";
-                    mountOptions = [ "compress=zstd" ];
+                    mountOptions = [ "subvol=@root" "compress=zstd" "noatime" ];
                   };
                   "/@nix" = {
                     mountpoint = "/nix";
-                    mountOptions = [ "compress=zstd" "noatime" ];
+                    mountOptions = [ "subvol=@nix" "compress=zstd" "noatime" ];
                   };
                   "/@persist" = {
                     mountpoint = "/persist";
-                    mountOptions = [ "compress=zstd" ];
+                    mountOptions = [ "subvol=@persist" "compress=zstd" ];
                   };
                   "/@swap" = {
                     mountpoint = "/swap";
-                    mountOptions = [ "noatime" ];
+                    mountOptions = [ "subvol=@swap" "noatime" ];
                   };
                 };
               };
@@ -57,4 +51,5 @@ in
       };
     };
   };
+  fileSystems."/persist".neededForBoot = true;
 }
