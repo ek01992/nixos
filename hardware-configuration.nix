@@ -20,7 +20,7 @@
         "sd_mod"
         "ahci"
       ];
-      kernelModules = [ "" ];
+      kernelModules = [  ];
       supportedFilesystems = [ "btrfs" ];
     };
     loader = {
@@ -29,10 +29,7 @@
         consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
-      timeout = 5;
     };
-    kernelParams = [ "console=tty1" ];
-    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   fileSystems = {

@@ -18,7 +18,12 @@
   hardware.enableRedistributableFirmware = true;
 
   # Bootloader and ephemeral root settings from the old hardware config
-  boot.initrd.postDeviceCommands = let
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "console=tty1" ];
+    loader.timeout = 5;
+
+    initrd.postDeviceCommands = let
     wipeScript = ''
       mkdir /tmp -p
       MNTPOINT=$(mktemp -d)
@@ -39,7 +44,8 @@
         btrfs subvolume snapshot "$MNTPOINT/@blank" "$MNTPOINT/@"
       )
     '';
-  in lib.mkBefore wipeScript;
+    in lib.mkBefore wipeScript;
+  };
 
   # Environment settings
   environment = {
@@ -84,8 +90,10 @@
       dates = "weekly";
       options = "--delete-older-than +3";
     };
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) (lib.filterAttrs (_: lib.isType "flake") inputs);
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") (lib.filterAttrs (_: lib.isType "flake") inputs);
+    registry = lib.mapAttrs' (name: value: {
+      inherit name;
+      value = { flake = value; };
+    }) (lib.filterAttrs (key: value: value ? "url" || value ? "path") inputs);
   };
 
   # Persistence settings
@@ -145,7 +153,7 @@
     extraSpecialArgs = { inherit inputs; };
     users.erik = {
       imports = [
-        inputs.impermanence.nixosModules.home-manager.impermanence
+        inputs.impermanence.homeManagerModules.impermanence
       ];
 
       home = {
