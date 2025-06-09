@@ -11,7 +11,6 @@
     ];
 
   boot.loader = {
-    grub.enable = false;
     systemd-boot.enable = true;
     efi = {
       canTouchEfiVariables = true;
@@ -23,29 +22,10 @@
     hostName = "nixos"; # edit this to your liking
   };
 
-  # QEMU-specific
-  # services.spice-vdagentd.enable = true;
-  # services.qemuGuest.enable = true;
-
   # locales
   # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # graphics
-  # services.xserver = {
-  #   enable = true;
-  #   resolutions = [{ x = 1920; y = 1200; }];
-  #   virtualScreen = { x = 1920; y = 1200; };
-  #   layout = "us"; # keyboard layout
-  #   desktopManager = {
-  #     xterm.enable = false;
-  #     xfce.enable = true;
-  #   };
-  #   displayManager.defaultSession = "xfce";
-  #   autorun = true; # run on graphic interface startup
-  #   libinput.enable = true; # touchpad support
-  # };
 
   # audio
   # sound.enable = true;
