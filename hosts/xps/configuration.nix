@@ -40,6 +40,11 @@
     };
   };
 
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
   # installed packages
   environment.systemPackages = with pkgs; [
     # cli utils
