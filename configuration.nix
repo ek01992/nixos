@@ -37,7 +37,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Add "wheel" for sudo access
     initialPassword = "temp"; # <-- This is where it goes!
-    # home = "/home/nixos"; # Optional: Disko typically handles home subvolumes
+    home = "/home/erik"; # Optional: Disko typically handles home subvolumes
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPakom6FvoSpBc0nmunHQUZwQI9VtS52i4W4WLuiUMpc ek01992@proton.me"
     ];

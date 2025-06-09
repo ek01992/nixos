@@ -15,7 +15,7 @@
     sessionVariables = { EDITOR = "helix"; };
   };
 
-  home.persistence."/persist/erik" = {
+  home.persistence."/persist/home/erik" = {
     allowOther = true;
     directories = [
       "downloads"
