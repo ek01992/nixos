@@ -23,6 +23,9 @@
     hostName = "nixos"; # edit this to your liking
   };
 
+  # nix
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # locales
   # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time.timeZone = "America/Chicago";
