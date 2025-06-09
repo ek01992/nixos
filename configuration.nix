@@ -11,6 +11,7 @@
     ];
 
   boot.loader = {
+    grub.enable = false;
     systemd-boot.enable = true;
     efi = {
       canTouchEfiVariables = true;
@@ -58,7 +59,7 @@
       initialPassword = "temp";
       isNormalUser = true; # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/config/users-groups.nix#L100
       extraGroups = [
-        "wheel audio video networkmanager"
+        "wheel" "audio" "video" "networkmanager"
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPakom6FvoSpBc0nmunHQUZwQI9VtS52i4W4WLuiUMpc ek01992@proton.me"
