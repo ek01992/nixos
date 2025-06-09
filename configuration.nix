@@ -1,70 +1,106 @@
-# configuration.nix
 {
   config,
-  lib,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./disk-config.nix
-    ./impermanence.nix
-    inputs.home-manager.nixosModules.home-manager
-    inputs.disko.nixosModules.disko
-    inputs.impermanence.nixosModules.impermanence
-  ];
-
-  networking.hostName = "xps"; # This will match the `hostname` of your flake
-
-  networking.networkmanager.enable = true;
-
-  boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
-  boot.loader.efi.canTouchEfiVariables = true;
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #   wget
-    git
-    helix
-  ];
-
-  time.timeZone = "America/Chicago";
-
-  users.users.erik = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Add "wheel" for sudo access
-    initialPassword = "temp"; # <-- This is where it goes!
-    home = "/home/erik"; # Optional: Disko typically handles home subvolumes
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPakom6FvoSpBc0nmunHQUZwQI9VtS52i4W4WLuiUMpc ek01992@proton.me"
+  imports =
+    [
+      ./hardware-configuration.nix
     ];
+
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi = {
+      canTouchEfiVariables = true;
+    };
   };
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users.erik = import ./home.nix;
+  networking = {
+    networkmanager.enable = true;
+    hostName = "nixos"; # edit this to your liking
   };
 
+  # QEMU-specific
+  # services.spice-vdagentd.enable = true;
+  # services.qemuGuest.enable = true;
+
+  # locales
+  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time.timeZone = "America/Chicago";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # graphics
+  # services.xserver = {
+  #   enable = true;
+  #   resolutions = [{ x = 1920; y = 1200; }];
+  #   virtualScreen = { x = 1920; y = 1200; };
+  #   layout = "us"; # keyboard layout
+  #   desktopManager = {
+  #     xterm.enable = false;
+  #     xfce.enable = true;
+  #   };
+  #   displayManager.defaultSession = "xfce";
+  #   autorun = true; # run on graphic interface startup
+  #   libinput.enable = true; # touchpad support
+  # };
+
+  # audio
+  # sound.enable = true;
+  # nixpkgs.config.pulseaudio = true;
+  # hardware.pulseaudio.enable = true;
+
+  # user configuration
+  users.users = {
+    erik = { # change this to you liking
+      createHome = true;
+      initialPassword = "temp";
+      isNormalUser = true; # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/config/users-groups.nix#L100
+      extraGroups = [
+        "wheel audio video networkmanager"
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPakom6FvoSpBc0nmunHQUZwQI9VtS52i4W4WLuiUMpc ek01992@proton.me"
+      ];
+    };
+    root = {
+      extraGroups = [
+        "wheel"
+      ];
+    };
+  };
+
+  # ssh
   services.openssh = {
     enable = true;
     settings = {
-      PermitRootLogin = "prohibit-password";
       PasswordAuthentication = false;
+      PermitRootLogin = "no"; # do not allow to login as root user
     };
   };
-
-  nix = {
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-    };
-  };
-
-  console.keyMap = "us";
 
   nixpkgs.config.allowUnfree = true;
+
+  # installed packages
+  environment.systemPackages = with pkgs; [
+    # cli utils
+    git
+    curl
+    wget
+    helix
+    htop
+
+    # browser
+    chromium
+  ];
+  
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+    ];
+  };
 
   system.stateVersion = "25.05";
 }
