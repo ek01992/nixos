@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {
@@ -15,6 +16,7 @@
     nixpkgs,
     home-manager,
     nixos-hardware,
+    hyprland,
     ...
   }@inputs: let
     system = "x86_64-linux";

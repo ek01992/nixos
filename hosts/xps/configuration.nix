@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ../../users/erik/user.nix
       inputs.home-manager.nixosModules.home-manager
+      inputs.hyprland.nixosModules.default
       ../../modules/home-manager.nix
     ];
   nixpkgs.config.allowUnfree = true;
@@ -51,6 +52,7 @@
     git
     curl
     wget
+    kitty
   ];
 
   system.stateVersion = "25.05";
