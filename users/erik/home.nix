@@ -16,10 +16,6 @@
 
   # Configure user-specific programs.
   programs = {
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
-    };
     home-manager.enable = true;
     git = {
       enable = true;
