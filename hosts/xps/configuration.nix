@@ -55,5 +55,8 @@
     kitty
   ];
 
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
   system.stateVersion = "25.05";
 }
