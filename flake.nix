@@ -22,14 +22,14 @@
     };   
   in {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      xps = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs system;
         };
         modules = [
-          ./configuration.nix
+          ./hosts/xps/configuration.nix
           home-manager.nixosModules.home-manager
-          ./modules/home.nix
+          ./modules/home-manager.nix
         ];
       };
     };

@@ -8,7 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./users/erik.nix
+      ../../users/erik/user.nix
     ];
 
   boot.loader = {
@@ -20,7 +20,7 @@
 
   networking = {
     networkmanager.enable = true;
-    hostName = "nixos"; # edit this to your liking
+    hostName = "xps"; # edit this to your liking
   };
 
   # nix
