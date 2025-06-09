@@ -48,8 +48,6 @@
     git
     curl
     wget
-    helix
-    htop
   ];
 
   system.stateVersion = "25.05";
