@@ -16,11 +16,11 @@
 
   # Configure user-specific programs.
   programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
     home-manager.enable = true;
-    # hyprland = {
-    #   enable = true;
-    #   xwayland.enable = true;
-    # };
     git = {
       enable = true;
       userName = "ek01992";
@@ -32,5 +32,18 @@
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
       ];
     };
+  };
+
+  wayland.windowManager.hyprland = {
+    # Whether to enable Hyprland wayland compositor
+    enable = true;
+    # The hyprland package to use
+    package = pkgs.hyprland;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+
+    # Optional
+    # Whether to enable hyprland-session.target on hyprland startup
+    systemd.enable = true;
   };
 }
