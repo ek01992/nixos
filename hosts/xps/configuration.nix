@@ -28,9 +28,15 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # audio
-  # sound.enable = true;
-  # nixpkgs.config.pulseaudio = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
   # ssh
   services.openssh = {
@@ -53,7 +59,16 @@
     curl
     wget
     kitty
+    (waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
+    mako
+    libnotify
+    swww
+    rofi-wayland
   ];
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
