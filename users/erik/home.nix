@@ -17,6 +17,10 @@
   # Configure user-specific programs.
   programs = {
     home-manager.enable = true;
+    # hyprland = {
+    #   enable = true;
+    #   xwayland.enable = true;
+    # };
     git = {
       enable = true;
       userName = "ek01992";

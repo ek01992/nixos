@@ -3,14 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    nixos-hardware,
     ...
   }@inputs: let
     system = "x86_64-linux";
@@ -19,7 +23,7 @@
       config = {
         allowUnfree = true;
       };
-    };   
+    };
   in {
     nixosConfigurations = {
       xps = nixpkgs.lib.nixosSystem {
@@ -28,8 +32,6 @@
         };
         modules = [
           ./hosts/xps/configuration.nix
-          home-manager.nixosModules.home-manager
-          ./modules/home-manager.nix
         ];
       };
     };

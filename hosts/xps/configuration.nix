@@ -9,14 +9,9 @@
     [
       ./hardware-configuration.nix
       ../../users/erik/user.nix
+      inputs.home-manager.nixosModules.home-manager
+      ../../modules/home-manager.nix
     ];
-
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      canTouchEfiVariables = true;
-    };
-  };
 
   networking = {
     networkmanager.enable = true;
