@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
+    inputs.impermanence.homeManagerModules.impermanence
   ];
 
   home = {
