@@ -21,7 +21,9 @@
       };
     };
     kernelModules = [ "kvm-intel" ];
+    blacklistedKernelModules = [ "psmouse" ];
     extraModulePackages = [ ];
+    kernelParams = [ "i915.enable_psr=0" ];
   };
 
   fileSystems = {
