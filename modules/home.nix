@@ -7,6 +7,6 @@
     # This allows home-manager to manage packages for each user.
     useUserPackages = true;
     # Link the user `erik` to his home-manager configuration.
-    users.erik = import ./users/home.nix;
+    users.erik = import ../users/home.nix;
   };
 }
