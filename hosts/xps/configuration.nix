@@ -12,7 +12,7 @@
       inputs.home-manager.nixosModules.home-manager
       ../../modules/home-manager.nix
     ];
-
+  nixpkgs.config.allowUnfree = true;
   networking = {
     networkmanager.enable = true;
     hostName = "xps"; # edit this to your liking
