@@ -50,6 +50,12 @@
                     userName = "ek01992";
                     userEmail = "ek01992@proton.me";
                   };
+                  chromium = {
+                    enable = true;
+                    extensions = [
+                      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+                    ];
+                  };
                 };
               };
             };
