@@ -20,7 +20,7 @@
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 
-    services.dunst = {
+  services.dunst = {
     enable = true;
     settings = {
       global = {
@@ -45,10 +45,6 @@
         timeout = 0;
       };
     };
-  };
-
-  programs.rofi = {
-    enable = true;
   };
 
   programs.waybar = {

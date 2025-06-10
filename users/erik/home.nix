@@ -12,6 +12,7 @@
       helix
       htop
       fastfetch
+      rofi
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     sessionVariables = {
