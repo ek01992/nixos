@@ -12,18 +12,14 @@
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs: 
   let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
-    };
+    lib = import ./lib { inherit inputs; };
   in {
     nixosConfigurations = {
-      xps = nixpkgs.lib.nixosSystem {
+      xps = lib.nixosSystem {
+        system = "x86_64-linux";
+        hostName = "xps";
         specialArgs = {
-          inherit inputs system;
+          inherit inputs;
         };
         modules = [
           ./hosts/xps/configuration.nix

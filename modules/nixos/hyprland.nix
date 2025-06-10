@@ -1,23 +1,28 @@
 { pkgs, ... }:
 {
-
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
-
-  programs.hyprland = {
+  wayland.windowManager.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    package = null;
+    portalPackage = null;
+    settings = {
+    "$mod" = "SUPER";
+    bind =
+      [
+        "$mod, F, exec, firefox"
+        ", Print, exec, grimblast copy area"
+        "$mod, T, exec, kitty"
+        "$mod, D, exec, rofi -show drun"
+      ]
+      ++ (
+        builtins.concatLists (builtins.genList (i:
+            let ws = i + 1;
+            in [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+          )
+          9)
+      );
+    };
   };
-  
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  };
-
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-
 }

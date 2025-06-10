@@ -2,14 +2,14 @@
 {
   imports =
     [
-      inputs.home-manager.nixosModules.home-manager
       ./hardware-configuration.nix
       ../../users/erik
-      ../../modules
+      ../../modules/home-manager
+      ../../modules/nixos/desktop.nix
+      ../../modules/nixos/base.nix
     ];
-  
-  networking = {
-    networkmanager.enable = true;
-    hostName = "xps";
-  };
+
+  home-manager.users.erik = import ../../users/erik/home.nix;
+
+  networkmanager.enable = true;
 }

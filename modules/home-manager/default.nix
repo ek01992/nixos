@@ -1,8 +1,11 @@
-{ ... }: 
+{ ... }:
 {
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+  ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.erik = import ../../users/erik/home.nix;
   };
 }

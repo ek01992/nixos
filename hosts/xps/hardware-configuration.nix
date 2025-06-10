@@ -23,17 +23,7 @@
     blacklistedKernelModules = [ "psmouse" ];
     extraModulePackages = [ ];
     kernelParams = [ "i915.enable_psr=0" ];
-  };
-
-    services.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-    
+  }; 
   
   fileSystems = {
     "/" = {
