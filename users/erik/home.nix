@@ -13,6 +13,7 @@
       htop
       fastfetch
       rofi
+      waybar-hyprland
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     sessionVariables = {
