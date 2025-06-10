@@ -11,6 +11,7 @@
         "$mod, F, exec, firefox"
         ", Print, exec, grimblast copy area"
         "$mod, T, exec, kitty"
+        "$mod, D, exec, rofi -show drun"
       ]
       ++ (
         builtins.concatLists (builtins.genList (i:

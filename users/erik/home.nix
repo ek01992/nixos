@@ -12,6 +12,7 @@
       helix
       htop
       fastfetch
+      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     sessionVariables = {
       EDITOR = "hx";
