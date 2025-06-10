@@ -46,7 +46,10 @@
     };
   };
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true; # Use the wayland greeter for SDDM
+  };
 
   # installed packages
   environment.systemPackages = with pkgs; [
@@ -65,8 +68,13 @@
 
   xdg.portal = {
     enable = true;
-    # By removing `extraPortals`, we let NixOS auto-detect them from systemPackages,
-    # including the one for Hyprland and this one for GTK.
+    # The build error "Failed assertions: - Setting xdg.portal.enable to true requires a
+    # portal implementation..." means we must explicitly list the portal backends we want to use.
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
+    # This configures the preference order for portals.
     config = {
       common.default = ["hyprland" "gtk"];
     };
