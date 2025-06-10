@@ -1,31 +1,5 @@
 { pkgs, ... }:
 {
-  home.pointerCursor = {
-    gtk.enable = true;
-    # x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
-  };
-
-  gtk = {
-    enable = true;
-
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
-    };
-
-    iconTheme = {
-      package = pkgs.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-
-    font = {
-      name = "Sans";
-      size = 11;
-    };
-  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -35,8 +9,9 @@
     "$mod" = "SUPER";
     bind =
       [
-        "$mod, F, exec, chromium"
+        "$mod, F, exec, firefox"
         ", Print, exec, grimblast copy area"
+        "$mod, T, exec, kitty"
       ]
       ++ (
         # workspaces
