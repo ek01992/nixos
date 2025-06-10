@@ -1,10 +1,5 @@
+{ config, pkgs, inputs, lib, ... }: 
 {
-  config,
-  pkgs,
-  inputs,
-  lib,
-  ...
-}: {
   imports =
     [
       inputs.home-manager.nixosModules.home-manager
@@ -17,29 +12,23 @@
   
   networking = {
     networkmanager.enable = true;
-    hostName = "xps"; # edit this to your liking
+    hostName = "xps";
   };
 
-  # nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # locales
-  # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # ssh
   services.openssh = {
     enable = true;
     settings = {
       PasswordAuthentication = false;
-      PermitRootLogin = "no"; # do not allow to login as root user
+      PermitRootLogin = "no";
     };
   };
 
-  # installed packages
   environment.systemPackages = with pkgs; [
-    # cli utils
     git
     curl
     wget

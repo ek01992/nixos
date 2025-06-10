@@ -1,11 +1,10 @@
-{ 
-  ... 
-}: {
+{ ... }: 
+{
   users.users = {
-    erik = { # change this to you liking
+    erik = {
       createHome = true;
       initialPassword = "temp";
-      isNormalUser = true; # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/config/users-groups.nix#L100
+      isNormalUser = true;
       extraGroups = [
         "wheel" "audio" "video" "networkmanager"
       ];

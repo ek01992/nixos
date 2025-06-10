@@ -1,6 +1,5 @@
-{ pkgs, 
-  ... 
-}: {
+{ pkgs, ... }: 
+{
   home = {
     stateVersion = "25.05";
     packages = with pkgs; [
@@ -12,7 +11,6 @@
     };
   };
 
-  # Configure user-specific programs.
   programs = {
     home-manager.enable = true;
     git = {
@@ -23,7 +21,7 @@
     chromium = {
       enable = true;
       extensions = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm"
       ];
     };
   };
