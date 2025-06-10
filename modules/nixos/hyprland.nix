@@ -7,7 +7,6 @@
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
-  # System-wide Hyprland configuration
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -18,7 +17,6 @@
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
-  # Enable SDDM as a graphical login manager
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 }

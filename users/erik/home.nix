@@ -19,13 +19,8 @@
   };
 
   programs = {
-    # Enable home-manager
     home-manager.enable = true;
-
-    # Browser
     firefox.enable = true;
-
-    # Shell tools
     kitty.enable = true;
     git = {
       enable = true;
