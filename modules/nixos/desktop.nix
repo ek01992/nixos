@@ -2,7 +2,6 @@
 {
   imports = [
     ./hyprland.nix
-    ./fonts.nix
   ];
 
   services.pulseaudio.enable = false;
