@@ -15,7 +15,10 @@
       kernelModules = [ ];
     };
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
       efi = {
         canTouchEfiVariables = true;
       };
@@ -26,6 +29,16 @@
     kernelParams = [ "i915.enable_psr=0" ];
   };
 
+    hardware.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    
+  
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/a4f2ee31-d059-4bdd-8ded-8c0a9da26b80";
