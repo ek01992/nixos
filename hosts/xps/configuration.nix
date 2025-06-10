@@ -46,11 +46,7 @@
     };
   };
 
-  services.xserver.displayManager.lightdm.enable = true;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  services.xserver.displayManager.gdm.enable = true;
 
   # installed packages
   environment.systemPackages = with pkgs; [
