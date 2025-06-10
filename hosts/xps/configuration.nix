@@ -15,7 +15,12 @@
     hostName = "xps";
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-substiters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -32,6 +37,7 @@
     git
     curl
     wget
+    cachix
   ];
 
   system.stateVersion = "25.05";
