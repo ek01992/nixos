@@ -65,6 +65,11 @@
     swww
     rofi-wayland
   ];
+  
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   xdg.portal = {
     enable = true;
