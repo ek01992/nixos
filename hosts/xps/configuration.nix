@@ -18,11 +18,6 @@
     networkmanager.enable = true;
     hostName = "xps"; # edit this to your liking
   };
-  services.fwupd.enable = true;
-  services.thermald.enable = lib.mkDefault true;
-  services.fprintd.enable = true;
-  services.fprintd.tod.enable = true;
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
   # nix
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
