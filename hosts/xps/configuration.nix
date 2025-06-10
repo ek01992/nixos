@@ -20,11 +20,6 @@
     xwayland.enable = true;
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-  };
-
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
