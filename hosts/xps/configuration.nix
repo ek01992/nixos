@@ -10,6 +10,4 @@
     ];
 
   home-manager.users.erik = import ../../users/erik/home.nix;
-
-  networkmanager.enable = true;
 }
