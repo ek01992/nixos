@@ -13,5 +13,5 @@
 
   # Enable SDDM as a graphical login manager
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = true;
 }
