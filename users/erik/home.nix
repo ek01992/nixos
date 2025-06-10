@@ -13,7 +13,7 @@
       htop
       fastfetch
       rofi
-      waybar
+      waybar-hyprland
     ];
     sessionVariables = {
       EDITOR = "hx";
