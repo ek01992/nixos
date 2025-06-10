@@ -16,7 +16,7 @@
     noto-fonts-emoji
     font-awesome
   ];
-  
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -29,7 +29,7 @@
         ", Print, exec, grimblast copy area"
         "$mod, T, exec, kitty"
         "$mod, D, exec, rofi -show drun"
-      ]
+      ];
     };
   };
 }
