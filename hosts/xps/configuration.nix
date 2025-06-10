@@ -63,8 +63,14 @@
     rofi-wayland
   ];
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    # By removing `extraPortals`, we let NixOS auto-detect them from systemPackages,
+    # including the one for Hyprland and this one for GTK.
+    config = {
+      common.default = ["hyprland" "gtk"];
+    };
+  };
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
