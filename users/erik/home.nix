@@ -1,10 +1,12 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 {
   imports = [
     ./hyprland.nix
   ];
 
   home = {
+    username = "erik";
+    homeDirectory = "/home/erik";
     stateVersion = "25.05";
     packages = with pkgs; [
       helix
@@ -17,10 +19,14 @@
   };
 
   programs = {
-    kitty.enable = true;
+    # Enable home-manager
     home-manager.enable = true;
+
+    # Browser
     firefox.enable = true;
-    
+
+    # Shell tools
+    kitty.enable = true;
     git = {
       enable = true;
       userName = "ek01992";
