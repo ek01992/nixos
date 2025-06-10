@@ -20,30 +20,4 @@
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
 
-  services.dunst = {
-    enable = true;
-    settings = {
-      global = {
-        origin = "top-right";
-        offset = "10x50";
-        font = "JetBrainsMono Nerd Font 10";
-      };
-      urgency_low = {
-        background = "#a3be8c";
-        foreground = "#2e3440";
-        timeout = 5;
-      };
-      urgency_normal = {
-        background = "#ebcb8b";
-        foreground = "#2e3440";
-        timeout = 10;
-      };
-      urgency_critical = {
-        background = "#bf616a";
-        foreground = "#d8dee9";
-        frame_color = "#bf616a";
-        timeout = 0;
-      };
-    };
-  };
 }

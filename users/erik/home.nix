@@ -14,7 +14,6 @@
       fastfetch
       rofi
       waybar-hyprland
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
     sessionVariables = {
       EDITOR = "hx";
