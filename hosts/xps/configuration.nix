@@ -7,10 +7,10 @@
 }: {
   imports =
     [
-      ./hardware-configuration.nix
-      ../../users/erik/user.nix
       inputs.home-manager.nixosModules.home-manager
-      ../../modules/home-manager.nix
+      ./hardware-configuration.nix
+      ../../users/erik
+      ../../modules/home-manager
     ];
 
   nixpkgs.config.allowUnfree = true;

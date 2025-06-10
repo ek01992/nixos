@@ -1,4 +1,6 @@
-{
+{ 
+  ... 
+}: {
   users.users = {
     erik = { # change this to you liking
       createHome = true;
