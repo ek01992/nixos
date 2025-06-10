@@ -76,6 +76,8 @@
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       "bind" = [
         "$mod, Q, exec, kitty"
+        "$mod, F, exec, firefox"
+        "$mod, D, exec, rofi -show drun"
         "$mod, C, killactive,"
         "$mod, M, exit,"
         # "$mod, E, exec, dolphin" # An example file manager
