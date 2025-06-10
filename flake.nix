@@ -10,13 +10,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    nixos-hardware,
-    ...
-  }@inputs: let
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs: 
+  let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
