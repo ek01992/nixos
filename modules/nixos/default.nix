@@ -5,6 +5,8 @@
     ./fonts.nix
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  
   # Basic system settings
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
