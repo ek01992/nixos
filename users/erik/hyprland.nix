@@ -35,7 +35,7 @@
     "$mod" = "SUPER";
     bind =
       [
-        "$mod, F, exec, firefox"
+        "$mod, F, exec, chromium"
         ", Print, exec, grimblast copy area"
       ]
       ++ (
