@@ -11,6 +11,7 @@
     packages = with pkgs; [
       helix
       htop
+      spacefetch
     ];
     sessionVariables = {
       EDITOR = "hx";
