@@ -10,9 +10,5 @@
     };
 
     programs.uwsm.enable = true;
-
-    environment.systemPackages = with pkgs; [
-
-    ];
   };
 }
