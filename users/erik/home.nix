@@ -2,7 +2,6 @@
 {
   imports = [
     inputs.self.homeManagerModules.default
-    inputs.self.desktopModules.default
   ];
 
   home = {
@@ -21,6 +20,4 @@
     userEmail = "ek01992@proton.me";
   };
   modules.home-manager.helix.enable = true;
-  modules.home-manager.hyprland.enable = true;
-  modules.desktop.wm.wayland.hyprland.enable = true;
 }
