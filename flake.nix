@@ -24,6 +24,7 @@
         hostName = "xps";
         specialArgs = {
           inherit inputs;
+          username = "erik";
         };
         modules = [
           ./hosts/xps/configuration.nix

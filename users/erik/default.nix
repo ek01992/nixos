@@ -1,6 +1,7 @@
+{ username, ... }:
 {
   users.users = {
-    erik = {
+    ${username} = {
       createHome = true;
       initialPassword = "temp";
       isNormalUser = true;

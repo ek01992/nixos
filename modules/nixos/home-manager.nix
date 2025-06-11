@@ -1,4 +1,4 @@
-{ lib, config, inputs, ... }:
+{ lib, config, inputs, username, ... }:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -11,7 +11,7 @@
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = { inherit inputs username; };
     };
   };
 }
