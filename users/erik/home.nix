@@ -15,8 +15,4 @@
   modules.home-manager.cli.enable = true;
   modules.home-manager.git.enable = true;
   modules.home-manager.helix.enable = true;
-
-  home.sessionVariables = {
-    # NIXOS_OZONE_WL = "1";
-  };
 }
