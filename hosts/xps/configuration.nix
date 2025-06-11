@@ -2,6 +2,7 @@
 {
   imports =
     [
+      ./hardware-configuration.nix
       ../../users/erik
       ../../modules/home-manager
       ../../modules/nixos
