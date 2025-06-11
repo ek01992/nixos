@@ -1,16 +1,19 @@
 { config, pkgs, inputs, lib, username, ... }:
-lib.mkMerge [
-  ((import (../../users + "/${username}/default.nix")) { inherit username; })
-  {
-    imports = [
-      ./hardware-configuration.nix
-      inputs.self.nixosModules.default
-    ];
+{
+  imports = [
+    # Static host and user imports
+    ./hardware-configuration.nix
+    (import (../../users + "/${username}/default.nix") { inherit username; })
 
-    modules.nixos.core.enable = true;
-    modules.nixos.home-manager.enable = true;
-    modules.nixos.ssh.enable = true;
+    # Shared module imports
+    inputs.self.nixosModules.default
+  ];
 
-    home-manager.users."${username}" = ../../users/${username}/home.nix;
-  }
-]
+  # Enable the modules for this host
+  modules.nixos.core.enable = true;
+  modules.nixos.home-manager.enable = true;
+  modules.nixos.ssh.enable = true;
+
+  # Assign the user's home-manager config
+  home-manager.users."${username}" = ../../users/${username}/home.nix;
+}

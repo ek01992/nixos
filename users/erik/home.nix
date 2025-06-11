@@ -12,19 +12,12 @@
 
   programs.home-manager.enable = true;
 
-  modules = {
-    home-manager = {
-      cli = {
-        enable = true;
-      };
-      git = {
-        enable = true;
-        userName = "ek01992";
-        userEmail = "ek01992@proton.me";
-      };
-      helix = {
-        enable = true;
-      };
-    };
+  # Correctly enable your custom modules
+  modules.home-manager.cli.enable = true;
+  modules.home-manager.git = {
+    enable = true;
+    userName = "ek01992";
+    userEmail = "ek01992@proton.me";
   };
+  modules.home-manager.helix.enable = true;
 }
