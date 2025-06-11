@@ -1,8 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-    # ./hyprland.nix
-  ];
 
   home = {
     username = "erik";
