@@ -12,7 +12,6 @@
 
   programs.home-manager.enable = true;
 
-  # Correctly enable your custom modules
   modules.home-manager.cli.enable = true;
   modules.home-manager.git = {
     enable = true;
