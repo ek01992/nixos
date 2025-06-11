@@ -1,10 +1,9 @@
-{ pkgs, ... }: 
+{ ... }: 
 {
   users.users = {
     erik = {
       createHome = true;
       initialPassword = "temp";
-      shell = pkgs.zsh;
       isNormalUser = true;
       extraGroups = [
         "wheel" "audio" "video" "networkmanager"
