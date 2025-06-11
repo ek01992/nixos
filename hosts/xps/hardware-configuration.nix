@@ -15,9 +15,7 @@
         enable = true;
         configurationLimit = 5;
       };
-      efi = {
-        canTouchEfiVariables = true;
-      };
+      efi.canTouchEfiVariables = true;
     };
     kernelModules = [ "kvm-intel" ];
     blacklistedKernelModules = [ "psmouse" ];

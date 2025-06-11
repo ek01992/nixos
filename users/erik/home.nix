@@ -21,8 +21,6 @@
 
   programs = {
     home-manager.enable = true;
-    firefox.enable = true;
-    kitty.enable = true;
     git = {
       enable = true;
       userName = "ek01992";
