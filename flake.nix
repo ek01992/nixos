@@ -14,6 +14,10 @@
   let
     lib = import ./lib { inherit inputs; };
   in {
+
+    nixosModules.default = import ./modules/nixos;
+    homeManagerModules.default = import ./modules/home-manager;
+
     nixosConfigurations = {
       xps = lib.nixosSystem {
         system = "x86_64-linux";

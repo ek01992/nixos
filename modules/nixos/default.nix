@@ -1,23 +1,7 @@
-{ pkgs, ... }:
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  time.timeZone = "America/Chicago";
-  i18n.defaultLocale = "en_US.UTF-8";
-  nixpkgs.config.allowUnfree = true;
-
-  environment.systemPackages = with pkgs; [
-    git
-    curl
-    wget
-    # cachix
+  imports = [
+    ./core.nix
+    ./home-manager.nix
+    ./ssh.nix
   ];
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-    };
-  };
 }
