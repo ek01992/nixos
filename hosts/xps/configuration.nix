@@ -14,6 +14,7 @@
   modules.nixos.core.enable = true;
   modules.nixos.home-manager.enable = true;
   modules.nixos.ssh.enable = true;
+  modules.desktops.wm.wayland.hyprland.enable = true;
 
   # Assign the user's home-manager config
   home-manager.users."${username}" = ../../users/${username}/home.nix;
