@@ -1,5 +1,12 @@
+{ inputs, ... }:
 {
   imports = [
-    ./base.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+  };
 }
