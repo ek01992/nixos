@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ./hyprland.nix
+    # ./hyprland.nix
   ];
 
   home = {
@@ -12,8 +12,6 @@
       helix
       htop
       fastfetch
-      rofi
-      waybar
     ];
     sessionVariables = {
       EDITOR = "hx";

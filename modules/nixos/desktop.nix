@@ -1,8 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [
-    ./hyprland.nix
-  ];
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;

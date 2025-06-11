@@ -10,7 +10,7 @@
     git
     curl
     wget
-    cachix
+    # cachix
   ];
 
   services.openssh = {
