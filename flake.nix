@@ -18,7 +18,6 @@
 
     nixosModules.default = import ./modules/nixos;
     homeManagerModules.default = import ./modules/home-manager;
-    desktopModules.default = import ./modules/desktop/wm/wayland;
 
     nixosConfigurations = {
       xps = lib.nixosSystem {
