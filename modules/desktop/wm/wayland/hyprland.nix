@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 {
   options.modules.desktops.wm.wayland.hyprland.enable = lib.mkEnableOption "hyprland wayland windows manager";
 
@@ -6,17 +6,13 @@
     programs.hyprland = {
       enable = true;
       withUWSM = true;
-      package = pkgs.hyprland;
-      portalPackage = pkgs.xdg-desktop-portal-hyprland;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     };
 
     programs.uwsm.enable = true;
 
     environment.systemPackages = with pkgs; [
-      rofi-wayland
-      waybar
-      nwg-look
-      nwg-displays
+
     ];
   };
 }

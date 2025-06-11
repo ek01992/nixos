@@ -8,6 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs: 
@@ -17,6 +18,7 @@
 
     nixosModules.default = import ./modules/nixos;
     homeManagerModules.default = import ./modules/home-manager;
+    desktopModules.default = import ./modules/desktop;
 
     nixosConfigurations = {
       xps = lib.nixosSystem {
