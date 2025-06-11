@@ -20,4 +20,14 @@
 
   # services.xserver.enable = true;
   # services.displayManager.sddm.enable = true;
+  services.greetd = {
+  enable = true;
+  settings = rec {
+    initial_session = {
+    command = "Hyprland";
+    user = "erik";
+  };
+  default_session = initial_session;
+  };
+};
 }
