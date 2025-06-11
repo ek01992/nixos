@@ -5,8 +5,7 @@
       ./hardware-configuration.nix
       ../../users/erik
       ../../modules/home-manager
-      ../../modules/nixos/desktop.nix
-      ../../modules/nixos/base.nix
+      ../../modules/nixos
     ];
 
   home-manager.users.erik = import ../../users/erik/home.nix;
