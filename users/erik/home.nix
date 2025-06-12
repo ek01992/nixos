@@ -13,7 +13,7 @@
   programs.home-manager.enable = true;
 
   modules.home-manager = {
-    pkgs.enable = true;
+    cli.enable = true;
     git = {
       enable = true;
       userName = "ek01992";
