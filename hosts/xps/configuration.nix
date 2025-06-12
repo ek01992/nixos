@@ -19,17 +19,15 @@ in
     greetd.enable = true;
   };
 
-  # Set up home-manager for each user defined above
+  home-manager.extraSpecialArgs = { inherit inputs; };
+
   home-manager.users = lib.genAttrs users (username: {
     imports = [ ../../users/${username}/home.nix ];
-    pkgs = pkgs; # Use the host's pkgs for home-manager
   });
 
-  # Also define the system-level users
   users.users = lib.genAttrs users (username: {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # For sudo access
-    # You might want to set a shell for the user here
+    extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
   });
 }
