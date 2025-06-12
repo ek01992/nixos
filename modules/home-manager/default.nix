@@ -1,6 +1,6 @@
 {
   imports = [
-    ./pkgs.nix
+    ./cli.nix
     ./git
     ./helix
     ./hyprland
