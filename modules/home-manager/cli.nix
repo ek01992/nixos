@@ -10,7 +10,7 @@
       libnotify
       dunst
       swww
-      rofi-wayland
+      wofi
     ];
   };
 }

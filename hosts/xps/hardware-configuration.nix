@@ -20,6 +20,7 @@
     kernelModules = [ "kvm-intel" ];
     blacklistedKernelModules = [ "psmouse" ];
     extraModulePackages = [ ];
+    plymouth.enable = true;
     kernelParams = [ "i915.enable_psr=0" ];
   }; 
   
@@ -46,4 +47,13 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
 }
