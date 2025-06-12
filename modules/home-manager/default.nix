@@ -1,10 +1,10 @@
 {
   imports = [
     ./pkgs.nix
-    ./git.nix
+    ./git
     ./helix
-    ./hyprland.nix
-    ./zsh.nix
-    ./zen-browser.nix
+    ./hyprland
+    ./zsh
+    ./zen-browser
   ];
 }
