@@ -3,7 +3,7 @@
   options.modules.home-manager.zen-browser.enable = lib.mkEnableOption "zen";
 
   imports = [
-    inputs.zen-browser.homeManagerModules.twilight
+    inputs.zen-browser.homeModules.twilight
   ];
 
   config = lib.mkIf config.modules.home-manager.zen-browser.enable {
