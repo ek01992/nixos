@@ -13,15 +13,22 @@
   programs.home-manager.enable = true;
 
   modules.home-manager = {
-    cli.enable = true;
-    git = {
-      enable = true;
-      userName = "ek01992";
-      userEmail = "ek01992@proton.me";
+    cli = {
+      pkgs = {
+        enable = true;
+      };
+      git = {
+        enable = true;
+        userName = "ek01992";
+        userEmail = "ek01992@proton.me";
+      };
+      helix.enable = true;
+      zsh.enable = true;
     };
-    helix.enable = true;
-    zen-browser.enable = true;
-    zsh.enable = true;
-    hyprland.enable = true;
+
+    gui = {
+      hyprland.enable = true;
+      zen-browser.enable = true;
+    };
   };
 }
