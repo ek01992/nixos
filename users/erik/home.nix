@@ -1,19 +1,13 @@
-{ pkgs, inputs, username, ... }:
+{ pkgs, inputs, config, ... }:
 {
   imports = [
-    # This now imports all modules under the 'my' namespace
     inputs.self.homeManagerModules.default
   ];
 
-  home = {
-    inherit username;
-    homeDirectory = "/home/${username}";
-    stateVersion = "25.05";
-  };
+  home.stateVersion = "25.05";
 
   programs.home-manager.enable = true;
 
-  # This is where you enable and configure your custom modules
   my = {
     cli = {
       common.enable = true;

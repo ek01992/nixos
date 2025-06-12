@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, inputs,pkgs, ... }:
 let
   cfg = config.my.gui.hyprland;
 in

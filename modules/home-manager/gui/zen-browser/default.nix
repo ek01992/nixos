@@ -1,4 +1,4 @@
-{ lib, config, pkgs, username, inputs, ... }:
+{ lib, config, inputs, ... }:
 let
   cfg = config.my.gui.zen-browser;
 in

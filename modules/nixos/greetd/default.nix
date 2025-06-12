@@ -1,4 +1,4 @@
-{ lib, config, pkgs, username, ... }: 
+{ lib, config, pkgs, ... }: 
 let
   cfg = config.my.nixos.greetd;
 in
@@ -11,7 +11,7 @@ in
       settings = rec {
         initial_session = {
           command = "${pkgs.hyprland}/bin/Hyprland";
-          user = username;
+          user = cfg.user;
         };
         default_session = initial_session;
       };

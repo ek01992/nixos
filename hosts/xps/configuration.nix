@@ -14,7 +14,10 @@ in
     ssh.enable = true;
     hyprland.enable = true;
     zsh.enable = true;
-    greetd.enable = true;
+    greetd = {
+      enable = true;
+      user = "erik";
+    };
   };
 
   home-manager.extraSpecialArgs = { inherit inputs; };
