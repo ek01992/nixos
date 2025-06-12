@@ -3,6 +3,11 @@
   options.modules.nixos.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf config.modules.nixos.zsh.enable {
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
   };
 }
