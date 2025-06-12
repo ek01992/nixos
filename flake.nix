@@ -32,7 +32,6 @@
           username = "erik";
         };
         modules = [
-          ({ nixpkgs.overlays = [ nur.overlay ]; })
           ./hosts/xps/configuration.nix
         ];
       };
