@@ -18,7 +18,7 @@
             "dom.security.https_only_mode" = true;
             "dom.security.https_only_mode_ever_enabled" = true;
           };
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions = with pkgs; [
             ublock-origin
             firefox-color
             canvasblocker
