@@ -5,7 +5,7 @@
   config = lib.mkIf config.modules.home-manager.zsh.enable {
     programs.zsh = {
       enable = true;
-      enableCompletion = true;
+      enableCompletions = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };
