@@ -5,12 +5,6 @@
   config = lib.mkIf config.modules.home-manager.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      settings = {
-        "$mod" = "SUPER";
-        bind = [
-          "$mod, T, exec, /dev/pts/0"
-        ];
-      };
     };
   };
 }
