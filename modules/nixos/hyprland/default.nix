@@ -1,4 +1,4 @@
-{ lib, config, inputs, username, pkgs, ... }:
+{ lib, config, inputs, pkgs, ... }:
 let
   cfg = config.my.nixos.hyprland;
 in
