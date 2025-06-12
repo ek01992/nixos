@@ -4,7 +4,8 @@
     ./git.nix
     ./helix.nix
     ./hyprland.nix
-    ./firefox.nix
+    # ./firefox.nix
     ./zsh.nix
+    ./zen-browser.nix
   ];
 }

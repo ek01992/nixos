@@ -9,9 +9,13 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     hyprland.url = "github:hyprwm/Hyprland";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, zen-browser, ... }@inputs: 
   let
     lib = import ./lib { inherit inputs; };
   in {
@@ -28,6 +32,7 @@
           username = "erik";
         };
         modules = [
+          ({ nixpkgs.overlays = [ nur.overlay ]; })
           ./hosts/xps/configuration.nix
         ];
       };
