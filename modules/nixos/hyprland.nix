@@ -10,12 +10,6 @@
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
-      settings = {
-        "$mod" = "SUPER";
-        bind = [
-          "$mod, T, exec, /dev/pts/0"
-        ];
-      };
     };
   };
 }
