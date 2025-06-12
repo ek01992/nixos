@@ -1,12 +1,15 @@
 { lib, config, inputs, username, pkgs, ... }:
+let
+  cfg = config.my.nixos.hyprland;
+in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  options.modules.nixos.hyprland.enable = lib.mkEnableOption "hyprland";
+  options.my.nixos.hyprland.enable = lib.mkEnableOption "hyprland";
 
-  config = lib.mkIf config.modules.nixos.hyprland.enable {
+  config = lib.mkIf cfg.enable {
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;

@@ -1,8 +1,11 @@
 { lib, config, pkgs, ... }:
+let
+  cfg = config.my.cli.zsh;
+in
 {
-  options.modules.home-manager.cli.zsh.enable = lib.mkEnableOption "zsh";
+  options.my.cli.zsh.enable = lib.mkEnableOption "zsh";
 
-  config = lib.mkIf config.modules.home-manager.cli.zsh.enable {
+  config = lib.mkIf cfg.enable {
     programs.zsh = {
       enable = true;
     };

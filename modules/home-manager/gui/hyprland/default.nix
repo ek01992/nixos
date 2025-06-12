@@ -1,8 +1,11 @@
 { lib, config, pkgs, ... }:
+let
+  cfg = config.my.gui.hyprland;
+in
 {
-  options.modules.home-manager.gui.hyprland.enable = lib.mkEnableOption "hyprland";
+  options.my.gui.hyprland.enable = lib.mkEnableOption "hyprland";
 
-  config = lib.mkIf config.modules.home-manager.gui.hyprland.enable {
+  config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {

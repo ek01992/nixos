@@ -1,8 +1,11 @@
 { lib, config, ... }:
+let
+  cfg = config.my.nixos.ssh;
+in
 {
-  options.modules.nixos.ssh.enable = lib.mkEnableOption "openssh server";
+  options.my.nixos.ssh.enable = lib.mkEnableOption "openssh server";
 
-  config = lib.mkIf config.modules.nixos.ssh.enable {
+  config = lib.mkIf cfg.enable {
     services.openssh = {
       enable = true;
       settings = {

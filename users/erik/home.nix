@@ -1,6 +1,7 @@
 { pkgs, inputs, username, ... }:
 {
   imports = [
+    # This now imports all modules under the 'my' namespace
     inputs.self.homeManagerModules.default
   ];
 
@@ -12,7 +13,8 @@
 
   programs.home-manager.enable = true;
 
-  modules.home-manager = {
+  # This is where you enable and configure your custom modules
+  my = {
     cli = {
       common.enable = true;
       git = {

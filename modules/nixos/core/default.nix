@@ -1,8 +1,11 @@
 { lib, config, pkgs, ... }:
+let
+  cfg = config.my.nixos.core;
+in
 {
-  options.modules.nixos.core.enable = lib.mkEnableOption "core system settings";
+  options.my.nixos.core.enable = lib.mkEnableOption "core system settings";
 
-  config = lib.mkIf config.modules.nixos.core.enable {
+  config = lib.mkIf cfg.enable {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     time.timeZone = "America/Chicago";

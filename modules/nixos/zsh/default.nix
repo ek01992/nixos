@@ -1,8 +1,11 @@
 { lib, config, ... }:
+let
+  cfg = config.my.nixos.zsh;
+in
 {
-  options.modules.nixos.zsh.enable = lib.mkEnableOption "zsh";
+  options.my.nixos.zsh.enable = lib.mkEnableOption "zsh";
 
-  config = lib.mkIf config.modules.nixos.zsh.enable {
+  config = lib.mkIf cfg.enable {
     programs.zsh = {
       enable = true;
       enableCompletion = true;

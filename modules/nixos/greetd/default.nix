@@ -1,8 +1,11 @@
-{ lib, config, pkgs, username, ... }:
+{ lib, config, pkgs, username, ... }: 
+let
+  cfg = config.my.nixos.greetd;
+in
 {
-  options.modules.nixos.greetd.enable = lib.mkEnableOption "greetd";
+  options.my.nixos.greetd.enable = lib.mkEnableOption "greetd";
 
-  config = lib.mkIf config.modules.nixos.greetd.enable {
+  config = lib.mkIf cfg.enable {
     services.greetd = {
       enable = true;
       settings = rec {

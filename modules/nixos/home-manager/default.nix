@@ -1,12 +1,15 @@
 { lib, config, inputs, username, ... }:
+let
+  cfg = config.my.nixos.home-manager;
+in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  options.modules.nixos.home-manager.enable = lib.mkEnableOption "home-manager";
+  options.my.nixos.home-manager.enable = lib.mkEnableOption "home-manager";
 
-  config = lib.mkIf config.modules.nixos.home-manager.enable {
+  config = lib.mkIf cfg.enable {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;

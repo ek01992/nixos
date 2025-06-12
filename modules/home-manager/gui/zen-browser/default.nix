@@ -1,12 +1,15 @@
 { lib, config, pkgs, username, inputs, ... }:
+let
+  cfg = config.my.gui.zen-browser;
+in
 {
-  options.modules.home-manager.gui.zen-browser.enable = lib.mkEnableOption "zen";
+  options.my.gui.zen-browser.enable = lib.mkEnableOption "zen";
 
   imports = [
     inputs.zen-browser.homeModules.twilight
   ];
 
-  config = lib.mkIf config.modules.home-manager.gui.zen-browser.enable {
+  config = lib.mkIf cfg.enable {
     programs.zen-browser = {
       enable = true;
       policies = {

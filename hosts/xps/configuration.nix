@@ -1,17 +1,35 @@
-{ config, pkgs, inputs, lib, username, ... }:
+{ config, pkgs, inputs, lib, ... }:
+let
+  # Define the users for this specific host
+  users = [ "erik" ];
+in
 {
   imports = [
     ./hardware-configuration.nix
-    (import (../../users + "/${username}/default.nix") { inherit username pkgs; })
     inputs.self.nixosModules.default
   ];
 
-  modules.nixos.core.enable = true;
-  modules.nixos.home-manager.enable = true;
-  modules.nixos.ssh.enable = true;
-  modules.nixos.hyprland.enable = true;
-  modules.nixos.zsh.enable = true;
-  modules.nixos.greetd.enable = true;
+  # This assumes you refactor your nixos modules to a 'my.nixos' namespace for consistency.
+  my.nixos = {
+    core.enable = true;
+    home-manager.enable = true;
+    ssh.enable = true;
+    hyprland.enable = true;
+    zsh.enable = true;
+    greetd.enable = true;
+  };
 
-  home-manager.users."${username}" = ../../users/${username}/home.nix;
+  # Set up home-manager for each user defined above
+  home-manager.users = lib.genAttrs users (username: {
+    imports = [ ../../users/${username}/home.nix ];
+    pkgs = pkgs; # Use the host's pkgs for home-manager
+  });
+
+  # Also define the system-level users
+  users.users = lib.genAttrs users (username: {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # For sudo access
+    # You might want to set a shell for the user here
+    shell = pkgs.zsh;
+  });
 }

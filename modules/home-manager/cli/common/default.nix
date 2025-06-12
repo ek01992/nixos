@@ -1,8 +1,11 @@
 { lib, config, pkgs, ... }:
+let
+  cfg = config.my.cli.common;
+in
 {
-  options.modules.home-manager.cli.common.enable = lib.mkEnableOption "basic cli tools";
+  options.my.cli.common.enable = lib.mkEnableOption "basic cli tools";
 
-  config = lib.mkIf config.modules.home-manager.cli.common.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       htop
       fastfetch

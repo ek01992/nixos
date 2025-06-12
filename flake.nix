@@ -27,10 +27,7 @@
       xps = lib.nixosSystem {
         system = "x86_64-linux";
         hostName = "xps";
-        specialArgs = {
-          inherit inputs;
-          username = "erik";
-        };
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/xps/configuration.nix
         ];
