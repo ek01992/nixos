@@ -11,6 +11,7 @@
   modules.nixos.ssh.enable = true;
   modules.nixos.hyprland.enable = true;
   modules.nixos.zsh.enable = true;
+  modules.nixos.greetd.enable = true;
 
   home-manager.users."${username}" = ../../users/${username}/home.nix;
 }
