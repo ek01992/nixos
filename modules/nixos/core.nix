@@ -9,6 +9,16 @@
     i18n.defaultLocale = "en_US.UTF-8";
     nixpkgs.config.allowUnfree = true;
 
+    sound.enable = true;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
+
     environment.systemPackages = with pkgs; [
       git
       curl

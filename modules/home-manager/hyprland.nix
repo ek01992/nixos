@@ -9,6 +9,7 @@
         "$mod" = "SUPER";
         bind = [
           "$mod, F, exec, firefox"
+          "$mod, Q, exec, kitty"
         ];
       };
     };

@@ -1,4 +1,4 @@
-{ lib, config, inputs, username, ... }:
+{ lib, config, inputs, username, pkgs, ... }:
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -11,5 +11,7 @@
       enable = true;
       xwayland.enable = true;
     };
+    xdg.portal.enable = true;
+    xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 }

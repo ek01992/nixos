@@ -6,6 +6,10 @@
     home.packages = with pkgs; [
       htop
       fastfetch
+      waybar
+      libnotify
+      dunst
+      
     ];
   };
 }
