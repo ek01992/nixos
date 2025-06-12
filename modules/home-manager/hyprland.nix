@@ -6,11 +6,26 @@
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
-        "$mod" = "SUPER";
-        gaps_in = 6;
-        gaps_out = 8;
-        border_size = 2;
-        resize_on_border = true;
+        general = {
+          "$mod" = "SUPER";
+          gaps_in = 6;
+          gaps_out = 8;
+          border_size = 2;
+          resize_on_border = true;
+          layout = "dwindle";
+          allow_tearing = true;
+        };
+
+        input = {
+            kb_layout = "us";
+            follow_mouse = true;
+            touchpad = {
+              natural_scroll = true;
+            };
+            accel_profile = "flat";
+            sensitivity = 0;
+          };
+
         bind = [
           "$mod SHIFT,Return,exec,rofi-launcher"
           "$mod,Return,exec,kitty"
@@ -74,6 +89,7 @@
           "ALT,Tab,cyclenext"
           "ALT,Tab,bringactivetotop"
         ];
+
         bindm = [
           "$mod, mouse:272, movewindow"
           "$mod, mouse:273, resizewindow"
@@ -91,6 +107,25 @@
           monitor=,preferred,auto,auto
           monitor=eDP-1,1920x1200@60,auto,1
         '';
+
+        animations = {
+          enabled = true;
+          bezier = [
+            "overshot, 0.05, 0.9, 0.1, 1.05"
+            "smoothOut, 0.5, 0, 0.99, 0.99"
+            "smoothIn, 0.5, -0.5, 0.68, 1.5"
+          ];
+          animation = [
+            "windows, 1, 5, overshot, slide"
+            "windowsOut, 1, 3, smoothOut"
+            "windowsIn, 1, 3, smoothOut"
+            "windowsMove, 1, 4, smoothIn, slide"
+            "border, 1, 5, default"
+            "fade, 1, 5, smoothIn"
+            "fadeDim, 1, 5, smoothIn"
+            "workspaces, 1, 6, default"
+          ];
+        };
 
         env = [
           "NIXOS_OZONE_WL, 1"
@@ -113,6 +148,7 @@
           "QT_SCALE_FACTOR,1"
           "EDITOR,hx"
         ];
+
         decoration = {
           rounding = 10;
           blur = {
@@ -122,6 +158,7 @@
             ignore_opacity = false;
             new_optimizations = true;
           };
+
           shadow = {
             enabled = true;
             range = 4;
@@ -129,6 +166,7 @@
             color = "rgba(1a1a1aee)";
           };
         };
+        systemd.enable = true;
       };
     };
   };
