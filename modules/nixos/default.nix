@@ -5,5 +5,6 @@
     ./ssh.nix
     ./hyprland.nix
     ./zsh.nix
+    ./greetd.nix
   ];
 }
