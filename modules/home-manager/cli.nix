@@ -1,4 +1,4 @@
-{ lib, config, pkgs, inputs, system, ... }:
+{ lib, config, pkgs, ... }:
 {
   options.modules.home-manager.cli.enable = lib.mkEnableOption "basic cli tools";
 
@@ -6,7 +6,6 @@
     home.packages = with pkgs; [
       htop
       fastfetch
-      inputs.ghostty.packages."${pkgs.system}".default
     ];
   };
 }
