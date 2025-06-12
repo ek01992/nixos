@@ -1,10 +1,10 @@
 {
   imports = [
-    ./core.nix
-    ./home-manager.nix
-    ./ssh.nix
-    ./hyprland.nix
-    ./zsh.nix
-    ./greetd.nix
+    ./core
+    ./home-manager
+    ./ssh
+    ./hyprland
+    ./zsh
+    ./greetd
   ];
 }
