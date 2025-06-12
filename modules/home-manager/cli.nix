@@ -9,7 +9,8 @@
       waybar
       libnotify
       dunst
-      
+      swww
+      rofi-wayland
     ];
   };
 }
