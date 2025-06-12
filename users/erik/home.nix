@@ -19,4 +19,5 @@
     userEmail = "ek01992@proton.me";
   };
   modules.home-manager.helix.enable = true;
+  modules.home-manager.zsh.enable = true;
 }
