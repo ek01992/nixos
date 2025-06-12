@@ -1,4 +1,4 @@
-{ lib, config, inputs, username, ... }:
+{ lib, config, inputs, ... }:
 let
   cfg = config.my.nixos.home-manager;
 in
@@ -14,7 +14,7 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
       backupFileExtension = "backup";
-      extraSpecialArgs = { inherit inputs username; };
+      extraSpecialArgs = { inherit inputs; };
     };
   };
 }
