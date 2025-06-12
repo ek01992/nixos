@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../users/${username}
+    ../../users/${username}/default.nix
     inputs.self.nixosModules.default
   ];
 
