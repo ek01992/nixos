@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    (import (../../users + "/${username}/default.nix") { inherit username pkgs; })
+    ../../users/${username}
     inputs.self.nixosModules.default
   ];
 
