@@ -19,7 +19,6 @@
     userEmail = "ek01992@proton.me";
   };
   modules.home-manager.helix.enable = true;
-  # modules.home-manager.firefox.enable = true;
   modules.home-manager.zen-browser.enable = true;
   modules.home-manager.zsh.enable = true;
   modules.home-manager.hyprland.enable = true;

@@ -2,9 +2,8 @@
   imports = [
     ./cli.nix
     ./git.nix
-    ./helix.nix
+    ./helix
     ./hyprland.nix
-    # ./firefox.nix
     ./zsh.nix
     ./zen-browser.nix
   ];
