@@ -9,6 +9,7 @@
   modules.nixos.core.enable = true;
   modules.nixos.home-manager.enable = true;
   modules.nixos.ssh.enable = true;
+  modules.nixos.hyprland.enable = true;
 
   home-manager.users."${username}" = ../../users/${username}/home.nix;
 }

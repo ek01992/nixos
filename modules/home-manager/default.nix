@@ -3,5 +3,6 @@
     ./cli.nix
     ./git.nix
     ./helix.nix
+    ./hyprland.nix
   ];
 }
