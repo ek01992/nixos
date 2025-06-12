@@ -1,6 +1,6 @@
 { lib, config, ... }:
 {
-  options.modules.home-manager.git = {
+  options.modules.home-manager.cli.git = {
     enable = lib.mkEnableOption "git";
 
     userName = lib.mkOption {
@@ -14,11 +14,11 @@
     };
   };
 
-  config = lib.mkIf config.modules.home-manager.git.enable {
+  config = lib.mkIf config.modules.home-manager.cli.git.enable {
     programs.git = {
       enable = true;
-      userName = config.modules.home-manager.git.userName;
-      userEmail = config.modules.home-manager.git.userEmail;
+      userName = config.modules.home-manager.cli.git.userName;
+      userEmail = config.modules.home-manager.cli.git.userEmail;
     };
   };
 }

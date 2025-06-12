@@ -3,6 +3,6 @@
     ./git
     ./helix
     ./zsh
-    ./pkgs
+    ./common
   ];
 }

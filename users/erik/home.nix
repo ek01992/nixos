@@ -14,9 +14,7 @@
 
   modules.home-manager = {
     cli = {
-      pkgs = {
-        enable = true;
-      };
+      common.enable = true;
       git = {
         enable = true;
         userName = "ek01992";
@@ -25,7 +23,6 @@
       helix.enable = true;
       zsh.enable = true;
     };
-
     gui = {
       hyprland.enable = true;
       zen-browser.enable = true;
