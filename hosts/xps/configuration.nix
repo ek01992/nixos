@@ -6,7 +6,8 @@ in
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosModules.default
-  ];
+  ]
+  ++ (map (username: ../../users + "/${username}/default.nix") users);
 
   my.nixos = {
     core.enable = true;
@@ -28,7 +29,6 @@ in
 
   users.users = lib.genAttrs users (username: {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    shell = pkgs.zsh;
+    createHome = true;
   });
 }
