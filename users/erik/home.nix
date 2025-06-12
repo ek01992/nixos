@@ -20,7 +20,6 @@
         userName = "ek01992";
         userEmail = "ek01992@proton.me";
       };
-      helix.enable = true;
       zsh.enable = true;
     };
     gui = {

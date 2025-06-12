@@ -11,7 +11,6 @@
       dunst
       swww
       wofi
-      helix
     ];
   };
 }
