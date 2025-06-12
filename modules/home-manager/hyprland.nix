@@ -8,7 +8,7 @@
       settings = {
         "$mod" = "SUPER";
         bind = [
-          "$mod, T, exec, ghostty"
+          "$mod, T, exec, /dev/pts/0"
         ];
       };
     };
