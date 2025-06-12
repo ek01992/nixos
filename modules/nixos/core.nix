@@ -18,6 +18,18 @@
       jack.enable = true;
     };
 
+    fonts = {
+      packages = with pkgs; [
+        noto-fonts-emoji
+        noto-fonts-cjk-sans
+        font-awesome
+        symbola
+        material-icons
+        fira-code
+        fira-code-symbols
+      ];
+    };
+
     environment.systemPackages = with pkgs; [
       git
       curl
