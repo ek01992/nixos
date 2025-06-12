@@ -8,7 +8,7 @@
       settings = {
         "$mod" = "SUPER";
         bind = [
-          "$mod, T, exec, ${pkgs.ghostty}/bin/ghostty"
+          "$mod, T, exec, ghostty"
         ];
       };
     };
