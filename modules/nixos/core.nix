@@ -13,7 +13,7 @@
       git
       curl
       wget
-      ghostty
+      kitty
     ];
   };
 }
