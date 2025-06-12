@@ -12,14 +12,16 @@
 
   programs.home-manager.enable = true;
 
-  modules.home-manager.cli.enable = true;
-  modules.home-manager.git = {
-    enable = true;
-    userName = "ek01992";
-    userEmail = "ek01992@proton.me";
+  modules.home-manager = {
+    pkgs.enable = true;
+    git = {
+      enable = true;
+      userName = "ek01992";
+      userEmail = "ek01992@proton.me";
+    };
+    helix.enable = true;
+    zen-browser.enable = true;
+    zsh.enable = true;
+    hyprland.enable = true;
   };
-  modules.home-manager.helix.enable = true;
-  modules.home-manager.zen-browser.enable = true;
-  modules.home-manager.zsh.enable = true;
-  modules.home-manager.hyprland.enable = true;
 }
