@@ -1,6 +1,5 @@
 { config, pkgs, inputs, lib, ... }:
 let
-  # Define the users for this specific host
   users = [ "erik" ];
 in
 {
@@ -9,7 +8,6 @@ in
     inputs.self.nixosModules.default
   ];
 
-  # This assumes you refactor your nixos modules to a 'my.nixos' namespace for consistency.
   my.nixos = {
     core.enable = true;
     home-manager.enable = true;
