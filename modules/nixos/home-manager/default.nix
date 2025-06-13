@@ -17,7 +17,7 @@ in
       extraSpecialArgs = { inherit inputs; };
     };
     nixpkgs.overlays = [
-      inputs.nur.overlay.default
+      inputs.nur.overlays.default
     ];
   };
 }
