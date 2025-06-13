@@ -20,7 +20,11 @@ in
         sha256 = "32d1e9307e1745bf55227135b9c6a16cff63115571edbd58eb3bd2df7a6700be";
       };
 
-      gaps = 8;
+      variables = {
+        border_width = 2;
+        border_radius = 8;
+        window_gaps = 8;
+      };
 
       cursor = {
         package = pkgs.bibata-cursors;

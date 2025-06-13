@@ -11,7 +11,9 @@ in
       settings = {
         general = {
           "$mod" = "SUPER";
-          border_size = 2;
+          gaps_in = config.stylix.variables.window_gaps;
+          gaps_out = config.stylix.variables.window_gaps * 2;
+          border_size = config.stylix.variables.border_width;
           layout = "dwindle";
           allow_tearing = true;
           monitor = [
@@ -21,7 +23,7 @@ in
         };
 
         decoration = {
-          rounding = 8;
+          rounding = config.stylix.variables.border_radius;
         };
 
         input = {
