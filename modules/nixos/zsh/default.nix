@@ -26,9 +26,6 @@ in
         # nd = "nix develop -c $SHELL";
         rebuild = "sudo nixos-rebuild switch --fast; notify-send 'Rebuild complete\!'";
       };
-      initExtra = ''
-        eval "$(zoxide init zsh)"
-      '';
     };
   };
 }

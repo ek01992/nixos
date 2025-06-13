@@ -13,6 +13,7 @@
       userEmail = "ek01992@proton.me";
     };
     zsh.enable = true;
+    zoxide.enable = true;
   };
   gui = {
     hyprland.enable = true;
