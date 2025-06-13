@@ -7,6 +7,13 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.zsh = {
+      zplug = {
+        enable = true;
+        plugins = [
+          { name = "zsh-users/zsh-autosuggestions"; }
+          { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; }
+        ];
+      };
       enable = true;
       enableCompletion = true;
       autosuggestions.enable = true;
