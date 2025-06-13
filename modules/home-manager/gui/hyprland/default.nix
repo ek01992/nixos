@@ -36,7 +36,7 @@ in
         bind = [
           "$mod SHIFT,Return,exec,rofi-launcher"
           "$mod,Return,exec,kitty"
-          "$mod,W,exec,zen"
+          "$mod,W,exec,firefox"
           "$mod,Q,killactive,"
           "$mod SHIFT,I,togglesplit,"
           "$mod,F,fullscreen,"
