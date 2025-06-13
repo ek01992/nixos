@@ -13,7 +13,7 @@ in
           "$mod" = "SUPER";
           gaps_in = 6;
           gaps_out = 8;
-          border_size = 2;
+          border_size = 0;
           resize_on_border = true;
           layout = "dwindle";
           allow_tearing = true;
@@ -166,7 +166,6 @@ in
             enabled = true;
             range = 4;
             render_power = 3;
-            color = "rgba(1a1a1aee)";
           };
         };
         systemd.enable = true;
