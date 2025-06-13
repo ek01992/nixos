@@ -13,7 +13,7 @@ in
       syntaxHighlighting.enable = true;
       shellAliases = {
         c = "clear";
-        cd = "zoxide";
+        cd = "z";
         reboot = "sudo reboot now";
         shutdown = "sudo shutdown now";
         mkdir = "mkdir -vp";
@@ -26,6 +26,9 @@ in
         # nd = "nix develop -c $SHELL";
         rebuild = "sudo nixos-rebuild switch --fast; notify-send 'Rebuild complete\!'";
       };
+      initExtra = ''
+        eval "$(zoxide init zsh)"
+      '';
     };
   };
 }
