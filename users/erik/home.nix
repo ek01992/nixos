@@ -8,7 +8,6 @@
 
   my = {
     cli = {
-      common.enable = true;
       git = {
         enable = true;
         userName = "ek01992";
@@ -21,6 +20,8 @@
       firefox.enable = true;
       stylix.enable = true;
       kitty.enable = true;
+    };
+    services = {
     };
   };
 }
