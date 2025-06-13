@@ -34,6 +34,7 @@
     plymouth = {
       enable = true;
     };
+    kernelPackages = pkgs.linuxPackages_latest;
   }; 
   
   fileSystems = {
@@ -59,6 +60,10 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   hardware = {
+    firmware = with pkgs; [
+      sof-firmware
+      alsa-ucm-conf
+    ];
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     graphics = {
       enable = true;
