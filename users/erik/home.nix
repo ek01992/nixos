@@ -1,7 +1,7 @@
 { pkgs, inputs, config, ... }:
 {
   imports = [
-    inputs.self.homeManagerModules.default
+    inputs.self.homeModules.default
   ];
 
   home.stateVersion = "25.05";

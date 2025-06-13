@@ -7,7 +7,7 @@
   in {
 
     nixosModules.default = import ./modules/nixos;
-    homeManagerModules.default = import ./modules/home-manager;
+    homeModules.default = import ./modules/home-manager;
 
     nixosConfigurations = {
       xps = lib.nixosSystem {
