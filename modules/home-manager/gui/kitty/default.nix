@@ -1,15 +1,11 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.my.cli.kitty;
+  cfg = config.my.gui.kitty;
 in
 {
-  options.my.cli.kitty.enable = lib.mkEnableOption "kitty";
+  options.my.gui.kitty.enable = lib.mkEnableOption "kitty";
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      kitty
-    ];
-
     programs.kitty = lib.mkForce {
       enable = true;
       settings = {
@@ -18,8 +14,6 @@ in
         enable_audio_bell = false;
         mouse_hide_wait = "-1.0";
         window_padding_width = "10";
-        background_opacity = "0.5";
-        background_blur = 5;
       };
     };
   };
