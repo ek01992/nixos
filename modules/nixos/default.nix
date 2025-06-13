@@ -6,5 +6,6 @@
     ./hyprland
     ./zsh
     ./greetd
+    ./stylix
   ];
 }
