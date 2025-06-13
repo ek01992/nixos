@@ -34,6 +34,9 @@ in
       targets.kitty.enable = true;
       targets.hyprland.enable = true;
       targets.firefox.enable = true;
+      targets.firefox.profileNames = [
+        "default"
+        "erik"
+      ];
     };
   };
-}
