@@ -153,6 +153,7 @@ in
 
         decoration = {
           rounding = 10;
+          opacity = 0.7;
           blur = {
             enabled = true;
             size = 5;

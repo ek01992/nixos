@@ -32,7 +32,6 @@ in
         };
       };
       targets.kitty.enable = true;
-      targets.kitty.opacity = 0.7;
       targets.hyprland.enable = true;
 
     };
