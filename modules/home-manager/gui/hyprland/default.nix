@@ -11,16 +11,17 @@ in
       settings = {
         general = {
           "$mod" = "SUPER";
-          gaps_in = 6;
-          gaps_out = 8;
-          border_size = 0;
-          resize_on_border = true;
+          border_size = 2;
           layout = "dwindle";
           allow_tearing = true;
           monitor = [
             ",preferred,auto,auto"
             "eDP-1,1920x1200@60,auto,1"
           ];
+        };
+
+        decoration = {
+          rounding = 8;
         };
 
         input = {
