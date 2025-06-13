@@ -21,13 +21,13 @@
           "dom.security.https_first" = true;
           "dom.security.https_only_mode" = true;
           "dom.security.https_only_mode_ever_enabled" = true;
+          "extensions.activeThemeID" = "dracula-dark-colorscheme@draculatheme.com";
         };
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
-          firefox-color
           proton-pass
+          dracula-dark-colorscheme
         ];
-
         extraConfig = ''
           //
           /* You may copy+paste this file and use it as it is.
