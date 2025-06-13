@@ -1,16 +1,12 @@
 { lib, config, inputs, ... }:
 let
-  cfg = config.my.gui.zen-browser;
+  cfg = config.my.gui.firefox;
 in
 {
-  options.my.gui.zen-browser.enable = lib.mkEnableOption "zen";
-
-  imports = [
-    inputs.zen-browser.homeModules.twilight
-  ];
+  options.my.gui.firefox.enable = lib.mkEnableOption "zen";
 
   config = lib.mkIf cfg.enable {
-    programs.zen-browser = {
+    programs.firefox = {
       enable = true;
       policies = {
         DisableTelemetry = true;

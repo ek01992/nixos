@@ -18,7 +18,7 @@
     };
     gui = {
       hyprland.enable = true;
-      zen-browser.enable = true;
+      firefox.enable = true;
       stylix.enable = true;
       kitty.enable = true;
     };

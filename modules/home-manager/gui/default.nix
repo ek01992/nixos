@@ -1,7 +1,7 @@
 {
   imports = [
     ./hyprland
-    ./zen-browser
+    ./firefox
     ./stylix
     ./kitty
   ];
