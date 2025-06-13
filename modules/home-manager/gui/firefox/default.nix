@@ -14,6 +14,9 @@ in
           proton-pass
           dracula-dark-colorscheme
         ];
+        settings = {
+          "extensions.activeThemeID" = "dracula-dark-colorscheme@draculatheme.com";
+        };
       };
     };
   };
