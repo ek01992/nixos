@@ -1,4 +1,4 @@
-{ lib, config, inputs, ... }:
+{ lib, config, inputs, nur, ... }:
 let
   cfg = config.my.gui.firefox;
 in
