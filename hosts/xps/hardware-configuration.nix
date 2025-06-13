@@ -59,7 +59,27 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   environment.systemPackages = [ pkgs.alsa-ucm-conf pkgs.pulseaudio ];
-  
+  environment.etc = {
+    etc."wireplumber/main.lua.d/51-set-default-sink.lua" = {
+      text = ''
+        rule = {
+          matches = {
+            {
+              -- Replace this with the name of your laptop speakers from `pactl list sinks`
+              { "node.name", "equals", "alsa_output.pci-0000_00_1f.3-platform-sof_sdw.HiFi__Speaker__sink" },
+            },
+          },
+          apply_properties = {
+            -- A higher priority makes this device the default.
+            -- External devices often get a priority around 1000.
+            ["priority.driver"] = 1001,
+            ["priority.session"] = 1001,
+          },
+        }
+        table.insert(alsa_monitor.rules, rule)
+      '';
+    };
+  };
   hardware = {
     firmware = with pkgs; [
       sof-firmware
