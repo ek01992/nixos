@@ -49,6 +49,8 @@ in
       jq
       tcpdump
       zoxide
+      fzf
+      ripgrep
     ];
   };
 }
