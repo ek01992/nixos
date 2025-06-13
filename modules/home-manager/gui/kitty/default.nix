@@ -14,7 +14,6 @@ in
         enable_audio_bell = false;
         mouse_hide_wait = "-1.0";
         window_padding_width = "10";
-        opacity = 0.7;
       };
     };
   };

@@ -129,6 +129,10 @@ in
           ];
         };
 
+        windowrule = [
+          "opacity 0.9 0.8, ^(kitty)$"
+        ];
+
         env = [
           "NIXOS_OZONE_WL, 1"
           "NIXPKGS_ALLOW_UNFREE, 1"
@@ -153,7 +157,6 @@ in
 
         decoration = {
           rounding = 10;
-          opacity = 0.7;
           blur = {
             enabled = true;
             size = 5;
