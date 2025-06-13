@@ -16,5 +16,8 @@ in
       backupFileExtension = "backup";
       extraSpecialArgs = { inherit inputs; };
     };
+    nixpkgs.overlays = [
+      nur.overlay
+    ];
   };
 }

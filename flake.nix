@@ -1,7 +1,7 @@
 {
   description = "flake for nixos with Home Manager enabled";
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, zen-browser, stylix, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, stylix, nur, ... }@inputs: 
   let
     lib = import ./lib { inherit inputs; };
   in {
@@ -29,10 +29,6 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     hyprland.url = "github:hyprwm/Hyprland";
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,5 +37,9 @@
     #  url = "github:Mic92/sops-nix";
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
