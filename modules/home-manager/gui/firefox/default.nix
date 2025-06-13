@@ -22,7 +22,7 @@ in
         settings = {
           "extensions.activeThemeID" = "dracula-dark-colorscheme@protonmail.ch";
         };
-      }
+      };
     };
   };
 }
