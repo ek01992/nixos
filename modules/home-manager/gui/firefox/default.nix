@@ -15,7 +15,7 @@ in
       ];
       profiles.erik = {
         settings = {
-          "extensions.activeThemeID" = "dracula-dark-colorscheme@protonmail.ch";
+          
         };
       };
     };
