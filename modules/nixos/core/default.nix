@@ -32,6 +32,8 @@ in
       git
       curl
       wget
+      alsa-ucm-conf
+      pavucontrol
     ];
   };
 }

@@ -58,14 +58,17 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  environment.systemPackages = [ pkgs.alsa-ucm-conf pkgs.pulseaudio pkgs.pavucontrol ];
   hardware = {
     firmware = with pkgs; [
       sof-firmware
     ];
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    graphics = {
+    graphics = let
+      pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+    in {
       enable = true;
+      packages = [ pkgs-unstable.mesa.drivers ];
+      packages32 = [ pkgs-unstable.pkgsi686Linux.mesa.drivers ];
       extraPackages = with pkgs; [
         intel-media-driver
         vaapiIntel
