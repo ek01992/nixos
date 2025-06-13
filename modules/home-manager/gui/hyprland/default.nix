@@ -13,7 +13,7 @@ in
           "$mod" = "SUPER";
           gaps_in = 8;
           gaps_out = 16;
-          border_size = 2;
+          border_size = 0;
           layout = "dwindle";
           allow_tearing = true;
           monitor = [
@@ -118,7 +118,7 @@ in
         };
 
         windowrule = [
-          "opacity 0.8 0.6, class:kitty"
+          "opacity 0.8 0.4, class:kitty"
         ];
 
         env = [
