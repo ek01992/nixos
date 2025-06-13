@@ -60,7 +60,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   environment.systemPackages = [ pkgs.alsa-ucm-conf pkgs.pulseaudio ];
   environment.etc = {
-    etc."wireplumber/main.lua.d/51-set-default-sink.lua" = {
+    "wireplumber/main.lua.d/51-set-default-sink.lua" = {
       text = ''
         rule = {
           matches = {
