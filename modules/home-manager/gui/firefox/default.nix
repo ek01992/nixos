@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: {
-  options.my.gui.firefox.enable = lib.mkEnableOption "firefox";
+  options.gui.firefox.enable = lib.mkEnableOption "firefox";
 
-  config = lib.mkIf config.my.gui.firefox.enable {
+  config = lib.mkIf config.gui.firefox.enable {
 
     programs.firefox = {
       enable = true;

@@ -9,7 +9,7 @@ in
   ]
   ++ (map (username: ../../users + "/${username}/default.nix") users);
 
-  my.nixos = {
+  nixos = {
     core.enable = true;
     home-manager.enable = true;
     ssh.enable = true;

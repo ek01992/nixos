@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.my.cli.git;
+  cfg = config.cli.git;
 in
 {
-  options.my.cli.git = {
+  options.cli.git = {
     enable = lib.mkEnableOption "git";
 
     userName = lib.mkOption {

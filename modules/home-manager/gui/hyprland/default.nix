@@ -1,9 +1,9 @@
 { lib, config, inputs,pkgs, ... }:
 let
-  cfg = config.my.gui.hyprland;
+  cfg = config.gui.hyprland;
 in
 {
-  options.my.gui.hyprland.enable = lib.mkEnableOption "hyprland";
+  options.gui.hyprland.enable = lib.mkEnableOption "hyprland";
 
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {

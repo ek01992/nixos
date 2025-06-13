@@ -1,9 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.my.nixos.greetd;
+  cfg = config.nixos.greetd;
 in
 {
-  options.my.nixos.greetd = {
+  options.nixos.greetd = {
     enable = lib.mkEnableOption "greetd";
 
     # This 'user' option is what's missing from your current file.

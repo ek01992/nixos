@@ -1,9 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.my.nixos.core;
+  cfg = config.nixos.core;
 in
 {
-  options.my.nixos.core.enable = lib.mkEnableOption "core system settings";
+  options.nixos.core.enable = lib.mkEnableOption "core system settings";
 
   config = lib.mkIf cfg.enable {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

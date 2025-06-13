@@ -1,13 +1,13 @@
 { lib, config, inputs, pkgs, ... }:
 let
-  cfg = config.my.gui.stylix;
+  cfg = config.gui.stylix;
 in
 {
   imports = [
     inputs.stylix.homeModules.stylix
   ];
 
-  options.my.gui.stylix.enable = lib.mkEnableOption "stylix";
+  options.gui.stylix.enable = lib.mkEnableOption "stylix";
 
   config = lib.mkIf cfg.enable {
 

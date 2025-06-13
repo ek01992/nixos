@@ -1,9 +1,9 @@
 { lib, config, ... }:
 let
-  cfg = config.my.nixos.zsh;
+  cfg = config.nixos.zsh;
 in
 {
-  options.my.nixos.zsh.enable = lib.mkEnableOption "zsh";
+  options.nixos.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
     programs.zsh = {

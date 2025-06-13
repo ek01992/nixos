@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: {
-  options.my.gui.cursor.enable = lib.mkEnableOption "cursor";
+  options.gui.cursor.enable = lib.mkEnableOption "cursor";
 
-  config = lib.mkIf config.my.gui.cursor.enable {
+  config = lib.mkIf config.gui.cursor.enable {
     home.packages = with pkgs; [
       code-cursor
     ];

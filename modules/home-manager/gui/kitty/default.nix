@@ -1,9 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.my.gui.kitty;
+  cfg = config.gui.kitty;
 in
 {
-  options.my.gui.kitty.enable = lib.mkEnableOption "kitty";
+  options.gui.kitty.enable = lib.mkEnableOption "kitty";
 
   config = lib.mkIf cfg.enable {
     programs.kitty = {

@@ -1,9 +1,9 @@
 { lib, config, inputs, ... }:
 let
-  cfg = config.my.services.sops;
+  cfg = config.services.sops;
 in
 {
-  options.my.services.sops.enable = lib.mkEnableOption "sops";
+  options.services.sops.enable = lib.mkEnableOption "sops";
 
   imports = [
   ];
