@@ -3,5 +3,6 @@
     ./git
     ./zsh
     ./common
+    ./kitty
   ];
 }
