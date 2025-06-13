@@ -51,6 +51,7 @@ in
       zoxide
       fzf
       ripgrep
+      libnotify
     ];
   };
 }
