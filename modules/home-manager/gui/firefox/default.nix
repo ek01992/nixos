@@ -3,7 +3,7 @@ let
   cfg = config.my.gui.firefox;
 in
 {
-  options.my.gui.firefox.enable = lib.mkEnableOption "zen";
+  options.my.gui.firefox.enable = lib.mkEnableOption "firefox";
 
   config = lib.mkIf cfg.enable {
     programs.firefox = {
