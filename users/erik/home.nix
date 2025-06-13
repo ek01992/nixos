@@ -20,6 +20,7 @@
       firefox.enable = true;
       stylix.enable = true;
       kitty.enable = true;
+      cursor.enable = true;
     };
     services = {
     };

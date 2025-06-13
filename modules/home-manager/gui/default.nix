@@ -4,5 +4,6 @@
     ./firefox
     ./stylix
     ./kitty
+    ./cursor
   ];
 }
