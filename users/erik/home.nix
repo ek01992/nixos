@@ -22,6 +22,7 @@
     gui = {
       hyprland.enable = true;
       zen-browser.enable = true;
+      stylix.enable = true;
     };
   };
 }

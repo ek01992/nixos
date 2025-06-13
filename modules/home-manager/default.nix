@@ -2,6 +2,6 @@
   imports = [
     ./cli
     ./gui
-    # ./sops
+    ./services
   ];
 }

@@ -15,7 +15,6 @@ in
     ssh.enable = true;
     hyprland.enable = true;
     zsh.enable = true;
-    stylix.enable = true;
     greetd = {
       enable = true;
       user = "erik";
