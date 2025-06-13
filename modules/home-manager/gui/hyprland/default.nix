@@ -17,6 +17,10 @@ in
           resize_on_border = true;
           layout = "dwindle";
           allow_tearing = true;
+          monitor = [
+            ",preferred,auto,auto"
+            "eDP-1,1920x1200@60,auto,1"
+          ];
         };
 
         input = {
@@ -106,11 +110,6 @@ in
           no_warps = true;
         };
 
-        extraConfig = ''
-          monitor=,preferred,auto,auto
-          monitor=eDP-1,1920x1200@60,auto,1
-        '';
-
         animations = {
           enabled = true;
           bezier = [
@@ -168,7 +167,6 @@ in
             render_power = 3;
           };
         };
-        systemd.enable = true;
       };
     };
   };
