@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 let
   cfg = config.nixos.zsh;
 in
@@ -6,9 +6,6 @@ in
   options.nixos.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      zplug
-    ];
     programs.zsh = {
       zplug = {
         enable = true;
@@ -34,7 +31,8 @@ in
         ls = "eza -a --icons";
         tree = "eza --tree --icons";
         # nd = "nix develop -c $SHELL";
-        rebuild = "sudo nixos-rebuild switch --fast";
+        rebuild = "sudo nixos-rebuild switch";
+        upgrade = "sudo nixos-rebuild switch --upgrade";
       };
     };
   };
