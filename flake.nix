@@ -1,7 +1,7 @@
 {
   description = "flake for nixos with Home Manager enabled";
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, zen-browser, sops-nix, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, zen-browser, ... }@inputs: 
   let
     lib = import ./lib { inherit inputs; };
   in {

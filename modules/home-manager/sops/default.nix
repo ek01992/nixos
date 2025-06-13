@@ -1,3 +1,4 @@
+/*
 { lib, config, inputs, ... }:
 let
   cfg = config.my.sops;
@@ -18,3 +19,4 @@ in
     };
   };
 }
+*/
