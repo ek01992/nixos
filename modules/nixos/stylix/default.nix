@@ -11,12 +11,12 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      base24-schemes
+      base16-schemes
     ];
 
     stylix = {
       enable = true;
-      base24Scheme = "${pkgs.base24-schemes}/share/themes/dracula.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
     };
   };
 }
