@@ -28,7 +28,6 @@
           proton-pass
         ];
 
-        ## https://github.com/yokoffing/Betterfox/blob/main/user.js
         extraConfig = ''
           //
           /* You may copy+paste this file and use it as it is.
