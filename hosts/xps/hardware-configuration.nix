@@ -58,7 +58,8 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  environment.systemPackages = [ pkgs.alsa-ucm-conf ];
+  environment.systemPackages = [ pkgs.alsa-ucm-conf pkgs.pulseaudio ];
+  
   hardware = {
     firmware = with pkgs; [
       sof-firmware
