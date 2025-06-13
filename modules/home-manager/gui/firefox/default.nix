@@ -8,15 +8,12 @@ in
   config = lib.mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      profiles.erik = {
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
           proton-pass
           dracula-dark-colorscheme
-      ];
-      profiles.erik = {
-        settings = {
-          
-        };
+        ];
       };
     };
   };
