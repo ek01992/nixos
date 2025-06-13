@@ -67,9 +67,16 @@
       pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
     in {
       enable = true;
-      packages = [ pkgs-unstable.mesa.drivers ];
-      packages32 = [ pkgs-unstable.pkgsi686Linux.mesa.drivers ];
+      enable32Bit = true;
+      package = pkgs-unstable.mesa;
+      package32 = pkgs-unstable.pkgsi686Linux.mesa;
       extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
         intel-media-driver
         vaapiIntel
         vaapiVdpau
