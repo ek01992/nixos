@@ -24,7 +24,7 @@ in
         ls = "eza -a --icons";
         tree = "eza --tree --icons";
         # nd = "nix develop -c $SHELL";
-        rebuild = "sudo nixos-rebuild switch --fast; notify-send 'Rebuild complete\!'";
+        rebuild = "sudo nixos-rebuild switch --fast";
       };
     };
   };
