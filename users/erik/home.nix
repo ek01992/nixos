@@ -6,8 +6,6 @@
 
   home.stateVersion = "25.05";
 
-  programs.home-manager.enable = true;
-
   my = {
     cli = {
       common.enable = true;
