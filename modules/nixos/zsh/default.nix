@@ -13,6 +13,7 @@ in
       syntaxHighlighting.enable = true;
       shellAliases = {
         c = "clear";
+        cd = "z";
         mkdir = "mkdir -vp";
         rm = "rm -rifv";
         mv = "mv -iv";

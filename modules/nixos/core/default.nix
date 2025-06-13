@@ -48,6 +48,7 @@ in
       fastfetch
       jq
       tcpdump
+      zoxide
     ];
   };
 }
