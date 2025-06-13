@@ -21,14 +21,17 @@ in
     };
   };
 
-  home-manager.extraSpecialArgs = { inherit inputs; };
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = lib.genAttrs users (username: {
+      imports = [ ../../users/${username}/home.nix ];
+    });
+  };
 
-  home-manager.users = lib.genAttrs users (username: {
-    imports = [ ../../users/${username}/home.nix ];
-  });
-
-  users.users = lib.genAttrs users (username: {
-    isNormalUser = true;
-    createHome = true;
-  });
+  users = {
+    users = lib.genAttrs users (username: {
+      isNormalUser = true;
+      createHome = true;
+    });
+  };
 }

@@ -6,22 +6,41 @@
     ];
 
   boot = {
+    consoleLogLevel = 3;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+      "i915.enable_psr=0"
+    ];
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "sd_mod" ];
       kernelModules = [ ];
+      verbose = false;
     };
     loader = {
       systemd-boot = {
         enable = true;
         configurationLimit = 5;
+        timeout = 0;
       };
       efi.canTouchEfiVariables = true;
     };
     kernelModules = [ "kvm-intel" ];
     blacklistedKernelModules = [ "psmouse" ];
     extraModulePackages = [ ];
-    plymouth.enable = true;
-    kernelParams = [ "i915.enable_psr=0" ];
+    plymouth = {
+      enable = true;
+      theme = "rings";
+      themePackages = with pkgs; [
+        # By default we would install all themes
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "rings" ];
+        })
+      ];
+    };
   }; 
   
   fileSystems = {
@@ -46,14 +65,16 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vaapiIntel
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+    };
   };
 }
