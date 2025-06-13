@@ -36,7 +36,6 @@ in
       targets.firefox.enable = true;
       targets.firefox.profileNames = [
         "default"
-        "erik"
       ];
     };
   };
