@@ -20,8 +20,6 @@ in
         sha256 = "32d1e9307e1745bf55227135b9c6a16cff63115571edbd58eb3bd2df7a6700be";
       };
       fonts = {
-        serif = config.stylix.fonts.monospace;
-        sansSerif = config.stylix.fonts.monospace;
         monospace = {
           package = pkgs.nerd-fonts.jetbrains-mono;
           name = "JetBrainsMono Nerd Font Mono";

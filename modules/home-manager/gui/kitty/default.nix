@@ -6,7 +6,7 @@ in
   options.my.gui.kitty.enable = lib.mkEnableOption "kitty";
 
   config = lib.mkIf cfg.enable {
-    programs.kitty = lib.mkForce {
+    programs.kitty = {
       enable = true;
       settings = {
         confirm_os_window_close = 0;
