@@ -2,6 +2,5 @@
   imports = [
     ./git
     ./zsh
-    ./common
   ];
 }
