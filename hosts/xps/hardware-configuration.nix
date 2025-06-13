@@ -58,7 +58,7 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  environment.systemPackages = [ pkgs.alsa-ucm-conf pkgs.pulseaudio ];
+  environment.systemPackages = [ pkgs.alsa-ucm-conf pkgs.pulseaudio pkgs.pavucontrol ];
   environment.etc = {
     "wireplumber/main.lua.d/51-set-default-sink.lua" = {
       text = ''
