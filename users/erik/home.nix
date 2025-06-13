@@ -17,12 +17,12 @@
         userEmail = "ek01992@proton.me";
       };
       zsh.enable = true;
-      kitty.enable = true;
     };
     gui = {
       hyprland.enable = true;
       zen-browser.enable = true;
       stylix.enable = true;
+      kitty.enable = true;
     };
   };
 }
