@@ -52,6 +52,7 @@ in
       fzf
       ripgrep
       libnotify
+      mako
     ];
   };
 }

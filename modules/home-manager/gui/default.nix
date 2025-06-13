@@ -5,5 +5,6 @@
     ./stylix
     ./kitty
     ./cursor
+    ./mako
   ];
 }

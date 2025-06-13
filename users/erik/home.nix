@@ -21,6 +21,7 @@
     stylix.enable = true;
     kitty.enable = true;
     cursor.enable = true;
+    mako.enable = true;
   };
   services = {
   };
