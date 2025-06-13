@@ -6,6 +6,9 @@ in
   options.nixos.zsh.enable = lib.mkEnableOption "zsh";
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      zplug
+    ];
     programs.zsh = {
       zplug = {
         enable = true;
