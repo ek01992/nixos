@@ -13,7 +13,9 @@ in
       syntaxHighlighting.enable = true;
       shellAliases = {
         c = "clear";
-        cd = "z";
+        cd = "zoxide";
+        reboot = "sudo reboot now";
+        shutdown = "sudo shutdown now";
         mkdir = "mkdir -vp";
         rm = "rm -rifv";
         mv = "mv -iv";
