@@ -58,11 +58,10 @@
   networking.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-
+  environment.systemPackages = [ pkgs.alsa-ucm-conf ];
   hardware = {
     firmware = with pkgs; [
       sof-firmware
-      alsa-ucm-conf
     ];
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     graphics = {
