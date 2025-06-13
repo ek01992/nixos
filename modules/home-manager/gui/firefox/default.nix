@@ -1,9 +1,5 @@
+{ config, lib, pkgs, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
   options.gui.firefox.enable = lib.mkEnableOption "firefox";
 
   config = lib.mkIf config.gui.firefox.enable {

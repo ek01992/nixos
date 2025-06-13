@@ -34,6 +34,20 @@ in
       wget
       alsa-ucm-conf
       pavucontrol
+      eza
+      bat
+      coreutils
+      direnv
+      dnsutils
+      nmap
+      whois
+      unzip
+      age
+      sops
+      ssh-to-age
+      fastfetch
+      jq
+      tcpdump
     ];
   };
 }

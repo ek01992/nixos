@@ -19,6 +19,7 @@ in
       enable = true;
       user = "erik";
     };
+    obsidian.enable = true;
   };
 
   home-manager = {

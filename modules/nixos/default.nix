@@ -7,5 +7,6 @@
     ./zsh
     ./greetd
     ./sops
+    ./obsidian
   ];
 }
