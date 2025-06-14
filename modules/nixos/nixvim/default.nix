@@ -10,9 +10,28 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.nixvim = {
-      enable = true;
-      colorschemes.dracula.enable = true;
-      plugins.lualine.enable = true;
+    enable = true;
+    defaultEditor = true;
+
+    plugins = with pkgs.vimPlugins; [
+      nvim-lspconfig
+      nvim-treesitter.withAllGrammars
+      telescope-nvim
+      lualine-nvim
+    ];
+
+    opts = {
+      number = true;
+      relativenumber = true;
+      hlsearch = true;
+    };
+
+    keymaps = [
+      {
+        key = "<leader>ff";
+        action = "<cmd>Telescope find_files<cr>";
+        options.desc = "Find Files";
+      } ];
     };
   };
 }
