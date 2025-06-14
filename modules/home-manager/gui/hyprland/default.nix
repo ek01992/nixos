@@ -9,6 +9,9 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
+        exec-once = [
+          "waybar"
+        ];
         general = {
           "$mod" = "SUPER";
           gaps_in = 8;

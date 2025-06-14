@@ -49,6 +49,7 @@ in
             "erik"
           ];
         };
+        waybar.enable = true;
       };
     };
   };

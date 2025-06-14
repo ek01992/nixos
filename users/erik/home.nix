@@ -22,6 +22,7 @@
     kitty.enable = true;
     cursor.enable = true;
     mako.enable = true;
+    waybar.enable = true;
   };
   services = {
   };

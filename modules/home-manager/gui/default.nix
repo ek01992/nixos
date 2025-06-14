@@ -6,5 +6,6 @@
     ./kitty
     ./cursor
     ./mako
+    ./waybar
   ];
 }
