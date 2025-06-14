@@ -9,5 +9,6 @@
     ./obsidian
     ./nixvim
     ./sops
+    ./power-management
   ];
 }

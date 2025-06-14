@@ -22,6 +22,7 @@ in
     obsidian.enable = true;
     nixvim.enable = true;
     sops.enable = true;
+    power-management.enable = true;
   };
 
   home-manager = {
