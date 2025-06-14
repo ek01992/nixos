@@ -7,7 +7,7 @@
   ];
 
   config = lib.mkIf config.nixos.sops.enable {
-    programs.sops = {
+    sops = {
       defaultSopsFile = ../../../secrets/sops.yaml;
       age.keyFile = "/var/lib/sops/age/keys.txt";
       age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
