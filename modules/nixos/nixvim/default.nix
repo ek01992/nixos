@@ -13,12 +13,14 @@ in
     enable = true;
     defaultEditor = true;
 
-    plugins = with pkgs.vimPlugins; [
-      nvim-lspconfig
-      nvim-treesitter.withAllGrammars
-      telescope-nvim
-      lualine-nvim
-    ];
+    plugins = {
+      colorschemes.dracula.enable = true;
+      lsp.enable = true;
+      treesitter.enable = true;
+      telescope.enable = true;
+      lualine.enable = true;
+    };
+
 
     opts = {
       number = true;
