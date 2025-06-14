@@ -1,9 +1,9 @@
 { lib, config, pkgs, ... }:
 let
-  cfg = config.cli.nixvim;
+  cfg = config.nixos.nixvim;
 in
 {
-  options.cli.nixvim.enable = lib.mkEnableOption "nixvim";
+  options.nixos.nixvim.enable = lib.mkEnableOption "nixvim";
 
   config = lib.mkIf cfg.enable {
     programs.nixvim = {

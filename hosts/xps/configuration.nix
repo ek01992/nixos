@@ -20,6 +20,7 @@ in
       user = "erik";
     };
     obsidian.enable = true;
+    nixvim.enable = true;
   };
 
   home-manager = {

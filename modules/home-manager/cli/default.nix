@@ -3,6 +3,5 @@
     ./git
     ./zsh
     ./zoxide
-    ./nixvim
   ];
 }
