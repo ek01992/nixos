@@ -23,6 +23,7 @@
     cursor.enable = true;
     mako.enable = true;
     waybar.enable = true;
+    wofi.enable = true;
   };
   services = {
   };
