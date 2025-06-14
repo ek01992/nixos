@@ -3,6 +3,9 @@ let
   cfg = config.nixos.nixvim;
 in
 {
+  imports = [
+    inputs.nixvim.nixosModules.nixvim
+  ];
   options.nixos.nixvim.enable = lib.mkEnableOption "nixvim";
 
   config = lib.mkIf cfg.enable {
