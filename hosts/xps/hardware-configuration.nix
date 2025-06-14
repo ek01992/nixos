@@ -57,7 +57,10 @@
 
   networking = {
     useDHCP = lib.mkDefault true;
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.powersave = true;
+    };
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
