@@ -140,7 +140,7 @@ in
           #"AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1:/dev/card2"
           "GDK_SCALE,1"
           "QT_SCALE_FACTOR,1"
-          "EDITOR,hx"
+          "EDITOR,nvim"
         ];
       };
     };
