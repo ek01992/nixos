@@ -53,6 +53,7 @@ in
       ripgrep
       libnotify
       mako
+      yazi
     ];
   };
 }
