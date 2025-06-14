@@ -26,5 +26,6 @@
     wofi.enable = true;
   };
   services = {
+    sops.enable = true;
   };
 }

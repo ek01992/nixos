@@ -6,7 +6,6 @@
     ./hyprland
     ./zsh
     ./greetd
-    ./sops
     ./obsidian
     ./nixvim
   ];
