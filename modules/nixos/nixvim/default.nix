@@ -14,7 +14,6 @@ in
     defaultEditor = true;
 
     plugins = {
-      colorschemes.dracula.enable = true;
       lsp.enable = true;
       treesitter.enable = true;
       telescope.enable = true;
