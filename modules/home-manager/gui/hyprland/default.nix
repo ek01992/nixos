@@ -40,7 +40,7 @@ in
           };
 
         bind = [
-          "$mod SHIFT,Return,exec,rofi-launcher"
+          "$mod SHIFT,Return,exec,wofi --drun"
           "$mod,Return,exec,kitty"
           "$mod,W,exec,firefox"
           "$mod,Q,killactive,"
