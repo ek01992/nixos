@@ -738,11 +738,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1749847892,
-        "narHash": "sha256-+M0AtVshfTfleX0b00ghoVAkXRajepvOxBo68IMoeDc=",
+        "lastModified": 1749870813,
+        "narHash": "sha256-0pEnktvSsk7ajtGJTKUJDV19OEI41Cg/XUFAOxagJf4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "81f20de559c9ea83d6d88dbf958960a1c0006ebd",
+        "rev": "5651bb84318ec4e5e9a5e616a3fc5e903042f60a",
         "type": "github"
       },
       "original": {
@@ -831,7 +831,28 @@
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "nur": "nur",
+        "sops-nix": "sops-nix",
         "stylix": "stylix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1749592509,
+        "narHash": "sha256-VunQzfZFA+Y6x3wYi2UE4DEQ8qKoAZZCnZPUlSoqC+A=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "50754dfaa0e24e313c626900d44ef431f3210138",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "stylix": {
