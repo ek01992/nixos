@@ -8,5 +8,6 @@
     ./greetd
     ./obsidian
     ./nixvim
+    ./sops
   ];
 }
