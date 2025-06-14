@@ -21,6 +21,7 @@ in
     };
     obsidian.enable = true;
     nixvim.enable = true;
+    sops.enable = true;
   };
 
   home-manager = {
