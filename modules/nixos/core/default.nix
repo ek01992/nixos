@@ -54,7 +54,6 @@ in
       libnotify
       mako
       yazi
-      cider-2
     ];
   };
 }
