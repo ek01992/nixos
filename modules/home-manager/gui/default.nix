@@ -7,5 +7,6 @@
     ./cursor
     ./mako
     ./waybar
+    ./wofi
   ];
 }

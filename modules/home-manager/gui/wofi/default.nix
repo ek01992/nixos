@@ -6,15 +6,10 @@ in
   options.gui.waybar.enable = lib.mkEnableOption "waybar";
 
   config = lib.mkIf cfg.enable {
-    programs.waybar = {
+    programs.wofi = {
       enable = true;
-      package = pkgs.waybar;
       settings = {
       };
     };
-
-    home.packages = with pkgs; [
-      pavucontrol
-    ];
   };
 }
