@@ -43,7 +43,7 @@ in
       whois
       unzip
       age
-      sops
+      sops-nix
       ssh-to-age
       fastfetch
       jq
