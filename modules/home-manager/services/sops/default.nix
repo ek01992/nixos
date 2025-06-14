@@ -1,12 +1,12 @@
 { config, lib, pkgs, inputs, ... }:
 {
-  options.nixos.sops.enable = lib.mkEnableOption "sops";
+  options.services.sops.enable = lib.mkEnableOption "sops";
 
   imports = [
     inputs.sops-nix.homeModules.sops
   ];
 
-  config = lib.mkIf config.nixos.sops.enable {
+  config = lib.mkIf config.services.sops.enable {
     programs.sops = {
       defaultSopsFile = ../../../../secrets/sops.yaml;
       age.keyFile = "/var/lib/sops/age/keys.txt";
