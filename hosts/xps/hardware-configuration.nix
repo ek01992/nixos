@@ -60,6 +60,18 @@
     networkmanager = {
       enable = true;
       wifi.powersave = true;
+      connectionConfig = {
+        "wifi-home" = {
+          wifi = {
+            ssid = "Wiffy";
+            mode = "infrastructure";
+          };
+          wifi-security = {
+            key-mgmt = "wpa-psk";
+            psk = config.sops.secrets.wifi_password.path;
+          };
+        };
+      };
     };
   };
 
