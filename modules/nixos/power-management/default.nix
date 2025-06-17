@@ -32,5 +32,6 @@ in
     powerManagement.powertop = {
       autoTune.enable = true;
       enable = true;
+    };
   };
 }
