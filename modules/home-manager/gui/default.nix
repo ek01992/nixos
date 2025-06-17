@@ -8,6 +8,5 @@
     ./mako
     ./waybar
     ./wofi
-    ./swaylock
   ];
 }

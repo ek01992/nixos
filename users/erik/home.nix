@@ -24,9 +24,8 @@
     mako.enable = true;
     waybar.enable = true;
     wofi.enable = true;
-    swaylock.enable = true;
   };
   services = {
-    # TODO: Add services here
+    swaylock.enable = true;
   };
 }
