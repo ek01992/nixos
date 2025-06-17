@@ -22,7 +22,6 @@ in
     obsidian.enable = true;
     nixvim.enable = true;
     power-management.enable = true;
-    swaylock.enable = true;
   };
 
   home-manager = {

@@ -9,6 +9,5 @@
     ./obsidian
     ./nixvim
     ./power-management
-    ./swaylock
   ];
 }
