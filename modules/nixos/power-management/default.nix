@@ -29,9 +29,6 @@ in
 
     services.thermald.enable = true;
     services.power-profiles-daemon.enable = false;
-    powerManagement.powertop = {
-      autoTune.enable = true;
-      enable = true;
-    };
+
   };
 }
