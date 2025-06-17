@@ -3,7 +3,7 @@
 
 {
   config = {
-    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    stylix.base16Scheme = "${pkgs.schemes}/share/themes/gruvbox-dark-hard.yaml";
 
     stylix.image = self + "/assets/gruvbox-wallpaper.png";
   };
