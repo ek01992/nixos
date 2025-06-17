@@ -3,7 +3,7 @@
 
 {
   config = {
-    stylix.base16Scheme = "${pkgs.schemes}/share/themes/dracula.yaml";
+    stylix.base16Scheme = "Dracula";
 
     stylix.image = self + "/assets/dracula-wallpaper.png";
   };

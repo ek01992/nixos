@@ -1,5 +1,5 @@
 {
-  description = "flake for nixos with Home Manager enabled";
+  description = "Flake for nixos with Home Manager enabled";
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, stylix, nur, ... }@inputs: 
   let
@@ -25,7 +25,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     hyprland.url = "github:hyprwm/Hyprland";
-    schemes.url = "github:tinted-theming/schemes";
 
     home-manager = {
       url = "github:nix-community/home-manager";
