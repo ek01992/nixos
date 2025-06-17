@@ -26,6 +26,6 @@
     wofi.enable = true;
   };
   services = {
-    swaylock.enable = true;
+    swaylock.enable = false;
   };
 }
