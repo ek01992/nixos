@@ -1,3 +1,4 @@
+# modules/nixos/zsh/default.nix
 { lib, config, ... }:
 let
   cfg = config.nixos.zsh;

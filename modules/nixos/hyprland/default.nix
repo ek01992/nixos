@@ -1,3 +1,4 @@
+# modules/nixos/hyprland/default.nix
 { lib, config, inputs, pkgs, ... }:
 let
   cfg = config.nixos.hyprland;

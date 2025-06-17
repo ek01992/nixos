@@ -1,3 +1,4 @@
+# modules/nixos/greetd/default.nix
 { lib, config, pkgs, ... }:
 let
   cfg = config.nixos.greetd;

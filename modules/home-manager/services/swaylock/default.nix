@@ -1,3 +1,4 @@
+# modules/home-manager/services/swaylock/default.nix
 { lib, config, pkgs, ... }:
 
 let

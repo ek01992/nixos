@@ -1,3 +1,4 @@
+# modules/nixos/core/default.nix
 { lib, config, pkgs, ... }:
 let
   cfg = config.nixos.core;

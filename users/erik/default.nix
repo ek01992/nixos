@@ -1,3 +1,4 @@
+# users/erik/default.nix
 { pkgs, config, ... }:
 {
   users.users = {

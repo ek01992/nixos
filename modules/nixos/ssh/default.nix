@@ -1,3 +1,4 @@
+# modules/nixos/ssh/default.nix
 { lib, config, ... }:
 let
   cfg = config.nixos.ssh;

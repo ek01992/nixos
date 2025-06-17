@@ -1,3 +1,4 @@
+# modules/nixos/power-management/default.nix
 { lib, config, pkgs, ... }:
 
 let

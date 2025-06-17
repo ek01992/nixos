@@ -25,6 +25,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     hyprland.url = "github:hyprwm/Hyprland";
+    base16-schemes.url = "github:tinted-theming/base16-schemes";
 
     home-manager = {
       url = "github:nix-community/home-manager";

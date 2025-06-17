@@ -1,3 +1,4 @@
+# modules/nixos/nixvim/default.nix
 { lib, config, pkgs, inputs, ... }:
 let
   cfg = config.nixos.nixvim;

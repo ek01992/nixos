@@ -1,3 +1,4 @@
+# modules/nixos/home-manager/default.nix
 { lib, config, inputs, ... }:
 let
   cfg = config.nixos.home-manager;

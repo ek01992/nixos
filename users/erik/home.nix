@@ -1,3 +1,4 @@
+# users/erik/home.nix
 { pkgs, inputs, config, ... }:
 {
   imports = [

@@ -1,3 +1,4 @@
+# modules/nixos/default.nix
 {
   imports = [
     ./core
