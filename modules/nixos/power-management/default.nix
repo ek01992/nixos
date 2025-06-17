@@ -21,11 +21,16 @@ in
         CPU_HWP_DYN_BOOST_ON_BAT = 0;
         PLATFORM_PROFILE_ON_AC = "performance";
         PLATFORM_PROFILE_ON_BAT = "low-power";
+        START_CHARGE_THRESH_BAT0 = 75;
+        STOP_CHARGE_THRESH_BAT0 = 80;
+        PCIE_ASPM_ON_BAT = "powersupersave";
       };
     };
 
     services.thermald.enable = true;
     services.power-profiles-daemon.enable = false;
-    powerManagement.powertop.enable = true;
+    powerManagement.powertop = {
+      autoTune.enable = true;
+      enable = true;
   };
 }
