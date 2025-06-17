@@ -14,6 +14,7 @@
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
       "i915.enable_psr=0"
+      "intel_pstate=active"
     ];
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "uas" "sd_mod" ];
