@@ -1,10 +1,7 @@
 # themes/gruvbox.nix
-{ pkgs, config, lib, self,... }:
+{ self, ... }:
 
 {
-  config = {
-    stylix.base16Scheme = "Gruvbox Dark";
-
-    stylix.image = self + "/assets/gruvbox-wallpaper.png";
-  };
+  base16Scheme = "Gruvbox Dark";
+  image = self + "/assets/gruvbox-wallpaper.png";
 }

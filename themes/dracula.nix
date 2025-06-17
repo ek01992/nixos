@@ -1,10 +1,7 @@
 # themes/dracula.nix
-{ pkgs, config, lib, self,... }:
+{ self, ... }:
 
 {
-  config = {
-    stylix.base16Scheme = "Dracula";
-
-    stylix.image = self + "/assets/dracula-wallpaper.png";
-  };
+  base16Scheme = "Dracula";
+  image = self + "/assets/dracula-wallpaper.png";
 }
