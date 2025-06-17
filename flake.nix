@@ -1,7 +1,7 @@
 {
   description = "flake for nixos with Home Manager enabled";
 
-  outputs = { self, nixpkgs, sops-nix, home-manager, nixos-hardware, stylix, nur, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, stylix, nur, ... }@inputs: 
   let
     lib = import ./lib { inherit inputs; };
   in {
@@ -38,11 +38,6 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

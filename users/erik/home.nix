@@ -5,7 +5,6 @@
   ];
 
   home.stateVersion = "25.05";
-  home.file.".ssh/id_ed25519".source = config.sops.secrets.user_erik_ssh_private_key.path;
 
   cli = {
     git = {

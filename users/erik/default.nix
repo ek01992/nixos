@@ -4,7 +4,6 @@
     erik = {
       initialPassword = "temp";
       shell = pkgs.zsh;
-      hashedPasswordFile = config.sops.secrets.user_erik_password.path;
       extraGroups = [
         "wheel" "audio" "video" "networkmanager"
       ];

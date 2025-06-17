@@ -8,7 +8,6 @@
     ./greetd
     ./obsidian
     ./nixvim
-    ./sops
     ./power-management
   ];
 }
