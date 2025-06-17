@@ -1,10 +1,10 @@
 { lib, config, pkgs, ... }:
 
 let
-  cfg = config.gui.swaylock;
+  cfg = config.services.swaylock;
 in
 {
-  options.gui.swaylock.enable = lib.mkEnableOption "swaylock";
+  options.services.swaylock.enable = lib.mkEnableOption "swaylock";
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [ swaylock-fancy ];
