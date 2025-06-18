@@ -5,6 +5,5 @@
     ./stylix
     ./kitty
     ./cursor
-    ./fonts
   ];
 }

@@ -13,11 +13,22 @@ in
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
+      fonts = {
+        monospace = {
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font Mono";
+        };
+        emoji = {
+          package = pkgs.noto-fonts-emoji;
+          name = "Noto Color Emoji";
+        };
+      };
       targets = {
         kitty.enable = true;
         gtk.enable = true;
         hyprland = {
           enable = true;
+          hyprpaper.enable = true;
         };
         firefox = {
           enable = true;
@@ -25,6 +36,7 @@ in
             "erik"
           ];
         };
+        waybar.enable = true;
       };
     };
   };

@@ -22,6 +22,5 @@
     stylix.enable = true;
     kitty.enable = true;
     cursor.enable = true;
-    fonts.enable = true;
   };
 }
