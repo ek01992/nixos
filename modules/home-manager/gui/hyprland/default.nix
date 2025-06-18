@@ -7,6 +7,10 @@ in
   options.gui.hyprland.enable = lib.mkEnableOption "hyprland";
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      swww
+    ];
+
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
@@ -28,14 +32,19 @@ in
         };
 
         input = {
-            kb_layout = "us";
-            follow_mouse = true;
-            touchpad = {
-              natural_scroll = true;
-            };
-            accel_profile = "flat";
-            sensitivity = 0;
+          kb_layout = "us";
+          follow_mouse = true;
+          touchpad = {
+            natural_scroll = true;
           };
+          accel_profile = "flat";
+          sensitivity = 0;
+        };
+
+        exec-once = [
+          "swww-daemon"
+          "sleep 1 && swww img ${config.stylix.image}"
+        ];
 
         bind = [
           "$mod,Return,exec,kitty"
