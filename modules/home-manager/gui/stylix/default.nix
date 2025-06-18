@@ -24,7 +24,7 @@ in
         };
       };
 
-      image = ../../../../assets/wal.png;
+      image = ../../../../wal/wal.png;
 
       cursor = {
         package = pkgs.bibata-cursors;
