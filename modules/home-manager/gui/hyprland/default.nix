@@ -118,8 +118,11 @@ in
 
         animations = {
           enabled = true;
-          animation = "windows,1,5,default";
-          
+          animation = [
+            "windows,1,5,default"
+            "fade,1,3,default"
+            "border,1,4,default"
+          ];
         };
 
         windowrule = [
