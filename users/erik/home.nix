@@ -22,11 +22,6 @@
     stylix.enable = true;
     kitty.enable = true;
     cursor.enable = true;
-    mako.enable = true;
-    waybar.enable = true;
-    wofi.enable = true;
-  };
-  services = {
-    swaylock.enable = false;
+    fonts.enable = true;
   };
 }

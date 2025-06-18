@@ -3,6 +3,5 @@
   imports = [
     ./cli
     ./gui
-    ./services
   ];
 }

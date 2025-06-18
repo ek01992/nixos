@@ -6,13 +6,8 @@ in
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosModules.default
-    ../../modules/system/theme
   ]
   ++ (map (username: ../../users + "/${username}/default.nix") users);
-
-  theme = {
-    name = "dracula";
-  };
 
   nixos = {
     core.enable = true;

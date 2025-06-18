@@ -5,8 +5,6 @@
     ./stylix
     ./kitty
     ./cursor
-    ./mako
-    ./waybar
-    ./wofi
+    ./fonts
   ];
 }

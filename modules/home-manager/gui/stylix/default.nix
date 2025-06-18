@@ -13,16 +13,6 @@ in
   config = lib.mkIf cfg.enable {
     stylix = {
       enable = true;
-      fonts = {
-        monospace = {
-          package = pkgs.nerdfonts.override { fonts =; };
-          name = "JetBrainsMono Nerd Font";
-        };
-        emoji = {
-          package = pkgs.noto-fonts-emoji;
-          name = "Noto Color Emoji";
-        };
-      };
       targets = {
         kitty.enable = true;
         gtk.enable = true;
@@ -36,7 +26,6 @@ in
             "erik"
           ];
         };
-        waybar.enable = true;
       };
     };
   };
