@@ -1,3 +1,4 @@
+# modules/home-manager/cli/zsh/default.nix
 { lib, config, pkgs, ... }:
 let
   cfg = config.cli.zsh;

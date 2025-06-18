@@ -1,3 +1,4 @@
+# modules/home-manager/gui/default.nix
 {
   imports = [
     ./hyprland

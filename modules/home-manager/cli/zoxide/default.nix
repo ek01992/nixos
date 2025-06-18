@@ -1,3 +1,4 @@
+# modules/home-manager/cli/zoxide/default.nix
 { lib, config, pkgs, ... }:
 let
   cfg = config.cli.zoxide;

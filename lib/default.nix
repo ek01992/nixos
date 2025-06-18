@@ -1,3 +1,4 @@
+# lib/default.nix
 { inputs, ... }:
 {
   nixosSystem = { system, hostName, specialArgs, modules }:

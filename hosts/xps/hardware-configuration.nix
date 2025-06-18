@@ -1,3 +1,4 @@
+# hosts/xps/hardware-configuration.nix
 { config, lib, pkgs, modulesPath, inputs, ... }: 
 {
   imports =

@@ -1,3 +1,4 @@
+# modules/home-manager/cli/git/default.nix
 { lib, config, ... }:
 let
   cfg = config.cli.git;

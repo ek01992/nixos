@@ -1,3 +1,4 @@
+# hosts/xps/configuration.nix
 { config, pkgs, inputs, lib, ... }:
 let
   users = [ "erik" ];
