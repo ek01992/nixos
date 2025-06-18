@@ -9,9 +9,6 @@ in
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
-        exec-once = [
-          "waybar"
-        ];
         general = {
           "$mod" = "SUPER";
           gaps_in = 8;
@@ -40,7 +37,6 @@ in
           };
 
         bind = [
-          "$mod SHIFT,Return,exec,wofi --drun"
           "$mod,Return,exec,kitty"
           "$mod,W,exec,firefox"
           "$mod,Q,killactive,"

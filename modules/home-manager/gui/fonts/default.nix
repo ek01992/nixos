@@ -14,8 +14,8 @@ in
     stylix = {
       fonts = {
         monospace = {
-          package = pkgs.nerdfonts.override { fonts =; };
-          name = "JetBrainsMono Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font Mono";
         };
         emoji = {
           package = pkgs.noto-fonts-emoji;

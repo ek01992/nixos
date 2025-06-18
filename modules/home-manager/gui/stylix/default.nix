@@ -18,7 +18,6 @@ in
         gtk.enable = true;
         hyprland = {
           enable = true;
-          hyprpaper.enable = true;
         };
         firefox = {
           enable = true;
