@@ -1,3 +1,4 @@
+# modules/home-manager/gui/hyprland/default.nix
 { lib, config, inputs,pkgs, ... }:
 let
   cfg = config.gui.hyprland;

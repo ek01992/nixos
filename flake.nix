@@ -1,3 +1,4 @@
+# flake.nix
 {
   description = "Flake for nixos with Home Manager enabled";
 

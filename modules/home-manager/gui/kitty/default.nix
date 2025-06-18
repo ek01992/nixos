@@ -1,3 +1,4 @@
+# modules/home-manager/gui/kitty/default.nix
 { lib, config, pkgs, ... }:
 let
   cfg = config.gui.kitty;

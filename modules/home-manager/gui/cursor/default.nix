@@ -1,3 +1,4 @@
+# modules/home-manager/gui/cursor/default.nix
 { config, lib, pkgs, ... }:
 {
   options.gui.cursor.enable = lib.mkEnableOption "cursor";

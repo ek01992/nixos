@@ -1,3 +1,4 @@
+# modules/home-manager/gui/firefox/default.nix
 { config, lib, pkgs, ... }:
 {
   options.gui.firefox.enable = lib.mkEnableOption "firefox";
