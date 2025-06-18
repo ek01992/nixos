@@ -11,11 +11,11 @@ in
       settings = {
         general = {
           "$mod" = "SUPER";
-          gaps_in = 8;
-          gaps_out = 16;
-          border_size = 0;
-          layout = "dwindle";
-          allow_tearing = true;
+          gaps_in = 6;
+          gaps_out = 12;
+          border_size = 2;
+          col.active_border = rgba(88c0d080);
+          col.inactive_border = rgba(44444488);
           monitor = [
             ",preferred,auto,auto"
             "eDP-1,1920x1200@60,auto,1"
@@ -23,7 +23,11 @@ in
         };
 
         decoration = {
-          rounding = 8;
+          rounding = 10;
+          drop_shadow = true;
+          shadow_range = 4;
+          shadow_render_power = 3;
+          col.shadow = rgba(00000044);
         };
 
         input = {
@@ -114,6 +118,8 @@ in
 
         animations = {
           enabled = true;
+          animation = "windows,1,5,default";
+          
         };
 
         windowrule = [
