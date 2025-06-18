@@ -43,18 +43,12 @@ in
       nmap
       whois
       unzip
-      age
-      sops
-      ssh-to-age
       fastfetch
       jq
       tcpdump
       zoxide
       fzf
       ripgrep
-      libnotify
-      mako
-      yazi
     ];
   };
 }
