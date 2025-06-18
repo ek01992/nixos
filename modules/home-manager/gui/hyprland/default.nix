@@ -43,7 +43,7 @@ in
           "$mod SHIFT,I,togglesplit,"
           "$mod,F,fullscreen,"
           "$mod SHIFT,F,togglefloating,"
-          "$mod ALT,F,workspaceopt, allfloat"
+          "$mod ALT,F,workspaceopt,allfloat"
           "$mod SHIFT,C,exit,"
           "$mod SHIFT,left,movewindow,l"
           "$mod SHIFT,right,movewindow,r"
@@ -53,14 +53,14 @@ in
           "$mod SHIFT,l,movewindow,r"
           "$mod SHIFT,k,movewindow,u"
           "$mod SHIFT,j,movewindow,d"
-          "$mod ALT, left, swapwindow,l"
-          "$mod ALT, right, swapwindow,r"
-          "$mod ALT, up, swapwindow,u"
-          "$mod ALT, down, swapwindow,d"
-          "$mod ALT, 43, swapwindow,l"
-          "$mod ALT, 46, swapwindow,r"
-          "$mod ALT, 45, swapwindow,u"
-          "$mod ALT, 44, swapwindow,d"
+          "$mod ALT,left,swapwindow,l"
+          "$mod ALT,right,swapwindow,r"
+          "$mod ALT,up,swapwindow,u"
+          "$mod ALT,down,swapwindow,d"
+          "$mod ALT,43,swapwindow,l"
+          "$mod ALT,46,swapwindow,r"
+          "$mod ALT,45,swapwindow,u"
+          "$mod ALT,44,swapwindow,d"
           "$mod,left,movefocus,l"
           "$mod,right,movefocus,r"
           "$mod,up,movefocus,u"
@@ -100,8 +100,8 @@ in
         ];
 
         bindm = [
-          "$mod, mouse:272, movewindow"
-          "$mod, mouse:273, resizewindow"
+          "$mod,mouse:272,movewindow"
+          "$mod,mouse:273,resizewindow"
         ];
 
         cursor = {
@@ -122,26 +122,22 @@ in
         };
 
         windowrule = [
-          "opacity 0.8 0.4, class:kitty"
+          "opacity 0.8 0.4,class:kitty"
         ];
 
         env = [
-          "NIXOS_OZONE_WL, 1"
-          "NIXPKGS_ALLOW_UNFREE, 1"
-          "XDG_CURRENT_DESKTOP, Hyprland"
-          "XDG_SESSION_TYPE, wayland"
-          "XDG_SESSION_DESKTOP, Hyprland"
-          "GDK_BACKEND, wayland, x11"
-          "CLUTTER_BACKEND, wayland"
+          "NIXOS_OZONE_WL,1"
+          "NIXPKGS_ALLOW_UNFREE,1"
+          "XDG_CURRENT_DESKTOP,Hyprland"
+          "XDG_SESSION_TYPE,wayland"
+          "XDG_SESSION_DESKTOP,Hyprland"
+          "GDK_BACKEND,wayland,x11"
+          "CLUTTER_BACKEND,wayland"
           "QT_QPA_PLATFORM=wayland;xcb"
-          "QT_WAYLAND_DISABLE_WINDOWDECORATION, 1"
-          "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
-          "SDL_VIDEODRIVER, x11"
-          "MOZ_ENABLE_WAYLAND, 1"
-          # Disabling this by default as it can result in inop cfg
-          # Added card2 in case this gets enabled. For better coverage
-          # This is mostly needed by Hybrid laptops.
-          #"AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1:/dev/card2"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+          "SDL_VIDEODRIVER,x11"
+          "MOZ_ENABLE_WAYLAND,1"
           "GDK_SCALE,1"
           "QT_SCALE_FACTOR,1"
           "EDITOR,nvim"
