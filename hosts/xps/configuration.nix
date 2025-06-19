@@ -32,6 +32,16 @@ in
     });
   };
 
+   fonts.packages = with pkgs; [                                                                          
+    noto-fonts                                                                                           
+    noto-fonts-cjk                                                                                       
+    noto-fonts-emoji                                                                                     
+    liberation_ttf
+    nerdfonts
+    roboto-mono
+    font-awesome
+  ]
+
   users = {
     users = lib.genAttrs users (username: {
       isNormalUser = true;
