@@ -118,6 +118,7 @@ in
                 "<span color='#FFFF66'>  </span>"
                 "<span color='#00FF7F'>  </span>"
               ];
+            };
             on-click-right = "pavucontrol -t 3";
             on-click = "pactl -- set-sink-mute 0 toggle";
             tooltip = true;
