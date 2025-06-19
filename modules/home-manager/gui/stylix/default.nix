@@ -38,7 +38,7 @@ in
         kitty.enable = true;
         gtk.enable = true;
         hyprland.enable = true;
-        waybar.enable = true;
+        waybar.enable = false;
         firefox = {
           enable = true;
           profileNames = [
