@@ -19,8 +19,6 @@ in
           gaps_in = 4;
           gaps_out = 8;
           border_size = 0;
-          "col.active_border" = "rgb(FF90BC) rgb(5FBDFF) 45deg";
-          "col.inactive_border" = "rgba(00000000)";
           layout = "dwindle";
           allow_tearing = false;
           monitor = [
