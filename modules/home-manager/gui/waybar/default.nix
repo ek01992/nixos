@@ -10,7 +10,7 @@ in
     home.packages = with pkgs; [
       waybar
     ];
-    waybar = {
+    programs.waybar = {
       enable = true;
     };
   };
