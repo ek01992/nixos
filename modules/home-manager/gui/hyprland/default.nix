@@ -29,7 +29,6 @@ in
 
         decoration = {
           rounding = 8;
-          blurls = waybar;
         };
 
         input = {
