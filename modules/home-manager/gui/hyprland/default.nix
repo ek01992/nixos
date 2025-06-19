@@ -83,7 +83,8 @@ in
 
         windowrule = [
           "opacity 0.8 0.4,class:kitty"
-          "float, class:(pavucontrol)"
+          "float, class:pavucontrol"
+          "opacity 0.0 0.0, class:waybar"
         ];
 
         exec-once = [
