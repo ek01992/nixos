@@ -81,10 +81,6 @@ in
           preserve_split = "yes";
         };
 
-        master = {
-          new_is_master = true;
-        };
-
         bind = [
           "$mod,Return,exec,kitty"
           "$mod,D,exec,rofi -show drun"
