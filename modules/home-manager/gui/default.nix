@@ -6,6 +6,5 @@
     ./stylix
     ./kitty
     ./cursor
-    ./waybar
   ];
 }
