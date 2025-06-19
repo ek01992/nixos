@@ -180,7 +180,7 @@ with lib; {
           * {
             font-family: "JetBrainsMono Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
             font-size: 12px;
-            text-transform: lowercase;
+
             color: #dcdfe1;
           }
 
