@@ -26,7 +26,7 @@ with lib; {
             "custom/reboot"
             "custom/power"
           ];
-          modules-center = [ "hyprland/window" ];
+
           modules-right = [
             "network"
             "battery"
