@@ -42,6 +42,7 @@ in
         };
 
         exec-once = [
+          "waybar"
           "swww-daemon"
           "sleep 1 && swww img ${config.stylix.image}"
         ];
