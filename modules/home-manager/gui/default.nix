@@ -7,5 +7,6 @@
     ./kitty
     ./cursor
     ./waybar
+    ./rofi
   ];
 }

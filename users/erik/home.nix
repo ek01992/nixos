@@ -23,5 +23,6 @@
     kitty.enable = true;
     cursor.enable = true;
     waybar.enable = true;
+    rofi.enable = true;
   };
 }
