@@ -26,6 +26,8 @@ in
 
       image = ../../../../wal/wal.png;
 
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
+
       cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
