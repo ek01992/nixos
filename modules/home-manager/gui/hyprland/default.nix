@@ -38,7 +38,6 @@ in
             enabled = false;
             range = 8;
             render_power = 4;
-            color = "rgba(00000033)";
           };
           blur = {
             enabled = true;
