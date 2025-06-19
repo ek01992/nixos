@@ -178,7 +178,7 @@ with lib; {
         ''
           /* Global settings */
           * {
-            font-family: "CaskaydiaCove Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
+            font-family: "JetBrainsMono Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
             font-weight: bold;
             font-size: 16px;
             color: #dcdfe1;
