@@ -81,6 +81,10 @@ in
           preserve_split = "yes";
         };
 
+        blurls = {
+          "waybar,class:waybar,blur:0"
+        };
+
         bind = [
           "$mod,Return,exec,kitty"
           "$mod,D,exec,rofi -show drun"

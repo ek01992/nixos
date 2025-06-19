@@ -186,7 +186,7 @@ with lib; {
 
           /* Transparent Waybar background */
           #waybar {
-            background-color: rgba(0, 0, 0, 0);
+            background-color: transparent;
             border: none;
             box-shadow: none;
           }
