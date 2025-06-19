@@ -1,5 +1,5 @@
 # modules/home-manager/gui/waybar/default.nix
-{ lib, config, inputs,pkgs, ... }:
+{ lib, config, inputs, pkgs, ... }:
 let
   cfg = config.gui.waybar;
 in
