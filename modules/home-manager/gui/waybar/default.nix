@@ -3,7 +3,7 @@
 let
   cfg = config.gui.waybar;
 in
-{
+with lib; {
   options.gui.waybar.enable = lib.mkEnableOption "waybar";
 
   config = lib.mkIf cfg.enable {
