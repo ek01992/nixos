@@ -16,11 +16,13 @@ in
       settings = {
         general = {
           "$mod" = "SUPER";
-          gaps_in = 5;
+          gaps_in = 4;
           gaps_out = 8;
-          border_size = 2;
+          border_size = 0;
+          col.active_border = "rgb(FF90BC) rgb(5FBDFF) 45deg";
+          col.inactive_border = "rgba(00000000)";
           layout = "dwindle";
-          allow_tearing = true;
+          allow_tearing = false;
           monitor = [
             ",preferred,auto,auto"
             "eDP-1,1920x1200@60,auto,1"
@@ -28,7 +30,24 @@ in
         };
 
         decoration = {
-          rounding = 8;
+          rounding = 15;
+          rounding_power = 4;
+          active_opacity = 0.93;
+          inactive_opacity = 0.87;
+          shadow = {
+            enabled = false;
+            range = 8;
+            render_power = 4;
+            color = "rgba(00000033)";
+          };
+          blur = {
+            enabled = true;
+            size = 8;
+            passes = 2;
+            new_optimizations = true;
+            ignore_opacity = false;
+            vibrancy = 0.25;
+          };
         };
 
         input = {
