@@ -40,7 +40,7 @@ in
     nerdfonts
     roboto-mono
     font-awesome
-  ]
+  ];
 
   users = {
     users = lib.genAttrs users (username: {
