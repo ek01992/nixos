@@ -179,8 +179,7 @@ with lib; {
           /* Global settings */
           * {
             font-family: "JetBrainsMono Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
-            font-size: 12px;
-
+            font-size: 14px;
             color: #dcdfe1;
           }
 
