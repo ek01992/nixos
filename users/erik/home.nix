@@ -18,9 +18,10 @@
   };
   gui = {
     hyprland.enable = true;
-    firefox.enable = true;
+    firefox.enable  = true;
     stylix.enable = true;
     kitty.enable = true;
     cursor.enable = true;
+    waybar.enable = true;
   };
 }
