@@ -16,9 +16,9 @@ in
       settings = {
         general = {
           "$mod" = "SUPER";
-          gaps_in = 6;
-          gaps_out = 12;
-          border_size = 0;
+          gaps_in = 5;
+          gaps_out = 8;
+          border_size = 2;
           layout = "dwindle";
           allow_tearing = true;
           monitor = [
@@ -28,18 +28,47 @@ in
         };
 
         decoration = {
-          rounding = 10;
+          rounding = 8;
         };
 
         input = {
           kb_layout = "us";
           follow_mouse = true;
-          touchpad = {
-            natural_scroll = true;
-          };
+          touchpad.natural_scroll = true;
           accel_profile = "flat";
           sensitivity = 0;
         };
+
+        cursor = {
+          sync_gsettings_theme = true;
+          no_hardware_cursors = 2;
+          enable_hyprcursor = false;
+          warp_on_change_workspace = 2;
+          no_warps = true;
+        };
+
+        animations = {
+          enabled = true;
+
+          bezier = [
+            "myBezier, 0.05, 0.9, 0.1, 1.05"
+            "wobbly, 0.4, 1.8, 0.2, 1.1"
+          ];
+
+          animation = [
+            "windows, 1, 6, myBezier, slide"
+            "windowsOut, 1, 6, default, popin"
+            "border, 1, 10, default"
+            "borderangle, 1, 8, default"
+            "fade, 1, 7, default"
+            "workspaces, 1, 6, default, slide"
+          ];
+        };
+
+        windowrule = [
+          "opacity 0.8 0.4,class:kitty"
+          "float, class:(pavucontrol)"
+        ];
 
         exec-once = [
           "waybar"
@@ -47,8 +76,18 @@ in
           "sleep 1 && swww img ${config.stylix.image}"
         ];
 
+        dwindle = {
+          pseudotile = "yes";
+          preserve_split = "yes";
+        };
+
+        master = {
+          new_is_master = true;
+        };
+
         bind = [
           "$mod,Return,exec,kitty"
+          "$mod,D,exec,rofi -show drun"
           "$mod,W,exec,firefox"
           "$mod,Q,killactive,"
           "$mod SHIFT,I,togglesplit,"
@@ -113,27 +152,6 @@ in
         bindm = [
           "$mod,mouse:272,movewindow"
           "$mod,mouse:273,resizewindow"
-        ];
-
-        cursor = {
-          sync_gsettings_theme = true;
-          no_hardware_cursors = 2;
-          enable_hyprcursor = false;
-          warp_on_change_workspace = 2;
-          no_warps = true;
-        };
-
-        animations = {
-          enabled = true;
-          animation = [
-            "windows,1,5,default"
-            "fade,1,3,default"
-            "border,1,4,default"
-          ];
-        };
-
-        windowrule = [
-          "opacity 0.8 0.4,class:kitty"
         ];
 
         env = [
