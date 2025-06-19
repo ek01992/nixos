@@ -1,10 +1,10 @@
-# modules/home-manager/gui/hyprland/default.nix
+# modules/home-manager/gui/waybar/default.nix
 { lib, config, inputs,pkgs, ... }:
 let
-  cfg = config.gui.hyprland;
+  cfg = config.gui.waybar;
 in
 {
-  options.gui.hyprland.enable = lib.mkEnableOption "hyprland";
+  options.gui.waybar.enable = lib.mkEnableOption "waybar";
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
