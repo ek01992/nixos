@@ -13,9 +13,10 @@ in
   config = lib.mkIf cfg.enable {
     programs.hyprland = {
       enable = true;
+      withUWSM = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-      xwayland.enable = true;
+      xwayland.enable = false;
     };
     xdg.portal.enable = true;
     xdg.portal.extraPortals = [
