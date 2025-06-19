@@ -29,6 +29,7 @@ in
 
         decoration = {
           rounding = 8;
+          blurls = waybar;
         };
 
         input = {
@@ -79,10 +80,6 @@ in
         dwindle = {
           pseudotile = "yes";
           preserve_split = "yes";
-        };
-
-        blurls = {
-          "waybar,class:waybar,blur:0"
         };
 
         bind = [
