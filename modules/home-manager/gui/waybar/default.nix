@@ -179,7 +179,7 @@ with lib; {
           /* Global settings */
           * {
             font-family: "JetBrainsMono Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
-            font-size: 18px;
+            font-size: 24px;
             color: #dcdfe1;
           }
 
@@ -206,7 +206,6 @@ with lib; {
 
           #clock,
           #custom-power{
-            font-size: 24px;
             background-color: rgba(15,27,53,0.9);
             margin-top: 6px; /* leave distance from screen top */
             margin-right: 6px;
@@ -283,7 +282,7 @@ with lib; {
             border-radius: 10px;
           }
 
-          /* 未激活工作区按钮 */
+          /* Inactive workspace buttons */
           #workspaces button {
             background: transparent;
             border: none;
