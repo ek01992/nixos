@@ -148,7 +148,7 @@ with lib; {
             tooltip-format = "{:L%Y year %m month %d day, %A}";
           };
           "tray" = {
-            icon-size = 17;
+            icon-size = 24;
             spacing = 6;
           };
           "backlight" = {
@@ -157,10 +157,10 @@ with lib; {
             tooltip = true;
             tooltip-format = "Current screen brightness: {percent}%";
             format-icons = [
-              "<span color='#696969' font_size='24pt'> 󰃞 </span>"
-              "<span color='#A9A9A9' font_size='24pt'> 󰃝 </span>"
-              "<span color='#FFFF66' font_size='24pt'> 󰃟 </span>"
-              "<span color='#FFD700' font_size='24pt'> 󰃠 </span>"
+              "<span color='#696969'> 󰃞 </span>"
+              "<span color='#A9A9A9'> 󰃝 </span>"
+              "<span color='#FFFF66'> 󰃟 </span>"
+              "<span color='#FFD700'> 󰃠 </span>"
             ];
           };
           "bluetooth" = {
