@@ -206,6 +206,7 @@ with lib; {
 
           #clock,
           #custom-power{
+            font-size: 24px;
             background-color: rgba(15,27,53,0.9);
             margin-top: 6px; /* leave distance from screen top */
             margin-right: 6px;
