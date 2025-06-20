@@ -24,15 +24,15 @@ in
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {
-          bg = mkLiteral "#${config.stylix.base16scheme.base00}";
-          bg-alt = mkLiteral "#${config.stylix.base16scheme.base09}";
-          foreground = mkLiteral "#${config.stylix.base16scheme.base01}";
-          selected = mkLiteral "#${config.stylix.base16scheme.base08}";
-          active = mkLiteral "#${config.stylix.base16scheme.base0B}";
-          text-selected = mkLiteral "#${config.stylix.base16scheme.base00}";
-          text-color = mkLiteral "#${config.stylix.base16scheme.base05}";
-          border-color = mkLiteral "#${config.stylix.base16scheme.base0F}";
-          urgent = mkLiteral "#${config.stylix.base16scheme.base0E}";
+          bg = mkLiteral "#${config.stylix.base16Scheme.base00}";
+          bg-alt = mkLiteral "#${config.stylix.base16Scheme.base09}";
+          foreground = mkLiteral "#${config.stylix.base16Scheme.base01}";
+          selected = mkLiteral "#${config.stylix.base16Scheme.base08}";
+          active = mkLiteral "#${config.stylix.base16Scheme.base0B}";
+          text-selected = mkLiteral "#${config.stylix.base16Scheme.base00}";
+          text-color = mkLiteral "#${config.stylix.base16Scheme.base05}";
+          border-color = mkLiteral "#${config.stylix.base16Scheme.base0F}";
+          urgent = mkLiteral "#${config.stylix.base16Scheme.base0E}";
         };
       };
     };
