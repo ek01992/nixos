@@ -153,7 +153,7 @@ with lib; {
           };
           "backlight" = {
             device = "intel_backlight";
-            format = "<span color='#FFD700'>{icon}</span>{percent}% ";
+            format = "<span class='icon' color='#FFD700'>{icon}</span>{percent}% ";
             tooltip = true;
             tooltip-format = "Current screen brightness: {percent}%";
             format-icons = [
@@ -179,8 +179,13 @@ with lib; {
           /* Global settings */
           * {
             font-family: "JetBrainsMono Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
-            font-size: 24px;
+            font-size: 18px;
             color: #dcdfe1;
+          }
+
+          /* Increase the size of the icons */
+          .icon {
+            font-size: 24px;
           }
 
           /* Transparent Waybar background */
