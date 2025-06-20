@@ -157,10 +157,10 @@ with lib; {
             tooltip = true;
             tooltip-format = "Current screen brightness: {percent}%";
             format-icons = [
-              "<span color='#696969'> 󰃞 </span>"
-              "<span color='#A9A9A9'> 󰃝 </span>"
-              "<span color='#FFFF66'> 󰃟 </span>"
-              "<span color='#FFD700'> 󰃠 </span>"
+              "<span size = '24px' color='#696969'> 󰃞 </span>"
+              "<span size = '24px' color='#A9A9A9'> 󰃝 </span>"
+              "<span size = '24px' color='#FFFF66'> 󰃟 </span>"
+              "<span size = '24px' color='#FFD700'> 󰃠 </span>"
             ];
           };
           "bluetooth" = {
