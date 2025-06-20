@@ -20,21 +20,6 @@ in
         drun-display-format = "{name}";
         sidebar-mode = false;
       };
-      theme = let
-        inherit (config.lib.formats.rasi) mkLiteral;
-      in {
-        "*" = {
-          bg = mkLiteral "#${config.stylix.colors.base00}";
-          bg-alt = mkLiteral "#${config.stylix.colors.base09}";
-          foreground = mkLiteral "#${config.stylix.colors.base01}";
-          selected = mkLiteral "#${config.stylix.colors.base08}";
-          active = mkLiteral "#${config.stylix.colors.base0B}";
-          text-selected = mkLiteral "#${config.stylix.colors.base00}";
-          text-color = mkLiteral "#${config.stylix.colors.base05}";
-          border-color = mkLiteral "#${config.stylix.colors.base0F}";
-          urgent = mkLiteral "#${config.stylix.colors.base0E}";
-        };
-      };
     };
   };
 }
