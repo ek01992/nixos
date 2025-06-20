@@ -14,14 +14,11 @@ in
       enable = true;
       package = pkgs.rofi-wayland;
       extraConfig = {
-        modi = "drun,filebrowser,run";
-        show-icons = true;
-        icon-theme = "Papirus";
+        modi = "drun";
+        display-drun = "";
         font = "JetBrainsMono Nerd Font Mono 12";
-        drun-display-format = "{icon} {name}";
-        display-drun = " Apps";
-        display-run = " Run";
-        display-filebrowser = " File";
+        drun-display-format = "{name}";
+        sidebar-mode = false;
       };
     };
   };
