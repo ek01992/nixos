@@ -20,6 +20,13 @@ in
         drun-display-format = "{name}";
         sidebar-mode = false;
       };
+      theme = let
+        inherit (config.lib.formats.rasi) mkLiteral;
+      in {
+        "*" = {
+
+        };
+      };
     };
   };
 }
