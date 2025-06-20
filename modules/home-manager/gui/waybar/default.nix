@@ -157,10 +157,10 @@ with lib; {
             tooltip = true;
             tooltip-format = "Current screen brightness: {percent}%";
             format-icons = [
-              "<span color='#696969' font_size='24px'> 󰃞 </span>"
-              "<span color='#A9A9A9' font_size='24px'> 󰃝 </span>"
-              "<span color='#FFFF66' font_size='24px'> 󰃟 </span>"
-              "<span color='#FFD700' font_size='24px'> 󰃠 </span>"
+              "<span color='#696969'> 󰃞 </span>"
+              "<span color='#A9A9A9'> 󰃝 </span>"
+              "<span color='#FFFF66'> 󰃟 </span>"
+              "<span color='#FFD700'> 󰃠 </span>"
             ];
           };
           "bluetooth" = {
@@ -181,11 +181,6 @@ with lib; {
             font-family: "JetBrainsMono Nerd Font Mono", "Font Awesome 6 Free", "Font Awesome 6 Free Solid";
             font-size: 18px;
             color: #dcdfe1;
-          }
-
-          /* Increase the size of the icons */
-          .icon {
-            font-size: 24px;
           }
 
           /* Transparent Waybar background */
