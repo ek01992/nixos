@@ -15,14 +15,14 @@ in
         add_newline = true;
         command_timeout = 1000;
         continuation_prompt = "[∙](bright-black) ";
-        format = ''
-          [](0x9A348E)$username$hostname$localip$singularity$kubernetes
-          ($directory$vcsh)(fg:0x9A348E bg:0xDA627D)
-          ([](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status)
-          ([](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig)
-          ([](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$jobs$battery)
-          ([](fg:0x06969A bg:0x33658A)$time$status$shell$line_break$character)
-        '';
+        format = 
+          "[](0x9A348E)$username$hostname$localip$singularity$kubernetes"
+          + "[](fg:0x9A348E bg:0xDA627D)$directory$vcsh"
+          + "([](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status)"
+          + "([](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig)"
+          + "([](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$jobs$battery)"
+          + "([](fg:0x06969A bg:0x33658A)$time$status$shell)"
+          + "$line_break$character";
         right_format = "";
         scan_timeout = 30;
         
@@ -437,7 +437,7 @@ in
         hostname = {
           disabled = false;
           format = "[$ssh_symbol$hostname]($style) ";
-          ssh_only = false;
+          ssh_only = true;
           ssh_symbol = "󰢹 ";
           style = "green dimmed bold";
           trim_at = ".";
@@ -857,12 +857,11 @@ in
           detect_folders = [".terraform"];
         };
         time = {
-          format = "[$symbol$time]($style) ";
+          format = "[ $time]($style) ";
           style = "bold yellow bg:0x33658A";
           use_12hr = false;
           disabled = false;
           utc_time_offset = "local";
-          symbol = " ";
           # time_format = "%R"; # Hour:Minute Format;
           time_format = "%T"; # Hour:Minute:Seconds Format;
           time_range = "-";
