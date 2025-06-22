@@ -15,6 +15,7 @@
     };
     zsh.enable = true;
     zoxide.enable = true;
+    starship.enable = true;
   };
   gui = {
     hyprland.enable = true;

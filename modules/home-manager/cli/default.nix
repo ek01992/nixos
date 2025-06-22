@@ -4,5 +4,6 @@
     ./git
     ./zsh
     ./zoxide
+    ./starship
   ];
 }
