@@ -677,7 +677,11 @@ in
         };
         python = {
           format = "[$symbol$pyenv_prefix($version )(($virtualenv) )]($style)";
-          python_binary = [ "python", "python3", "python2" ];
+          python_binary = [
+            "python"
+            "python3"
+            "python2"
+          ];
           pyenv_prefix = "pyenv ";
           pyenv_version_name = true;
           style = "yellow bold";
