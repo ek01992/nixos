@@ -390,7 +390,10 @@ in
           style = "bold cyan bg:0x86BBD8";
           disabled = false;
           detect_extensions = ["go"];
-          detect_files = ["helmfile.yaml", "Chart.yaml"];
+          detect_files = [
+            "helmfile.yaml"
+            "Chart.yaml"
+          ];
           detect_folders = [];
         };
         haskell = {
