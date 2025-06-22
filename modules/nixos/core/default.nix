@@ -54,6 +54,7 @@ in
       zoxide
       fzf
       ripgrep
+      wl-clipboard
     ];
   };
 }

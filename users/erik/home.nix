@@ -25,5 +25,6 @@
     cursor.enable = true;
     waybar.enable = true;
     rofi.enable = true;
+    mako.enable = true;
   };
 }
