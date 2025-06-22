@@ -12,5 +12,6 @@
     ./nixvim
     ./power-management
     ./nixfmt
+    ./mako
   ];
 }
