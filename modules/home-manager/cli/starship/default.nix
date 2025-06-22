@@ -373,7 +373,7 @@ in
           deleted = "";
           disabled = false;
           diverged = "";
-          format = "([[$all_status$ahead_behind]]($style) )";
+          format = "([[$all_status $ahead_behind]]($style) )";
           ignore_submodules = false;
           modified = "";
           renamed = "󰙚";
