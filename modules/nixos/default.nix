@@ -7,6 +7,7 @@
     ./hyprland
     ./zsh
     ./greetd
+    ./blueman
     ./obsidian
     ./nixvim
     ./power-management

@@ -20,6 +20,7 @@ in
       enable = true;
       user = "erik";
     };
+    blueman.enable = true;
     obsidian.enable = true;
     nixvim.enable = true;
     power-management.enable = true;
