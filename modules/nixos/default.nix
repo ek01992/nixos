@@ -10,5 +10,6 @@
     ./obsidian
     ./nixvim
     ./power-management
+    ./nixfmt
   ];
 }
