@@ -8,6 +8,5 @@
     ./cursor
     ./waybar
     ./rofi
-    ./mako
   ];
 }

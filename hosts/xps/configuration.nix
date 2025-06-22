@@ -25,6 +25,7 @@ in
     nixvim.enable = true;
     power-management.enable = true;
     nixfmt.enable = true;
+    mako.enable = true;
   };
 
   home-manager = {
