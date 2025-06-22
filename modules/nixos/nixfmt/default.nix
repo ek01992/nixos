@@ -10,8 +10,5 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [ pkgs.nixfmt-rfc-style ];
-    programs.nixfmt-rfc-style = {
-      enable = true;
-    };
   };
 }
