@@ -16,12 +16,12 @@ in
         command_timeout = 1000;
         continuation_prompt = "[∙](bright-black) ";
         format = 
-          "[](0x9A348E)$username$hostname$localip$singularity$kubernetes"
-          + "[](fg:0x9A348E bg:0xDA627D)$directory$vcsh"
-          + "([](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status)"
-          + "([](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig)"
-          + "([](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$jobs$battery)"
-          + "([](fg:0x06969A bg:0x33658A)$time$status$shell)"
+          "[$username$hostname$localip$singularity$kubernetes](bg:0x9A348E)"
+          + "[|](fg:bright-black bg:0xDA627D)[$directory$vcsh](bg:0xDA627D)"
+          + "[|](fg:bright-black bg:0xFCA17D)[$git_branch$git_commit$git_state$git_metrics$git_status](bg:0xFCA17D)"
+          + "[|](fg:bright-black bg:0x86BBD8)[$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig](bg:0x86BBD8)"
+          + "[|](fg:bright-black bg:0x06969A)[$docker_context$package$buf$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$jobs$battery](bg:0x06969A)"
+          + "[|](fg:bright-black bg:0x33658A)[$time$status$shell](bg:0x33658A)"
           + "$line_break$character";
         right_format = "";
         scan_timeout = 30;
@@ -205,7 +205,7 @@ in
           read_only = " ";
           read_only_style = "red";
           repo_root_format = "[$before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) ";
-          style = "cyan bold bg:0xDA627D";
+          style = "bold white bg:0xDA627D";
           truncate_to_repo = true;
           truncation_length = 3;
           truncation_symbol = "…/";
@@ -330,7 +330,7 @@ in
         git_branch = {
           format = "[$symbol$branch(:$remote_branch)]($style) ";
           symbol = " ";
-          style = "bold purple bg:0xFCA17D";
+          style = "bold white bg:0xFCA17D";
           truncation_length = 9223372036854775807;
           truncation_symbol = "…";
           only_attached = false;
@@ -373,7 +373,7 @@ in
           deleted = "";
           disabled = false;
           diverged = "";
-          format = "([\\[$all_status$ahead_behind\\]]($style) )";
+          format = "([$all_status$ahead_behind]($style) )";
           ignore_submodules = false;
           modified = "";
           renamed = "󰙚";
@@ -505,7 +505,7 @@ in
         };
         kubernetes = {
           disabled = false;
-          format = "[$symbol$context( ($namespace))]($style) in ";
+          format = "[$symbol$context( ($namespace))]($style) ";
           style = "cyan bold";
           symbol = " ";
         };
@@ -825,12 +825,12 @@ in
           symbol = " ";
           disabled = false;
         };
-          sudo = {
+        sudo = {
           format = "[as $symbol]($style)";
           symbol = " ";
           style = "bold blue";
           allow_windows = false;
-          disabled = true;
+          disabled = false;
         };
         swift = {
           format = "[$symbol($version )]($style)";
@@ -862,8 +862,7 @@ in
           use_12hr = false;
           disabled = false;
           utc_time_offset = "local";
-          # time_format = "%R"; # Hour:Minute Format;
-          time_format = "%T"; # Hour:Minute:Seconds Format;
+          time_format = "%R";
           time_range = "-";
         };
         username = {
