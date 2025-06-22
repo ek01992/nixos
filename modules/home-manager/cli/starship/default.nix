@@ -15,13 +15,20 @@ in
         add_newline = true;
         command_timeout = 500;
         continuation_prompt = "[∙](bright-black) ";
-        format = "[](0x9A348E)$username$hostname$localip$shlvl$singularity$kubernetes[](fg:0x9A348E bg:0xDA627D)$directory$vcsh[](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch[](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf[](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$azure$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery[](fg:0x06969A bg:0x33658A)$time$status$shell$character";
+        format = ''
+          [](0x9A348E)$username$hostname$localip$singularity$kubernetes
+          [](fg:0x9A348E bg:0xDA627D)$directory$vcsh
+          [](fg:0xDA627D bg:0xFCA17D)$git_branch$git_commit$git_state$git_metrics$git_status
+          [](fg:0xFCA17D bg:0x86BBD8)$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig
+          [](fg:0x86BBD8 bg:0x06969A)$docker_context$package$buf$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$jobs$battery
+          [](fg:0x06969A bg:0x33658A)$time$status$shell$line_break$character
+        '';
         right_format = "";
         scan_timeout = 30;
         
         aws = {
           format = "[$symbol($profile )(($region) )([$duration] )]($style)";
-          symbol = "🅰 ";
+          symbol = " ";
           style = "bold yellow";
           disabled = false;
           expiration_symbol = "X";
@@ -31,7 +38,7 @@ in
         aws.profile_aliases = {};
         azure = {
           format = "[$symbol($subscription)([$duration])]($style) ";
-          symbol = "ﴃ ";
+          symbol = "  ";
           style = "blue bold";
           disabled = true;
         };
@@ -53,7 +60,7 @@ in
         buf = {
           format = "[$symbol ($version)]($style)";
           version_format = "v$raw";
-          symbol = "";
+          symbol = " ";
           style = "bold blue";
           disabled = false;
           detect_extensions = [];
@@ -101,7 +108,7 @@ in
         cmake = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "△ ";
+          symbol = " ";
           style = "bold blue";
           disabled = false;
           detect_extensions = [];
@@ -123,7 +130,7 @@ in
         cobol = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "⚙️ ";
+          symbol = " ";
           style = "bold blue";
           disabled = false;
           detect_extensions = [
@@ -145,14 +152,14 @@ in
         };
         container = {
           format = "[$symbol [$name]]($style) ";
-          symbol = "⬢";
+          symbol = "󰜸 ";
           style = "red bold dimmed";
           disabled = false;
         };
         crystal = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🔮 ";
+          symbol = " ";
           style = "bold red";
           disabled = false;
           detect_extensions = ["cr"];
@@ -162,7 +169,7 @@ in
         dart = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🎯 ";
+          symbol = " ";
           style = "bold blue";
           disabled = false;
           detect_extensions = ["dart"];
@@ -236,7 +243,7 @@ in
         dotnet = {
           format = "[$symbol($version )(🎯 $tfm )]($style)";
           version_format = "v$raw";
-          symbol = "🥅 ";
+          symbol = " ";
           style = "blue bold";
           heuristic = true;
           disabled = false;
@@ -314,7 +321,7 @@ in
         };
         gcloud = {
           format = "[$symbol$account(@$domain)(($region))(($project))]($style) ";
-          symbol = "☁️ ";
+          symbol = " ";
           style = "bold blue";
           disabled = false;
         };
@@ -344,36 +351,36 @@ in
           added_style = "bold green";
           deleted_style = "bold red";
           only_nonzero_diffs = true;
-          format = "([+$added]($added_style) )([-$deleted]($deleted_style) )";
+          format = "([ $added]($added_style) )([ $deleted]($deleted_style) )";
           disabled = false;
         };
         git_state = {
           am = "AM";
           am_or_rebase = "AM/REBASE";
           bisect = "BISECTING";
-          cherry_pick = "🍒PICKING(bold red)";
+          cherry_pick = " PICKING(bold red)";
           disabled = false;
           format = "([$state( $progress_current/$progress_total)]($style)) ";
-          merge = "MERGING";
-          rebase = "REBASING";
+          merge = " MERGING";
+          rebase = " REBASING";
           revert = "REVERTING";
           style = "bold yellow";
         };
         git_status = {
-          ahead = "🏎💨$count";
-          behind = "😰$count";
-          conflicted = "🏳";
-          deleted = "🗑";
+          ahead = " $count";
+          behind = " $count";
+          conflicted = "";
+          deleted = "";
           disabled = false;
-          diverged = "😵";
+          diverged = "";
           format = "([[$all_status$ahead_behind]]($style) )";
           ignore_submodules = false;
-          modified = "📝";
-          renamed = "👅";
-          staged = "[++($count)](green)";
-          stashed = "📦";
+          modified = "";
+          renamed = "󰙚";
+          staged = "[ $count](green)";
+          stashed = "";
           style = "red bold bg:0xFCA17D";
-          untracked = "🤷";
+          untracked = "";
           up_to_date = "✓";
         };
         golang = {
@@ -383,15 +390,8 @@ in
           style = "bold cyan bg:0x86BBD8";
           disabled = false;
           detect_extensions = ["go"];
-          detect_files = [
-            "go.mod"
-            "go.sum"
-            "glide.yaml"
-            "Gopkg.yml"
-            "Gopkg.lock"
-            ".go-version"
-          ];
-          detect_folders = ["Godeps"];
+          detect_files = ["helmfile.yaml", "Chart.yaml"];
+          detect_folders = [];
         };
         haskell = {
           format = "[$symbol($version )]($style)";
@@ -433,8 +433,9 @@ in
         };
         hostname = {
           disabled = false;
-          format = "[$ssh_symbol](blue dimmed bold)[$hostname]($style) ";
-          ssh_only = false;
+          format = "[$ssh_symbol$hostname]($style) ";
+          ssh_only = true;
+          ssh_symbol = "󰢹 ";
           style = "green dimmed bold";
           trim_at = ".";
         };
@@ -468,7 +469,7 @@ in
           symbol_threshold = 0;
           number_threshold = 2;
           format = "[$symbol$number]($style) ";
-          symbol = "✦";
+          symbol = " ";
           style = "bold blue";
           disabled = false;
         };
@@ -488,7 +489,7 @@ in
         kotlin = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🅺 ";
+          symbol = " ";
           style = "bold blue";
           kotlin_binary = "kotlin";
           disabled = false;
@@ -503,7 +504,7 @@ in
           disabled = false;
           format = "[$symbol$context( ($namespace))]($style) in ";
           style = "cyan bold";
-          symbol = "⛵ ";
+          symbol = " ";
         };
         kubernetes.context_aliases = {};
         line_break = {
@@ -518,7 +519,7 @@ in
         lua = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🌙 ";
+          symbol = " ";
           style = "bold blue";
           lua_binary = "lua";
           disabled = false;
@@ -583,7 +584,7 @@ in
           global_switch_indicator = "";
           local_switch_indicator = "*";
           style = "bold yellow";
-          symbol = "🐫 ";
+          symbol = "  ";
           version_format = "v$raw";
           disabled = false;
           detect_extensions = [
@@ -622,7 +623,7 @@ in
         perl = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🐪 ";
+          symbol = " ";
           style = "149 bold";
           disabled = false;
           detect_extensions = [
@@ -644,7 +645,7 @@ in
         php = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🐘 ";
+          symbol = " ";
           style = "147 bold";
           disabled = false;
           detect_extensions = ["php"];
@@ -664,7 +665,7 @@ in
         purescript = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "<=> ";
+          symbol = "  ";
           style = "bold white";
           disabled = false;
           detect_extensions = ["purs"];
@@ -673,15 +674,11 @@ in
         };
         python = {
           format = "[$symbol$pyenv_prefix($version )(($virtualenv) )]($style)";
-          python_binary = [
-            "python"
-            "python3"
-            "python2"
-          ];
+          python_binary = [ "python", "python3", "python2" ];
           pyenv_prefix = "pyenv ";
           pyenv_version_name = true;
           style = "yellow bold";
-          symbol = "🐍 ";
+          symbol = " ";
           version_format = "v$raw";
           disabled = false;
           detect_extensions = ["py"];
@@ -713,7 +710,7 @@ in
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
           style = "blue bold";
-          symbol = "📐 ";
+          symbol = " ";
           disabled = false;
           detect_extensions = [
             "R"
@@ -728,7 +725,7 @@ in
         ruby = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "💎 ";
+          symbol = " ";
           style = "bold red";
           disabled = false;
           detect_extensions = ["rb"];
@@ -745,7 +742,7 @@ in
         rust = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🦀 ";
+          symbol = " ";
           style = "bold red bg:0x86BBD8";
           disabled = false;
           detect_extensions = ["rs"];
@@ -757,7 +754,7 @@ in
           version_format = "v$raw";
           disabled = false;
           style = "red bold";
-          symbol = "🆂 ";
+          symbol = " ";
           detect_extensions = [
             "sbt"
             "scala"
@@ -771,10 +768,10 @@ in
         };
         shell = {
           format = "[$indicator]($style) ";
-          bash_indicator = "bsh";
+          bash_indicator = "";
           cmd_indicator = "cmd";
           elvish_indicator = "esh";
-          fish_indicator = "";
+          fish_indicator = "󰈺";
           ion_indicator = "ion";
           nu_indicator = "nu";
           powershell_indicator = "_";
@@ -782,7 +779,7 @@ in
           tcsh_indicator = "tsh";
           unknown_indicator = "mystery shell";
           xonsh_indicator = "xsh";
-          zsh_indicator = "zsh";
+          zsh_indicator = "";
           disabled = false;
         };
         shlvl = {
@@ -796,7 +793,7 @@ in
         singularity = {
           format = "[$symbol[$env]]($style) ";
           style = "blue bold dimmed";
-          symbol = "📦 ";
+          symbol = "󰜸 ";
           disabled = false;
         };
         spack = {
@@ -811,19 +808,19 @@ in
           map_symbol = true;
           not_executable_symbol = "🚫";
           not_found_symbol = "🔍";
-          pipestatus = false;
+          pipestatus = true;
           pipestatus_format = "[$pipestatus] => [$symbol$common_meaning$signal_name$maybe_int]($style)";
           pipestatus_separator = "|";
           recognize_signal_code = true;
           signal_symbol = "⚡";
-          style = "bold red bg:blue";
-          success_symbol = "🟢 SUCCESS";
-          symbol = "🔴 ";
-          disabled = true;
+          style = "bold red";
+          success_symbol = "";
+          symbol = " ";
+          disabled = false;
         };
-        sudo = {
+          sudo = {
           format = "[as $symbol]($style)";
-          symbol = "🧙 ";
+          symbol = " ";
           style = "bold blue";
           allow_windows = false;
           disabled = true;
@@ -831,7 +828,7 @@ in
         swift = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "🐦 ";
+          symbol = " ";
           style = "bold 202";
           disabled = false;
           detect_extensions = ["swift"];
@@ -841,7 +838,7 @@ in
         terraform = {
           format = "[$symbol$workspace]($style) ";
           version_format = "v$raw";
-          symbol = "💠 ";
+          symbol = "󱁢 ";
           style = "bold 105";
           disabled = false;
           detect_extensions = [
@@ -853,11 +850,12 @@ in
           detect_folders = [".terraform"];
         };
         time = {
-          format = "[$symbol $time]($style) ";
+          format = "[$symbol$time]($style) ";
           style = "bold yellow bg:0x33658A";
           use_12hr = false;
           disabled = false;
           utc_time_offset = "local";
+          symbol = " ";
           # time_format = "%R"; # Hour:Minute Format;
           time_format = "%T"; # Hour:Minute:Seconds Format;
           time_range = "-";
@@ -880,7 +878,7 @@ in
           detect_folders = [];
         };
         vcsh = {
-          symbol = "";
+          symbol = " ";
           style = "bold yellow";
           format = "[$symbol$repo]($style) ";
           disabled = false;
@@ -902,7 +900,7 @@ in
         zig = {
           format = "[$symbol($version )]($style)";
           version_format = "v$raw";
-          symbol = "↯ ";
+          symbol = " ";
           style = "bold yellow";
           disabled = false;
           detect_extensions = ["zig"];
