@@ -69,7 +69,7 @@ in
           text-color = mkLiteral "inherit";
         };
         "element-icon" = {
-          background-color = mkLiteral "transparent";
+          background-color = mkLiteral (mkDefault "transparent");
         };
         "element selected" = {
           border-radius = mkLiteral "8px";
