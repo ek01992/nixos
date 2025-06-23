@@ -16,7 +16,7 @@ in
       extraConfig = {
         modi = "drun";
         display-drun = "";
-        font = "JetBrainsMono Nerd Font Mono 12";
+        font = "FiraCode Nerd Font 12";
         drun-display-format = "{name}";
         sidebar-mode = false;
       };
