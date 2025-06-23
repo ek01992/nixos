@@ -66,24 +66,24 @@ with lib; {
             tooltip-format = "Lock";
           };
           "custom/reboot" = {
-            format = "<span color='#FFD700'>  </span>";
+            format = "<span color='#FFD700'> </span>";
             on-click = "systemctl reboot";
             tooltip = true;
             tooltip-format = "Reboot";
           };
           "custom/power" = {
-            format = "<span color='#FF4040'>  </span>";
+            format = "<span color='#FF4040'> </span>";
             on-click = "systemctl poweroff";
             tooltip = true;
             tooltip-format = "Power Off";
           };
           "network" = {
-            format-wifi = "<span color='#00FFFF'> 󰤨 </span>{essid} ";
-            format-ethernet = "<span color='#7FFF00'>  </span>Wired ";
+            format-wifi = "<span color='#00FFFF'> 󰤨  </span>{essid} ";
+            format-ethernet = "<span color='#7FFF00'>   </span>Wired ";
             tooltip-format = "<span color='#FF1493'> 󰅧 </span>{bandwidthUpBytes}  <span color='#00BFFF'> 󰅢 </span>{bandwidthDownBytes}";
             format-linked = "<span color='#FFA500'> 󱘖 </span>{ifname} (No IP) ";
-            format-disconnected = "<span color='#FF4040'>  </span>Disconnected ";
-            format-alt = "<span color='#00FFFF'> 󰤨 </span>{signalStrength}% ";
+            format-disconnected = "<span color='#FF4040'>   </span>Disconnected ";
+            format-alt = "<span color='#00FFFF'> 󰤨  </span>{signalStrength}% ";
             interval = 1;
           };
           "battery" = {
@@ -104,7 +104,7 @@ with lib; {
             tooltip = true;
           };
           "pulseaudio" = {
-            format = "<span color='#00FF7F'>{icon}</span>{volume}% ";
+            format = "<span color='#00FF7F'>{icon} </span>{volume}% ";
             format-muted = "<span color='#FF4040'> 󰖁 </span>0% ";
             format-icons = {
               headphone = "<span color='#BF00FF'>  </span>";
@@ -132,7 +132,7 @@ with lib; {
             tooltip-format = "Current CPU temperature: {}°C";
           };
           "memory" = {
-            format = "<span color='#8A2BE2'>  </span>{used:0.1f}G/{total:0.1f}G ";
+            format = "<span color='#8A2BE2'>   </span>{used:0.1f}G/{total:0.1f}G ";
             tooltip = true;
             tooltip-format = "Current memory usage: {used:0.2f}G/{total:0.2f}G";
           };
