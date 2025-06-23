@@ -16,7 +16,8 @@ in
         command_timeout = 200;
         continuation_prompt = "[∙](bright-black) ";
         format = "$directory$git_branch$git_status$jobs$character";
-        
+        right_format = "$cmd_duration$time";
+
         aws = {
           format = "[$symbol($profile )(($region) )([$duration] )]($style)";
           symbol = " ";
