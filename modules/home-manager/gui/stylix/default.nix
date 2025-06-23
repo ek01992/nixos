@@ -24,7 +24,7 @@ in
         };
       };
 
-      image = ../../../../wal/wal.png;
+      image = ../../../../wal/rose.png;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
 
