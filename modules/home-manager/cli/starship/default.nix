@@ -12,25 +12,16 @@ in
       programs.starship = {
       enable = true;
       settings = {
-        add_newline = true;
-        command_timeout = 1000;
+        add_newline = false;
+        command_timeout = 200;
         continuation_prompt = "[∙](bright-black) ";
-        format = 
-          "[$username$hostname$localip$singularity$kubernetes](bg:0x9A348E)"
-          + "[|](fg:bright-black bg:0xDA627D)[$directory$vcsh](bg:0xDA627D)"
-          + "[|](fg:bright-black bg:0xFCA17D)[$git_branch$git_commit$git_state$git_metrics$git_status](bg:0xFCA17D)"
-          + "[|](fg:bright-black bg:0x86BBD8)[$c$cmake$cobol$container$daml$dart$deno$dotnet$elixir$elm$erlang$golang$haskell$helm$java$julia$kotlin$lua$nim$nodejs$ocaml$perl$php$pulumi$purescript$python$rlang$red$ruby$rust$scala$swift$terraform$vlang$vagrant$zig](bg:0x86BBD8)"
-          + "[|](fg:bright-black bg:0x06969A)[$docker_context$package$buf$nix_shell$conda$spack$memory_usage$aws$gcloud$openstack$env_var$crystal$custom$cmd_duration$jobs$battery](bg:0x06969A)"
-          + "[|](fg:bright-black bg:0x33658A)[$time$status$shell](bg:0x33658A)"
-          + "$line_break$character";
-        right_format = "";
-        scan_timeout = 30;
+        format = "$directory$git_branch$git_status$jobs$character";
         
         aws = {
           format = "[$symbol($profile )(($region) )([$duration] )]($style)";
           symbol = " ";
           style = "bold yellow";
-          disabled = false;
+          disabled = true;
           expiration_symbol = "X";
           force_display = false;
         };
