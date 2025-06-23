@@ -33,7 +33,7 @@ in
           enabled = false;
         };
         "entry" = {
-          placeholder = mkLiteral "Search...";
+          placeholder = "Search...";
           expand = true;
           padding = mkLiteral "1.5%";
           border-radius = mkLiteral "8px";
