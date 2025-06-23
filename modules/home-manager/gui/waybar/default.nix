@@ -66,7 +66,7 @@ with lib; {
             tooltip-format = "Lock";
           };
           "custom/reboot" = {
-            format = "<span color='#FFD700'> </span>";
+            format = "<span color='#FFD700'>   </span>";
             on-click = "systemctl reboot";
             tooltip = true;
             tooltip-format = "Reboot";
