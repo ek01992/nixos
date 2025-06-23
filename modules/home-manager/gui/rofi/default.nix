@@ -40,7 +40,7 @@ in
         };
         "inputbar" = {
           children = map mkLiteral [ "prompt" "entry" ];
-          background-image = mkLiteral ''url("../../../../wal/rose.png", height)'';
+          background-image = mkLiteral ''url("/etc/nixos/wal/rose.png", height)'';
           expand = false;
           border-radius = mkLiteral "0px 0 8px 8px";
           padding = mkLiteral "100px 30px 30px 300px";
