@@ -42,7 +42,7 @@ in
       pavucontrol
       eza
       bat
-      sensors
+      lm_sensors
       coreutils
       direnv
       dnsutils
