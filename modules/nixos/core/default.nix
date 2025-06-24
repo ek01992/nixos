@@ -42,6 +42,7 @@ in
       pavucontrol
       eza
       bat
+      sensors
       coreutils
       direnv
       dnsutils
