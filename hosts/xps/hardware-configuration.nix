@@ -66,7 +66,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware = {
-    pulseaudio.enable = false;
     bluetooth = {
       enable = true;
       powerOnBoot = true;

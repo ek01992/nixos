@@ -27,6 +27,7 @@ in
       pulse.enable = true;
       jack.enable = true;
     };
+    services.pulseaudio.enable = false;
 
     fonts = {
       packages = with pkgs; [
