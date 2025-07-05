@@ -39,6 +39,7 @@ in
         gtk.enable = true;
         hyprland.enable = true;
         waybar.enable = false;
+        rofi.enable = false;
         firefox = {
           enable = true;
           profileNames = [
