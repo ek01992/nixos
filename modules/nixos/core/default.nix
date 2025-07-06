@@ -7,11 +7,17 @@ in
   options.nixos.core.enable = lib.mkEnableOption "core system settings";
 
   config = lib.mkIf cfg.enable {
+    nix.extraOptions = "gc-keep-outputs = true";
     nix.settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+      substituters = [ 
+        "https://hyprland.cachix.org"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
       download-buffer-size = 524288000;
     };
 
@@ -37,27 +43,28 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      git
-      curl
-      wget
       alsa-ucm-conf
-      pavucontrol
-      eza
       bat
-      lm_sensors
+      cachix
       coreutils
+      curl
       direnv
       dnsutils
-      nmap
-      whois
-      unzip
+      eza
       fastfetch
-      jq
-      tcpdump
-      zoxide
       fzf
+      git
+      jq
+      lm_sensors
+      nmap
+      pavucontrol
       ripgrep
+      tcpdump
+      unzip
+      wget
+      whois
       wl-clipboard
+      zoxide
     ];
   };
 }
