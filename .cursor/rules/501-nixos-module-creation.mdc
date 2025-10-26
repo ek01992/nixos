@@ -1,0 +1,13 @@
+---
+description: NixOS Module Creation Process
+---
+# NixOS Module Creation
+
+**Process**: Create modules in appropriate category with proper structure.
+
+**Key Points**:
+- Place in `modules/category/name.nix` (system, networking, services, virtualization, users)
+- Define `myCategory.feature` namespace with options and config
+- Create submodules for complex features
+- Import in profile `default.nix` imports list
+- Use `mkEnableOption` and `mkOption` patterns consistently

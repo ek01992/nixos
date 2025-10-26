@@ -1,0 +1,13 @@
+---
+description: NixOS Host Creation Process
+---
+# NixOS Host Creation
+
+**Process**: Create hosts/hostname/ with proper imports and configuration.
+
+**Key Points**:
+- Create `hosts/hostname/default.nix` and `hardware-configuration.nix`
+- Import `inputs` parameter for nixos-hardware modules
+- Add to flake.nix: `hostname = mkSystem "hostname" "x86_64-linux"`
+- Configure host-specific settings (networking, ZFS mounts, etc.)
+- Import profile and hardware modules in host config

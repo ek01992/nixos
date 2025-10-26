@@ -1,0 +1,31 @@
+{
+  "rules": [
+    {
+      "pattern": "flake\\.nix$",
+      "commands": [
+        "nix fmt"
+      ]
+    },
+    {
+      "pattern": "\\.nix$",
+      "commands": [
+        "nix fmt"
+      ]
+    },
+    {
+      "pattern": "justfile$",
+      "commands": [
+        "just --check"
+      ]
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "files.associations": {
+      "*.nix": "nix"
+    }
+  }
+}
