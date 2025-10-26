@@ -17,18 +17,6 @@
           ];
         };
     in {
-      modules = {
-        system = ./modules/system;
-        networking = ./modules/networking;
-        services = ./modules/services;
-        virtualisation = ./modules/virtualization;
-        users = ./modules/users;
-      };
-
-      profiles = {
-        server = ./profiles/server;
-      };
-
       nixosConfigurations = {
         xps = mkSystem "xps" "x86_64-linux";
       };

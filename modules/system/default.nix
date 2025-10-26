@@ -9,18 +9,6 @@ in
   options.mySystem = {
     enable = mkEnableOption "system configuration";
 
-    enableBoot = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable boot configuration";
-    };
-
-    enableLocale = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable locale configuration";
-    };
-
     enableAutoUpgrade = mkOption {
       type = types.bool;
       default = false;
@@ -58,10 +46,6 @@ in
   ];
 
   config = mkIf cfg.enable {
-    # Enable sub-modules
-    mySystem.boot.enable = cfg.enableBoot;
-    mySystem.locale.enable = cfg.enableLocale;
-
     # System settings
     system.stateVersion = cfg.stateVersion;
 

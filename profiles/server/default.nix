@@ -15,61 +15,24 @@ in
   ];
 
   options.profiles.server = {
-    enable = mkEnableOption "server profile";
-
-    enableSystem = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable system configuration";
-    };
-
-    enableNetworking = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable networking configuration";
-    };
-
-    enableServices = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable services configuration";
-    };
-
-    enableVirtualisation = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable virtualisation configuration";
-    };
-
-    enableUsers = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable users configuration";
-    };
-
-    enableSystemPackages = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable essential system packages";
-    };
+    enable = mkEnableOption "server profile with all standard modules";
   };
 
   config = mkIf cfg.enable {
-    # Enable all modules by default
-    mySystem.enable = cfg.enableSystem;
-    myNetworking.enable = cfg.enableNetworking;
-    myServices.enable = cfg.enableServices;
-    myVirtualisation.enable = cfg.enableVirtualisation;
-    myUsers.enable = cfg.enableUsers;
+    # Just enable everything - granular control via mySystem.* options
+    mySystem.enable = true;
+    myNetworking.enable = true;
+    myServices.enable = true;
+    myVirtualization.enable = true;
+    myUsers.enable = true;
 
-    # Essential system packages for server use
-    environment.systemPackages = mkIf cfg.enableSystemPackages (with pkgs; [
+    environment.systemPackages = with pkgs; [
       git
       wget
       curl
       htop
       vim
       tree
-    ]);
+    ];
   };
 }

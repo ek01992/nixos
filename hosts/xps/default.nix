@@ -13,8 +13,6 @@
   # System configuration
   mySystem = {
     enable = true;
-    enableBoot = true;
-    enableLocale = true;
     enableAutoUpgrade = true;
     autoUpgradeDates = "weekly";
     allowReboot = true;
@@ -39,27 +37,6 @@
     keyMap = "us";
   };
 
-  # Networking configuration
-  myNetworking = {
-    enable = true;
-    hostId = "ea997198";
-    hostName = "xps";
-    enableFirewall = false;
-    enableDhcp = false;
-    bridgeName = "externalbr0";
-    bridgeInterface = "enp0s20f0u6u1i5";
-    bridgeMacAddress = "03:f6:ad:d9:9e:d1";
-    enableTailscale = true;
-  };
-
-  # Services configuration
-  myServices = {
-    enable = true;
-    enableZfs = true;
-    enableSsh = true;
-    enableFirmware = true;
-  };
-
   # ZFS services
   myServices.zfs = {
     enable = true;
@@ -76,15 +53,35 @@
     permitRootLogin = "no";
   };
 
-  # Virtualisation configuration
-  myVirtualisation = {
+  # Networking configuration
+  myNetworking = {
     enable = true;
-    enableKvmgt = true;
-    enableIncus = true;
+    hostId = "ea997198";
+    hostName = "xps";
+    enableFirewall = false;
+    enableDhcp = false;
+    bridgeName = "externalbr0";
+    bridgeInterface = "enp0s20f0u6u1i5";
+    bridgeMacAddress = "03:f6:ad:d9:9e:d1";
+    enableTailscale = true;
   };
 
+  # Services configuration
+  myServices = {
+    enable = true;
+    enableFirmware = true;
+  };
+
+  # Virtualization configuration
+  myVirtualization = {
+    enable = true;
+  };
+
+  # KVM-GT configuration
+  myVirtualization.kvmgt.enable = true;
+
   # Incus configuration
-  myVirtualisation.incus = {
+  myVirtualization.incus = {
     enable = true;
     enableUi = true;
     storagePool = "tank/incus";
@@ -106,26 +103,5 @@
     sshKeys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
     ];
-  };
-
-  # ZFS filesystem mounts (host-specific)
-  fileSystems."/" = {
-    device = "tank/root";
-    fsType = "zfs";
-  };
-
-  fileSystems."/nix" = {
-    device = "tank/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems."/var" = {
-    device = "tank/var";
-    fsType = "zfs";
-  };
-
-  fileSystems."/home" = {
-    device = "tank/home";
-    fsType = "zfs";
   };
 }

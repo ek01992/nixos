@@ -1,3 +1,8 @@
+# ZFS Service Module
+# Verification: zpool status
+#               zpool list
+#               systemctl status zfs-scrub@<pool>
+#               systemctl status zfs-trim@<pool>
 { config, lib, pkgs, ... }:
 
 with lib;

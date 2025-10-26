@@ -1,3 +1,7 @@
+# SSH Service Module
+# Verification: systemctl status sshd
+#               ss -tlnp | grep :22
+#               ssh-audit localhost
 { config, lib, pkgs, ... }:
 
 with lib;

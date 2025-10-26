@@ -1,12 +1,18 @@
+# Incus Virtualization Module
+# Verification: incus admin init --dump
+#               incus profile list
+#               incus storage list
+#               incus network list
+#               systemctl status incus
 { config, lib, pkgs, ... }:
 
 with lib;
 
 let
-  cfg = config.myVirtualisation.incus;
+  cfg = config.myVirtualization.incus;
 in
 {
-  options.myVirtualisation.incus = {
+  options.myVirtualization.incus = {
     enable = mkEnableOption "Incus container and VM management";
 
     enableUi = mkOption {

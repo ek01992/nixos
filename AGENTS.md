@@ -26,15 +26,38 @@ mkSystem = hostname: system:
   };
 ```
 
-**Why this pattern exists**: 
+**Why this pattern exists**:
 - Ensures `system` parameter is always passed to `nixosSystem`
 - Provides `inputs` via `specialArgs` for nixos-hardware access
 - Makes adding new hosts trivial and consistent
 
-### Module Structure
+### Module Hierarchy
 
-All modules follow this pattern:
+This configuration uses a simplified two-level hierarchy:
 
+**Level 1**: Category modules (`modules/category/default.nix`)
+```nix
+{ config, lib, pkgs, ... }:
+with lib;
+let cfg = config.myCategory;
+in {
+  options.myCategory = {
+    enable = mkEnableOption "category description";
+    # Configuration options (stateVersion, ports, etc.)
+  };
+
+  imports = [
+    ./feature1.nix  # Direct submodule import
+    ./feature2.nix
+  ];
+
+  config = mkIf cfg.enable {
+    # Category-wide configuration
+  };
+}
+```
+
+**Level 2**: Feature modules (`modules/category/feature.nix`)
 ```nix
 { config, lib, pkgs, ... }:
 with lib;
@@ -42,9 +65,9 @@ let cfg = config.myCategory.feature;
 in {
   options.myCategory.feature = {
     enable = mkEnableOption "feature description";
-    # Additional options with types, defaults, descriptions
+    # Feature-specific options
   };
-  
+
   config = mkIf cfg.enable {
     # Actual NixOS configuration
   };
@@ -55,7 +78,8 @@ in {
 - Use `myCategory.feature` namespace to avoid conflicts
 - Always define `enable` option with `mkEnableOption`
 - Use `mkIf cfg.enable` to make features optional
-- Import submodules in `default.nix` files
+- No intermediate enable options - direct submodule control
+- Submodules manage their own enable states
 
 ## Adding Components
 
@@ -64,17 +88,22 @@ in {
 1. **Create the module file**: `modules/category/name.nix`
 2. **Define options and config**:
    ```nix
-   options.myCategory.name = {
-     enable = mkEnableOption "description";
-     # ... other options
-   };
-   
-   config = mkIf cfg.enable {
-     # ... configuration
-   };
+   { config, lib, pkgs, ... }:
+   with lib;
+   let cfg = config.myCategory.name;
+   in {
+     options.myCategory.name = {
+       enable = mkEnableOption "feature description";
+       # Additional options with types, defaults, descriptions
+     };
+
+     config = mkIf cfg.enable {
+       # Actual NixOS configuration
+     };
+   }
    ```
-3. **Import in profile**: Add to `profiles/server/default.nix` imports
-4. **Enable in host**: Set `myCategory.name.enable = true;`
+3. **Import in category default.nix**: Add to `modules/category/default.nix` imports
+4. **Enable in host**: Set `myCategory.name.enable = true;` (direct submodule control)
 
 ### Adding a New Host
 
@@ -88,7 +117,7 @@ in {
        ../../profiles/server
        inputs.nixos-hardware.nixosModules.device-name
      ];
-     
+
      # Host-specific configuration
      myNetworking.hostName = "hostname";
      # ... other host-specific settings
@@ -111,7 +140,7 @@ in {
      options.profiles.profilename = {
        enable = mkEnableOption "profile description";
      };
-     
+
      config = mkIf cfg.enable {
        # Import and configure modules
        mySystem.enable = true;
@@ -139,6 +168,26 @@ in {
 **Problem**: Module options conflict with NixOS built-ins
 **Solution**: Use `myCategory.feature` namespace consistently
 
+### Module Hierarchy Changes (2025-01-XX)
+**Background**: The configuration was simplified from a 4-level to a 2-level hierarchy by removing redundant intermediate enable options.
+
+**Before (4 levels)**:
+```nix
+myVirtualization = {
+  enable = true;
+  enableIncus = true;  # ← Intermediate option (REMOVED)
+};
+myVirtualization.incus.enable = true;  # ← Direct option (KEPT)
+```
+
+**After (2 levels)**:
+```nix
+myVirtualization.enable = true;        # ← Category enable
+myVirtualization.incus.enable = true;  # ← Direct submodule enable
+```
+
+**Impact**: Host configurations must now use direct submodule enables instead of intermediate options. See CHANGELOG.md for complete migration examples.
+
 ## Best Practices
 
 ### Code Organization
@@ -152,6 +201,8 @@ in {
 - Provide sensible defaults
 - Use `mkIf` for conditional configuration
 - Document non-obvious configurations
+- Enable categories first, then specific features: `myCategory.enable = true; myCategory.feature.enable = true;`
+- Avoid intermediate enable options - use direct submodule control
 
 ### Testing and Validation
 - Run `just check` to validate syntax
@@ -161,42 +212,67 @@ in {
 
 ## Module Categories
 
-- **`system/`**: Boot, locale, auto-upgrade, firmware
+- **`system/`**: Boot (systemd-boot), locale, auto-upgrade, firmware
 - **`networking/`**: Hostname, firewall, bridges, Tailscale
-- **`services/`**: SSH, ZFS, firmware updates
-- **`virtualization/`**: Incus, KVM-GT, container management
+- **`services/`**: SSH, ZFS (scrubbing/trimming), firmware updates
+- **`virtualization/`**: KVM-GT (Intel GPU passthrough), Incus (containers/VMs)
 - **`users/`**: User accounts, SSH keys, groups
 
 ## Examples
 
-### Simple Service Module
+### Category Module Pattern
 ```nix
-# modules/services/example.nix
+# modules/services/default.nix (Category level)
 { config, lib, pkgs, ... }:
 with lib;
-let cfg = config.myServices.example;
+let cfg = config.myServices;
 in {
-  options.myServices.example = {
-    enable = mkEnableOption "example service";
-    port = mkOption {
-      type = types.int;
-      default = 8080;
-      description = "Service port";
+  options.myServices = {
+    enable = mkEnableOption "services configuration";
+    enableFirmware = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable firmware update service";
     };
   };
-  
+
+  imports = [
+    ./zfs.nix
+    ./ssh.nix
+  ];
+
   config = mkIf cfg.enable {
-    systemd.services.example = {
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.example}/bin/example --port ${toString cfg.port}";
-      };
+    services.fwupd.enable = cfg.enableFirmware;
+  };
+}
+```
+
+### Feature Module Pattern
+```nix
+# modules/services/ssh.nix (Feature level)
+{ config, lib, pkgs, ... }:
+with lib;
+let cfg = config.myServices.ssh;
+in {
+  options.myServices.ssh = {
+    enable = mkEnableOption "SSH daemon";
+    port = mkOption {
+      type = types.int;
+      default = 22;
+      description = "SSH daemon port";
+    };
+  };
+
+  config = mkIf cfg.enable {
+    services.openssh = {
+      enable = true;
+      settings.Port = cfg.port;
     };
   };
 }
 ```
 
-### Host with Custom Networking
+### Host with Direct Submodule Control
 ```nix
 # hosts/custom/default.nix
 { config, lib, pkgs, inputs, ... }:
@@ -205,7 +281,8 @@ in {
     ./hardware-configuration.nix
     ../../profiles/server
   ];
-  
+
+  # Category-level configuration
   myNetworking = {
     hostName = "custom";
     enableFirewall = true;
@@ -213,7 +290,37 @@ in {
     bridgeInterface = "eth0";
     bridgeMacAddress = "02:00:00:00:00:01";
   };
+
+  # Direct submodule enables (no intermediate options)
+  mySystem.enable = true;
+  mySystem.boot.enable = true;
+  mySystem.locale.enable = true;
+  myServices.enable = true;
+  myServices.zfs.enable = true;
+  myServices.ssh.enable = true;
+  myVirtualization.enable = true;
+  myVirtualization.kvmgt.enable = true;
+  myVirtualization.incus.enable = true;
+  myUsers.enable = true;
 }
 ```
 
-This structure ensures maintainable, scalable NixOS configurations while preventing common errors through consistent patterns.
+## Migration from 4-Level to 2-Level Hierarchy
+
+**Before (2025-01-XX)**:
+```nix
+myVirtualization = {
+  enable = true;
+  enableKvmgt = true;  # ← REMOVED
+  enableIncus = true;  # ← REMOVED
+};
+```
+
+**After (2025-01-XX)**:
+```nix
+myVirtualization.enable = true;        # ← Category enable
+myVirtualization.kvmgt.enable = true;  # ← Direct submodule
+myVirtualization.incus.enable = true;  # ← Direct submodule
+```
+
+This simplified structure eliminates redundancy while maintaining granular control over individual features.
