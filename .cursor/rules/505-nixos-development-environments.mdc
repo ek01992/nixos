@@ -1,0 +1,60 @@
+---
+alwaysApply: false
+---
+# NixOS Development Patterns (Modern)
+## VM Testing
+**Quick disposable testing:**
+```bash
+# Build VM from current config
+nixos-rebuild build-vm --flake .#hostname
+
+# Run (creates qcow2 disk)
+./result/bin/run-*-vm
+
+# With specific memory
+QEMU_OPTS="-m 4096" ./result/bin/run-*-vm
+```
+Use for: System-level changes, service testing, migration validation.
+## Container Testing (Incus)
+**Lightweight persistent environments.**
+Why Incus (not LXD):
+- Community-led fork post-Canonical acquisition
+- Original LXD core team maintains
+- Better integration trajectory
+```nix
+# configuration.nix
+virtualisation.incus = {
+  enable = true;
+  preseed = {
+    networks = [{
+      name = "incusbr0";
+      type = "bridge";
+    }];
+    storage_pools = [{
+      name = "default";
+      driver = "dir";
+    }];
+  };
+};
+
+users.users.yourusername.extraGroups = [ "incus-admin" ];
+```
+Workflow:
+```bash
+# Launch NixOS container
+incus launch images:nixos/unstable myproject
+
+# Configure declaratively
+incus exec myproject -- bash
+cd /etc/nixos
+# Edit flake.nix, add configuration
+nixos-rebuild switch --flake .#myproject
+
+# Access GUI (if configured with xrdp)
+remmina
+```
+Use cases:
+- Isolated client environments
+- Testing deployment configs
+- Multi-project separation
+- Clean state management

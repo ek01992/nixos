@@ -2,34 +2,70 @@
 globs: *.nix
 alwaysApply: false
 ---
-# NixOS Workflow Patterns
+# NixOS Workflow Patterns (2025)
+## Flakes-First Philosophy
+**Default to flakes for all NixOS systems.**
+- Reproducible: `flake.lock` pins all inputs
+- No channels: direct GitHub references
+- Standard tooling: `nix` command suite
+```nix
+# /etc/nixos/flake.nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
 
-## Channel Strategy
-**Use NixOS-unstable by default for desktop systems.**
-- "Unstable" = rolling release gated by CI, not chaotic
-- Rollback via bootloader generations mitigates breaking changes
-- More current packages than stable channel
-- Switch: `nix-channel --add https://nixos.org/channels/nixos-unstable nixos`
-
+  outputs = { nixpkgs, ... }: {
+    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ ./configuration.nix ];
+    };
+  };
+}
+```
+Enable: `nix.settings.experimental-features = ["nix-command" "flakes"];`
+## Unstable vs Stable
+**Use nixos-unstable for desktop systems.**
+- Rolling release gated by CI
+- Bootloader generations provide safety net
+- Update: `nix flake update` (updates flake.lock)
+Switch to stable when: Server deployments needing predictable maintenance windows.
 ## Rollback Pattern
-**Never use `nixos-rebuild --rollback switch`.**
-
-Instead:
-1. Boot into desired generation via bootloader menu
-2. Run: `/run/current-system/bin/switch-to-configuration boot`
-3. Reboot confirms selection
-
-Why: Avoids mental gymnastics calculating rollback depth from broken state.
-
-## State Management
-**Critical: Rollback doesn't restore application data.**
-
-Implications:
-- Database schemas may change between generations
-- Apps like Telegram, Signal can break on downgrade
-- Always maintain backups matching system generations
-- Consider impermanence for explicit state management
-
-## Testing Changes
-**Validation sequence before production:**
+**Boot into desired generation, then set as default.**
 ```bash
+# At bootloader: Select working generation
+# After boot:
+sudo /run/current-system/bin/switch-to-configuration boot
+# Reboot to confirm
+```
+Why: Avoids calculating rollback depth from broken state.
+**Critical**: Rollbacks don't restore application state.
+- Database schemas may be incompatible with older app versions
+- Apps like Signal, Telegram can break on downgrade
+- Always maintain backups matching generations
+## Testing Changes
+**Validation sequence:**
+```bash
+# Dry run (shows what will change)
+nixos-rebuild dry-build --flake .#hostname
+# Build without activation (test compilation)
+nixos-rebuild build --flake .#hostname
+# Activate without setting default boot entry
+nixos-rebuild test --flake .#hostname
+# Apply and set as default
+nixos-rebuild switch --flake .#hostname
+# VM testing (disposable)
+nixos-rebuild build-vm --flake .#hostname
+./result/bin/run-*-vm
+```
+## Update Workflow
+```bash
+# Update all flake inputs
+nix flake update
+# Update specific input
+nix flake lock --update-input nixpkgs
+# Preview changes before applying
+nix flake lock --update-input nixpkgs --dry-run
+# Apply updated system
+nixos-rebuild switch --flake .#hostname
+```
