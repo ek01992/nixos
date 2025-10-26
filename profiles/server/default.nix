@@ -33,6 +33,7 @@ in
       htop
       vim
       tree
+      alejandra
     ];
   };
 }
