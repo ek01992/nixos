@@ -23,7 +23,7 @@
         server = ./profiles/server;
       };
 
-      nixosConfigurations.nixos = pkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/xps/default.nix
