@@ -4,7 +4,6 @@
   imports =
     [
       ./hardware-configuration.nix
-      <nixos-hardware/dell/xps/13-9315>
     ];
 
   # Enable flakes and CLI tool
