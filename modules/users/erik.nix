@@ -1,0 +1,41 @@
+{ config, lib, pkgs, ... }:
+
+with lib;
+
+let
+  cfg = config.users.erik;
+in
+{
+  options.users.erik = {
+    enable = mkEnableOption "Erik user account";
+
+    description = mkOption {
+      type = types.str;
+      default = "Erik Kowald";
+      description = "User description";
+    };
+
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [ "wheel" "incus-admin" ];
+      description = "Additional groups for Erik user";
+    };
+
+    sshKeys = mkOption {
+      type = types.listOf types.str;
+      default = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
+      ];
+      description = "SSH public keys for Erik user";
+    };
+  };
+
+  config = mkIf cfg.enable {
+    users.users.erik = {
+      isNormalUser = true;
+      description = cfg.description;
+      extraGroups = cfg.extraGroups;
+      openssh.authorizedKeys.keys = cfg.sshKeys;
+    };
+  };
+}
