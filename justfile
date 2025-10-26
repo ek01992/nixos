@@ -39,6 +39,7 @@ branch name:
     git checkout -b {{name}}
 
 commit message:
+    @echo "{{message}}" | grep -qE '^(feat|fix|docs|style|refactor|perf|test|chore|build|ci)\([a-z]+\): .+' || (echo "Invalid format. Use: type(scope): description" && exit 1)
     git commit -m "{{message}}"
 
 push:

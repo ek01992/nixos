@@ -37,23 +37,33 @@
     keyMap = "us";
   };
 
-  # ZFS services
-  myServices.zfs = {
+  # Services configuration
+  myServices = {
     enable = true;
-    enableScrub = true;
-    enableTrim = true;
-  };
 
-  # SSH configuration
-  myServices.ssh = {
-    enable = true;
-    port = 22;
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
-    permitRootLogin = "no";
+    firmware = {
+      enable = true;
+    };
+
+    zfs = {
+      enable = true;
+      enableScrub = true;
+      enableTrim = true;
+    };
+
+    ssh = {
+      enable = true;
+      port = 22;
+      passwordAuthentication = false;
+      kbdInteractiveAuthentication = false;
+      permitRootLogin = "no";
+    };
   };
 
   # Networking configuration
+  # IMPORTANT: bridgeInterface assumes Anker USB-C adapter
+  # in specific USB-C port. Name changes if hardware changes.
+  # Verify with: ip link show
   myNetworking = {
     enable = true;
     hostId = "ea997198";
@@ -64,12 +74,6 @@
     bridgeInterface = "enp0s20f0u6u1i5";
     bridgeMacAddress = "02:f6:ad:d9:9e:d1";
     enableTailscale = true;
-  };
-
-  # Services configuration
-  myServices = {
-    enable = true;
-    enableFirmware = true;
   };
 
   # Virtualization configuration
@@ -92,7 +96,6 @@
   # Users configuration
   myUsers = {
     enable = true;
-    enableErik = true;
   };
 
   # Erik user configuration

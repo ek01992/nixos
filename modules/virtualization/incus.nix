@@ -25,18 +25,21 @@ in
       type = types.str;
       default = "tank/incus";
       description = "ZFS pool for Incus storage";
+      example = "rpool/incus";
     };
 
     internalBridge = mkOption {
       type = types.str;
       default = "internalbr0";
       description = "Name of internal bridge for containers";
+      example = "lxdbr0";
     };
 
     externalBridge = mkOption {
       type = types.str;
       default = "externalbr0";
       description = "Name of external bridge for bridged containers";
+      example = "lanbr0";
     };
   };
 

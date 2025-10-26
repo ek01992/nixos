@@ -49,6 +49,32 @@ just clean        # Garbage collect old generations
 
 See [AGENTS.md](AGENTS.md) for detailed patterns and [CONTRIBUTING.md](CONTRIBUTING.md) for workflow guidelines.
 
+## Backup Strategy
+
+This configuration uses ZFS for storage management with automatic maintenance, but **ZFS scrubbing ≠ backups**.
+
+### Current Setup
+- **ZFS snapshots**: Manual via `zfs snapshot tank@backup-$(date +%Y%m%d)`
+- **Automatic maintenance**: Scrubbing and trimming enabled
+- **Off-host backups**: Not yet implemented
+
+### Future Considerations
+- **sanoid + syncoid**: Automated ZFS snapshots and replication to remote ZFS
+- **restic**: Encrypted backups to cloud storage (Backblaze B2, AWS S3)
+- **borg**: Deduplicated backups with compression
+
+### Manual Backup Commands
+```bash
+# Create ZFS snapshot
+zfs snapshot tank@backup-$(date +%Y%m%d)
+
+# List snapshots
+zfs list -t snapshot
+
+# Send snapshot to remote (when configured)
+zfs send tank@backup-20250101 | ssh remote-host "zfs receive tank/backup"
+```
+
 ## Current Hosts
 
 - **xps**: Dell XPS 13 9315 laptop with Incus virtualization

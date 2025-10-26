@@ -1,3 +1,7 @@
+# Networking Configuration Module
+# Verification: ip link show
+#               systemctl status systemd-networkd
+#               networkctl status
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -12,12 +16,14 @@ in
     hostId = mkOption {
       type = types.str;
       description = "Unique host ID for ZFS";
+      example = "8a3e4f2d";
     };
 
     hostName = mkOption {
       type = types.str;
       default = "nixos";
       description = "System hostname";
+      example = "server";
     };
 
     enableFirewall = mkOption {
@@ -36,16 +42,19 @@ in
       type = types.str;
       default = "externalbr0";
       description = "Name of the external bridge";
+      example = "lanbr0";
     };
 
     bridgeInterface = mkOption {
       type = types.str;
       description = "Physical interface to bridge";
+      example = "eth0";
     };
 
     bridgeMacAddress = mkOption {
       type = types.str;
       description = "MAC address for bridge interface";
+      example = "02:f6:ad:d9:9e:d1";
     };
 
     enableTailscale = mkOption {
@@ -78,6 +87,12 @@ in
           macAddress = cfg.bridgeMacAddress;
         };
       };
+    };
+
+    # MAC-based interface matching as fallback
+    systemd.network.networks."10-usb-ethernet" = {
+      matchConfig.MACAddress = cfg.bridgeMacAddress;
+      networkConfig.Bridge = cfg.bridgeName;
     };
 
     # Tailscale VPN

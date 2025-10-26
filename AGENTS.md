@@ -33,9 +33,9 @@ mkSystem = hostname: system:
 
 ### Module Hierarchy
 
-This configuration uses a simplified two-level hierarchy:
+This configuration uses a simplified two-level hierarchy with a **container-only pattern**:
 
-**Level 1**: Category modules (`modules/category/default.nix`)
+**Level 1**: Category modules (`modules/category/default.nix`) - **Pure Organizational Containers**
 ```nix
 { config, lib, pkgs, ... }:
 with lib;
@@ -43,7 +43,6 @@ let cfg = config.myCategory;
 in {
   options.myCategory = {
     enable = mkEnableOption "category description";
-    # Configuration options (stateVersion, ports, etc.)
   };
 
   imports = [
@@ -52,7 +51,8 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    # Category-wide configuration
+    # NO LOGIC HERE - category modules are pure containers
+    # All configuration logic lives in submodules
   };
 }
 ```
@@ -80,6 +80,8 @@ in {
 - Use `mkIf cfg.enable` to make features optional
 - No intermediate enable options - direct submodule control
 - Submodules manage their own enable states
+- **Category modules are pure organizational containers** - no logic, only imports
+- **All configuration logic lives in submodules** - create dedicated submodules for each service/feature
 
 ## Adding Components
 
@@ -220,29 +222,25 @@ myVirtualization.incus.enable = true;  # ← Direct submodule enable
 
 ## Examples
 
-### Category Module Pattern
+### Category Module Pattern (Container-Only)
 ```nix
-# modules/services/default.nix (Category level)
+# modules/services/default.nix (Category level - Pure Container)
 { config, lib, pkgs, ... }:
 with lib;
 let cfg = config.myServices;
 in {
   options.myServices = {
     enable = mkEnableOption "services configuration";
-    enableFirmware = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable firmware update service";
-    };
   };
 
   imports = [
+    ./firmware.nix  # Dedicated submodule for firmware
     ./zfs.nix
     ./ssh.nix
   ];
 
   config = mkIf cfg.enable {
-    services.fwupd.enable = cfg.enableFirmware;
+    # NO LOGIC HERE - all logic moved to submodules
   };
 }
 ```

@@ -1,3 +1,7 @@
+# Users Configuration Module
+# Verification: id erik
+#               groups erik
+#               ls -la /home/erik/.ssh/authorized_keys
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -8,12 +12,6 @@ in
 {
   options.myUsers = {
     enable = mkEnableOption "users configuration";
-
-    enableErik = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable Erik user account";
-    };
   };
 
   imports = [

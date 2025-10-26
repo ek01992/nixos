@@ -1,0 +1,18 @@
+# NixOS build artifacts
+result
+*.qcow2
+.direnv
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

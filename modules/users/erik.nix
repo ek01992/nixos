@@ -13,12 +13,14 @@ in
       type = types.str;
       default = "Erik Kowald";
       description = "User description";
+      example = "John Doe";
     };
 
     extraGroups = mkOption {
       type = types.listOf types.str;
       default = [ "wheel" "incus-admin" ];
       description = "Additional groups for Erik user";
+      example = [ "wheel" "docker" "audio" ];
     };
 
     sshKeys = mkOption {

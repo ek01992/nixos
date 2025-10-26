@@ -1,3 +1,7 @@
+# System Configuration Module
+# Verification: nixos-version
+#               systemctl status nixos-upgrade.timer
+#               nix flake show
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -19,6 +23,7 @@ in
       type = types.str;
       default = "weekly";
       description = "Cron schedule for auto-upgrade";
+      example = "daily at 02:00";
     };
 
     allowReboot = mkOption {
@@ -31,6 +36,7 @@ in
       type = types.str;
       default = "25.11";
       description = "NixOS state version";
+      example = "24.11";
     };
 
     enableFirmware = mkOption {

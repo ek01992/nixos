@@ -1,0 +1,35 @@
+---
+globs: *.nix
+alwaysApply: false
+---
+# NixOS Workflow Patterns
+
+## Channel Strategy
+**Use NixOS-unstable by default for desktop systems.**
+- "Unstable" = rolling release gated by CI, not chaotic
+- Rollback via bootloader generations mitigates breaking changes
+- More current packages than stable channel
+- Switch: `nix-channel --add https://nixos.org/channels/nixos-unstable nixos`
+
+## Rollback Pattern
+**Never use `nixos-rebuild --rollback switch`.**
+
+Instead:
+1. Boot into desired generation via bootloader menu
+2. Run: `/run/current-system/bin/switch-to-configuration boot`
+3. Reboot confirms selection
+
+Why: Avoids mental gymnastics calculating rollback depth from broken state.
+
+## State Management
+**Critical: Rollback doesn't restore application data.**
+
+Implications:
+- Database schemas may change between generations
+- Apps like Telegram, Signal can break on downgrade
+- Always maintain backups matching system generations
+- Consider impermanence for explicit state management
+
+## Testing Changes
+**Validation sequence before production:**
+```bash

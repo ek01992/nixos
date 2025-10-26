@@ -17,6 +17,7 @@ in
       type = types.int;
       default = 22;
       description = "SSH daemon port";
+      example = 2222;
     };
 
     passwordAuthentication = mkOption {

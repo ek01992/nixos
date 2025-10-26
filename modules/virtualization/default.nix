@@ -1,3 +1,7 @@
+# Virtualization Configuration Module
+# Verification: systemctl status incus
+#               ls /sys/devices/pci*/mdev_supported_types
+#               incus list
 { config, lib, pkgs, ... }:
 
 with lib;

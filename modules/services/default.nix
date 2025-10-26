@@ -1,3 +1,6 @@
+# Services Configuration Module
+# Verification: systemctl status fwupd sshd zfs-*
+#               incus list
 { config, lib, pkgs, ... }:
 
 with lib;
@@ -8,21 +11,16 @@ in
 {
   options.myServices = {
     enable = mkEnableOption "services configuration";
-
-    enableFirmware = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable firmware update service";
-    };
   };
 
   imports = [
+    ./firmware.nix
     ./zfs.nix
     ./ssh.nix
   ];
 
   config = mkIf cfg.enable {
-    # Firmware update service
-    services.fwupd.enable = cfg.enableFirmware;
+    # TODO: Add secrets management when needed (Tailscale auth keys, API tokens, etc.)
+    # Consider: agenix (simple) or sops-nix (team-friendly)
   };
 }
