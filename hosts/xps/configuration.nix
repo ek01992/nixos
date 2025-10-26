@@ -75,6 +75,7 @@
     htop
     vi
     tree
+  ];
 
   # Services
   services = {
