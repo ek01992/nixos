@@ -1,6 +1,7 @@
 ---
-globs: hosts/*/*.nix modules/*/*.nix profiles/*/*.nix
+globs: hosts/**/*.nix, modules/**/*.nix, profiles/**/*.nix
 alwaysApply: false
+description: Configuration validation checklist
 ---
 # NixOS Configuration Validation Checklist
 

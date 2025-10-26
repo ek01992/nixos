@@ -1,6 +1,7 @@
 ---
-globs: *.md
+globs: *.md, **/*.md
 alwaysApply: false
+description: Documentation writing standards
 ---
 # Documentation Standards
 

@@ -1,5 +1,7 @@
 ---
+globs: flake.nix
 alwaysApply: false
+description: Advanced flake patterns and techniques
 ---
 # Advanced Flake Patterns (2025)
 

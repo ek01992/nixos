@@ -1,6 +1,7 @@
 ---
-globs: *.nix
+globs: *.nix, **/*.nix
 alwaysApply: false
+description: NixOS rebuild and testing workflow
 ---
 # NixOS Workflow Patterns (2025)
 ## Flakes-First Philosophy

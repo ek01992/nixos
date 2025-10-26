@@ -1,5 +1,6 @@
 ---
 alwaysApply: true
+description: Package management best practices
 ---
 # NixOS Package Management (Modern Patterns)
 ## Never Use Imperative Installation

@@ -1,6 +1,7 @@
 ---
-globs: .cursor/rules.*.mdc
+globs: .cursor/rules/*.mdc
 alwaysApply: false
+description: Standards for rule file organization
 ---
 # Rule File Standards
 

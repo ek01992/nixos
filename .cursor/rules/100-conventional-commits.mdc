@@ -1,5 +1,6 @@
 ---
-description: Conventional Commits
+alwaysApply: true
+description: Conventional commit message format enforcement
 ---
 # Git Commit Standards
 

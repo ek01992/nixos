@@ -1,5 +1,6 @@
 ---
 alwaysApply: false
+description: VM and container development patterns
 ---
 # NixOS Development Patterns (Modern)
 ## VM Testing

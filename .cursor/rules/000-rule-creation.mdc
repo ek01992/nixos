@@ -1,6 +1,7 @@
 ---
 globs: .cursor/rules/*.mdc
 alwaysApply: false
+description: Guidelines for creating new cursor rules
 ---
 # Creating Cursor Rules
 

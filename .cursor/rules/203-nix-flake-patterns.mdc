@@ -1,6 +1,7 @@
 ---
 globs: flake.nix
 alwaysApply: false
+description: Flake configuration patterns
 ---
 # Nix Flake Patterns
 

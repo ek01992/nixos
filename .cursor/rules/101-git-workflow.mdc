@@ -1,5 +1,6 @@
 ---
-description: Git Workflow Standards
+alwaysApply: false
+description: Git branching and workflow standards
 ---
 # Git Workflow
 

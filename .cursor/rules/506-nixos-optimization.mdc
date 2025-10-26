@@ -1,5 +1,6 @@
 ---
 alwaysApply: true
+description: Performance and security best practices
 ---
 # NixOS Performance & Best Practices (2025)
 ## Build Output Monitoring

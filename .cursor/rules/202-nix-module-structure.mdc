@@ -1,6 +1,7 @@
 ---
-globs: modules/
+globs: modules/**/*.nix
 alwaysApply: false
+description: NixOS module structure patterns
 ---
 # Nix Module Structure
 
