@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.virtualisation;
+  cfg = config.myVirtualisation;
 in
 {
-  options.virtualisation = {
+  options.myVirtualisation = {
     enable = mkEnableOption "virtualisation configuration";
 
     enableKvmgt = mkOption {

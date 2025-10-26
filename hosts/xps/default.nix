@@ -11,7 +11,7 @@
   profiles.server.enable = true;
 
   # System configuration
-  system = {
+  mySystem = {
     enable = true;
     enableBoot = true;
     enableLocale = true;
@@ -23,7 +23,7 @@
   };
 
   # Boot configuration
-  system.boot = {
+  mySystem.boot = {
     enable = true;
     enableSystemdBoot = true;
     enableEfiVariables = true;
@@ -32,7 +32,7 @@
   };
 
   # Locale configuration
-  system.locale = {
+  mySystem.locale = {
     enable = true;
     timezone = "America/Chicago";
     defaultLocale = "en_US.UTF-8";
@@ -40,7 +40,7 @@
   };
 
   # Networking configuration
-  networking = {
+  myNetworking = {
     enable = true;
     hostId = "ea997198";
     hostName = "xps";
@@ -53,7 +53,7 @@
   };
 
   # Services configuration
-  services = {
+  myServices = {
     enable = true;
     enableZfs = true;
     enableSsh = true;
@@ -61,14 +61,14 @@
   };
 
   # ZFS services
-  services.zfs = {
+  myServices.zfs = {
     enable = true;
     enableScrub = true;
     enableTrim = true;
   };
 
   # SSH configuration
-  services.ssh = {
+  myServices.ssh = {
     enable = true;
     port = 22;
     passwordAuthentication = false;
@@ -77,14 +77,14 @@
   };
 
   # Virtualisation configuration
-  virtualisation = {
+  myVirtualisation = {
     enable = true;
     enableKvmgt = true;
     enableIncus = true;
   };
 
   # Incus configuration
-  virtualisation.incus = {
+  myVirtualisation.incus = {
     enable = true;
     enableUi = true;
     storagePool = "tank/incus";
@@ -93,13 +93,13 @@
   };
 
   # Users configuration
-  users = {
+  myUsers = {
     enable = true;
     enableErik = true;
   };
 
   # Erik user configuration
-  users.erik = {
+  myUsers.erik = {
     enable = true;
     description = "Erik Kowald";
     extraGroups = [ "wheel" "incus-admin" ];

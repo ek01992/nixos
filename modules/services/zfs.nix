@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.services.zfs;
+  cfg = config.myServices.zfs;
 in
 {
-  options.services.zfs = {
+  options.myServices.zfs = {
     enable = mkEnableOption "ZFS services";
 
     enableScrub = mkOption {

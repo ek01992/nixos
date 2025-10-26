@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.system;
+  cfg = config.mySystem;
 in
 {
-  options.system = {
+  options.mySystem = {
     enable = mkEnableOption "system configuration";
 
     enableBoot = mkOption {
@@ -59,8 +59,8 @@ in
 
   config = mkIf cfg.enable {
     # Enable sub-modules
-    system.boot.enable = cfg.enableBoot;
-    system.locale.enable = cfg.enableLocale;
+    mySystem.boot.enable = cfg.enableBoot;
+    mySystem.locale.enable = cfg.enableLocale;
 
     # System settings
     system.stateVersion = cfg.stateVersion;

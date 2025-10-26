@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.system.locale;
+  cfg = config.mySystem.locale;
 in
 {
-  options.system.locale = {
+  options.mySystem.locale = {
     enable = mkEnableOption "locale configuration";
 
     timezone = mkOption {

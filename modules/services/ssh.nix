@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.services.ssh;
+  cfg = config.myServices.ssh;
 in
 {
-  options.services.ssh = {
+  options.myServices.ssh = {
     enable = mkEnableOption "SSH daemon";
 
     port = mkOption {

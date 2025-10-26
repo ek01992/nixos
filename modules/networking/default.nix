@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.networking;
+  cfg = config.myNetworking;
 in
 {
-  options.networking = {
+  options.myNetworking = {
     enable = mkEnableOption "networking configuration";
 
     hostId = mkOption {

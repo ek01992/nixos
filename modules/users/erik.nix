@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.users.erik;
+  cfg = config.myUsers.erik;
 in
 {
-  options.users.erik = {
+  options.myUsers.erik = {
     enable = mkEnableOption "Erik user account";
 
     description = mkOption {

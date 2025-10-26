@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.system.boot;
+  cfg = config.mySystem.boot;
 in
 {
-  options.system.boot = {
+  options.mySystem.boot = {
     enable = mkEnableOption "boot configuration";
 
     enableSystemdBoot = mkOption {

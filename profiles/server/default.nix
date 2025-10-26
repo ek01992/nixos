@@ -56,11 +56,11 @@ in
 
   config = mkIf cfg.enable {
     # Enable all modules by default
-    system.enable = cfg.enableSystem;
-    networking.enable = cfg.enableNetworking;
-    services.enable = cfg.enableServices;
-    virtualisation.enable = cfg.enableVirtualisation;
-    users.enable = cfg.enableUsers;
+    mySystem.enable = cfg.enableSystem;
+    myNetworking.enable = cfg.enableNetworking;
+    myServices.enable = cfg.enableServices;
+    myVirtualisation.enable = cfg.enableVirtualisation;
+    myUsers.enable = cfg.enableUsers;
 
     # Essential system packages for server use
     environment.systemPackages = mkIf cfg.enableSystemPackages (with pkgs; [

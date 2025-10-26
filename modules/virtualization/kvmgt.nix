@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.virtualisation.kvmgt;
+  cfg = config.myVirtualisation.kvmgt;
 in
 {
-  options.virtualisation.kvmgt = {
+  options.myVirtualisation.kvmgt = {
     enable = mkEnableOption "Intel GVT-g GPU virtualization";
   };
 

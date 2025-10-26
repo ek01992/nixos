@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.services;
+  cfg = config.myServices;
 in
 {
-  options.services = {
+  options.myServices = {
     enable = mkEnableOption "services configuration";
 
     enableZfs = mkOption {

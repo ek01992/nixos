@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.virtualisation.incus;
+  cfg = config.myVirtualisation.incus;
 in
 {
-  options.virtualisation.incus = {
+  options.myVirtualisation.incus = {
     enable = mkEnableOption "Incus container and VM management";
 
     enableUi = mkOption {
