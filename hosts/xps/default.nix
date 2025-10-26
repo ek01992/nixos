@@ -1,9 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ../../profiles/server
+    inputs.nixos-hardware.nixosModules.dell-xps-13-9315
   ];
 
   # Host-specific configuration

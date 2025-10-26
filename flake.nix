@@ -8,8 +8,14 @@
 
   outputs = { self, nixpkgs, nixos-hardware, ... }@inputs:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      mkSystem = hostname: system:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/${hostname}/default.nix
+          ];
+        };
     in {
       modules = {
         system = ./modules/system;
@@ -23,12 +29,8 @@
         server = ./profiles/server;
       };
 
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/xps/default.nix
-          nixos-hardware.nixosModules.dell-xps-13-9315
-        ];
+      nixosConfigurations = {
+        nixos = mkSystem "xps" "x86_64-linux";
       };
     };
 }
