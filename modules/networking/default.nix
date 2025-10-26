@@ -80,9 +80,7 @@ in
       };
     };
 
+    # Tailscale VPN
+    services.tailscale.enable = cfg.enableTailscale;
   };
-
-  imports = [
-    ./tailscale.nix
-  ];
 }
