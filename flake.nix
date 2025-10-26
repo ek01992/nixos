@@ -18,8 +18,10 @@
             ./hosts/${hostname}/default.nix
           ];
         };
+
+      mkFormatter = system: alejandra.defaultPackage.${system};
     in {
-      formatter.${system} = alejandra.defaultPackage.${system};
+      formatter.x86_64-linux = mkFormatter "x86_64-linux";
       nixosConfigurations = {
         xps = mkSystem "xps" "x86_64-linux";
       };
