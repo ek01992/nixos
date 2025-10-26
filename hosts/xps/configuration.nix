@@ -72,7 +72,7 @@
     wget
     curl
     htop
-    vi
+    vim
     tree
   ];
 
