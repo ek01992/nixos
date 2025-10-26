@@ -4,14 +4,15 @@
 #               incus storage list
 #               incus network list
 #               systemctl status incus
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.myVirtualization.incus;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myVirtualization.incus;
+in {
   options.myVirtualization.incus = {
     enable = mkEnableOption "Incus container and VM management";
 

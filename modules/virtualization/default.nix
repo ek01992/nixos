@@ -2,14 +2,15 @@
 # Verification: systemctl status incus
 #               ls /sys/devices/pci*/mdev_supported_types
 #               incus list
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.myVirtualization;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myVirtualization;
+in {
   options.myVirtualization = {
     enable = mkEnableOption "virtualization configuration";
   };

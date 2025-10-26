@@ -2,14 +2,15 @@
 # Verification: systemctl status sshd
 #               ss -tlnp | grep :22
 #               ssh-audit localhost
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.myServices.ssh;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myServices.ssh;
+in {
   options.myServices.ssh = {
     enable = mkEnableOption "SSH daemon";
 
@@ -33,7 +34,7 @@ in
     };
 
     permitRootLogin = mkOption {
-      type = types.enum [ "yes" "no" "prohibit-password" "forced-commands-only" ];
+      type = types.enum ["yes" "no" "prohibit-password" "forced-commands-only"];
       default = "no";
       description = "Permit root login";
     };

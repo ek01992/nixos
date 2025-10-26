@@ -2,14 +2,15 @@
 # Verification: id erik
 #               groups erik
 #               ls -la /home/erik/.ssh/authorized_keys
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.myUsers;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myUsers;
+in {
   options.myUsers = {
     enable = mkEnableOption "users configuration";
   };
@@ -18,6 +19,7 @@ in
     ./erik.nix
   ];
 
-  config = mkIf cfg.enable {
-  };
+  config =
+    mkIf cfg.enable {
+    };
 }

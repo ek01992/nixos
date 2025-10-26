@@ -2,14 +2,15 @@
 # Verification: nixos-version
 #               systemctl status nixos-upgrade.timer
 #               nix flake show
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.mySystem;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.mySystem;
+in {
   options.mySystem = {
     enable = mkEnableOption "system configuration";
 
@@ -63,7 +64,7 @@ in
     };
 
     # Nix configuration
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = ["nix-command" "flakes"];
     nixpkgs.config.allowUnfree = true;
 
     # Hardware configuration

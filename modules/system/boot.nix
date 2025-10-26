@@ -2,14 +2,15 @@
 # Verification: bootctl status
 #               ls /boot/loader/entries/
 #               cat /proc/cmdline
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.mySystem.boot;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.mySystem.boot;
+in {
   options.mySystem.boot = {
     enable = mkEnableOption "boot configuration";
 
@@ -42,7 +43,7 @@ in
     boot.loader.systemd-boot.enable = cfg.enableSystemdBoot;
     boot.loader.efi.canTouchEfiVariables = cfg.enableEfiVariables;
 
-    boot.supportedFilesystems = mkIf cfg.enableZfsSupport [ "zfs" ];
+    boot.supportedFilesystems = mkIf cfg.enableZfsSupport ["zfs"];
 
     boot.extraModprobeConfig = mkIf cfg.enableKvmOptions ''
       options kvm ignore_msrs=1 report_ignored_msrs=0

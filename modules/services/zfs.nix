@@ -3,14 +3,15 @@
 #               zpool list
 #               systemctl status zfs-scrub@<pool>
 #               systemctl status zfs-trim@<pool>
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.myServices.zfs;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myServices.zfs;
+in {
   options.myServices.zfs = {
     enable = mkEnableOption "ZFS services";
 

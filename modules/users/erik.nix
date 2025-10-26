@@ -1,11 +1,12 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.myUsers.erik;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myUsers.erik;
+in {
   options.myUsers.erik = {
     enable = mkEnableOption "Erik user account";
 
@@ -18,9 +19,9 @@ in
 
     extraGroups = mkOption {
       type = types.listOf types.str;
-      default = [ "wheel" "incus-admin" ];
+      default = ["wheel" "incus-admin"];
       description = "Additional groups for Erik user";
-      example = [ "wheel" "docker" "audio" ];
+      example = ["wheel" "docker" "audio"];
     };
 
     sshKeys = mkOption {

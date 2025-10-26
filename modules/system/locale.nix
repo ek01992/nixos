@@ -2,14 +2,15 @@
 # Verification: timedatectl status
 #               localectl status
 #               cat /etc/timezone
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
-  cfg = config.mySystem.locale;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.mySystem.locale;
+in {
   options.mySystem.locale = {
     enable = mkEnableOption "locale configuration";
 
@@ -38,7 +39,7 @@ in
       type = types.attrsOf types.str;
       default = {};
       description = "Additional locale settings";
-      example = { LC_TIME = "en_GB.UTF-8"; };
+      example = {LC_TIME = "en_GB.UTF-8";};
     };
   };
 

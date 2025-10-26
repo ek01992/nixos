@@ -16,7 +16,7 @@ build:
 
 # Switch to new configuration
 switch:
-    sudo nixos-rebuild switch --flake {{flake_path}}
+    sq
 
 # Update flake inputs
 update:
@@ -28,7 +28,7 @@ check:
 
 # Format all .nix files
 fmt:
-    nix fmt
+    nix run nixpkgs#alejandra -- .
 
 # Clean old generations and garbage collect
 clean:

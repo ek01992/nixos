@@ -1,6 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../../profiles/server
@@ -102,7 +106,7 @@
   myUsers.erik = {
     enable = true;
     description = "Erik Kowald";
-    extraGroups = [ "wheel" "incus-admin" ];
+    extraGroups = ["wheel" "incus-admin"];
     sshKeys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
     ];
