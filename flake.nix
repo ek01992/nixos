@@ -7,7 +7,7 @@
 
   outputs = { self, nixpkgs, ... }@inputs: {
 
-    nixosConfigurations.nixops = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       modules = [
         ./hosts/xps/configuration.nix
       ];
