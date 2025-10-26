@@ -9,22 +9,16 @@ in
   options.system = {
     enable = mkEnableOption "system configuration";
 
-    timezone = mkOption {
-      type = types.str;
-      default = "America/Chicago";
-      description = "System timezone";
+    enableBoot = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable boot configuration";
     };
 
-    locale = mkOption {
-      type = types.str;
-      default = "en_US.UTF-8";
-      description = "System locale";
-    };
-
-    keyMap = mkOption {
-      type = types.str;
-      default = "us";
-      description = "Console keymap";
+    enableLocale = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable locale configuration";
     };
 
     enableAutoUpgrade = mkOption {
@@ -51,18 +45,6 @@ in
       description = "NixOS state version";
     };
 
-    enableZfs = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable ZFS filesystem support";
-    };
-
-    enableKvm = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable KVM virtualization support";
-    };
-
     enableFirmware = mkOption {
       type = types.bool;
       default = true;
@@ -71,20 +53,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Boot configuration
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
-    
-    boot.supportedFilesystems = mkIf cfg.enableZfs [ "zfs" ];
-    
-    boot.extraModprobeConfig = mkIf cfg.enableKvm ''
-      options kvm ignore_msrs=1 report_ignored_msrs=0
-    '';
+    # Import sub-modules
+    imports = [
+      (mkIf cfg.enableBoot ./boot.nix)
+      (mkIf cfg.enableLocale ./locale.nix)
+    ];
+
+    # Enable sub-modules
+    system.boot.enable = cfg.enableBoot;
+    system.locale.enable = cfg.enableLocale;
 
     # System settings
-    time.timeZone = cfg.timezone;
-    console.keyMap = cfg.keyMap;
-    i18n.defaultLocale = cfg.locale;
     system.stateVersion = cfg.stateVersion;
 
     # Auto-upgrade configuration

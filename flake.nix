@@ -30,7 +30,7 @@
       };
 
       nixosConfigurations = {
-        nixos = mkSystem "xps" "x86_64-linux";
+        xps = mkSystem "xps" "x86_64-linux";
       };
     };
 }

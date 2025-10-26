@@ -13,23 +13,37 @@
   # System configuration
   system = {
     enable = true;
-    timezone = "America/Chicago";
-    locale = "en_US.UTF-8";
-    keyMap = "us";
+    enableBoot = true;
+    enableLocale = true;
     enableAutoUpgrade = true;
     autoUpgradeDates = "weekly";
     allowReboot = true;
     stateVersion = "25.11";
-    enableZfs = true;
-    enableKvm = true;
     enableFirmware = true;
+  };
+
+  # Boot configuration
+  system.boot = {
+    enable = true;
+    enableSystemdBoot = true;
+    enableEfiVariables = true;
+    enableZfsSupport = true;
+    enableKvmOptions = true;
+  };
+
+  # Locale configuration
+  system.locale = {
+    enable = true;
+    timezone = "America/Chicago";
+    defaultLocale = "en_US.UTF-8";
+    keyMap = "us";
   };
 
   # Networking configuration
   networking = {
     enable = true;
     hostId = "ea997198";
-    hostName = "nixos";
+    hostName = "xps";
     enableFirewall = false;
     enableDhcp = false;
     bridgeName = "externalbr0";
