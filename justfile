@@ -59,3 +59,6 @@ info:
 # Test configuration without applying
 test:
     nix build .#nixosConfigurations.xps.config.system.build.toplevel --dry-run
+
+audit:
+    bash -c scripts/token-audit.sh
