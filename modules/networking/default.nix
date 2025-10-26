@@ -16,7 +16,7 @@ in
 
     hostName = mkOption {
       type = types.str;
-      default = "nixos";
+      default = "xps";
       description = "System hostname";
     };
 
