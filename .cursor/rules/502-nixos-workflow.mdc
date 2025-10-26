@@ -4,33 +4,23 @@ alwaysApply: false
 description: NixOS rebuild and testing workflow
 ---
 # NixOS Workflow Patterns (2025)
+
 ## Flakes-First Philosophy
 **Default to flakes for all NixOS systems.**
 - Reproducible: `flake.lock` pins all inputs
 - No channels: direct GitHub references
 - Standard tooling: `nix` command suite
-```nix
-# /etc/nixos/flake.nix
-{
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  };
 
-  outputs = { nixpkgs, ... }: {
-    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
-    };
-  };
-}
-```
 Enable: `nix.settings.experimental-features = ["nix-command" "flakes"];`
+
 ## Unstable vs Stable
 **Use nixos-unstable for desktop systems.**
 - Rolling release gated by CI
 - Bootloader generations provide safety net
 - Update: `nix flake update` (updates flake.lock)
+
 Switch to stable when: Server deployments needing predictable maintenance windows.
+
 ## Rollback Pattern
 **Boot into desired generation, then set as default.**
 ```bash
@@ -40,10 +30,12 @@ sudo /run/current-system/bin/switch-to-configuration boot
 # Reboot to confirm
 ```
 Why: Avoids calculating rollback depth from broken state.
+
 **Critical**: Rollbacks don't restore application state.
 - Database schemas may be incompatible with older app versions
 - Apps like Signal, Telegram can break on downgrade
 - Always maintain backups matching generations
+
 ## Testing Changes
 **Validation sequence:**
 ```bash
@@ -59,6 +51,7 @@ nixos-rebuild switch --flake .#hostname
 nixos-rebuild build-vm --flake .#hostname
 ./result/bin/run-*-vm
 ```
+
 ## Update Workflow
 ```bash
 # Update all flake inputs

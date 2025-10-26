@@ -1,8 +1,10 @@
 ---
+globs: *.nix, **/*.nix
 alwaysApply: false
 description: VM and container development patterns
 ---
-# NixOS Development Patterns (Modern)
+# NixOS Development Patterns
+
 ## VM Testing
 **Quick disposable testing:**
 ```bash
@@ -16,12 +18,15 @@ nixos-rebuild build-vm --flake .#hostname
 QEMU_OPTS="-m 4096" ./result/bin/run-*-vm
 ```
 Use for: System-level changes, service testing, migration validation.
+
 ## Container Testing (Incus)
 **Lightweight persistent environments.**
+
 Why Incus (not LXD):
 - Community-led fork post-Canonical acquisition
 - Original LXD core team maintains
 - Better integration trajectory
+
 ```nix
 # configuration.nix
 virtualisation.incus = {
@@ -40,7 +45,8 @@ virtualisation.incus = {
 
 users.users.yourusername.extraGroups = [ "incus-admin" ];
 ```
-Workflow:
+
+**Workflow:**
 ```bash
 # Launch NixOS container
 incus launch images:nixos/unstable myproject
@@ -54,6 +60,7 @@ nixos-rebuild switch --flake .#myproject
 # Access GUI (if configured with xrdp)
 remmina
 ```
+
 Use cases:
 - Isolated client environments
 - Testing deployment configs

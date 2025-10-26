@@ -1,71 +1,25 @@
 ---
-alwaysApply: true
+globs: *.nix, **/*.nix
+alwaysApply: false
 description: Package management best practices
 ---
-# NixOS Package Management (Modern Patterns)
+# NixOS Package Management
+
 ## Never Use Imperative Installation
 **Avoid `nix profile install` on NixOS.**
 Rationale: Breaks declarative reproducibility.
-Correct patterns:
+
+**Correct patterns:**
 - **Permanent packages**: `environment.systemPackages` or Home Manager
 - **One-off tools**: `nix shell nixpkgs#ffmpeg` (temporary)
 - **Execute once**: `nix run nixpkgs#cowsay -- "hello"` (no install)
 - **Development**: `nix develop` with flake devShells
-## Search & Discovery
-**Modern search workflow:**
-```bash
-# Search packages (fast, cached)
-nix search nixpkgs vim
-# Search with regex
-nix search nixpkgs 'firefox.*'
-# Search options
-nix search nixpkgs --option # (not widely supported yet)
-# Use: https://search.nixos.org/options
-# Show package details
-nix eval nixpkgs#package.meta.description
-```
-**Search priority:**
-1. Options first (https://search.nixos.org/options) - integrated services
-2. Packages second (https://search.nixos.org/packages or `nix search`)
-3. Nixpkgs source grep - many packages poorly indexed
-## Multiple Nixpkgs Versions
-**Modern input-based approach:**
-```nix
-# flake.nix
-{
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
-  };
 
-  outputs = { nixpkgs, nixpkgs-stable, ... }: {
-    nixosConfigurations.hostname = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        pkgs-stable = import nixpkgs-stable {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-      };
-      modules = [{
-        # Use in config
-        environment.systemPackages = [ pkgs-stable.package ];
-      }];
-    };
-  };
-}
-```
-Alternative overlay pattern:
-```nix
-nixpkgs.overlays = [
-  (final: prev: {
-    stable = import nixpkgs-stable {
-      system = final.system;
-      config = final.config;
-    };
-  })
-];
-# Use: pkgs.stable.package
-```
+## Search Priority
+1. **Options first**: https://search.nixos.org/options (integrated services)
+2. **Packages second**: https://search.nixos.org/packages or `nix search`
+3. **Nixpkgs source grep**: Many packages poorly indexed
+
 ## Temporary Environments
 ```bash
 # Shell with packages available
@@ -74,18 +28,6 @@ nix shell nixpkgs#python3 nixpkgs#nodejs
 nix run nixpkgs#hello
 # Development environment (with flake.nix)
 nix develop
-# Development environment (without flake)
-nix develop nixpkgs#python3
 ```
-## Package Information
-```bash
-# Why is package in my system?
-nix why-depends /run/current-system nixpkgs#package
-# What depends on this?
-nix-store -q --referrers /nix/store/hash-package
-# Derivation details
-nix derivation show nixpkgs#package
-# Build without installing
-nix build nixpkgs#package
-ls result/
-```
+
+**Detailed patterns:** See [NIXOS-PATTERNS.md](NIXOS-PATTERNS.md)

@@ -11,6 +11,12 @@ This configuration uses a modular flake architecture designed for maintainabilit
 - **`modules/`**: Reusable NixOS modules organized by category
 - **`profiles/`**: Composed configurations that import and configure modules
 
+## Reference Documentation
+
+- **[NIXOS-PATTERNS.md](NIXOS-PATTERNS.md)**: Advanced patterns, performance tuning, package management, and development workflows
+- **[CONTRIBUTING.md](CONTRIBUTING.md)**: Workflow standards and commit conventions
+- **[README.md](README.md)**: Quick start guide and common tasks
+
 ## Key Patterns
 
 ### mkSystem Helper Function

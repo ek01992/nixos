@@ -3,7 +3,7 @@ globs: flake.nix
 alwaysApply: false
 description: Advanced flake patterns and techniques
 ---
-# Advanced Flake Patterns (2025)
+# Advanced Flake Patterns
 
 ## Cherry-Pick Unmerged PRs
 **Apply patches from open PRs before merge.**
@@ -40,64 +40,9 @@ description: Advanced flake patterns and techniques
     };
 }
 ```
+
 **Auto-detection**: When PR merges, patch fails → reminder to remove.
-## Following Nixpkgs Main
-**Use specific branches/commits:**
 
-```nix
-inputs = {
-  # Specific commit
-  nixpkgs.url = "github:NixOS/nixpkgs/abc123def456";
-
-  # Specific PR (while testing)
-  nixpkgs-pr.url = "github:user/nixpkgs/branch-name";
-
-  # Local development
-  nixpkgs.url = "path:/home/user/nixpkgs";
-  # or: "git+file:///home/user/nixpkgs"
-};
-```
-Workflow:
-1. Fork/clone nixpkgs
-2. Make changes
-3. Point flake input to local path
-4. Test: `nixos-rebuild build --flake .#hostname`
-5. Submit PR when working
-## Flake Development Tools
-### Interactive Exploration
-```bash
-# Enter REPL with flake
-nix repl
-:lf .  # or :load-flake (shorter alias)
-:lf github:NixOS/nixpkgs/nixos-unstable
-# Tab completion available
-outputs.nixosConfigurations.<TAB>
-# Evaluate attributes
-:p outputs.nixosConfigurations.hostname.config.services
-```
-### Build Monitoring
-```bash
-# Pretty build output
-nix build --log-format internal-json 2>&1 | nom
-# Works with nixos-rebuild
-nixos-rebuild build --flake . 2>&1 | nom
-# Install nom
-nix shell nixpkgs#nix-output-monitor
-# or add to config:
-environment.systemPackages = [ pkgs.nix-output-monitor ];
-```
-### Flake Management
-```bash
-# Show flake structure
-nix flake show
-# Check flake validity
-nix flake check
-# Show current inputs
-nix flake metadata
-# Lock file management
-nix flake lock --update-input nixpkgs
-nix flake lock --override-input nixpkgs github:NixOS/nixpkgs/branch
-```
 ## DevShell Pattern
 **Reproducible development environments:**
 ```nix
@@ -108,11 +53,8 @@ nix flake lock --override-input nixpkgs github:NixOS/nixpkgs/branch
       let pkgs = import nixpkgs { system = "x86_64-linux"; };
       in pkgs.mkShell {
         packages = with pkgs; [
-          nodejs
-          python3
-          postgresql
+          nodejs python3 postgresql
         ];
-
         shellHook = ''
           echo "Development environment loaded"
           export DATABASE_URL="postgresql://localhost/dev"
@@ -120,9 +62,15 @@ nix flake lock --override-input nixpkgs github:NixOS/nixpkgs/branch
       };
   };
 }
-
-# Usage:
-# $ nix develop
-# Development environment loaded
-# $ node --version
 ```
+
+## REPL Exploration
+```bash
+# Enter REPL with flake
+nix repl
+:lf .  # or :load-flake (shorter alias)
+# Tab completion available
+outputs.nixosConfigurations.<TAB>
+```
+
+**Detailed patterns:** See [NIXOS-PATTERNS.md](NIXOS-PATTERNS.md)
