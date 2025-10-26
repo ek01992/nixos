@@ -62,7 +62,7 @@
     enableDhcp = false;
     bridgeName = "externalbr0";
     bridgeInterface = "enp0s20f0u6u1i5";
-    bridgeMacAddress = "03:f6:ad:d9:9e:d1";
+    bridgeMacAddress = "02:f6:ad:d9:9e:d1";
     enableTailscale = true;
   };
 
