@@ -16,10 +16,10 @@ in
     };
   };
 
+  imports = [
+    ./erik.nix
+  ];
+
   config = mkIf cfg.enable {
-    # Import user modules
-    imports = [
-      (mkIf cfg.enableErik ./erik.nix)
-    ];
   };
 }

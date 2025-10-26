@@ -28,13 +28,12 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    # Import service modules
-    imports = [
-      (mkIf cfg.enableZfs ./zfs.nix)
-      (mkIf cfg.enableSsh ./ssh.nix)
-    ];
+  imports = [
+    ./zfs.nix
+    ./ssh.nix
+  ];
 
+  config = mkIf cfg.enable {
     # Firmware update service
     services.fwupd.enable = cfg.enableFirmware;
   };

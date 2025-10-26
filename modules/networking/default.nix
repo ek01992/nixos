@@ -16,7 +16,7 @@ in
 
     hostName = mkOption {
       type = types.str;
-      default = "xps";
+      default = "nixos";
       description = "System hostname";
     };
 
@@ -80,7 +80,9 @@ in
       };
     };
 
-    # Import Tailscale if enabled
-    imports = mkIf cfg.enableTailscale [ ./tailscale.nix ];
   };
+
+  imports = [
+    ./tailscale.nix
+  ];
 }

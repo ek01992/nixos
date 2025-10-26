@@ -6,6 +6,14 @@ let
   cfg = config.profiles.server;
 in
 {
+  imports = [
+    ../../modules/system
+    ../../modules/networking
+    ../../modules/services
+    ../../modules/virtualization
+    ../../modules/users
+  ];
+
   options.profiles.server = {
     enable = mkEnableOption "server profile";
 
@@ -47,15 +55,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Import all module categories
-    imports = [
-      (mkIf cfg.enableSystem ../../modules/system)
-      (mkIf cfg.enableNetworking ../../modules/networking)
-      (mkIf cfg.enableServices ../../modules/services)
-      (mkIf cfg.enableVirtualisation ../../modules/virtualization)
-      (mkIf cfg.enableUsers ../../modules/users)
-    ];
-
     # Enable all modules by default
     system.enable = cfg.enableSystem;
     networking.enable = cfg.enableNetworking;

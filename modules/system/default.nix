@@ -23,7 +23,7 @@ in
 
     enableAutoUpgrade = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Enable automatic system upgrades";
     };
 
@@ -52,13 +52,12 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    # Import sub-modules
-    imports = [
-      (mkIf cfg.enableBoot ./boot.nix)
-      (mkIf cfg.enableLocale ./locale.nix)
-    ];
+  imports = [
+    ./boot.nix
+    ./locale.nix
+  ];
 
+  config = mkIf cfg.enable {
     # Enable sub-modules
     system.boot.enable = cfg.enableBoot;
     system.locale.enable = cfg.enableLocale;

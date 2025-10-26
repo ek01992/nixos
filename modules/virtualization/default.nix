@@ -22,11 +22,11 @@ in
     };
   };
 
+  imports = [
+    ./kvmgt.nix
+    ./incus.nix
+  ];
+
   config = mkIf cfg.enable {
-    # Import virtualization modules
-    imports = [
-      (mkIf cfg.enableKvmgt ./kvmgt.nix)
-      (mkIf cfg.enableIncus ./incus.nix)
-    ];
   };
 }
