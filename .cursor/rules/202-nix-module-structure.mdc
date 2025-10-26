@@ -1,5 +1,6 @@
 ---
-description: Nix Module Structure Standards
+globs: modules/
+alwaysApply: false
 ---
 # Nix Module Structure
 

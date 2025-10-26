@@ -1,5 +1,6 @@
 ---
-description: NixOS Host Creation Process
+globs: hosts/*/*.nix
+alwaysApply: false
 ---
 # NixOS Host Creation
 

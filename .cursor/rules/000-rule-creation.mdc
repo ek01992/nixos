@@ -1,5 +1,6 @@
 ---
-description: Rule Creation Guide
+globs: .cursor/rules/*.mdc
+alwaysApply: false
 ---
 # Creating Cursor Rules
 

@@ -1,5 +1,6 @@
 ---
-description: NixOS Module Creation Process
+globs: modules/*/*.nix
+alwaysApply: false
 ---
 # NixOS Module Creation
 

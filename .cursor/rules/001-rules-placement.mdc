@@ -1,5 +1,6 @@
 ---
-description: Cursor Rules Placement
+globs: .cursor/rules.*.mdc
+alwaysApply: false
 ---
 # Rule File Standards
 

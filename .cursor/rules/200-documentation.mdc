@@ -1,5 +1,6 @@
 ---
-description: Documentation Standards
+globs: *.md
+alwaysApply: false
 ---
 # Documentation Standards
 
