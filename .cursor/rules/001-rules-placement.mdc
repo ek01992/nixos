@@ -1,0 +1,13 @@
+---
+description: Cursor Rules Placement
+---
+# Rule File Standards
+
+**Location**: `.cursor/rules/*.mdc` only
+
+**Naming**: `NNN-kebab-case.mdc`
+- Use 3-digit prefix for ordering
+- Descriptive names
+- Always .mdc extension
+
+**Never**: place in root, other folders, or nest subdirectories

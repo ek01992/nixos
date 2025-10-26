@@ -1,0 +1,15 @@
+---
+description: Conventional Commits
+---
+# Git Commit Standards
+
+**Format**: `type(scope): description`
+
+**Types**: feat, fix, docs, style, refactor, perf, test, chore, build, ci
+
+**Rules**:
+- Imperative mood ("add" not "added")
+- No period at end
+- Under 50 characters
+- Scope from path (src/auth → auth)
+- Breaking changes: `type(scope)!: description`
