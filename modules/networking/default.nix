@@ -19,7 +19,6 @@ in {
     ./core.nix
     ./bridge.nix
     ./firewall.nix
-    ./nftables.nix
     ./tailscale.nix
   ];
 

@@ -18,6 +18,13 @@ in {
   config = mkIf cfg.enable {
     # Firewall configuration
     networking.nftables.enable = true;
-    networking.firewall.enable = true;
+    networking.firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22 ];
+      trustedInterfaces = [ "tailscale0" ];
+      extraCommands = ''
+        iptables -A INPUT -i ${config.myNetworking.bridge.name} -j ACCEPT;
+      '';
+    };
   };
 }

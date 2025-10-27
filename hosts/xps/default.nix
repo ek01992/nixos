@@ -13,6 +13,7 @@
     ../../modules/virtualization
     ../../modules/users
     inputs.nixos-hardware.nixosModules.dell-xps-13-9315
+    inputs.agenix.nixosModules.default
   ];
 
   # System configuration
@@ -100,12 +101,6 @@
   # Firewall configuration
   # Disabled for development environment - system protected by Tailscale VPN
   myNetworking.firewall = {
-    enable = false;
-  };
-
-  # Nftables firewall configuration
-  # Required for Incus containers to receive static DHCP leases based on bridge MAC
-  myNetworking.nftables = {
     enable = true;
   };
 
