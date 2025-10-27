@@ -15,7 +15,7 @@ in {
   };
 
   imports = [
-    ./firmware
+    ./fwupd
     ./zfs
     ./ssh
   ];
