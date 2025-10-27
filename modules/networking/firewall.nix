@@ -20,7 +20,10 @@ in {
       firewall = {
         enable = lib.mkDefault true;
         allowedTCPPorts = lib.mkDefault [22];
-        trustedInterfaces = lib.mkDefault ["tailscale0" config.myNetworking.bridge.name];
+        trustedInterfaces = lib.mkDefault (
+          lib.optionals config.myNetworking.tailscale.enable ["tailscale0"] ++
+          [config.myNetworking.bridge.name]
+        );
       };
     };
   };
