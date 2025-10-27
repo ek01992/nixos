@@ -7,12 +7,13 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/server
+    ../../modules/system
+    ../../modules/networking
+    ../../modules/services
+    ../../modules/virtualization
+    ../../modules/users
     inputs.nixos-hardware.nixosModules.dell-xps-13-9315
   ];
-
-  # Host-specific configuration
-  profiles.server.enable = true;
 
   # System configuration
   mySystem = {
@@ -87,6 +88,8 @@
   };
 
   # Bridge configuration
+  # MAC address matches USB Ethernet adapter for consistent interface naming
+  # Allows Incus containers to receive static DHCP leases based on bridge MAC
   myNetworking.bridge = {
     enable = true;
     name = "externalbr0";
@@ -95,6 +98,7 @@
   };
 
   # Firewall configuration
+  # Disabled for development environment - system protected by Tailscale VPN
   myNetworking.firewall = {
     enable = false;
   };
@@ -135,4 +139,15 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
     ];
   };
+
+  # System packages
+  environment.systemPackages = with pkgs; [
+    git
+    wget
+    curl
+    htop
+    vim
+    tree
+    alejandra
+  ];
 }
