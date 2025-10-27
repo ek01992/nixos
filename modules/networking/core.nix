@@ -42,7 +42,8 @@ in {
       # Disabled to prevent IPv6 privacy extensions interfering with static DHCP leases
       # Incus containers need predictable addresses for bridge networking
       tempAddresses = lib.mkDefault "disabled";
-      useDHCP = lib.mkDefault cfg.enableDhcp;
+      # Let hardware config set the default, we override based on enableDhcp option
+      useDHCP = cfg.enableDhcp;
     };
   };
 }
