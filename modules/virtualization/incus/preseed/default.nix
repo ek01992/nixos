@@ -11,11 +11,9 @@
   ...
 }: let
   cfg = config.myVirtualization.incus;
-  inherit (lib) mkEnableOption mkOption mkIf types mkDefault;
+  inherit (lib) mkOption mkIf types mkDefault;
 in {
   options.myVirtualization.incus = {
-    enable = mkEnableOption "Incus container and VM management";
-
     storagePool = mkOption {
       type = types.str;
       default = "tank/incus";
