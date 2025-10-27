@@ -117,8 +117,9 @@ boot.extraModprobeConfig = "options kvm ignore_msrs=1";
 ### Module Structure
 ```nix
 { config, lib, pkgs, ... }:
-with lib;
-let cfg = config.myCategory.feature;
+let 
+  cfg = config.myCategory.feature;
+  inherit (lib) mkEnableOption mkOption mkIf types mkDefault;
 in {
   options.myCategory.feature = {
     enable = mkEnableOption "feature description";

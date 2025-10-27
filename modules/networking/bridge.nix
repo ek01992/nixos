@@ -36,7 +36,7 @@ in {
 
   config = mkIf cfg.enable {
     # Bridge configuration
-    networking.bridges = {
+    networking.bridges = lib.mkDefault {
       "${cfg.name}" = {
         interfaces = [cfg.interface];
       };
@@ -48,7 +48,7 @@ in {
         # MAC address matches USB Ethernet adapter for consistent interface naming
         # Allows Incus containers to receive static DHCP leases based on bridge MAC
         # Without this, interface name changes on reboot and DHCP reservations break
-        macAddress = cfg.macAddress;
+        macAddress = lib.mkDefault cfg.macAddress;
       };
     };
 

@@ -48,6 +48,6 @@ in {
     i18n.defaultLocale = lib.mkDefault cfg.defaultLocale;
     console.keyMap = lib.mkDefault cfg.keyMap;
 
-    i18n.extraLocaleSettings = cfg.extraLocaleSettings;
+    i18n.extraLocaleSettings = lib.mkDefault cfg.extraLocaleSettings;
   };
 }

@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    networking.nftables.enable = true;
+    networking.nftables.enable = lib.mkDefault true;
     networking.firewall = {
       enable = lib.mkDefault true;
       allowedTCPPorts = lib.mkDefault [22];

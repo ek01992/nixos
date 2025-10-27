@@ -40,13 +40,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot.loader.systemd-boot.enable = cfg.enableSystemdBoot;
-    boot.loader.efi.canTouchEfiVariables = cfg.enableEfiVariables;
+    boot.loader.systemd-boot.enable = lib.mkDefault cfg.enableSystemdBoot;
+    boot.loader.efi.canTouchEfiVariables = lib.mkDefault cfg.enableEfiVariables;
 
     boot.supportedFilesystems = lib.mkIf cfg.enableZfsSupport (lib.mkDefault ["zfs"]);
 
-    boot.extraModprobeConfig = mkIf cfg.enableKvmOptions ''
+    boot.extraModprobeConfig = lib.mkIf cfg.enableKvmOptions (lib.mkDefault ''
       options kvm ignore_msrs=1 report_ignored_msrs=0
-    '';
+    '');
   };
 }

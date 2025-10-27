@@ -47,8 +47,6 @@ in {
     };
 
     # Use secrets in services
-    services.tailscale.authKeyFile =
-      lib.mkIf (cfg.tailscaleAuthKey != null)
-      config.age.secrets.tailscale-auth.path;
+    services.tailscale.authKeyFile = lib.mkIf (cfg.tailscaleAuthKey != null) (lib.mkDefault config.age.secrets.tailscale-auth.path);
   };
 }

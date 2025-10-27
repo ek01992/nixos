@@ -33,10 +33,10 @@ in {
     system.stateVersion = cfg.stateVersion;
 
     # Nix configuration
-    nix.settings.experimental-features = ["nix-command" "flakes"];
-    nixpkgs.config.allowUnfree = true;
+    nix.settings.experimental-features = lib.mkDefault ["nix-command" "flakes"];
+    nixpkgs.config.allowUnfree = lib.mkDefault true;
 
     # Hardware configuration
-    hardware.enableRedistributableFirmware = cfg.enableFirmware;
+    hardware.enableRedistributableFirmware = lib.mkDefault cfg.enableFirmware;
   };
 }
