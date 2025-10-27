@@ -4,10 +4,14 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    alejandra.url = "github:kamadorueda/alejandra/4.0.0";
-    alejandra.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    alejandra = {
+      url = "github:kamadorueda/alejandra/4.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

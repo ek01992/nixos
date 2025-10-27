@@ -5,6 +5,7 @@ This directory contains encrypted secrets managed by agenix.
 ## Setup Instructions
 
 ### 1. Generate Age Key
+
 ```bash
 # Create age key directory
 sudo mkdir -p /var/lib/agenix
@@ -15,6 +16,7 @@ age.identityPaths = [ "/var/lib/agenix/key.txt" ];
 ```
 
 ### 2. Encrypt Secrets
+
 ```bash
 # Encrypt a secret file
 agenix -e secrets/tailscale-auth.age
@@ -24,6 +26,7 @@ agenix -e secrets/tailscale-auth.age
 ```
 
 ### 3. Enable in Host Configuration
+
 ```nix
 mySecurity.secrets = {
   enable = true;
