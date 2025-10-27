@@ -9,7 +9,7 @@
   ...
 }: let
   cfg = config.myNetworking.tailscale;
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkDefault;
 in {
   options.myNetworking.tailscale = {
     enable = mkEnableOption "Tailscale VPN";
@@ -17,6 +17,6 @@ in {
 
   config = mkIf cfg.enable {
     # Tailscale VPN
-    services.tailscale.enable = true;
+    services.tailscale.enable = lib.mkDefault true;
   };
 }

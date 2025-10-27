@@ -9,7 +9,7 @@
   ...
 }: let
   cfg = config.myServices.ssh;
-  inherit (lib) mkEnableOption mkOption mkIf types;
+  inherit (lib) mkEnableOption mkOption mkIf types mkDefault;
 in {
   options.myServices.ssh = {
     enable = mkEnableOption "SSH daemon";
@@ -42,8 +42,8 @@ in {
 
   config = mkIf cfg.enable {
     services.openssh = {
-      enable = true;
-      settings = {
+      enable = lib.mkDefault true;
+      settings = lib.mkDefault {
         Port = cfg.port;
         PasswordAuthentication = cfg.passwordAuthentication;
         KbdInteractiveAuthentication = cfg.kbdInteractiveAuthentication;

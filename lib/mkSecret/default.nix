@@ -22,14 +22,17 @@
     owner ? "root",
     mode ? "0400",
     group ? null,
-  }: {
-    file = ../../secrets/${secretFile};
-    owner = owner;
-    mode = mode;
-  } // lib.optionalAttrs (group != null) {inherit group;};
+  }:
+    {
+      file = ../../secrets/${secretFile};
+      owner = owner;
+      mode = mode;
+    }
+    // lib.optionalAttrs (group != null) {inherit group;};
 
   # Create multiple secrets from a list
-  mkSecrets = secrets: lib.listToAttrs (
-    map (secret: lib.nameValuePair secret.name (lib.mkSecret secret)) secrets
-  );
+  mkSecrets = secrets:
+    lib.listToAttrs (
+      map (secret: lib.nameValuePair secret.name (lib.mkSecret secret)) secrets
+    );
 }

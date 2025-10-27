@@ -89,6 +89,40 @@ in {
 - **Category modules are pure organizational containers** - no logic, only imports
 - **All configuration logic lives in submodules** - create dedicated submodules for each service/feature
 
+## Module Template Pattern
+
+While not mandatory, this template provides a helpful starting point for new modules:
+
+```nix
+# <Module Name> Module
+# Verification: <command to verify it's working>
+# Why: <one-line reason this module exists>
+{ config, lib, pkgs, ... }:
+let 
+  cfg = config.myCategory.feature;
+  inherit (lib) mkEnableOption mkOption mkIf types mkDefault;
+in {
+  options.myCategory.feature = {
+    enable = mkEnableOption "<description>";
+    # Add options with defaults wrapped in mkDefault in config section
+  };
+  
+  config = mkIf cfg.enable {
+    # Use lib.mkDefault for any values that should be overridable
+    services.something.enable = lib.mkDefault true;
+    services.something.settings = lib.mkDefault { ... };
+  };
+}
+```
+
+**Key patterns highlighted:**
+- Verification command in header comment
+- Explicit `inherit (lib)` for clarity
+- `lib.mkDefault` for overridable configuration values
+- Consistent `myCategory.feature` namespace
+
+**Note**: This is a helpful reference pattern, not a rigid requirement. Adapt as needed for your specific use case.
+
 ## Adding Components
 
 ### Adding a New Module

@@ -57,15 +57,18 @@ in {
     };
 
     # Example 4: Using mkFirewallRule
-    networking.firewall.allowedTCPPorts = lib.mkFirewallRule {
-      port = 8080;
-      protocol = "tcp";
-    }.allowedTCPPorts;
+    networking.firewall.allowedTCPPorts =
+      lib.mkFirewallRule
+      {
+        port = 8080;
+        protocol = "tcp";
+      }.allowedTCPPorts;
 
     # Example 5: Using mkTailscale
     services.tailscale = lib.mkTailscale {
       enable = true;
-      authKeyFile = lib.mkIf (cfg.secretFile != null)
+      authKeyFile =
+        lib.mkIf (cfg.secretFile != null)
         config.age.secrets.demo-secret.path;
     };
   };

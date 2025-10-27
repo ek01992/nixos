@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.myUsers.erik;
-  inherit (lib) mkEnableOption mkOption mkIf types;
+  inherit (lib) mkEnableOption mkOption mkIf types mkDefault;
 in {
   options.myUsers.erik = {
     enable = mkEnableOption "Erik user account";
@@ -34,7 +34,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    users.users.erik = {
+    users.users.erik = lib.mkDefault {
       isNormalUser = true;
       description = cfg.description;
       extraGroups = cfg.extraGroups;

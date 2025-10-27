@@ -31,19 +31,23 @@
     optionName = "${category}.${name}";
     cfg = config.${category}.${name};
   in {
-    options.${optionName} = {
-      enable = lib.mkEnableOption "${description}";
-    } // options;
+    options.${optionName} =
+      {
+        enable = lib.mkEnableOption "${description}";
+      }
+      // options;
 
     config = lib.mkIf cfg.enable {
-      systemd.services.${serviceName} = {
-        description = description;
-        wantedBy = ["multi-user.target"];
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-        };
-      } // config;
+      systemd.services.${serviceName} =
+        {
+          description = description;
+          wantedBy = ["multi-user.target"];
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+          };
+        }
+        // config;
     };
   };
 }

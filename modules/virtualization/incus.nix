@@ -11,7 +11,7 @@
   ...
 }: let
   cfg = config.myVirtualization.incus;
-  inherit (lib) mkEnableOption mkOption mkIf types;
+  inherit (lib) mkEnableOption mkOption mkIf types mkDefault;
 in {
   options.myVirtualization.incus = {
     enable = mkEnableOption "Incus container and VM management";
@@ -45,7 +45,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    virtualisation.incus = {
+    virtualisation.incus = lib.mkDefault {
       enable = true;
       ui.enable = cfg.enableUi;
       package = pkgs.incus;

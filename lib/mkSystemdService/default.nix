@@ -49,10 +49,12 @@
   }: {
     systemd.services.${name} = {
       description = description;
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = script;
-      } // serviceConfig;
+      serviceConfig =
+        {
+          Type = "oneshot";
+          ExecStart = script;
+        }
+        // serviceConfig;
     };
 
     systemd.timers.${name} = {

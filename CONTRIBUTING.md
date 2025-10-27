@@ -77,6 +77,41 @@ just build    # Ensure configuration builds
 just fmt      # Format code
 ```
 
+## Module Quality Checklist
+
+When creating or reviewing modules, ensure they follow these patterns:
+
+- [ ] **Verification command**: Module header includes practical verification commands
+- [ ] **Explicit inherit**: Uses `inherit (lib)` instead of `with lib;` for clarity
+- [ ] **mkDefault usage**: Base NixOS config values wrapped with `lib.mkDefault`
+- [ ] **Why comments**: Non-obvious configuration choices documented inline
+- [ ] **Option descriptions**: All options have `description` and `example` where helpful
+- [ ] **Namespace consistency**: Follows `myCategory.feature` naming convention
+
+### When to Use mkDefault
+
+Wrap base NixOS configuration values with `lib.mkDefault` when they might be overridden:
+
+```nix
+# ✓ Overridable service configuration
+services.openssh.enable = lib.mkDefault true;
+services.openssh.settings = lib.mkDefault { Port = 22; };
+
+# ✗ Fixed values that shouldn't change
+boot.loader.systemd-boot.enable = true;  # Bootloader choice is fixed
+```
+
+**Examples**: See `modules/system/boot.nix` and `modules/services/zfs.nix` for good patterns.
+
+### When to Add "Why" Comments
+
+Document non-obvious choices that future maintainers might question:
+
+```nix
+# Why: Ignore MSRs to prevent VM crashes with Intel GPU passthrough
+boot.extraModprobeConfig = "options kvm ignore_msrs=1";
+```
+
 ## Common Patterns
 
 ### Module Structure

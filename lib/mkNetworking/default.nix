@@ -23,21 +23,26 @@
     port,
     protocol ? "tcp",
     interface ? null,
-  }: {
-    allowed${lib.toUpper protocol}Ports = [port];
-  } // lib.optionalAttrs (interface != null) {
-    trustedInterfaces = [interface];
-  };
+  }:
+    {
+      allowedTCPPorts = lib.mkIf (protocol == "tcp") [port];
+      allowedUDPPorts = lib.mkIf (protocol == "udp") [port];
+    }
+    // lib.optionalAttrs (interface != null) {
+      trustedInterfaces = [interface];
+    };
 
   # Create a Tailscale configuration
   mkTailscale = {
     enable ? true,
     authKeyFile ? null,
   }: {
-    services.tailscale = {
-      enable = enable;
-    } // lib.optionalAttrs (authKeyFile != null) {
-      inherit authKeyFile;
-    };
+    services.tailscale =
+      {
+        enable = enable;
+      }
+      // lib.optionalAttrs (authKeyFile != null) {
+        inherit authKeyFile;
+      };
   };
 }
