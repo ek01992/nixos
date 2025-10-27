@@ -53,19 +53,13 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 1. Create `modules/category/name.nix`
 2. Define `myCategory.feature` namespace
 3. Use `mkEnableOption` and `mkOption` patterns
-4. Import in `profiles/server/default.nix`
+4. Import in `modules/category/default.nix`
 
 ### New Host
 1. Create `hosts/hostname/default.nix`
 2. Add `inputs` parameter for nixos-hardware access
 3. Configure host-specific settings
 4. Add to `flake.nix`: `hostname = mkSystem "hostname" "x86_64-linux"`
-
-### New Profile
-1. Create `profiles/name/default.nix`
-2. Import relevant modules
-3. Define `profiles.name.enable` option
-4. Use in host configurations
 
 ## Code Standards
 
@@ -95,7 +89,7 @@ in {
     enable = mkEnableOption "feature description";
     # ... other options
   };
-  
+
   config = mkIf cfg.enable {
     # ... configuration
   };
@@ -108,10 +102,17 @@ in {
 {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/server
+    ../../modules/system
+    ../../modules/networking
+    ../../modules/services
+    ../../modules/virtualization
+    ../../modules/users
     inputs.nixos-hardware.nixosModules.device-name
   ];
-  
+
   # Host-specific configuration
+  mySystem.enable = true;
+  myNetworking.enable = true;
+  # ... other modules
 }
 ```

@@ -17,7 +17,6 @@ This configuration uses a modular flake architecture:
 - **`flake.nix`**: Entry point with `mkSystem` helper for multi-host support
 - **`hosts/`**: Host-specific configurations (hardware, networking, mounts)
 - **`modules/`**: Reusable NixOS modules (system, networking, services, virtualization, users)
-- **`profiles/`**: Composed configurations (server profile imports all modules)
 
 ## Common Tasks
 
@@ -38,14 +37,13 @@ just clean        # Garbage collect old generations
 - **Incus Integration**: Container and VM management with web UI
 - **ZFS Support**: Automatic scrubbing and trimming
 - **Tailscale VPN**: Secure remote access
-- **Modular Design**: Easy to add hosts, modules, and profiles
+- **Modular Design**: Easy to add hosts and modules
 - **Hardware Support**: Dell XPS 13 9315 optimizations
 
 ## Adding Components
 
 - **New Host**: Create `hosts/hostname/`, add to `flake.nix`
-- **New Module**: Create in `modules/category/`, import in profile
-- **New Profile**: Create in `profiles/`, compose modules
+- **New Module**: Create in `modules/category/`, import in host
 
 See [AGENTS.md](AGENTS.md) for detailed patterns and [CONTRIBUTING.md](CONTRIBUTING.md) for workflow guidelines.
 
@@ -54,11 +52,13 @@ See [AGENTS.md](AGENTS.md) for detailed patterns and [CONTRIBUTING.md](CONTRIBUT
 This configuration uses ZFS for storage management with automatic maintenance, but **ZFS scrubbing ≠ backups**.
 
 ### Current Setup
+
 - **ZFS snapshots**: Manual via `zfs snapshot tank@backup-$(date +%Y%m%d)`
 - **Automatic maintenance**: Scrubbing and trimming enabled
 - **Off-host backups**: Not yet implemented
 
 ### Future Considerations
+
 - **sanoid + syncoid**: Automated ZFS snapshots and replication to remote ZFS
 - **restic**: Encrypted backups to cloud storage (Backblaze B2, AWS S3)
 - **borg**: Deduplicated backups with compression
@@ -72,7 +72,7 @@ zfs snapshot tank@backup-$(date +%Y%m%d)
 zfs list -t snapshot
 
 # Send snapshot to remote (when configured)
-zfs send tank@backup-20250101 | ssh remote-host "zfs receive tank/backup"
+zfs send tank@backup-20251026 | ssh remote-host "zfs receive tank/backup"
 ```
 
 ## Current Hosts
