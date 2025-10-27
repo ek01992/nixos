@@ -142,7 +142,7 @@
   };
 
   # Age identity for secrets management
-  age.identityPaths = [ "/var/lib/agenix/key.txt" ];
+  age.identityPaths = ["/var/lib/agenix/key.txt"];
 
   # System packages
   environment.systemPackages = with pkgs; [
