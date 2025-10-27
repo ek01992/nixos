@@ -17,5 +17,4 @@ in {
   imports = [
     ./secrets.nix
   ];
-
 }

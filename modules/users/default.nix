@@ -18,8 +18,4 @@ in {
   imports = [
     ./erik.nix
   ];
-
-  config =
-    mkIf cfg.enable {
-    };
 }

@@ -21,9 +21,4 @@ in {
     ./core.nix
     ./upgrade.nix
   ];
-
-  config = mkIf cfg.enable {
-    # NO LOGIC HERE - category modules are pure containers
-    # All configuration logic lives in submodules
-  };
 }

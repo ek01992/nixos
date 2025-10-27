@@ -19,8 +19,4 @@ in {
     ./kvmgt.nix
     ./incus.nix
   ];
-
-  config =
-    mkIf cfg.enable {
-    };
 }
