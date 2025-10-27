@@ -1,0 +1,101 @@
+---
+globs: **/*.nix,*.nix
+alwaysApply: false
+---
+# Nix Guidelines
+
+Declarative, reproducible configuration. Pure functions, explicit dependencies.
+
+## Core Philosophy
+
+**Pure and reproducible:** Same inputs → same outputs. No hidden state. Lazy evaluation.
+
+**Format:** Use `alejandra .` - trust the formatter, consistency matters.
+
+## Naming
+
+- Attributes/functions: `camelCase`
+- Packages: `lowercase-with-hyphens`
+- Files: `kebab-case.nix`
+- Constants: `UPPER_SNAKE_CASE`
+
+## Critical Patterns
+
+**Explicit over inherit-all:**
+```nix
+# ✓ Selective inherit
+{ lib, pkgs, ... }: {
+  inherit (lib) mkIf mkOption;
+}
+
+# ✗ Namespace pollution
+with lib; with pkgs; { }
+```
+
+**Pure functions with explicit dependencies:**
+```nix
+# ✓ All deps in signature
+mkService = { lib, pkgs, config }: { };
+
+# ✗ Implicit (breaks reproducibility)
+mkService = { enable = config.services.enable; };
+```
+
+**Module structure:**
+```nix
+{ config, lib, pkgs, ... }:
+let cfg = config.services.myservice;
+in {
+  options.services.myservice = {
+    enable = lib.mkEnableOption "myservice";
+    port = lib.mkOption { type = lib.types.port; default = 8080; };
+  };
+
+  config = lib.mkIf cfg.enable {
+    systemd.services.myservice = { /* ... */ };
+  };
+}
+```
+
+**String handling:**
+```nix
+# ✓ Path type (copies to store)
+src = ./configs/default.nix;
+
+# ✗ String path (doesn't copy)
+src = "./configs/default.nix";
+```
+
+## Anti-Patterns
+
+**Never do:**
+- Impure functions: `builtins.currentTime` (breaks reproducibility)
+- `rec` abuse: Creates circular dependencies, hard to debug
+- Deep `with` nesting: Namespace pollution
+- Import From Derivation (IFD) when avoidable
+
+## Common Mistakes
+
+**Lists/attrs conditionals:**
+```nix
+# ✓ Conditional items
+packages = [ pkgs.git ] ++ lib.optionals cfg.extra [ pkgs.docker ];
+
+# ✓ Conditional attributes
+config = { host = "localhost"; } // lib.optionalAttrs cfg.ssl { ssl = {}; };
+```
+
+**Lazy evaluation:**
+```nix
+# ✓ Only evaluates if needed
+config = lib.mkIf condition { expensive = heavyCompute; };
+
+# ✗ Always evaluates
+result = if condition then heavyCompute else {};
+```
+
+## Quick Reference
+
+- Options: https://search.nixos.org/options
+- Validate: `nix flake check`
+- Format: `alejandra . && git add -u`
