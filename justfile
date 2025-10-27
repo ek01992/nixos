@@ -36,9 +36,6 @@ push:
 pull:
     git pull
 
-install package:
-    nix-env -iA nixpkgs.{{package}}
-
 info:
     nix flake show
 
