@@ -218,6 +218,135 @@ myVirtualization.incus.enable = true;  # ← Direct submodule enable
 - Format code with `just fmt`
 - Test on VM before applying to physical host
 
+## Helper Functions
+
+This configuration provides helper functions in `lib/default.nix` to reduce boilerplate and enforce consistency.
+
+### Available Helpers
+
+#### Module Helpers (`lib.mkModule`, `lib.mkServiceModule`)
+```nix
+# Basic module creation
+lib.mkModule {
+  name = "myfeature";
+  category = "myCategory";
+  config = {
+    # Your configuration here
+  };
+}
+
+# Service module with systemd integration
+lib.mkServiceModule {
+  name = "myservice";
+  category = "myServices";
+  serviceName = "my-service";
+  description = "My Custom Service";
+  config = {
+    ExecStart = "/path/to/script";
+  };
+}
+```
+
+#### Secret Helpers (`lib.mkSecret`, `lib.mkSecretPath`, `lib.mkSecrets`)
+```nix
+# Basic secret creation
+lib.mkSecret {
+  name = "mysecret";
+  file = "../../secrets/mysecret.age";
+  owner = "root";
+  mode = "0400";
+}
+
+# Secret with automatic path resolution
+lib.mkSecretPath {
+  name = "mysecret";
+  secretFile = "mysecret.age";  # Automatically resolves to ../../secrets/
+}
+
+# Multiple secrets from list
+lib.mkSecrets [
+  { name = "secret1"; file = "../../secrets/secret1.age"; }
+  { name = "secret2"; file = "../../secrets/secret2.age"; }
+]
+```
+
+#### Systemd Service Helpers (`lib.mkSystemdService`, `lib.mkSystemdServiceRestart`, `lib.mkSystemdTimer`)
+```nix
+# Basic oneshot service
+lib.mkSystemdService {
+  name = "myservice";
+  description = "My Service";
+  script = "/path/to/script";
+}
+
+# Service with restart behavior
+lib.mkSystemdServiceRestart {
+  name = "myservice";
+  description = "My Service";
+  script = "/path/to/script";
+  restart = "on-failure";
+}
+
+# Timer service
+lib.mkSystemdTimer {
+  name = "mytimer";
+  description = "My Timer";
+  script = "/path/to/script";
+  onCalendar = "daily";
+}
+```
+
+#### Networking Helpers (`lib.mkBridge`, `lib.mkFirewallRule`, `lib.mkTailscale`)
+```nix
+# Bridge configuration
+lib.mkBridge {
+  name = "mybridge";
+  interface = "eth0";
+  macAddress = "02:00:00:00:00:01";
+}
+
+# Firewall rule
+lib.mkFirewallRule {
+  port = 8080;
+  protocol = "tcp";
+  interface = "tailscale0";
+}
+
+# Tailscale configuration
+lib.mkTailscale {
+  enable = true;
+  authKeyFile = "/path/to/key";
+}
+```
+
+### When to Use Helpers
+
+**Use helpers when:**
+- Creating new modules with standard patterns
+- Managing secrets with agenix
+- Setting up systemd services
+- Configuring networking components
+
+**Don't use helpers when:**
+- Configuration is highly custom or unique
+- You need fine-grained control over options
+- The helper doesn't fit your specific use case
+
+### Importing Helpers
+
+Helpers are automatically available in all modules via the flake's lib output:
+
+```nix
+# In any module
+{ config, lib, pkgs, ... }:
+let
+  # Helpers are available as lib.mkModule, lib.mkSecret, etc.
+  myConfig = lib.mkModule { ... };
+in {
+  # Your module configuration
+}
+```
+
 ## Module Categories
 
 - **`system/`**: Boot (systemd-boot), locale, auto-upgrade, firmware

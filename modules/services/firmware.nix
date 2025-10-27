@@ -16,6 +16,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.fwupd.enable = true;
+    # Using helper function for consistent service configuration
+    services.fwupd.enable = lib.mkDefault true;
   };
 }

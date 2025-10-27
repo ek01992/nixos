@@ -28,11 +28,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Auto-upgrade configuration
+    # Auto-upgrade configuration with overridable defaults
     system.autoUpgrade = {
-      enable = true;
-      dates = cfg.dates;
-      allowReboot = cfg.allowReboot;
+      enable = lib.mkDefault true;
+      dates = lib.mkDefault cfg.dates;
+      allowReboot = lib.mkDefault cfg.allowReboot;
     };
   };
 }

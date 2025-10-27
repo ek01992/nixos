@@ -61,7 +61,7 @@ just clean        # Garbage collect old generations
 - **New Host**: Create `hosts/hostname/`, add to `flake.nix`
 - **New Module**: Create in `modules/category/`, import in host
 
-See [AGENTS.md](AGENTS.md) for detailed patterns and [CONTRIBUTING.md](CONTRIBUTING.md) for workflow guidelines.
+See [AGENTS.md](AGENTS.md) for detailed patterns, [CONTRIBUTING.md](CONTRIBUTING.md) for workflow guidelines, and [HELPER-FUNCTIONS.md](HELPER-FUNCTIONS.md) for helper function documentation.
 
 ## Backup Strategy
 
