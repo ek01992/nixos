@@ -47,8 +47,8 @@ in {
       };
       supportedFilesystems = lib.mkIf cfg.enableZfsSupport (lib.mkDefault ["zfs"]);
       extraModprobeConfig = lib.mkIf cfg.enableKvmOptions (lib.mkDefault ''
-          options kvm ignore_msrs=1 report_ignored_msrs=0
-        '');
+        options kvm ignore_msrs=1 report_ignored_msrs=0
+      '');
     };
   };
 }
