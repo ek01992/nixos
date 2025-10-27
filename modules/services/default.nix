@@ -21,7 +21,7 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    # TODO: Add secrets management when needed (Tailscale auth keys, API tokens, etc.)
-    # Consider: agenix (simple) or sops-nix (team-friendly)
+    # NO LOGIC HERE - category modules are pure containers
+    # All configuration logic lives in submodules
   };
 }

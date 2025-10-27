@@ -1,0 +1,22 @@
+# Tailscale VPN Configuration Module
+# Verification: systemctl status tailscaled
+#               tailscale status
+#               tailscale ip
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.myNetworking.tailscale;
+in {
+  options.myNetworking.tailscale = {
+    enable = mkEnableOption "Tailscale VPN";
+  };
+
+  config = mkIf cfg.enable {
+    # Tailscale VPN
+    services.tailscale.enable = true;
+  };
+}

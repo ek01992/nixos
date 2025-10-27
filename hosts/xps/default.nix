@@ -17,11 +17,20 @@
   # System configuration
   mySystem = {
     enable = true;
-    enableAutoUpgrade = true;
-    autoUpgradeDates = "weekly";
-    allowReboot = true;
+  };
+
+  # Core system settings
+  mySystem.core = {
+    enable = true;
     stateVersion = "25.11";
     enableFirmware = true;
+  };
+
+  # System upgrade settings
+  mySystem.upgrade = {
+    enable = true;
+    dates = "weekly";
+    allowReboot = true;
   };
 
   # Boot configuration
@@ -65,19 +74,34 @@
   };
 
   # Networking configuration
-  # IMPORTANT: bridgeInterface assumes Anker USB-C adapter
-  # in specific USB-C port. Name changes if hardware changes.
-  # Verify with: ip link show
   myNetworking = {
+    enable = true;
+  };
+
+  # Core networking settings
+  myNetworking.core = {
     enable = true;
     hostId = "ea997198";
     hostName = "xps";
-    enableFirewall = false;
     enableDhcp = false;
-    bridgeName = "externalbr0";
-    bridgeInterface = "enp0s20f0u6u1i5";
-    bridgeMacAddress = "02:f6:ad:d9:9e:d1";
-    enableTailscale = true;
+  };
+
+  # Bridge configuration
+  myNetworking.bridge = {
+    enable = true;
+    name = "externalbr0";
+    interface = "enp0s20f0u6u1i5";
+    macAddress = "02:f6:ad:d9:9e:d1";
+  };
+
+  # Firewall configuration
+  myNetworking.firewall = {
+    enable = false;
+  };
+
+  # Tailscale VPN
+  myNetworking.tailscale = {
+    enable = true;
   };
 
   # Virtualization configuration
