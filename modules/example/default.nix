@@ -14,10 +14,6 @@ in {
   };
 
   imports = [
-    ./helper-demo.nix
+    ./helper-demo
   ];
-
-  config = mkIf cfg.enable {
-    # Example modules are enabled here
-  };
 }

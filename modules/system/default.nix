@@ -16,9 +16,9 @@ in {
   };
 
   imports = [
-    ./boot.nix
-    ./locale.nix
-    ./core.nix
-    ./upgrade.nix
+    ./boot
+    ./locale
+    ./core
+    ./upgrade
   ];
 }

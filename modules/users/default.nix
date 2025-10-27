@@ -16,6 +16,6 @@ in {
   };
 
   imports = [
-    ./erik.nix
+    ./erik
   ];
 }

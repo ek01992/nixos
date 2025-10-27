@@ -15,8 +15,8 @@ in {
   };
 
   imports = [
-    ./firmware.nix
-    ./zfs.nix
-    ./ssh.nix
+    ./firmware
+    ./zfs
+    ./ssh
   ];
 }

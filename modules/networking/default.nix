@@ -16,9 +16,9 @@ in {
   };
 
   imports = [
-    ./core.nix
-    ./bridge.nix
-    ./firewall.nix
-    ./tailscale.nix
+    ./core
+    ./bridge
+    ./firewall
+    ./tailscale
   ];
 }

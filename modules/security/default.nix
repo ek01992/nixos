@@ -15,6 +15,6 @@ in {
   };
 
   imports = [
-    ./secrets.nix
+    ./secrets
   ];
 }

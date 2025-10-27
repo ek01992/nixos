@@ -16,7 +16,7 @@ in {
   };
 
   imports = [
-    ./kvmgt.nix
-    ./incus.nix
+    ./kvmgt
+    ./incus
   ];
 }
