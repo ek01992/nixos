@@ -20,6 +20,7 @@
   };
 
   # Create a simple service module with common patterns
+  # Usage: lib.mkServiceModule { name = "myservice"; category = "myservices"; serviceName = "myservice"; description = "My Service"; config = {...}; }
   mkServiceModule = {
     name,
     category,
