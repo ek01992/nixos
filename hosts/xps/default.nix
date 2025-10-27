@@ -103,6 +103,12 @@
     enable = false;
   };
 
+  # Nftables firewall configuration
+  # Required for Incus containers to receive static DHCP leases based on bridge MAC
+  myNetworking.nftables = {
+    enable = true;
+  };
+
   # Tailscale VPN
   myNetworking.tailscale = {
     enable = true;
