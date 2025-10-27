@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myServices.firmware;
+  inherit (lib) mkEnableOption mkIf;
 in {
   options.myServices.firmware = {
     enable = mkEnableOption "firmware update service";

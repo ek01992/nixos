@@ -6,9 +6,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.mySecurity;
+  inherit (lib) mkEnableOption;
 in {
   options.mySecurity = {
     enable = mkEnableOption "security configuration";

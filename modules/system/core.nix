@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.mySystem.core;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.mySystem.core = {
     enable = mkEnableOption "core system configuration";

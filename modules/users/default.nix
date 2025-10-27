@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myUsers;
+  inherit (lib) mkEnableOption;
 in {
   options.myUsers = {
     enable = mkEnableOption "users configuration";

@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myNetworking.bridge;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.myNetworking.bridge = {
     enable = mkEnableOption "bridge networking configuration";

@@ -1,6 +1,11 @@
-{ config, lib, pkgs, ... }:
-with lib;
-let cfg = config.mySecurity.secrets;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.mySecurity.secrets;
+  inherit (lib) mkEnableOption mkIf;
 in {
   options.mySecurity.secrets = {
     enable = mkEnableOption "Secrets management with agenix";

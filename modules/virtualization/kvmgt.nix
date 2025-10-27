@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myVirtualization.kvmgt;
+  inherit (lib) mkEnableOption mkIf;
 in {
   options.myVirtualization.kvmgt = {
     enable = mkEnableOption "Intel GVT-g GPU virtualization";

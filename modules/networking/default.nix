@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myNetworking;
+  inherit (lib) mkEnableOption;
 in {
   options.myNetworking = {
     enable = mkEnableOption "networking configuration";

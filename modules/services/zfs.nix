@@ -8,9 +8,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myServices.zfs;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.myServices.zfs = {
     enable = mkEnableOption "ZFS services";

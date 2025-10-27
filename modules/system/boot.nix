@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.mySystem.boot;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.mySystem.boot = {
     enable = mkEnableOption "boot configuration";

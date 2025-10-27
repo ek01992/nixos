@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myServices.ssh;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.myServices.ssh = {
     enable = mkEnableOption "SSH daemon";

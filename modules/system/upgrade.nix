@@ -6,9 +6,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.mySystem.upgrade;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.mySystem.upgrade = {
     enable = mkEnableOption "automatic system upgrades";

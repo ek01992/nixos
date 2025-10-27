@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myNetworking.tailscale;
+  inherit (lib) mkEnableOption mkIf;
 in {
   options.myNetworking.tailscale = {
     enable = mkEnableOption "Tailscale VPN";

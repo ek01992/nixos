@@ -9,9 +9,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myVirtualization.incus;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.myVirtualization.incus = {
     enable = mkEnableOption "Incus container and VM management";

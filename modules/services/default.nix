@@ -6,9 +6,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myServices;
+  inherit (lib) mkEnableOption;
 in {
   options.myServices = {
     enable = mkEnableOption "services configuration";

@@ -3,9 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myUsers.erik;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.myUsers.erik = {
     enable = mkEnableOption "Erik user account";

@@ -7,9 +7,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.myNetworking.core;
+  inherit (lib) mkEnableOption mkOption mkIf types;
 in {
   options.myNetworking.core = {
     enable = mkEnableOption "core networking configuration";
