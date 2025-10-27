@@ -149,5 +149,6 @@
     vim
     tree
     alejandra
+    just
   ];
 }

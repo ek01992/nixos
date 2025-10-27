@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+description: File deletion rules
+---
+# File Deletion
+
+**Rule**:
+- Never delete files. Instead, always move files to `.trash/`. Consider this deletion.
+- .gitignore should always block `.trash/` from being committed
+- `.trash/`, and its contents, should never be referenced or linked to in any way from any other file.
