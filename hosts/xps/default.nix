@@ -99,7 +99,7 @@
   };
 
   # Firewall configuration
-  # Disabled for development environment - system protected by Tailscale VPN
+  # Firewall enabled - Tailscale VPN provides secure access
   myNetworking.firewall = {
     enable = true;
   };
@@ -140,6 +140,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
     ];
   };
+
+  # Age identity for secrets management
+  age.identityPaths = [ "/var/lib/agenix/key.txt" ];
 
   # System packages
   environment.systemPackages = with pkgs; [

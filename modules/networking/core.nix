@@ -39,8 +39,10 @@ in {
     networking = {
       hostId = cfg.hostId;
       hostName = cfg.hostName;
-      tempAddresses = "disabled";
-      useDHCP = cfg.enableDhcp;
+      # Disabled to prevent IPv6 privacy extensions interfering with static DHCP leases
+      # Incus containers need predictable addresses for bridge networking
+      tempAddresses = lib.mkDefault "disabled";
+      useDHCP = lib.mkDefault cfg.enableDhcp;
     };
   };
 }

@@ -10,6 +10,22 @@ A modular NixOS configuration for a personal laptop homelab/server with Incus co
 4. **Switch**: `sudo just switch`
 5. **Update**: `just update`
 
+## Secrets Management
+
+This configuration uses agenix for encrypted secrets management.
+
+### Setup
+1. **Generate age key**: `sudo mkdir -p /var/lib/agenix && sudo age-keygen -o /var/lib/agenix/key.txt`
+2. **Add to host config**: `age.identityPaths = [ "/var/lib/agenix/key.txt" ];`
+3. **Encrypt secrets**: `agenix -e secrets/tailscale-auth.age`
+4. **Enable in host**: `mySecurity.secrets.enable = true;`
+
+### Available Secrets
+- **Tailscale auth key**: Automatic VPN login
+- **SSH host key**: Consistent host identification
+
+See [secrets/README.md](secrets/README.md) for detailed instructions.
+
 ## Structure
 
 This configuration uses a modular flake architecture:

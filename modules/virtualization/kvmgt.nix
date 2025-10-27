@@ -16,6 +16,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    virtualisation.kvmgt.enable = true;
+    # Intel GVT-g enables GPU passthrough for VMs without dedicated GPU
+    # Creates virtual GPU devices that can be assigned to VMs
+    # Requires Intel integrated graphics (not NVIDIA/AMD)
+    virtualisation.kvmgt.enable = lib.mkDefault true;
   };
 }

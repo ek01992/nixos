@@ -30,8 +30,12 @@ in {
 
   config = mkIf cfg.enable {
     services.zfs = {
-      autoScrub.enable = cfg.enableScrub;
-      trim.enable = cfg.enableTrim;
+      # Weekly scrubbing prevents data corruption and maintains pool health
+      # Runs automatically on Sundays at 2 AM
+      autoScrub.enable = lib.mkDefault cfg.enableScrub;
+      # Trim improves SSD performance by marking unused blocks
+      # Different from scrub - trim is for performance, scrub is for integrity
+      trim.enable = lib.mkDefault cfg.enableTrim;
     };
   };
 }

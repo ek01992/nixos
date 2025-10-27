@@ -15,9 +15,9 @@ in {
   config = mkIf cfg.enable {
     networking.nftables.enable = true;
     networking.firewall = {
-      enable = true;
-      allowedTCPPorts = [22];
-      trustedInterfaces = ["tailscale0" config.myNetworking.bridge.name];
+      enable = lib.mkDefault true;
+      allowedTCPPorts = lib.mkDefault [22];
+      trustedInterfaces = lib.mkDefault ["tailscale0" config.myNetworking.bridge.name];
     };
   };
 }

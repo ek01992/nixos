@@ -44,9 +44,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    time.timeZone = cfg.timezone;
-    i18n.defaultLocale = cfg.defaultLocale;
-    console.keyMap = cfg.keyMap;
+    time.timeZone = lib.mkDefault cfg.timezone;
+    i18n.defaultLocale = lib.mkDefault cfg.defaultLocale;
+    console.keyMap = lib.mkDefault cfg.keyMap;
 
     i18n.extraLocaleSettings = cfg.extraLocaleSettings;
   };

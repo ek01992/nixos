@@ -43,7 +43,7 @@ in {
     boot.loader.systemd-boot.enable = cfg.enableSystemdBoot;
     boot.loader.efi.canTouchEfiVariables = cfg.enableEfiVariables;
 
-    boot.supportedFilesystems = mkIf cfg.enableZfsSupport ["zfs"];
+    boot.supportedFilesystems = lib.mkIf cfg.enableZfsSupport (lib.mkDefault ["zfs"]);
 
     boot.extraModprobeConfig = mkIf cfg.enableKvmOptions ''
       options kvm ignore_msrs=1 report_ignored_msrs=0

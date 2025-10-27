@@ -28,10 +28,15 @@
       };
 
     mkFormatter = system: alejandra.defaultPackage.${system};
+
+    # Import lib helpers for use in modules
+    lib = import ./lib/default.nix { lib = nixpkgs.lib; };
   in {
     formatter.x86_64-linux = mkFormatter "x86_64-linux";
     nixosConfigurations = {
       xps = mkSystem "xps" "x86_64-linux";
     };
+    # Expose lib helpers for external use
+    lib = lib;
   };
 }
