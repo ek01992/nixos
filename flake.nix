@@ -23,14 +23,14 @@
         inherit system;
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/${hostname}/default.nix
+          ./hosts/${hostname}
         ];
       };
 
     mkFormatter = system: alejandra.defaultPackage.${system};
 
     # Import lib helpers for use in modules
-    lib = import ./lib/default.nix {lib = nixpkgs.lib;};
+    lib = import ./lib {lib = nixpkgs.lib;};
   in {
     formatter.x86_64-linux = mkFormatter "x86_64-linux";
     nixosConfigurations = {

@@ -1,5 +1,5 @@
 {
   imports = [
-  ./xps
+    ./xps
   ];
 }
