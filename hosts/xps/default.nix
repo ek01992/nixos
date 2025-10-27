@@ -6,53 +6,39 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
-    ../../modules/system
-    ../../modules/networking
-    ../../modules/services
-    ../../modules/virtualization
-    ../../modules/users
+    ./hardware
+    ../../modules
     inputs.nixos-hardware.nixosModules.dell-xps-13-9315
     inputs.agenix.nixosModules.default
   ];
 
-  # System configuration
   mySystem = {
     enable = true;
+    core = {
+      enable = true;
+      stateVersion = "25.11";
+      enableFirmware = true;
+    };
+    upgrade = {
+      enable = true;
+      dates = "weekly";
+      allowReboot = true;
+    };
+    boot = {
+      enable = true;
+      enableSystemdBoot = true;
+      enableEfiVariables = true;
+      enableZfsSupport = true;
+      enableKvmOptions = true;
+    };
+    locale = {
+      enable = true;
+      timezone = "America/Chicago";
+      defaultLocale = "en_US.UTF-8";
+      keyMap = "us";
+    };
   };
 
-  # Core system settings
-  mySystem.core = {
-    enable = true;
-    stateVersion = "25.11";
-    enableFirmware = true;
-  };
-
-  # System upgrade settings
-  mySystem.upgrade = {
-    enable = true;
-    dates = "weekly";
-    allowReboot = true;
-  };
-
-  # Boot configuration
-  mySystem.boot = {
-    enable = true;
-    enableSystemdBoot = true;
-    enableEfiVariables = true;
-    enableZfsSupport = true;
-    enableKvmOptions = true;
-  };
-
-  # Locale configuration
-  mySystem.locale = {
-    enable = true;
-    timezone = "America/Chicago";
-    defaultLocale = "en_US.UTF-8";
-    keyMap = "us";
-  };
-
-  # Services configuration
   myServices = {
     enable = true;
 
@@ -75,76 +61,59 @@
     };
   };
 
-  # Networking configuration
   myNetworking = {
     enable = true;
+    core = {
+      enable = true;
+      hostId = "ea997198";
+      hostName = "xps";
+      enableDhcp = false;
+    };
+    bridge = {
+      enable = true;
+      name = "externalbr0";
+      interface = "enp0s20f0u6u1i5";
+      macAddress = "02:f6:ad:d9:9e:d1";
+    };
+    firewall = {
+      enable = true;
+    };
+    tailscale = {
+      enable = true;
+    };
   };
 
-  # Core networking settings
-  myNetworking.core = {
-    enable = true;
-    hostId = "ea997198";
-    hostName = "xps";
-    enableDhcp = false;
-  };
-
-  # Bridge configuration
-  # MAC address matches USB Ethernet adapter for consistent interface naming
-  # Allows Incus containers to receive static DHCP leases based on bridge MAC
-  myNetworking.bridge = {
-    enable = true;
-    name = "externalbr0";
-    interface = "enp0s20f0u6u1i5";
-    macAddress = "02:f6:ad:d9:9e:d1";
-  };
-
-  # Firewall configuration
-  # Firewall enabled - Tailscale VPN provides secure access
-  myNetworking.firewall = {
-    enable = true;
-  };
-
-  # Tailscale VPN
-  myNetworking.tailscale = {
-    enable = true;
-  };
-
-  # Virtualization configuration
   myVirtualization = {
     enable = true;
+
+    kvmgt = {
+      enable = true;
+    };
+
+    incus = {
+      enable = true;
+      enableUi = true;
+      storagePool = "tank/incus";
+      internalBridge = "internalbr0";
+      externalBridge = "externalbr0";
+    };
   };
 
-  # KVM-GT configuration
-  myVirtualization.kvmgt.enable = true;
-
-  # Incus configuration
-  myVirtualization.incus = {
-    enable = true;
-    enableUi = true;
-    storagePool = "tank/incus";
-    internalBridge = "internalbr0";
-    externalBridge = "externalbr0";
-  };
-
-  # Users configuration
   myUsers = {
     enable = true;
+
+    erik = {
+      enable = true;
+      description = "Erik Kowald";
+      extraGroups = ["wheel" "incus-admin"];
+      sshKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
+      ];
+    };
   };
 
-  # Erik user configuration
-  myUsers.erik = {
-    enable = true;
-    description = "Erik Kowald";
-    extraGroups = ["wheel" "incus-admin"];
-    sshKeys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
-    ];
-  };
-
-  # Age identity for secrets management
   age.identityPaths = ["/var/lib/agenix/key.txt"];
 
-  # System packages
   environment.systemPackages = with pkgs; [
     git
     wget
