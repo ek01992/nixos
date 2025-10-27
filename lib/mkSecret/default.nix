@@ -1,6 +1,7 @@
 # Create a secret with standard age.secrets structure
 # Usage: lib.mkSecret { name = "mysecret"; file = "../../secrets/mysecret.age"; }
 {lib, ...}: {
+  # Create a secret with a specific file path
   mkSecret = {
     name,
     file,
