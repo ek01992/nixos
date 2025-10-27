@@ -8,7 +8,6 @@
   pkgs,
   ...
 }: let
-  cfg = config.myVirtualization;
   inherit (lib) mkEnableOption;
 in {
   options.myVirtualization = {
