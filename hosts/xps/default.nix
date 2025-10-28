@@ -78,7 +78,7 @@
     allowReboot = true;
 
     # Local path for now
-    flake = "path:/nixos#xps";
+    flake = "path:/etc/nixos#xps";
   };
 
   # NixOS release version
