@@ -1,15 +1,18 @@
 {
-  description = "NixOS Flake";
+  description = "NixOS Infrastructure Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
     nixos-hardware.url = "github:nixos/nixos-hardware";
-    alejandra = {
-      url = "github:kamadorueda/alejandra/4.0.0";
+    
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix = {
-      url = "github:ryantm/agenix";
+    
+    alejandra = {
+      url = "github:kamadorueda/alejandra/4.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -18,29 +21,32 @@
     self,
     nixpkgs,
     nixos-hardware,
+    sops-nix,
     alejandra,
-    agenix,
     ...
-  } @ inputs: let
-    mkSystem = hostname: system:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {inherit inputs;};
+  }: {
+    # Formatter
+    formatter.x86_64-linux = alejandra.defaultPackage.x86_64-linux;
+
+    # NixOS configurations - explicit for single host
+    nixosConfigurations = {
+      xps = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit self;};
         modules = [
-          ./hosts/${hostname}
+          # Core configuration - required on all hosts
+          ./hosts/common/core
+          # Host-specific configuration
+          ./hosts/xps
+          # Hardware support
+          nixos-hardware.nixosModules.dell-xps-13-9315
+          # Secrets management
+          sops-nix.nixosModules.sops
         ];
       };
-
-    mkFormatter = system: alejandra.defaultPackage.${system};
-
-    # Import lib helpers for use in modules
-    lib = import ./lib {lib = nixpkgs.lib;};
-  in {
-    formatter.x86_64-linux = mkFormatter "x86_64-linux";
-    nixosConfigurations = {
-      xps = mkSystem "xps" "x86_64-linux";
     };
-    # Expose lib helpers for external use
-    lib = lib;
+
+    # Expose common modules for external use
+    nixosModules.default = ./hosts/common/core;
   };
 }

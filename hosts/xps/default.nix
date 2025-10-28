@@ -1,127 +1,87 @@
+# XPS-specific configuration
+# Common settings are in hosts/common/core/
+# Only host-specific values and imports belong here
+# Verification: nixos-rebuild dry-build --flake '.#xps'
+
 {
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: {
+
   imports = [
-    ./hardware
-    ../../modules
-    inputs.nixos-hardware.nixosModules.dell-xps-13-9315
-    inputs.agenix.nixosModules.default
+    # Hardware configuration
+    ./hardware-configuration.nix
+    # Optional features for this host
+    ../common/optional/virtualization.nix
+    ../common/optional/zfs.nix
+    ../common/optional/tailscale.nix
   ];
 
-  mySystem = {
-    enable = true;
-    core = {
-      enable = true;
-      stateVersion = "25.11";
-      enableFirmware = true;
-    };
-    upgrade = {
-      enable = true;
-      dates = "weekly";
-      allowReboot = true;
-    };
-    boot = {
-      enable = true;
-      enableSystemdBoot = true;
-      enableEfiVariables = true;
-      enableZfsSupport = true;
-      enableKvmOptions = true;
-    };
-    locale = {
-      enable = true;
-      timezone = "America/Chicago";
-      defaultLocale = "en_US.UTF-8";
-      keyMap = "us";
+  # Host identification
+  networking = {
+    hostName = "xps";
+    hostId = "ea997198";
+  };
+
+  # Override timezone from core default (UTC)
+  time.timeZone = lib.mkForce "America/Chicago";
+
+  # Locale settings
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "en_US.UTF-8";
     };
   };
 
-  myServices = {
-    enable = true;
+  console.keyMap = "us";
 
-    firmware = {
-      enable = true;
-    };
+  # Firmware updates for Dell XPS
+  services.fwupd.enable = true;
+  hardware.enableRedistributableFirmware = true;
 
-    zfs = {
-      enable = true;
-      enableScrub = true;
-      enableTrim = true;
-    };
+  # External bridge for Incus LAN-bridged containers
+  # MAC address matches USB Ethernet adapter for consistent DHCP reservations
+  networking.bridges.externalbr0 = {
+    interfaces = ["enp0s20f0u6u1i5"];
+  };
 
-    ssh = {
-      enable = true;
-      port = 22;
-      passwordAuthentication = false;
-      kbdInteractiveAuthentication = false;
-      permitRootLogin = "no";
+  networking.interfaces.externalbr0 = {
+    useDHCP = true;
+    macAddress = "02:f6:ad:d9:9e:d1";
+  };
+
+  # Trust external bridge in firewall
+  networking.firewall.trustedInterfaces = lib.mkAfter ["externalbr0"];
+
+  # sops-nix secrets configuration
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    secrets = {
+      tailscale-auth = {
+        owner = "root";
+        mode = "0400";
+      };
     };
   };
 
-  myNetworking = {
-    enable = true;
-    core = {
-      enable = true;
-      hostId = "ea997198";
-      hostName = "xps";
-      enableDhcp = false;
-    };
-    bridge = {
-      enable = true;
-      name = "externalbr0";
-      interface = "enp0s20f0u6u1i5";
-      macAddress = "02:f6:ad:d9:9e:d1";
-    };
-    firewall = {
-      enable = true;
-    };
-    tailscale = {
-      enable = true;
-    };
-  };
-
-  myVirtualization = {
-    enable = true;
-
-    kvmgt = {
-      enable = true;
-    };
-
-    incus = {
-      enable = true;
-      enableUi = true;
-      storagePool = "tank/incus";
-      internalBridge = "internalbr0";
-      externalBridge = "externalbr0";
-    };
-  };
-
-  myUsers = {
-    enable = true;
-
-    erik = {
-      enable = true;
-      description = "Erik Kowald";
-      extraGroups = ["wheel" "incus-admin"];
-      sshKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtT76ryXgblv68mqVfrcRVp4tRvhl81vwFKDLEF0MP desktop@erik-dev.io"
-      ];
-    };
-  };
-
-  age.identityPaths = ["/var/lib/agenix/key.txt"];
-
+  # Host-specific packages
   environment.systemPackages = with pkgs; [
-    git
-    wget
-    curl
-    htop
-    vim
-    tree
-    alejandra
     just
   ];
+
+  # Automatic system upgrades
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+    allowReboot = true;
+    flake = "path:/etc/nixos#xps";  # Local path for now
+  };
+
+  # NixOS release version
+  system.stateVersion = "25.11";
+
 }

@@ -1,0 +1,10 @@
+keys:
+  - &admin age1gk5tx06qq4gklfulvytj4cj747lcwy3cetv3jv2g8rg9rg6xvauq6lgtwh
+  - &xps age1g5krkw0ujcn92p3fvyek809mu4axq5uatw7gvl780d35724uj9vq5xcfxr
+
+creation_rules:
+  - path_regex: hosts/.*/secrets\.yaml$
+    key_groups:
+      - age:
+          - *admin
+          - *xps
