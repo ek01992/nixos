@@ -60,16 +60,17 @@
 
   # External bridge firewall trust is handled by virtualization module
 
-  sops = {
-    defaultSopsFile = ./secrets.yaml;
-    age.keyFile = "/etc/ssh/ssh_host_ed25519_key";
-    secrets = {
-      tailscale-auth = {
-        owner = "root";
-        mode = "0400";
-      };
-    };
-  };
+  # Temporarily disabled sops secrets until real Tailscale auth key is provided
+  # sops = {
+  #   defaultSopsFile = ./secrets.yaml;
+  #   age.keyFile = "/etc/ssh/ssh_host_ed25519_key";
+  #   secrets = {
+  #     tailscale-auth = {
+  #       owner = "root";
+  #       mode = "0400";
+  #     };
+  #   };
+  # };
 
   # Host-specific packages
   environment.systemPackages = with pkgs; [
