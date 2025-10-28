@@ -1,14 +1,12 @@
 # Nix daemon and flakes configuration
 # Applied to all hosts to ensure consistent build behavior
 # Verification: cat /etc/nix/nix.conf
-
 {
   config,
   lib,
   pkgs,
   ...
 }: {
-
   nix = {
     settings = {
       # Enable flakes and new nix command
@@ -35,5 +33,4 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = lib.mkDefault true;
-
 }

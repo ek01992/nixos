@@ -1,13 +1,11 @@
 # Core configuration required on ALL hosts
 # This module must work unchanged on every host in your infrastructure
-
 {
   config,
   lib,
   pkgs,
   ...
 }: {
-
   imports = [
     ./nix-settings.nix
     ./networking.nix
@@ -43,5 +41,4 @@
 
   # NixOS release compatibility
   system.stateVersion = lib.mkDefault "25.11";
-
 }

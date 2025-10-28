@@ -2,14 +2,12 @@
 # Common settings are in hosts/common/core/
 # Only host-specific values and imports belong here
 # Verification: nixos-rebuild dry-build --flake '.#xps'
-
 {
   config,
   lib,
   pkgs,
   ...
 }: {
-
   imports = [
     # Hardware configuration
     ./hardware-configuration.nix
@@ -78,10 +76,9 @@
     enable = true;
     dates = "weekly";
     allowReboot = true;
-    flake = "path:/etc/nixos#xps";  # Local path for now
+    flake = "path:/etc/nixos#xps"; # Local path for now
   };
 
   # NixOS release version
   system.stateVersion = "25.11";
-
 }

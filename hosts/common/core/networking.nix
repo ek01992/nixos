@@ -1,14 +1,12 @@
 # Basic networking configuration for all hosts
 # Host-specific networking (bridges, static IPs) goes in hosts/<hostname>/
 # Verification: networkctl status, ip addr show
-
 {
   config,
   lib,
   pkgs,
   ...
 }: {
-
   networking = {
     # Disable IPv6 privacy extensions for predictable addresses
     # Important for static DHCP reservations and container networking
@@ -31,5 +29,4 @@
 
   # Enable nftables for Incus compatibility
   networking.nftables.enable = lib.mkDefault true;
-
 }

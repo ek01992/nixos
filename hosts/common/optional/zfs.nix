@@ -1,14 +1,12 @@
 # ZFS filesystem services
 # Enable in host config with: imports = [ ../common/optional/zfs.nix ];
 # Verification: zpool status, systemctl status zfs-scrub@*
-
 {
   config,
   lib,
   pkgs,
   ...
 }: {
-
   # ZFS support in boot
   boot.supportedFilesystems = ["zfs"];
 
@@ -30,5 +28,4 @@
       interval = "weekly";
     };
   };
-
 }

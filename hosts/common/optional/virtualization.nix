@@ -1,14 +1,12 @@
 # Virtualization stack (Incus + KVM-GT)
 # Enable in host config with: imports = [ ../common/optional/virtualization.nix ];
 # Verification: incus list, systemctl status incus
-
 {
   config,
   lib,
   pkgs,
   ...
 }: {
-
   # Intel GVT-g GPU virtualization
   virtualisation.kvmgt.enable = true;
 
@@ -85,5 +83,4 @@
   networking.firewall.trustedInterfaces = lib.mkAfter (
     lib.optional (config.networking.bridges ? externalbr0) "externalbr0"
   );
-
 }
