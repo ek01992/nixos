@@ -4,6 +4,9 @@
 #               incus storage list
 #               incus network list
 #               systemctl status incus
+#               nft list ruleset | grep -E "internalbr|externalbr"
+# Options: myVirtualization.incus.trustedUsers, internalNetwork.ipv4Address, externalNetwork.ipv4Address
+# Features: Automatic firewall trust for bridges, user group management
 {
   config,
   lib,
@@ -34,9 +37,51 @@ in {
       description = "Name of external bridge for bridged containers";
       example = "lanbr0";
     };
+
+    trustedUsers = mkOption {
+      type = types.listOf types.str;
+      default = ["erik"];
+      description = "Users to add to incus-admin group";
+      example = ["admin" "user1"];
+    };
+
+    internalNetwork = {
+      ipv4Address = mkOption {
+        type = types.str;
+        default = "auto";
+        example = "10.100.100.1/24";
+        description = ''
+          IPv4 address for internal bridge.
+          "auto" = Let Incus choose (recommended)
+        '';
+      };
+    };
+
+    externalNetwork = {
+      ipv4Address = mkOption {
+        type = types.str;
+        default = "auto";
+        example = "192.168.1.100/24";
+        description = ''
+          IPv4 address for external bridge.
+          "auto" = Let Incus choose (recommended)
+        '';
+      };
+    };
   };
 
   config = mkIf cfg.enable {
+    # Automatically trust bridge interfaces in firewall
+    # This removes the need for manual firewall rules in host config
+    networking.firewall.trustedInterfaces = lib.mkAfter (
+      [ cfg.internalBridge ]
+      ++ lib.optional (config.networking.bridges ? ${cfg.externalBridge}) 
+                      cfg.externalBridge
+    );
+
+    # Add users to incus-admin group
+    users.groups.incus-admin.members = cfg.trustedUsers;
+
     virtualisation.incus = lib.mkDefault {
       preseed = {
         networks = [
@@ -45,7 +90,7 @@ in {
             type = "bridge";
             description = "Internal/NATted bridge";
             config = {
-              "ipv4.address" = "auto";
+              "ipv4.address" = cfg.internalNetwork.ipv4Address;
               "ipv4.nat" = "true";
               "ipv6.address" = "auto";
               "ipv6.nat" = "true";

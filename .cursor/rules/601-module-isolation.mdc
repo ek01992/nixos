@@ -1,0 +1,126 @@
+---
+globs: ["hosts/common/**/*.nix", "modules/**/*.nix"]
+description: Module isolation and optional module architecture
+---
+
+# Module Isolation Architecture
+
+**"Optional Means Optional" - Core modules must never depend on optional module state.**
+
+## Core Principle
+
+**Module Isolation Levels:**
+- **Core**: No references to optional modules
+- **Optional**: Self-contained, manage own concerns
+- **Host**: Physical hardware + which modules to enable
+
+## Correct Architecture
+
+### Core Modules (`hosts/common/core/`)
+```nix
+# ✅ CORRECT: Core handles only fundamentals
+networking.firewall.allowedTCPPorts = [22];  # SSH only
+# No references to optional modules
+```
+
+### Optional Modules (`hosts/common/optional/`)
+```nix
+# ✅ CORRECT: Module adds its own firewall rules
+networking.firewall.trustedInterfaces = ["tailscale0"];
+# Self-contained, only affects system when imported
+```
+
+### Host Config (`hosts/<hostname>/`)
+```nix
+# ✅ CORRECT: Only physical hardware + imports
+imports = [
+  ../common/optional/tailscale.nix
+  ../common/optional/virtualization.nix
+];
+# No manual firewall rules - modules handle this
+```
+
+## Critical Anti-Pattern
+
+❌ **Core Coupling to Optional**
+```nix
+# WRONG: Core checking optional module state
+trustedInterfaces = lib.optionals (config.services.tailscale.enable or false) [
+  "tailscale0"
+];
+```
+
+**Why This Breaks:**
+- Core depends on optional module state
+- Creates coupling between layers
+- Violates "optional means optional"
+
+## Correct Pattern
+
+✅ **Module Self-Management**
+```nix
+# Core: Just basics
+networking.firewall.allowedTCPPorts = [22];
+
+# Tailscale module: Adds own trust when imported
+networking.firewall.trustedInterfaces = ["tailscale0"];
+
+# Virtualization module: Adds own trust when imported
+networking.firewall.trustedInterfaces = ["internalbr0" "externalbr0"];
+```
+
+**Result**: Only enabled modules affect firewall
+
+## Module Responsibilities
+
+### Core Modules Must:
+- ✅ Work on every host unchanged
+- ✅ Handle only fundamental requirements
+- ✅ Never reference optional module state
+- ✅ Provide stable foundation
+
+### Optional Modules Must:
+- ✅ Be completely self-contained
+- ✅ Add their own firewall rules
+- ✅ Configure their own services
+- ✅ Only impact system when imported
+- ✅ Handle their own dependencies
+
+### Host Configs Must:
+- ✅ Specify physical hardware details
+- ✅ Choose which optional modules to enable
+- ✅ Override defaults when needed
+- ✅ Never manage module internals
+
+## Enforcement Checklist
+
+Before accepting modules:
+1. **Core modules**: No `config.services.*` references to optional services
+2. **Optional modules**: All configuration self-contained
+3. **Host configs**: No manual firewall rules for optional modules
+4. **Import chains**: Direct imports, no deep nesting
+
+## Example Flow
+
+```nix
+# hosts/prod-1/default.nix
+imports = [
+  ../common/core/networking.nix    # SSH + fundamentals
+  ../common/optional/tailscale.nix  # Adds tailscale0 trust
+  ../common/optional/virtualization.nix  # Adds bridge trust
+];
+
+# Result: Only enabled modules affect firewall
+# Core: [22] (SSH)
+# + Tailscale: ["tailscale0"] 
+# + Virtualization: ["internalbr0", "externalbr0"]
+```
+
+## Benefits
+
+- **Predictable**: Core always works the same
+- **Composable**: Mix and match optional modules
+- **Maintainable**: Clear separation of concerns
+- **Testable**: Each module can be tested independently
+
+See report lines 157-195 for complete isolation analysis.

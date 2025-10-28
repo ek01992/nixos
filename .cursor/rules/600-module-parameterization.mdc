@@ -1,0 +1,114 @@
+---
+globs: ["modules/**/*.nix", "hosts/common/**/*.nix"]
+description: Module parameterization standards and patterns
+---
+
+# Module Parameterization Standards
+
+**Every configuration value should be configurable with good defaults, unless explicitly proven unnecessary.**
+
+## Core Principle
+
+Modules must follow the "everything configurable" pattern:
+- Every setting gets an option (unless proven unnecessary)
+- Good defaults for 80% of cases
+- Clear descriptions for the other 20%
+- Examples showing when to customize
+
+## Standard Option Pattern
+
+```nix
+options.myFeature = {
+  enable = mkEnableOption "feature description" // { default = true; };
+  
+  setting = mkOption {
+    type = types.str;
+    default = "sensible-default";
+    description = ''
+      Clear explanation of what this does.
+      When to change: specific use cases.
+      Impact: what breaks if wrong.
+    '';
+    example = "alternative-value";
+  };
+  
+  advanced = mkOption {
+    type = types.bool;
+    default = false;
+    description = "Enable advanced mode (requires expertise)";
+  };
+};
+```
+
+## Required Components
+
+**Every option must have:**
+- ✅ `type` - NixOS type system validation
+- ✅ `default` - Works for 80% of cases
+- ✅ `description` - Clear explanation + when to change
+- ✅ `example` - Shows alternative values
+
+**Enable options should:**
+- ✅ Have `default = true` for commonly used features
+- ✅ Use `mkEnableOption` with descriptive text
+- ✅ Allow disabling without breaking core functionality
+
+## Gold Standard Reference
+
+**SSH Module** (`modules/services/ssh/default.nix`):
+- Perfect parameterization ✓
+- Clear descriptions ✓
+- Good defaults ✓
+- No changes needed ✓
+
+**Networking Modules** (`hosts/common/core/networking.nix`, `hosts/common/optional/tailscale.nix`):
+- Follows pattern ✓
+- Self-contained ✓
+- Proper isolation ✓
+
+## Anti-Patterns
+
+❌ **Hardcoded Values**
+```nix
+# BAD: No option, hardcoded
+config.services.myapp.port = 8080;
+```
+
+❌ **Missing Descriptions**
+```nix
+# BAD: No guidance
+port = mkOption { type = types.int; default = 8080; };
+```
+
+❌ **Poor Defaults**
+```nix
+# BAD: Breaks for most users
+port = mkOption { type = types.int; default = 0; };
+```
+
+## Enforcement
+
+Before accepting modules:
+1. Every config value has corresponding option
+2. All options have descriptions explaining when to change
+3. Defaults work for typical use cases
+4. Examples show customization patterns
+
+## Module Categories
+
+**Core Modules** (`hosts/common/core/`):
+- Must work on every host unchanged
+- Only fundamental requirements
+- Conservative defaults
+
+**Optional Modules** (`hosts/common/optional/`):
+- Self-contained functionality
+- Can be disabled without impact
+- Feature-rich defaults
+
+**Service Modules** (`modules/services/`):
+- Follow SSH module pattern
+- Comprehensive options
+- Clear upgrade paths
+
+See report lines 287-385 for complete parameterization analysis.
