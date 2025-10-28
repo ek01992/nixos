@@ -11,6 +11,7 @@
   imports = [
     # Hardware configuration
     ./hardware-configuration.nix
+
     # Optional features for this host
     ../common/optional/virtualization.nix
     ../common/optional/zfs.nix
@@ -48,13 +49,12 @@
 
   networking.interfaces.externalbr0 = {
     useDHCP = true;
-    macAddress = "02:f6:ad:d9:9e:d1";
+    macAddress = "0c:37:96:84:09:c9";
   };
 
   # Trust external bridge in firewall
   networking.firewall.trustedInterfaces = lib.mkAfter ["externalbr0"];
 
-  # sops-nix secrets configuration
   sops = {
     defaultSopsFile = ./secrets.yaml;
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
@@ -76,7 +76,9 @@
     enable = true;
     dates = "weekly";
     allowReboot = true;
-    flake = "path:/etc/nixos#xps"; # Local path for now
+
+    # Local path for now
+    flake = "path:/nixos#xps";
   };
 
   # NixOS release version
