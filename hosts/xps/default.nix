@@ -52,12 +52,11 @@
     macAddress = "0c:37:96:84:09:c9";
   };
 
-  # Trust external bridge in firewall
-  networking.firewall.trustedInterfaces = lib.mkAfter ["externalbr0"];
+  # External bridge firewall trust is handled by virtualization module
 
   sops = {
     defaultSopsFile = ./secrets.yaml;
-    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    age.keyFile = "/etc/ssh/ssh_host_ed25519_key";
     secrets = {
       tailscale-auth = {
         owner = "root";
