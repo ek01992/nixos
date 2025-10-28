@@ -18,6 +18,12 @@
     ../common/optional/tailscale.nix
   ];
 
+  # Tailscale configuration - disable auth key until real key is provided
+  myNetworking.tailscale.useAuthKeyFile = false;
+
+  # Disable network wait online for WSL environments
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
+
   # Host identification
   networking = {
     hostName = "xps";
