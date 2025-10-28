@@ -26,4 +26,4 @@ Thumbs.db
 
 # Encrypted secrets
 secrets/*.age
-.migration.bak
+.migration
