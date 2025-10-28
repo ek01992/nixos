@@ -1,0 +1,36 @@
+---
+globs: ["hosts/**", "modules/**", "secrets/**", "lib/**"]
+description: Enforce 3-tier directory structure
+---
+
+# Directory Structure Standards
+
+Maintain strict 3-tier organization for multi-host scalability.
+
+## Required Structure
+```
+├── flake.nix                    # Single entry point
+├── hosts/
+│   ├── common/
+│   │   ├── core/               # Required on ALL hosts
+│   │   └── optional/           # Opt-in features
+│   └── <hostname>/
+│       ├── default.nix         # Host-specific only
+│       └── hardware-configuration.nix
+├── modules/                     # Custom modules
+├── secrets/                     # sops-nix encrypted
+└── lib/                        # Helpers (3+ uses only)
+```
+
+## Enforcement Checks
+- `hosts/common/core/` must work on every host unchanged
+- No `hosts/<hostname>/` files import from other host dirs
+- `modules/` contains zero host-specific values
+- `lib/` functions used ≥3 times or don't exist
+
+## Violations
+❌ `modules/docker.nix` contains IP address → Move to `hosts/<hostname>/`
+❌ `hosts/prod-1/` imports `hosts/prod-2/` → Extract to `common/optional/`
+❌ Nested >2 levels: `modules/services/web/nginx/` → Flatten to `modules/nginx.nix`
+
+See report lines 15-88 for rationale.

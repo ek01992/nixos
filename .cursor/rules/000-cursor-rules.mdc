@@ -1,0 +1,45 @@
+---
+globs: [".cursor/rules/*.mdc"]
+alwaysApply: false
+description: Guidelines for creating new cursor rules
+---
+
+# Creating Cursor Rules
+
+## When to Create
+- Pattern repeats >3 times
+- Prevents documented anti-pattern
+- Enforces measurable standard
+
+## Structure
+```markdown
+---
+description: Brief purpose
+globs: ["relevant/paths/**"]
+---
+# Rule Name
+
+Core instruction in 1-3 sentences.
+
+**Enforcement**: Specific check/pattern
+```
+
+## Placement
+- 000-099: Meta rules
+- 100-199: Git/version control
+- 200-299: Structure/standards
+- 300-399: Configuration patterns
+- 400-499: Security/secrets
+- 500+: Workflows
+
+## Token Budget
+- Target: 250-350 tokens
+- Maximum: 500 tokens
+- Total limit: 4000 tokens across all rules
+- If >500 tokens needed → documentation, not rule
+
+## Keep Minimal
+- <150 words
+- One enforceable concept
+- Examples only if non-obvious
+- Reference line numbers in docs when applicable

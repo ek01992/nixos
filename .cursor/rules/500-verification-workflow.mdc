@@ -1,0 +1,49 @@
+---
+globs: ["flake.nix", "hosts/**/*.nix"]
+description: Mandatory pre-deployment verification steps
+---
+
+# Verification Workflow
+
+**Required checks before every deployment. No exceptions.**
+
+## Pre-Deployment Checklist
+```bash
+# 1. Syntax check
+nix flake check --no-build
+
+# 2. Build verification
+nix build '.#nixosConfigurations.prod-1.config.system.build.toplevel'
+
+# 3. Review changes
+nixos-rebuild dry-activate --flake '.#prod-1'
+
+# 4. Test activation (non-persistent)
+nixos-rebuild test --flake '.#prod-1' --target-host prod-1.example.com
+
+# 5. Deploy
+nixos-rebuild switch --flake '.#prod-1' --target-host prod-1.example.com
+```
+
+## Test Command Behavior
+- `test`: Activates immediately, reverts on reboot
+- `switch`: Activates and persists to boot menu
+- `dry-build`: Shows what would build
+- `dry-activate`: Shows what would change
+
+## For Critical Changes
+Add NixOS tests in flake:
+```nix
+checks.x86_64-linux.my-service = pkgs.nixosTest {
+  name = "service-validation";
+  nodes.machine = { imports = [ ./hosts/common/core ]; };
+  testScript = ''
+    machine.wait_for_unit("sshd.service")
+    machine.succeed("systemctl status myapp")
+  '';
+};
+```
+
+Run: `nix flake check -L`
+
+See report lines 797-853 for complete workflow.

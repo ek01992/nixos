@@ -1,0 +1,37 @@
+---
+globs: ["modules/**/*.nix", "hosts/**/*.nix"]
+description: Enforce maximum 2-level import depth
+---
+
+# Module Depth Limit
+
+**Maximum import depth: 2 levels from host configuration.**
+
+## The Rule
+From `hosts/<hostname>/default.nix`:
+- ✅ Level 1: `imports = [ ../../modules/docker.nix ];`
+- ✅ Level 2: `docker.nix` imports `./containers.nix`
+- ❌ Level 3: `containers.nix` imports another module → FLATTEN
+
+## Why 2 Levels
+Depth >2 creates "archaeological debugging" where tracing configuration requires exploring nested files. Maintainability collapses.
+
+## Enforcement
+Count import hops from host default.nix to final module:
+```nix
+# hosts/prod-1/default.nix
+imports = [ ../../modules/web.nix ];      # Hop 1
+
+# modules/web.nix
+imports = [ ./nginx.nix ./php.nix ];     # Hop 2 - OK
+
+# modules/nginx.nix
+imports = [ ./upstream.nix ];            # Hop 3 - VIOLATION
+```
+
+## Fix Pattern
+Merge nested modules or import directly from host config.
+
+**Exception**: NixOS built-in modules don't count (hardware profiles, etc).
+
+See report lines 237-285, specifically "nested modules >3 levels" anti-pattern.

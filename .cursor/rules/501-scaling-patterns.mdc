@@ -1,0 +1,54 @@
+---
+globs: ["flake.nix"]
+description: When and how to scale architecture
+---
+
+# Scaling Patterns: Trigger Points
+
+**Scale architecture at documented pain points. Not before.**
+
+## Explicit Scaling Thresholds
+
+**1-3 Hosts: Explicit Configuration**
+```nix
+nixosConfigurations = {
+  prod-1 = nixpkgs.lib.nixosSystem { ... };
+  prod-2 = nixpkgs.lib.nixosSystem { ... };
+};
+```
+No abstraction. Copy/paste is fine.
+
+**3-5 Hosts: Generator Function**
+```nix
+let mkHost = hostname: modules: nixpkgs.lib.nixosSystem {
+  specialArgs = { inherit self hostname; };
+  modules = [ ./hosts/common/core ./hosts/${hostname} ] ++ modules;
+};
+in {
+  nixosConfigurations = {
+    prod-1 = mkHost "prod-1" [];
+    prod-2 = mkHost "prod-2" [];
+  };
+}
+```
+
+**5-10 Hosts: Metadata-Driven**
+```nix
+let hosts = {
+  prod-1 = { region = "us-east"; modules = ["server"]; };
+  prod-2 = { region = "us-west"; modules = ["server"]; };
+};
+in {
+  nixosConfigurations = builtins.mapAttrs mkHost hosts;
+}
+```
+
+**10+ Hosts: Deployment Tools**
+Consider Colmena/deploy-rs for parallel deployment.
+
+## Enforcement
+Current host count determines allowed patterns:
+- <3 hosts with generator → violation (premature)
+- >5 hosts without generator → violation (repetitive)
+
+See report lines 157-235 for detailed patterns.

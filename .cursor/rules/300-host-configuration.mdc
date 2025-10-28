@@ -1,0 +1,47 @@
+---
+globs: ["hosts/*/default.nix", "hosts/*/hardware-configuration.nix"]
+description: Enforce host-specific value isolation
+---
+
+# Host Configuration Isolation
+
+**Host-specific values never escape `hosts/<hostname>/` directory.**
+
+## Host-Specific Values
+Must stay in `hosts/<hostname>/default.nix`:
+- Hostnames, IPs, MAC addresses
+- Disk layouts, partition schemes
+- Hardware-specific kernel modules
+- Service-specific ports/credentials (via sops secrets)
+- Resource limits (CPU, RAM allocations)
+
+## Enforcement Pattern
+```nix
+# ✅ CORRECT: hosts/prod-1/default.nix
+networking.hostName = "prod-1";
+networking.interfaces.eth0.ipv4.addresses = [{
+  address = "10.0.1.10";
+  prefixLength = 24;
+}];
+
+# ❌ WRONG: modules/networking.nix
+networking.interfaces.eth0.ipv4.addresses = [{
+  address = "10.0.1.10";  # Host-specific value in shared module
+}];
+```
+
+## Parameter Pattern
+Shared modules accept parameters:
+```nix
+# modules/app.nix
+{ hostname, ... }: {
+  services.myapp.serverName = hostname;  # Passed from host
+}
+```
+
+Host configs provide specialArgs:
+```nix
+specialArgs = { hostname = "prod-1"; };
+```
+
+See report line 847: "Host-specific values never leave host directories."

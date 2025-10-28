@@ -1,0 +1,39 @@
+---
+globs: ["**/*.nix"]
+description: Block documented anti-patterns
+---
+
+# Anti-Patterns: Immediate Rejection
+
+Flag and block these patterns on sight. No exceptions without explicit justification.
+
+## Critical Anti-Patterns
+
+**Magic Derivations**
+❌ Complex functions without inline comments
+✅ Every non-obvious function needs `# Why:` comment
+
+**Config Mixing**
+❌ `modules/shared.nix` contains host-specific IPs/paths
+✅ Host values exclusively in `hosts/<hostname>/`
+
+**Premature Lib Functions**
+❌ `lib/mkDockerConfig.nix` used once
+✅ Write inline until 3rd use, then extract
+
+**specialArgs Abuse**
+❌ `specialArgs = { inherit inputs self lib utils helpers config; }`
+✅ `specialArgs = { inherit self hostname; }` (minimal globals only)
+
+**Deep Nesting**
+❌ Import chains >2 levels deep
+✅ Direct imports from host config
+
+## Enforcement Pattern
+Before accepting code:
+1. Search for host-specific values in `modules/`
+2. Count lib function call sites (must be ≥3)
+3. Check import depth from `hosts/<hostname>/default.nix`
+4. Verify comments on complex derivations
+
+See report lines 237-285 for detailed rationale.

@@ -1,0 +1,44 @@
+---
+globs: ["lib/**/*.nix", "flake.nix"]
+description: Enforce 3-use rule before abstraction
+---
+
+# Abstraction Timing: The 3-Use Rule
+
+**Extract helpers only after 3rd use. Not before.**
+
+## The Pattern
+1. **First time**: Write code inline
+2. **Second time**: Copy/paste with modification
+3. **Third time**: Extract to function/lib
+
+## Rationale
+Premature abstraction creates:
+- Unused helpers cluttering codebase
+- Wrong abstractions that don't fit new use cases
+- Indirection without benefit
+
+Wait until the pattern stabilizes across 3 real uses.
+
+## Enforcement
+Before accepting lib functions:
+```bash
+# Count actual call sites
+rg "mkDockerConfig" --type nix | wc -l
+# Must be ≥3 or function shouldn't exist
+```
+
+## Scaling Triggers
+- **1-3 hosts**: No mkHost helper → explicit configs
+- **3-5 hosts**: mkHost function appears
+- **5-10 hosts**: Metadata-driven config
+- **10+ hosts**: Consider deployment tools
+
+## Example Violation
+```nix
+# lib/default.nix
+mkPostgresConfig = host: { ... };  # Used once in prod-1
+```
+**Fix**: Delete lib function, inline the config.
+
+See report lines 837-845 for principle explanation.

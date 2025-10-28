@@ -1,0 +1,34 @@
+---
+globs: ["flake.lock", ".gitignore"]
+description: flake.lock version control standards
+---
+
+# Git: Flake Lock Management
+
+**Always commit `flake.lock`** to version control. Never add to `.gitignore`.
+
+## Rationale
+Single lock = consistent versions across all hosts. Prevents:
+- Version drift between machines
+- Cache misses from different dependency versions
+- "Works on my machine" issues
+
+## Enforcement
+- `flake.lock` must exist in repo root
+- Must not appear in `.gitignore`
+- Changes require commit message explaining update reason
+
+## Update Workflow
+```bash
+# Targeted update
+nix flake update nixpkgs
+git add flake.lock
+git commit -m "Update nixpkgs: security patches"
+
+# Test before pushing
+nix flake check
+```
+
+**Exception**: Multi-environment setups use git branches (staging/production), not separate flakes.
+
+See report lines 718-735 for trade-off analysis.

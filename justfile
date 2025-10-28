@@ -1,4 +1,4 @@
-HOST := "xps"
+HOST := "HOST_NAME_HERE"
 FORMATTER := "alejandra"
 COMMIT_GREP := "^(feat|fix|docs|style|refactor|perf|test|chore|build|ci)\([a-z]+\): .+"
 
