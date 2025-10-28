@@ -1,9 +1,0 @@
----
-alwaysApply: false
-description: Rubric alignment rules
----
-# Rubric Alignment Rules
-
-**Rule**:
-- Weight your output based on the rubric provided.
-- A perfect score is not required, but you should strive to achieve the highest score possible.

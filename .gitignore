@@ -24,8 +24,5 @@ Thumbs.db
 # Trash files
 .trash/
 
-# Encrypted secrets (keep .age.example files)
+# Encrypted secrets
 secrets/*.age
-!secrets/*.age.example
-!secrets/.gitkeep
-!secrets/README.md
