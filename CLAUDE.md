@@ -13,6 +13,7 @@ nixos-rebuild switch --flake .#nixos-wsl
 
 # Build without switching (dry-run deploy)
 nix build .#nixosConfigurations.nixxy.config.system.build.toplevel
+nix build .#nixosConfigurations.nixos-wsl.config.system.build.toplevel
 
 # Validate the flake
 nix flake check
@@ -43,14 +44,23 @@ Each host is composed of three layers:
 2. **System** (`modules/hosts/{host}/configuration.nix`) — users, services, system packages, networking
 3. **Features** (`modules/features/`) — composable, reusable modules imported by hosts
 
-The host `default.nix` ties these layers together and imports relevant features.
+The host `default.nix` creates the `nixosConfigurations` entry point. `configuration.nix` imports hardware and features.
 
 ### Feature Modules
 
 - `modules/features/niri.nix` — Niri Wayland compositor config (keybinds, gaps, xwayland)
 - `modules/features/noctalia.nix` — Noctalia desktop shell; loads settings from `noctalia.json`
 
-Both features use the **wrapper-modules** pattern (`BirdeeHub/nix-wrapper-modules`) to inject JSON configuration into the wrapped program.
+Both features use the **wrapper-modules** pattern (`BirdeeHub/nix-wrapper-modules`) to inject configuration into the wrapped program at build time:
+
+```nix
+inputs.wrapper-modules.wrappers.niri.wrap {
+  inherit pkgs;
+  settings = { ... };  # Nix attrs baked into the binary at build time
+}
+```
+
+Noctalia's settings are read from `modules/features/noctalia.json` (`.settings` key) by `noctalia.nix`.
 
 ### Key Flake Inputs
 
@@ -68,8 +78,15 @@ Both features use the **wrapper-modules** pattern (`BirdeeHub/nix-wrapper-module
 2. Export `flake.nixosConfigurations.{hostname}` from `default.nix`
 3. import-tree picks it up automatically — no edits to `flake.nix` needed
 
+### flake-parts Scoping
+
+Two scopes appear throughout module files:
+
+- `{ self, inputs, ... }` — root scope; access to all flake outputs and inputs
+- `perSystem = { pkgs, lib, self', ... }` — per-architecture scope; use `self'` (not `self`) to reference packages built within the same system
+
 ### Adding a New Feature Module
 
 1. Create `modules/features/{name}.nix`
 2. Export as `flake.nixosModules.{name}` if it needs to be referenced by hosts
-3. Import it in the relevant host's `default.nix`
+3. Import it in the relevant host's `configuration.nix`
