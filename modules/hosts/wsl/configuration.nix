@@ -4,6 +4,8 @@
 
     imports = [
       self.nixosModules.nixos-wslHardware
+      <nixos-wsl/modules>
+
     ];
 
     wsl = {
