@@ -32,11 +32,6 @@
         fsType = "ext4";
       };
 
-    fileSystems."/mnt/d" =
-      { device = "D:\134";
-        fsType = "9p";
-      };
-
     swapDevices =
         [ { device = "/dev/disk/by-uuid/fd82a5ac-a68d-4ecb-b50d-ddcc66a96bde"; }
         ];
