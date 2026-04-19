@@ -3,7 +3,6 @@
   flake.nixosConfigurations.nixos-wsl = inputs.nixpkgs.lib.nixosSystem {
     modules =[
       self.nixosModules.nixos-wslConfiguration
-      nixos-wsl.nixosModules.default
     ];
   };
 }

@@ -3,7 +3,7 @@
   flake.nixosModules.nixos-wslConfiguration = { config, pkgs, lib, ... }: {
 
     imports = [
-      # List imports
+      self.nixosModules.nixos-wslHardware
     ];
 
     wsl = {
