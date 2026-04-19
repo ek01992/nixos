@@ -32,27 +32,6 @@
         fsType = "ext4";
       };
 
-    fileSystems."/mnt/wslg" =
-      { device = "none";
-        fsType = "tmpfs";
-      };
-
-    fileSystems."/usr/lib/wsl/lib" =
-      { device = "none";
-        fsType = "overlay";
-      };
-
-    fileSystems."/tmp/.X11-unix" =
-      { device = "/mnt/wslg/.X11-unix";
-        fsType = "none";
-        options = [ "bind" ];
-      };
-
-    fileSystems."/mnt/wslg/doc" =
-      { device = "none";
-        fsType = "overlay";
-      };
-
     fileSystems."/mnt/c" =
       { device = "C:\134";
         fsType = "9p";
