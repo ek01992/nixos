@@ -32,24 +32,9 @@
         fsType = "ext4";
       };
 
-    fileSystems."/mnt/c" =
-      { device = "C:\134";
-        fsType = "9p";
-      };
-
     fileSystems."/mnt/d" =
       { device = "D:\134";
         fsType = "9p";
-      };
-
-    fileSystems."/mnt/e" =
-      { device = "E:\134";
-        fsType = "9p";
-      };
-
-    fileSystems."/mnt/wslg/run/user/1000" =
-      { device = "tmpfs";
-        fsType = "tmpfs";
       };
 
     swapDevices =
