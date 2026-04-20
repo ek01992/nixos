@@ -7,13 +7,13 @@
       inputs.nixos-wsl.nixosModules.default
     ];
 
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     wsl = {
       enable = true;
       defaultUser = "erik";
       interop.includePath = false;
     };
-
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     environment.systemPackages = with pkgs; [
       # Add System Packages
@@ -23,6 +23,7 @@
       curl
       bat
       fastfetch
+      nixfmt
     ];
 
     programs = {

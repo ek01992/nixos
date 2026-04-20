@@ -16,12 +16,43 @@
       };
     };
 
+    environment.systemPackages = with pkgs; [
+      # Add System Packages
+      git
+      helix
+      wget
+      curl
+      bat
+      fastfetch
+      nixfmt
+    ];
+
+
+    programs = {
+      firefox.enable = true;
+    };
+
+    services = {
+      pulseaudio.enable = false;
+      pipewire = {
+        enable = true;
+        alsa = {
+          enable = true;
+          support32Bit = true;
+        };
+        pulse.enable = true;
+      };
+      openssh.enable = true;
+    };
+
+    security.rtkit.enable = true;
+
+    time.timeZone = "America/Chicago";
+
     networking = {
       hostName = "nixxy";
       networkmanager.enable = true;
     };
-
-    time.timeZone = "America/Chicago";
 
     i18n = {
       defaultLocale = "en_US.UTF-8";
@@ -36,20 +67,7 @@
         LC_TELEPHONE = "en_US.UTF-8";
         LC_TIME = "en_US.UTF-8";
       };
-    };  
-
-    services = {
-      pulseaudio.enable = false;
-      pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-      };
-      openssh.enable = true;
     };
-
-    security.rtkit.enable = true;
 
     users = {
       users = {
@@ -58,24 +76,11 @@
           description = "Erik Kowald";
           extraGroups = [ "networkmanager" "wheel" ];
           packages = with pkgs; [
-            #
+            # Add User-Specific Packages
           ];
         };
       };
     };
-
-    programs = {
-      firefox.enable = true;
-    };
-    
-    environment.systemPackages = with pkgs; [
-      helix
-      git
-      bat
-      curl
-      wget
-      nixfmt
-    ];
 
     system.stateVersion = "26.05";
   };
