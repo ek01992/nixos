@@ -51,10 +51,10 @@
 
     networking = {
       hostName = "nixxy";
-      networkmanager.enable = true;
+      networkmanager.enable = false;
       wireless = {
         enable = true;
-        userControlled.enable = true;
+        userControlled = true;
       };
     };
 
