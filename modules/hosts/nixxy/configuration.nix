@@ -52,6 +52,10 @@
     networking = {
       hostName = "nixxy";
       networkmanager.enable = true;
+      wireless = {
+        enable = true;
+        userControlled.enable = true;
+      };
     };
 
     i18n = {
