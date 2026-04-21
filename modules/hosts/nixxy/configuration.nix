@@ -55,6 +55,7 @@
       wireless = {
         enable = true;
         userControlled = true;
+        networks.Wiffy.pskRaw = "b6a859f735233e8dd7ae33141c041526259be3b79b36eba6d3dfb04848dac58b";
       };
     };
 
