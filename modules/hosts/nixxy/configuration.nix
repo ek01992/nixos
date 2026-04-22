@@ -45,6 +45,8 @@
       openssh.enable = true;
     };
 
+    nixpkgs.config.allowUnfree = true;
+    
     security.rtkit.enable = true;
 
     time.timeZone = "America/Chicago";
@@ -76,6 +78,7 @@
           description = "Erik Kowald";
           extraGroups = [ "networkmanager" "wheel" ];
           packages = with pkgs; [
+            # Add packages
             claude-code
           ];
         };
