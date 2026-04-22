@@ -19,6 +19,7 @@
     environment.systemPackages = with pkgs; [
       # Add System Package
       claude-code
+      bun
       git
       helix
       wget
