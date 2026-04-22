@@ -27,6 +27,7 @@
       bat
       fastfetch
       nixfmt
+      uv
     ];
 
 
