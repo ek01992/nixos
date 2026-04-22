@@ -5,6 +5,7 @@
     imports = [
       self.nixosModules.nixxyHardware
       self.nixosModules.niri
+      self.nixosModules.nixxyClaudeConfig
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
