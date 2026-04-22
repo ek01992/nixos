@@ -76,7 +76,7 @@
           description = "Erik Kowald";
           extraGroups = [ "networkmanager" "wheel" ];
           packages = with pkgs; [
-            # Add User-Specific Packages
+            claude-code
           ];
         };
       };
