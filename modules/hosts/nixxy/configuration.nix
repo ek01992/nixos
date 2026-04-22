@@ -17,7 +17,8 @@
     };
 
     environment.systemPackages = with pkgs; [
-      # Add System Packages
+      # Add System Package
+      claude-code
       git
       helix
       wget
@@ -79,7 +80,6 @@
           extraGroups = [ "networkmanager" "wheel" ];
           packages = with pkgs; [
             # Add packages
-            claude-code
           ];
         };
       };
