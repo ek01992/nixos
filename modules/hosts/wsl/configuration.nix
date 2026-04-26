@@ -51,6 +51,8 @@
         # };
       };
 
+      nixpkgs.config.allowUnfree = true;
+
       time.timeZone = "America/Chicago";
 
       networking.hostName = "nixos-wsl";
