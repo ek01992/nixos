@@ -10,15 +10,15 @@
       ...
     }:
     {
-      imports = [];
+      imports = [ ];
 
       boot = {
         initrd = {
-          availableKernelModules = [];
-          kernelModules = [];
+          availableKernelModules = [ ];
+          kernelModules = [ ];
         };
         kernelModules = [ "kvm-intel" ];
-        extraModulePackages = [];
+        extraModulePackages = [ ];
       };
 
       fileSystems = {
@@ -52,7 +52,7 @@
         };
       };
 
-      swapDevices = [{ device = "/dev/disk/by-uuid/fd82a5ac-a68d-4ecb-b50d-ddcc66a96bde"; }];
+      swapDevices = [ { device = "/dev/disk/by-uuid/fd82a5ac-a68d-4ecb-b50d-ddcc66a96bde"; } ];
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     };
 }

@@ -24,10 +24,10 @@
             "uas"
             "sd_mod"
           ];
-          kernelModules = [];
+          kernelModules = [ ];
         };
         kernelModules = [ "kvm-intel" ];
-        extraModulePackages = [];
+        extraModulePackages = [ ];
       };
 
       fileSystems = {
@@ -46,7 +46,7 @@
         };
       };
 
-      swapDevices = [{ device = "/dev/disk/by-uuid/df36f2f3-d2de-4d51-a134-22dd56664fea"; }];
+      swapDevices = [ { device = "/dev/disk/by-uuid/df36f2f3-d2de-4d51-a134-22dd56664fea"; } ];
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
