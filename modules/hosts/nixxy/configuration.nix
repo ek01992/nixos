@@ -39,10 +39,18 @@
       ];
 
       programs = {
+        # programName = {
+        #   enable = true;
+        #   ...
+        # };
         firefox.enable = true;
       };
 
       services = {
+        # serviceName = {
+        #   enable - true;
+        #   ...
+        # };
         pulseaudio.enable = false;
         pipewire = {
           enable = true;

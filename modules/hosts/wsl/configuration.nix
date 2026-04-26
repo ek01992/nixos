@@ -49,6 +49,7 @@
         #   enable - true;
         #   ...
         # };
+        openssh.enable = true;
       };
 
       nixpkgs.config.allowUnfree = true;
