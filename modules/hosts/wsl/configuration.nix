@@ -57,15 +57,6 @@
 
       networking.hostName = "nixos-wsl";
 
-      fileSystems."/shared" = {
-        device = "/mnt/d/wsl/shared";
-        fsType = "none";
-        options = [
-          "bind"
-          "nofail"
-        ];
-      };
-
       i18n = {
         defaultLocale = "en_US.UTF-8";
         extraLocaleSettings = {
