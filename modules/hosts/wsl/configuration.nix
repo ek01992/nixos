@@ -13,6 +13,7 @@
       imports = [
         self.nixosModules.nixos-wslHardware
         inputs.nixos-wsl.nixosModules.default
+        self.nixosModules.niri
       ];
 
       nix.settings.experimental-features = [
