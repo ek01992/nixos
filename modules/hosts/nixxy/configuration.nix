@@ -1,93 +1,102 @@
-{ self, inputs, ... }: {
+{ self, inputs, ... }:
+{
 
-  flake.nixosModules.nixxyConfiguration = { config, pkgs, lib, ... }: {
+  flake.nixosModules.nixxyConfiguration =
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
+    {
 
-    imports = [
-      self.nixosModules.nixxyHardware
-      self.nixosModules.niri
-      self.nixosModules.nixxyClaudeConfig
-    ];
+      imports = [
+        self.nixosModules.nixxyHardware
+        self.nixosModules.niri
+      ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
-    boot = {
-      loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
+      boot = {
+        loader = {
+          systemd-boot.enable = true;
+          efi.canTouchEfiVariables = true;
+        };
       };
-    };
 
-    environment.systemPackages = with pkgs; [
-      # Add System Package
-      claude-code
-      bun
-      git
-      helix
-      wget
-      curl
-      bat
-      fastfetch
-      nixfmt
-      uv
-    ];
+      environment.systemPackages = with pkgs; [
+        # Add System Package
+        git
+        wget
+        curl
+        bat
+        fastfetch
+        nixfmt
+        nixfmt-tree
+      ];
 
+      programs = {
+        firefox.enable = true;
+      };
 
-    programs = {
-      firefox.enable = true;
-    };
-
-    services = {
-      pulseaudio.enable = false;
-      pipewire = {
-        enable = true;
-        alsa = {
+      services = {
+        pulseaudio.enable = false;
+        pipewire = {
           enable = true;
-          support32Bit = true;
+          alsa = {
+            enable = true;
+            support32Bit = true;
+          };
+          pulse.enable = true;
         };
-        pulse.enable = true;
+        openssh.enable = true;
       };
-      openssh.enable = true;
-    };
 
-    nixpkgs.config.allowUnfree = true;
-    
-    security.rtkit.enable = true;
+      nixpkgs.config.allowUnfree = true;
 
-    time.timeZone = "America/Chicago";
+      security.rtkit.enable = true;
 
-    networking = {
-      hostName = "nixxy";
-      networkmanager.enable = true;
-    };
+      time.timeZone = "America/Chicago";
 
-    i18n = {
-      defaultLocale = "en_US.UTF-8";
-      extraLocaleSettings = {
-        LC_ADDRESS = "en_US.UTF-8";
-        LC_IDENTIFICATION = "en_US.UTF-8";
-        LC_MEASUREMENT = "en_US.UTF-8";
-        LC_MONETARY = "en_US.UTF-8";
-        LC_NAME = "en_US.UTF-8";
-        LC_NUMERIC = "en_US.UTF-8";
-        LC_PAPER = "en_US.UTF-8";
-        LC_TELEPHONE = "en_US.UTF-8";
-        LC_TIME = "en_US.UTF-8";
+      networking = {
+        hostName = "nixxy";
+        networkmanager.enable = true;
       };
-    };
 
-    users = {
+      i18n = {
+        defaultLocale = "en_US.UTF-8";
+        extraLocaleSettings = {
+          LC_ADDRESS = "en_US.UTF-8";
+          LC_IDENTIFICATION = "en_US.UTF-8";
+          LC_MEASUREMENT = "en_US.UTF-8";
+          LC_MONETARY = "en_US.UTF-8";
+          LC_NAME = "en_US.UTF-8";
+          LC_NUMERIC = "en_US.UTF-8";
+          LC_PAPER = "en_US.UTF-8";
+          LC_TELEPHONE = "en_US.UTF-8";
+          LC_TIME = "en_US.UTF-8";
+        };
+      };
+
       users = {
-        erik = {
-          isNormalUser = true;
-          description = "Erik Kowald";
-          extraGroups = [ "networkmanager" "wheel" ];
-          packages = with pkgs; [
-            # Add packages
-          ];
+        users = {
+          erik = {
+            isNormalUser = true;
+            description = "Erik Kowald";
+            extraGroups = [
+              "networkmanager"
+              "wheel"
+            ];
+            packages = with pkgs; [
+              # Add packages
+            ];
+          };
         };
       };
-    };
 
-    system.stateVersion = "26.05";
-  };
+      system.stateVersion = "26.05";
+    };
 }
