@@ -13,12 +13,7 @@
       imports = [
         self.nixosModules.nixos-wslHardware
         inputs.nixos-wsl.nixosModules.default
-        self.nixosModules.niri
-      ];
-
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
+        self.nixosModules.common
       ];
 
       wsl = {
@@ -26,17 +21,6 @@
         defaultUser = "erik";
         interop.includePath = false;
       };
-
-      environment.systemPackages = with pkgs; [
-        # Add System Packages
-        git
-        wget
-        curl
-        bat
-        fastfetch
-        nixfmt
-        nixfmt-tree
-      ];
 
       programs = {
         # programName = {
@@ -47,32 +31,12 @@
 
       services = {
         # serviceName = {
-        #   enable - true;
+        #   enable = true;
         #   ...
         # };
-        openssh.enable = true;
       };
-
-      nixpkgs.config.allowUnfree = true;
-
-      time.timeZone = "America/Chicago";
 
       networking.hostName = "nixos-wsl";
-
-      i18n = {
-        defaultLocale = "en_US.UTF-8";
-        extraLocaleSettings = {
-          LC_ADDRESS = "en_US.UTF-8";
-          LC_IDENTIFICATION = "en_US.UTF-8";
-          LC_MEASUREMENT = "en_US.UTF-8";
-          LC_MONETARY = "en_US.UTF-8";
-          LC_NAME = "en_US.UTF-8";
-          LC_NUMERIC = "en_US.UTF-8";
-          LC_PAPER = "en_US.UTF-8";
-          LC_TELEPHONE = "en_US.UTF-8";
-          LC_TIME = "en_US.UTF-8";
-        };
-      };
 
       users = {
         users = {

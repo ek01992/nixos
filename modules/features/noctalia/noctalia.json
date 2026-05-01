@@ -662,46 +662,5 @@
       "gridSnapScale": false,
       "monitorWidgets": []
     }
-  },
-  "state": {
-    "doNotDisturb": false,
-    "noctaliaPerformanceMode": false,
-    "barVisible": true,
-    "openedPanel": "",
-    "lockScreenActive": false,
-    "wallpapers": {
-      "eDP-1": "/nix/store/7j4a02nkk4ilda585jbjgg9f9i9b4ibb-noctalia-shell-4.7.5/share/noctalia-shell/Assets/Wallpaper/noctalia.png"
-    },
-    "desktopWidgetsEditMode": false,
-    "display": {
-      "eDP-1": {
-        "name": "eDP-1",
-        "connected": true,
-        "scale": 1.25,
-        "width": 1536,
-        "height": 960,
-        "x": 0,
-        "y": 0,
-        "physical_width": 290,
-        "physical_height": 180,
-        "refresh_rate": 59950,
-        "vrr_supported": true,
-        "vrr_enabled": false,
-        "transform": "Normal"
-      }
-    },
-    "notificationsState": {
-      "lastSeenTs": 0
-    },
-    "changelogState": {
-      "lastSeenVersion": "v4.7.5"
-    },
-    "colorSchemesList": {
-      "schemes": [],
-      "timestamp": 0
-    },
-    "ui": {
-      "settingsSidebarExpanded": true
-    }
   }
 }

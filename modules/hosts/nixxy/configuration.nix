@@ -13,11 +13,7 @@
       imports = [
         self.nixosModules.nixxyHardware
         self.nixosModules.niri
-      ];
-
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
+        self.nixosModules.common
       ];
 
       boot = {
@@ -26,17 +22,6 @@
           efi.canTouchEfiVariables = true;
         };
       };
-
-      environment.systemPackages = with pkgs; [
-        # Add System Package
-        git
-        wget
-        curl
-        bat
-        fastfetch
-        nixfmt
-        nixfmt-tree
-      ];
 
       programs = {
         # programName = {
@@ -48,7 +33,7 @@
 
       services = {
         # serviceName = {
-        #   enable - true;
+        #   enable = true;
         #   ...
         # };
         pulseaudio.enable = false;
@@ -60,33 +45,13 @@
           };
           pulse.enable = true;
         };
-        openssh.enable = true;
       };
 
-      nixpkgs.config.allowUnfree = true;
-
       security.rtkit.enable = true;
-
-      time.timeZone = "America/Chicago";
 
       networking = {
         hostName = "nixxy";
         networkmanager.enable = true;
-      };
-
-      i18n = {
-        defaultLocale = "en_US.UTF-8";
-        extraLocaleSettings = {
-          LC_ADDRESS = "en_US.UTF-8";
-          LC_IDENTIFICATION = "en_US.UTF-8";
-          LC_MEASUREMENT = "en_US.UTF-8";
-          LC_MONETARY = "en_US.UTF-8";
-          LC_NAME = "en_US.UTF-8";
-          LC_NUMERIC = "en_US.UTF-8";
-          LC_PAPER = "en_US.UTF-8";
-          LC_TELEPHONE = "en_US.UTF-8";
-          LC_TIME = "en_US.UTF-8";
-        };
       };
 
       users = {

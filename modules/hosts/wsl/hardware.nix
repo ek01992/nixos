@@ -17,16 +17,11 @@
           availableKernelModules = [ ];
           kernelModules = [ ];
         };
-        kernelModules = [ "kvm-intel" ];
+        kernelModules = [ ];
         extraModulePackages = [ ];
       };
 
       fileSystems = {
-        "/lib/modules/6.6.87.2-microsoft-standard-WSL2" = {
-          device = "none";
-          fsType = "overlay";
-        };
-
         "/mnt/wsl" = {
           device = "none";
           fsType = "tmpfs";
