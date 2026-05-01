@@ -10,8 +10,6 @@
       ...
     }:
     {
-      imports = [ ];
-
       boot = {
         initrd = {
           availableKernelModules = [ ];

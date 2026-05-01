@@ -22,20 +22,6 @@
         interop.includePath = false;
       };
 
-      programs = {
-        # programName = {
-        #   enable = true;
-        #   ...
-        # };
-      };
-
-      services = {
-        # serviceName = {
-        #   enable = true;
-        #   ...
-        # };
-      };
-
       networking.hostName = "nixos-wsl";
 
       users = {

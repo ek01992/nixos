@@ -24,18 +24,18 @@
       };
 
       programs = {
-        # programName = {
-        #   enable = true;
-        #   ...
-        # };
         firefox.enable = true;
       };
 
+      fonts = {
+        enableDefaultPackages = true;
+        packages = with pkgs; [
+          noto-fonts
+          noto-fonts-emoji
+        ];
+      };
+
       services = {
-        # serviceName = {
-        #   enable = true;
-        #   ...
-        # };
         pulseaudio.enable = false;
         pipewire = {
           enable = true;

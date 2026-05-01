@@ -351,7 +351,7 @@
       "position": "center",
       "pinnedApps": [],
       "sortByMostUsed": true,
-      "terminalCommand": "alacritty -e",
+      "terminalCommand": "kitty",
       "customLaunchPrefixEnabled": false,
       "customLaunchPrefix": "",
       "viewMode": "list",

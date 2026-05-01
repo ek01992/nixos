@@ -9,7 +9,6 @@
       ];
 
       environment.systemPackages = with pkgs; [
-        git
         wget
         curl
         bat
@@ -18,9 +17,32 @@
         nixfmt-tree
       ];
 
+      programs.git = {
+        enable = true;
+        config = {
+          user = {
+            name = "Erik";
+            email = "erik@cyberworkforce.com";
+          };
+          init.defaultBranch = "main";
+        };
+      };
+
+      programs.bash.shellAliases = {
+        nrb = "nixos-rebuild build --flake $HOME/nixos";
+        nrs = "sudo nixos-rebuild switch --flake $HOME/nixos";
+        nfc = "nix flake check";
+        nfu = "nix flake update";
+      };
+
       nixpkgs.config.allowUnfree = true;
 
       services.openssh.enable = true;
+
+      networking.firewall = {
+        enable = true;
+        allowedTCPPorts = [ 22 ];
+      };
 
       time.timeZone = "America/Chicago";
 
