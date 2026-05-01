@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/tmp/everything-claude-code/**)",
+      "Read(/tmp/everything-claude-code/.agents/skills/**)",
+      "Read(/home/erik/.claude/**)",
+      "Read(/home/erik/.claude/rules/**)",
+      "Bash(nix flake *)",
+      "Bash(gh api *)",
+      "Bash(git *)",
+      "mcp__nixos__nix"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "nixos"
+  ],
+  "disableAllHooks": true,
+  "enabledPlugins": {
+    "everything-claude-code@everything-claude-code": true
+  }
+}
