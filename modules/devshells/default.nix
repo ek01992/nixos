@@ -13,6 +13,8 @@
           git
           gh
           nil
+          deadnix
+          statix
           ripgrep
           fd
           jq

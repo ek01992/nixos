@@ -1,18 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HOSTNAME="${1:-}"
-TYPE="${2:-bare-metal}"
+HOSTNAME=""
+TYPE="bare-metal"
+WAYLAND="false"
 
 usage() {
-  echo "Usage: $0 <hostname> [bare-metal|wsl]" >&2
+  echo "Usage: $0 <hostname> [bare-metal|wsl] [--wayland]" >&2
   echo "  Creates modules/hosts/<hostname>/{default,configuration,hardware}.nix" >&2
   echo "  Default type: bare-metal" >&2
+  echo "  --wayland: add self.nixosModules.niri import (bare-metal only)" >&2
   exit 1
 }
 
+for arg in "$@"; do
+  case "$arg" in
+    --wayland) WAYLAND="true" ;;
+    bare-metal|wsl) TYPE="$arg" ;;
+    -*)
+      echo "error: unknown flag: $arg" >&2
+      usage
+      ;;
+    *)
+      if [[ -z "$HOSTNAME" ]]; then
+        HOSTNAME="$arg"
+      else
+        echo "error: unexpected argument: $arg" >&2
+        usage
+      fi
+      ;;
+  esac
+done
+
 [[ -z "$HOSTNAME" ]] && { echo "error: hostname is required" >&2; usage; }
-[[ "$TYPE" != "bare-metal" && "$TYPE" != "wsl" ]] && { echo "error: type must be 'bare-metal' or 'wsl'" >&2; usage; }
 
 HOST_DIR="modules/hosts/$HOSTNAME"
 [[ -d "$HOST_DIR" ]] && { echo "error: $HOST_DIR already exists" >&2; exit 1; }
@@ -102,6 +122,7 @@ else
         self.nixosModules.home
         self.nixosModules.shell
         self.nixosModules.editor
+@NIRI_IMPORT@
       ];
 
       boot = {
@@ -138,6 +159,15 @@ else
 EOF
 fi
 sed -i "s/@HOSTNAME@/$HOSTNAME/g" "$HOST_DIR/configuration.nix"
+
+# Apply --wayland flag: substitute or delete the niri import placeholder
+if [[ "$TYPE" == "bare-metal" ]]; then
+  if [[ "$WAYLAND" == "true" ]]; then
+    sed -i 's|@NIRI_IMPORT@|        self.nixosModules.niri|' "$HOST_DIR/configuration.nix"
+  else
+    sed -i '/@NIRI_IMPORT@/d' "$HOST_DIR/configuration.nix"
+  fi
+fi
 
 # --- hardware.nix ---
 if [[ "$TYPE" == "wsl" ]]; then

@@ -32,9 +32,9 @@ Source: .claude/audit/audit-report.md
 
 ## Phase 3: Structural Changes (requires /verification-loop)
 
-- [ ] **Add deadnix + statix to devShell** | `modules/devshells/default.nix` | Add `pkgs.deadnix` and `pkgs.statix` to the devShell packages list. Run `nix flake check` + `nixos-rebuild build` on both hosts after. Risk: LOW — additive change, no functional impact. Expected delta: Nix-specific linting available in standard workflow.
+- [x] **Add deadnix + statix to devShell** | `modules/devshells/default.nix` | Add `pkgs.deadnix` and `pkgs.statix` to the devShell packages list. Run `nix flake check` + `nixos-rebuild build` on both hosts after. Risk: LOW — additive change, no functional impact. Expected delta: Nix-specific linting available in standard workflow.
 
-- [ ] **Add `--wayland` flag to `new-host.sh` bare-metal template** | `scripts/new-host.sh` | Make niri import conditional on a `--wayland` flag in the bare-metal template. Without the flag, bare-metal template generates `hardware + common + home + shell + editor` only. With `--wayland`, also adds `niri`. Risk: LOW — additive flag, existing behavior preserved. Expected delta: accurate scaffold for non-wayland bare-metal hosts.
+- [x] **Add `--wayland` flag to `new-host.sh` bare-metal template** | `scripts/new-host.sh` | Make niri import conditional on a `--wayland` flag in the bare-metal template. Without the flag, bare-metal template generates `hardware + common + home + shell + editor` only. With `--wayland`, also adds `niri`. Risk: LOW — additive flag, existing behavior preserved. Expected delta: accurate scaffold for non-wayland bare-metal hosts.
 
 ---
 
