@@ -28,7 +28,8 @@
       "Bash(nix run *)",
       "Bash(nix fmt *)",
       "Bash(cat *)",
-      "Bash(tail *)"
+      "Bash(tail *)",
+      "Bash(nix-instantiate --parse *)"
     ]
   },
   "enabledMcpjsonServers": [

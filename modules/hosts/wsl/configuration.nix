@@ -14,6 +14,9 @@
         self.nixosModules.nixos-wslHardware
         inputs.nixos-wsl.nixosModules.default
         self.nixosModules.common
+        self.nixosModules.home
+        self.nixosModules.shell
+        self.nixosModules.editor
       ];
 
       wsl = {

@@ -14,6 +14,9 @@
         self.nixosModules.nixxyHardware
         self.nixosModules.niri
         self.nixosModules.common
+        self.nixosModules.home
+        self.nixosModules.shell
+        self.nixosModules.editor
       ];
 
       boot = {
@@ -32,6 +35,8 @@
         packages = with pkgs; [
           noto-fonts
           noto-fonts-color-emoji
+          nerd-fonts.jetbrains-mono
+          nerd-fonts.symbols-only
         ];
       };
 
@@ -56,6 +61,11 @@
         };
       };
 
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+      };
+
       security.rtkit.enable = true;
 
       networking = {
@@ -73,7 +83,11 @@
               "wheel"
             ];
             packages = with pkgs; [
-              # Add packages
+              waylock
+              grim
+              slurp
+              wl-clipboard
+              cliphist
             ];
           };
         };

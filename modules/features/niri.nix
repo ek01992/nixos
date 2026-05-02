@@ -33,11 +33,41 @@
           input.keyboard.xkb.layout = "us";
           layout.gaps = 5;
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
-          binds = {
-            "Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
-            "Mod+Q".close-window = null;
-            "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
-          };
+          binds = lib.mergeAttrsList (
+            [
+              {
+                # Apps
+                "Mod+Return".spawn-sh = lib.getExe pkgs.kitty;
+                "Mod+Q".close-window = null;
+                "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
+
+                # Navigation
+                "Mod+Left".focus-column-left = null;
+                "Mod+Right".focus-column-right = null;
+                "Mod+Up".focus-window-up = null;
+                "Mod+Down".focus-window-down = null;
+                "Mod+Shift+Left".move-column-left = null;
+                "Mod+Shift+Right".move-column-right = null;
+
+                # Resize
+                "Mod+Minus".set-column-width = "-10%";
+                "Mod+Equal".set-column-width = "+10%";
+
+                # Window state
+                "Mod+F".fullscreen-window = null;
+                "Mod+Shift+F".toggle-window-floating = null;
+
+                # System
+                "Mod+Shift+L".spawn-sh = lib.getExe pkgs.waylock;
+                "Print".spawn-sh =
+                  ''${lib.getExe pkgs.grim} -g "$(${lib.getExe pkgs.slurp})" - | ${pkgs.wl-clipboard}/bin/wl-copy'';
+              }
+            ]
+            ++ map (i: {
+              "Mod+${toString i}".focus-workspace = i;
+              "Mod+Shift+${toString i}".move-window-to-workspace = i;
+            }) (lib.range 1 9)
+          );
         };
       };
     };
