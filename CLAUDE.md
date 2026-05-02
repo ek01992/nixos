@@ -119,12 +119,23 @@ Reusable features exposed as `flake.nixosModules.<feature>` and imported by host
 
 ## Claude Code Guidance
 
-- **Package lookups**: Use the `nixos` MCP server (available in this session) — faster and more current than `nix search` or manual nixpkgs browsing.
-- **Repo patterns**: Run `/nixos-patterns` to recall structural conventions, module templates, and commit style before making changes.
-- **Architecture concepts**: See [[concepts/dendritic-pattern]], [[concepts/flake-parts]], and [[concepts/wrapper-modules]] in the wiki for background on structural patterns.
-- **Wiki**: See `wiki/wiki-schema.md` for how to maintain and query the wiki. Read `wiki/index.md` first on any wiki query.
-- **Wiki maintenance**: `/wiki-lint` — validate the wiki (broken links, stale dates, missing coverage). `/wiki-update <file>` — ingest a changed source file into the wiki.
-- **Scaffolding**: `/nixos-scaffold` — generate a new host, feature module, or devShell from repo-pattern templates. Faster than reconstructing boilerplate from scratch.
+### Skills Quick Reference
+
+| Situation | Skill |
+|-----------|-------|
+| Any structural/pattern question about this repo | `/nixos-patterns` (run first) |
+| Scaffold new host, feature, or devShell | `/nixos-scaffold` |
+| Source file changed — update wiki | `/wiki-update <file>` |
+| Periodic wiki hygiene | `/wiki-lint` |
+| Before ANY commit | `/verification-loop` |
+| Update flake inputs | `/nix-update` |
+| Long session nearing context limit | `/strategic-compact` |
+
+### Lookups
+
+- **Package/option lookups**: Use the `nixos` MCP server — faster and more current than `nix search` or manual nixpkgs browsing. See `.claude/rules/wiki-lookup.md` for the full retrieval hierarchy.
+- **Wiki**: Read `wiki/index.md` first on any codebase question, then navigate to the relevant page. See `wiki/wiki-schema.md` for ingest/query/lint rules.
+- **Architecture concepts**: See [[concepts/dendritic-pattern]], [[concepts/flake-parts]], and [[concepts/wrapper-modules]] in the wiki.
 
 ## ECC Overrides (NixOS-specific)
 
