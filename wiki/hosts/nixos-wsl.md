@@ -1,7 +1,7 @@
 ---
 title: nixos-wsl Host
 type: host
-updated: 2026-05-01
+updated: 2026-05-02
 sources:
   - modules/hosts/wsl/default.nix
   - modules/hosts/wsl/configuration.nix
@@ -24,6 +24,9 @@ imports = [
   self.nixosModules.nixos-wslHardware    # hardware.nix
   inputs.nixos-wsl.nixosModules.default  # WSL2 NixOS integration
   self.nixosModules.common               # baseline (see [[modules/common]])
+  self.nixosModules.home                 # home-manager bridge (see [[features/home]])
+  self.nixosModules.shell                # fish + starship (see [[features/shell]])
+  self.nixosModules.editor               # helix (see [[features/editor]])
 ];
 ```
 

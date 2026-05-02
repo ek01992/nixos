@@ -43,6 +43,19 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - Updated: [[concepts/dendritic-pattern]], [[concepts/flake-parts]], [[concepts/wrapper-modules]], [[features/niri]], [[features/noctalia]], [[overview]]
 - Key changes: Removed ARCHITECTURE.md from sources: frontmatter on 6 pages; updated wiki-schema.md example; updated CLAUDE.md to point to wiki instead of ARCHITECTURE.md; added deprecation markers to ARCHITECTURE.md and LLM-WIKI.md
 
+## [2026-05-02] ingest | modules/hosts/nixxy/configuration.nix, modules/hosts/wsl/configuration.nix
+- Updated: [[hosts/nixxy]], [[hosts/nixos-wsl]]
+- Key changes: added home/shell/editor to imports list on both hosts; nixxy also updated with nerd-fonts packages, bluetooth section, and user packages table (waylock, grim, slurp, wl-clipboard, cliphist)
+
+## [2026-05-02] ingest | modules/features/editor.nix, modules/features/home.nix, modules/features/shell.nix
+- Created: [[features/editor]], [[features/home]], [[features/shell]]
+- Updated: [[overview]] (added home-manager to inputs table; added editor/home/shell to module graph; updated sources frontmatter)
+- Key changes: three new feature pages covering home-manager bridge (home), fish+starship (shell), and helix editor (editor); overview module graph now complete
+
+## [2026-05-02] ingest | modules/features/niri.nix
+- Updated: [[features/niri]]
+- Key changes: expanded keybinds section from 3 to full set — apps (3), navigation (6), resize (2), window state (2), system (2), workspaces (Mod+1–9, Mod+Shift+1–9 via lib.range)
+
 ## [2026-05-02] lint | full pass (nixos-audit Domain B)
 - Orphans: none
 - Stale: [[hosts/nixxy]] (missing home/shell/editor imports); [[hosts/nixos-wsl]] (same); [[overview]] (missing editor/home/shell in module graph, missing home-manager input); [[features/niri]] (keybinds section documents 3 of ~20 binds)

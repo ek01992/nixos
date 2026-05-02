@@ -52,6 +52,9 @@ if [[ "$TYPE" == "wsl" ]]; then
         self.nixosModules.@HOSTNAME@Hardware
         inputs.nixos-wsl.nixosModules.default
         self.nixosModules.common
+        self.nixosModules.home
+        self.nixosModules.shell
+        self.nixosModules.editor
       ];
 
       wsl = {
@@ -96,6 +99,9 @@ else
       imports = [
         self.nixosModules.@HOSTNAME@Hardware
         self.nixosModules.common
+        self.nixosModules.home
+        self.nixosModules.shell
+        self.nixosModules.editor
       ];
 
       boot = {

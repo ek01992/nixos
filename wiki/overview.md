@@ -1,11 +1,14 @@
 ---
 title: System Overview
 type: overview
-updated: 2026-05-01
+updated: 2026-05-02
 sources:
   - flake.nix
   - CLAUDE.md
   - modules/devshells/default.nix
+  - modules/features/editor.nix
+  - modules/features/home.nix
+  - modules/features/shell.nix
 ---
 
 # System Overview
@@ -29,8 +32,9 @@ A NixOS flake configuration for two machines, built with [[concepts/flake-parts]
 | `nixos-wsl` | 2511.7.1 (pinned) | WSL2 NixOS support |
 | `wrapper-modules` (BirdeeHub) | latest | Declarative app wrappers |
 | `claude-code-nix` (sadjow) | latest | Claude Code CLI for devShells.default |
+| `home-manager` (nix-community) | latest | User-level config (shell, editor, dotfiles) |
 
-`nixos-wsl`, `wrapper-modules`, and `claude-code-nix` all follow `nixpkgs` to avoid duplicate copies of nixpkgs in the closure.
+`nixos-wsl`, `wrapper-modules`, `claude-code-nix`, and `home-manager` all follow `nixpkgs` to avoid duplicate copies of nixpkgs in the closure.
 
 ## Module Graph
 
@@ -50,6 +54,9 @@ flake.nix
     │   ├── configuration.nix
     │   └── hardware.nix
     └── features/
+        ├── home.nix        → flake.nixosModules.home   (home-manager bridge)
+        ├── shell.nix       → flake.nixosModules.shell  (fish + starship)
+        ├── editor.nix      → flake.nixosModules.editor (helix)
         ├── niri.nix        → flake.nixosModules.niri + perSystem.packages.myNiri
         └── noctalia/
             ├── noctalia.nix → perSystem.packages.myNoctalia

@@ -1,7 +1,7 @@
 ---
 title: Niri Compositor
 type: feature
-updated: 2026-05-01
+updated: 2026-05-02
 sources:
   - modules/features/niri.nix
 ---
@@ -87,13 +87,54 @@ Niri doesn't handle Xwayland itself. `xwayland-satellite` bridges X11 apps into 
 
 ### Keybinds
 
+`Mod` is the Super/Windows key.
+
+**Apps**
+
 | Keybind | Action |
 |---|---|
 | `Mod+Return` | spawn `kitty` terminal |
 | `Mod+Q` | close focused window |
 | `Mod+S` | toggle noctalia launcher (`myNoctalia ipc call launcher toggle`) |
 
-`Mod` is the Super/Windows key by default in niri.
+**Navigation**
+
+| Keybind | Action |
+|---|---|
+| `Mod+Left` | focus column left |
+| `Mod+Right` | focus column right |
+| `Mod+Up` | focus window up |
+| `Mod+Down` | focus window down |
+| `Mod+Shift+Left` | move column left |
+| `Mod+Shift+Right` | move column right |
+
+**Resize**
+
+| Keybind | Action |
+|---|---|
+| `Mod+Minus` | shrink column width by 10% |
+| `Mod+Equal` | grow column width by 10% |
+
+**Window state**
+
+| Keybind | Action |
+|---|---|
+| `Mod+F` | fullscreen focused window |
+| `Mod+Shift+F` | toggle floating |
+
+**System**
+
+| Keybind | Action |
+|---|---|
+| `Mod+Shift+L` | lock screen (`waylock`) |
+| `Print` | screenshot selection → clipboard (grim + slurp → wl-copy) |
+
+**Workspaces** (generated dynamically via `lib.range 1 9`)
+
+| Keybind | Action |
+|---|---|
+| `Mod+1` – `Mod+9` | focus workspace N |
+| `Mod+Shift+1` – `Mod+Shift+9` | move focused window to workspace N |
 
 ## Cross-references
 

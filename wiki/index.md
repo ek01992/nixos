@@ -1,7 +1,7 @@
 # Wiki Index
 
 Content catalog. Read this first to find relevant pages before drilling in.  
-Last updated: 2026-05-01 (devshells module added)
+Last updated: 2026-05-02 (editor, home, shell feature pages added)
 
 ---
 
@@ -27,7 +27,10 @@ Last updated: 2026-05-01 (devshells module added)
 
 | Page | Summary |
 |---|---|
-| [[features/niri]] | Scrollable tiling Wayland compositor; myNiri package with keybinds, xwayland, noctalia at startup |
+| [[features/home]] | Home Manager bridge — imports HM module, sets useGlobalPkgs/useUserPackages, base user config for erik |
+| [[features/shell]] | Fish shell + starship prompt for erik; fish aliases nrb/nrs/nfc/nfu via home-manager |
+| [[features/editor]] | Helix editor via home-manager; defaultEditor = true sets $EDITOR |
+| [[features/niri]] | Scrollable tiling Wayland compositor; myNiri package with all keybinds documented, xwayland, noctalia at startup |
 | [[features/noctalia]] | Wayland shell (bar, launcher, control center); config via noctalia.json, Catppuccin Lavender theme |
 
 ---

@@ -6,6 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A NixOS flake configuration for two hosts (`nixos-wsl` and `nixxy`), built with `flake-parts` and `import-tree`. Every `.nix` file under `modules/` is automatically loaded as a flake-parts module — no explicit import list to maintain.
 
+## ECC Overrides (NixOS-specific)
+
+This is a NixOS flake config repo, not a software project. The following global ECC behaviors do **not** apply here:
+
+- **No code-reviewer, security-reviewer, or tdd-guide agents** for `.nix` file edits — they add cost without actionable output on config files. Config correctness is validated by `nix flake check` and `nixos-rebuild build`.
+- **No 80% test coverage or TDD requirements** — NixOS configs don't have unit tests. Use `nix flake check` + build validation instead.
+- **No development-workflow research phase** (gh search, library docs, package registries) for Nix module changes — the `nixos` MCP tool is the correct lookup path.
+- **Wiki-first lookups**: For any question about host configs, module structure, feature details, or architecture — read `wiki/index.md` first and navigate to the relevant page. Read source files directly only when the wiki page is insufficient or marked stale.
+
 ## Common Commands
 
 ```bash
@@ -147,12 +156,3 @@ Reusable features exposed as `flake.nixosModules.<feature>` and imported by host
 - **Git-diff first for update tasks**: Before reading any wiki page or source file for a doc-sync task, run `git log --oneline -5 -- modules/` or `git diff --stat HEAD~1` to identify exactly which files changed. Read only the wiki pages whose `sources:` frontmatter lists those files.
 - **Parallel Read over Explore agents**: For any file whose path is known, use parallel `Read` calls — not an Explore agent. Explore returns summaries; `Read` returns exact content. See `.claude/rules/exploration-efficiency.md`.
 - **`nixfmt-tree` availability**: If `nixfmt-tree` is not on PATH, use `nix run nixpkgs#nixfmt-tree` or `nix fmt` (both are in the allow list).
-
-## ECC Overrides (NixOS-specific)
-
-This is a NixOS flake config repo, not a software project. The following global ECC behaviors do **not** apply here:
-
-- **No code-reviewer, security-reviewer, or tdd-guide agents** for `.nix` file edits — they add cost without actionable output on config files. Config correctness is validated by `nix flake check` and `nixos-rebuild build`.
-- **No 80% test coverage or TDD requirements** — NixOS configs don't have unit tests. Use `nix flake check` + build validation instead.
-- **No development-workflow research phase** (gh search, library docs, package registries) for Nix module changes — the `nixos` MCP tool is the correct lookup path.
-- **Wiki-first lookups**: For any question about host configs, module structure, feature details, or architecture — read `wiki/index.md` first and navigate to the relevant page. Read source files directly only when the wiki page is insufficient or marked stale.

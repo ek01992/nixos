@@ -1,7 +1,7 @@
 ---
 title: nixxy Host
 type: host
-updated: 2026-05-01
+updated: 2026-05-02
 sources:
   - modules/hosts/nixxy/default.nix
   - modules/hosts/nixxy/configuration.nix
@@ -24,6 +24,9 @@ imports = [
   self.nixosModules.nixxyHardware   # hardware.nix
   self.nixosModules.niri            # Wayland compositor + myNiri package
   self.nixosModules.common          # baseline (see [[modules/common]])
+  self.nixosModules.home            # home-manager bridge (see [[features/home]])
+  self.nixosModules.shell           # fish + starship (see [[features/shell]])
+  self.nixosModules.editor          # helix (see [[features/editor]])
 ];
 ```
 
@@ -89,8 +92,34 @@ security.rtkit.enable = true; # real-time scheduling for pipewire
 
 ```nix
 fonts.enableDefaultPackages = true;
-fonts.packages = [ pkgs.noto-fonts pkgs.noto-fonts-color-emoji ];
+fonts.packages = [
+  pkgs.noto-fonts
+  pkgs.noto-fonts-color-emoji
+  pkgs.nerd-fonts.jetbrains-mono  # monospace coding font
+  pkgs.nerd-fonts.symbols-only    # icon glyphs for noctalia bar
+];
 ```
+
+## Bluetooth
+
+```nix
+hardware.bluetooth = {
+  enable = true;
+  powerOnBoot = true;
+};
+```
+
+## User Packages
+
+Packages installed for user `erik` (not global):
+
+| Package | Purpose |
+|---|---|
+| `waylock` | Screen locker (triggered by `Mod+Shift+L` in niri) |
+| `grim` | Wayland screenshot tool |
+| `slurp` | Region selector (piped into grim for selection screenshots) |
+| `wl-clipboard` | Wayland clipboard utilities (`wl-copy`, `wl-paste`) |
+| `cliphist` | Clipboard history manager |
 
 ## Hardware
 

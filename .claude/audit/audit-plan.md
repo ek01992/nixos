@@ -6,15 +6,15 @@ Source: .claude/audit/audit-report.md
 
 ## Phase 1: Quick Wins (≤30 min each)
 
-- [ ] **Fix `new-host.sh` template drift** | `scripts/new-host.sh` | Add `self.nixosModules.home`, `self.nixosModules.shell`, `self.nixosModules.editor` to both the bare-metal and wsl configuration.nix templates. Expected delta: prevents every future `new-host.sh` scaffold from producing a broken config.
+- [x] **Fix `new-host.sh` template drift** | `scripts/new-host.sh` | Add `self.nixosModules.home`, `self.nixosModules.shell`, `self.nixosModules.editor` to both the bare-metal and wsl configuration.nix templates. Expected delta: prevents every future `new-host.sh` scaffold from producing a broken config.
 
-- [ ] **Update `wiki/overview.md`** | `wiki/overview.md` | Add `editor.nix`, `home.nix`, `shell.nix` to the module graph; add `home-manager` to the flake inputs section. Use `/wiki-update modules/features/editor.nix modules/features/home.nix modules/features/shell.nix`. Expected delta: module graph accurate again.
+- [x] **Update `wiki/overview.md`** | `wiki/overview.md` | Add `editor.nix`, `home.nix`, `shell.nix` to the module graph; add `home-manager` to the flake inputs section. Use `/wiki-update modules/features/editor.nix modules/features/home.nix modules/features/shell.nix`. Expected delta: module graph accurate again.
 
-- [ ] **Update host wiki pages** | `wiki/hosts/nixxy.md`, `wiki/hosts/nixos-wsl.md` | Add `home`, `shell`, `editor` to the imports list for both hosts. Use `/wiki-update modules/hosts/nixxy/configuration.nix modules/hosts/wsl/configuration.nix`. Expected delta: host import queries resolve correctly in 1 read.
+- [x] **Update host wiki pages** | `wiki/hosts/nixxy.md`, `wiki/hosts/nixos-wsl.md` | Add `home`, `shell`, `editor` to the imports list for both hosts. Use `/wiki-update modules/hosts/nixxy/configuration.nix modules/hosts/wsl/configuration.nix`. Expected delta: host import queries resolve correctly in 1 read.
 
-- [ ] **Update `wiki/features/niri.md`** | `wiki/features/niri.md` | Expand keybinds section to document all ~20 binds (navigation, resize, workspace switching, lock, screenshot). Use `/wiki-update modules/features/niri.nix`. Expected delta: niri keybind queries no longer require source-file fallback.
+- [x] **Update `wiki/features/niri.md`** | `wiki/features/niri.md` | Expand keybinds section to document all ~20 binds (navigation, resize, workspace switching, lock, screenshot). Use `/wiki-update modules/features/niri.nix`. Expected delta: niri keybind queries no longer require source-file fallback.
 
-- [ ] **Move ECC Overrides section to top of CLAUDE.md** | `CLAUDE.md` | Relocate the "ECC Overrides (NixOS-specific)" section to immediately after "What This Is", before Common Commands. Expected delta: prevents ECC agent misfires at session start.
+- [x] **Move ECC Overrides section to top of CLAUDE.md** | `CLAUDE.md` | Relocate the "ECC Overrides (NixOS-specific)" section to immediately after "What This Is", before Common Commands. Expected delta: prevents ECC agent misfires at session start.
 
 ---
 
