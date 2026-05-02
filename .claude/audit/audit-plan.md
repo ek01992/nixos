@@ -20,13 +20,13 @@ Source: .claude/audit/audit-report.md
 
 ## Phase 2: Medium Effort (1–2 hours each)
 
-- [ ] **Create 3 missing wiki pages** | `wiki/features/editor.md`, `wiki/features/home.md`, `wiki/features/shell.md` | Use `/wiki-update` for each. For `shell.md`, document the intentional bash/fish alias duplication (common.nix handles bash; shell.nix handles fish — both hosts import both). Expected delta: full wiki coverage for all feature modules.
+- [x] **Create 3 missing wiki pages** | `wiki/features/editor.md`, `wiki/features/home.md`, `wiki/features/shell.md` | Use `/wiki-update` for each. For `shell.md`, document the intentional bash/fish alias duplication (common.nix handles bash; shell.nix handles fish — both hosts import both). Expected delta: full wiki coverage for all feature modules.
 
-- [ ] **Trim CLAUDE.md** | `CLAUDE.md` | (a) Remove Key inputs table (6 rows, ~90w) — replace with: "See `flake.nix` for current inputs." (b) Condense Feature modules section: trim niri paragraph to one line referencing `[[features/niri]]`; trim noctalia paragraph to one line. Expected delta: ~180w reduction per session.
+- [x] **Trim CLAUDE.md** | `CLAUDE.md` | (a) Remove Key inputs table (6 rows, ~90w) — replace with: "See `flake.nix` for current inputs." (b) Condense Feature modules section: trim niri paragraph to one line referencing `[[features/niri]]`; trim noctalia paragraph to one line. Expected delta: ~180w reduction per session.
 
-- [ ] **Investigate and re-enable hooks** | `.claude/settings.local.json` | Run `git log -p .claude/settings.local.json` to understand why `disableAllHooks: true` was set. If no blocking reason, remove the setting. Then add a PostToolUse hook for `nixfmt-tree` on `*.nix` file writes. Consider adding wiki-lint to the Stop hook. Expected delta: eliminates manual nixfmt-tree step; catches wiki staleness automatically.
+- [x] **Investigate and re-enable hooks** | `.claude/settings.local.json` | Run `git log -p .claude/settings.local.json` to understand why `disableAllHooks: true` was set. If no blocking reason, remove the setting. Then add a PostToolUse hook for `nixfmt-tree` on `*.nix` file writes. Consider adding wiki-lint to the Stop hook. Expected delta: eliminates manual nixfmt-tree step; catches wiki staleness automatically.
 
-- [ ] **Write `new-wiki-stub.sh`** | `scripts/new-wiki-stub.sh` | Script that accepts a source .nix path and creates a corresponding wiki page stub with correct frontmatter (`title`, `type`, `updated`, `sources`). Should follow bash-scripts.md standards, use `<<'EOF'` heredoc quoting, validate target does not exist, and `git add` the new file. Expected delta: wiki-lint "no coverage" warnings become 1-command fixes.
+- [x] **Write `new-wiki-stub.sh`** | `scripts/new-wiki-stub.sh` | Script that accepts a source .nix path and creates a corresponding wiki page stub with correct frontmatter (`title`, `type`, `updated`, `sources`). Should follow bash-scripts.md standards, use `<<'EOF'` heredoc quoting, validate target does not exist, and `git add` the new file. Expected delta: wiki-lint "no coverage" warnings become 1-command fixes.
 
 ---
 

@@ -112,19 +112,12 @@ Hosts currently defined: `nixos-wsl` (WSL2, no display server, dir: `wsl/`) and 
 
 Reusable features exposed as `flake.nixosModules.<feature>` and imported by host configurations:
 
-- **`niri.nix`** — defines both `flake.nixosModules.niri` (enables the compositor, installs `xwayland-satellite` and `polkit_gnome` as system packages) and `perSystem.packages.myNiri` (the wrapped niri package with keybinds, layout, and startup of myNoctalia); configures xwayland-satellite and kitty as terminal
-- **`noctalia/noctalia.nix`** — defines `perSystem.packages.myNoctalia`; reads `noctalia.json` with `builtins.fromJSON` at build time and passes `.settings` to the `wrapper-modules` noctalia wrapper
+- **`niri.nix`** — see [[features/niri]]
+- **`noctalia/noctalia.nix`** — see [[features/noctalia]]
 
 ### Key inputs
 
-| Input | Purpose |
-|---|---|
-| `nixpkgs` | Package set — tracking **nixos-unstable** |
-| `flake-parts` | Modular flake composition |
-| `import-tree` | Auto-imports all `.nix` files in `modules/` |
-| `nixos-wsl` | WSL2 NixOS support (pinned to `2511.7.1`) |
-| `wrapper-modules` (BirdeeHub) | Wraps niri and noctalia with declarative settings |
-| `claude-code-nix` (sadjow) | Claude Code CLI package, used in `devShells.default` |
+See `flake.nix` for current inputs.
 
 ### Noctalia configuration
 

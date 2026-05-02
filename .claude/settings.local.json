@@ -36,7 +36,19 @@
   "enabledMcpjsonServers": [
     "nixos"
   ],
-  "disableAllHooks": true,
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/nixfmt-on-nix-write.sh"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "everything-claude-code@everything-claude-code": true
   }
