@@ -7,6 +7,15 @@
         enable = true;
         package = self.packages.${pkgs.stdenv.hostPlatform.system}.myNiri;
       };
+
+      # xwayland-satellite provides X11 compatibility; niri's wrapper references
+      # it by path, so it must be on the system PATH.
+      # polkit_gnome provides a graphical auth agent for the user session;
+      # its XDG autostart entry is picked up by systemd-xdg-autostart-generator.
+      environment.systemPackages = with pkgs; [
+        xwayland-satellite
+        polkit_gnome
+      ];
     };
 
   perSystem =

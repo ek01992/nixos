@@ -24,7 +24,9 @@
       "Bash(./scripts/new-host.sh testwsl *)",
       "Bash(./scripts/new-feature.sh myfeature *)",
       "Bash(./scripts/new-feature.sh mywrapper *)",
-      "Bash(./scripts/new-devshell.sh mydev *)"
+      "Bash(./scripts/new-devshell.sh mydev *)",
+      "Bash(nix run *)",
+      "Bash(nix fmt *)"
     ]
   },
   "enabledMcpjsonServers": [
