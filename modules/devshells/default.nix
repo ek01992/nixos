@@ -15,6 +15,7 @@
           nil
           deadnix
           statix
+          nodejs
           ripgrep
           fd
           jq
