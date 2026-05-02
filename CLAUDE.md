@@ -24,6 +24,9 @@ sudo nixos-rebuild switch --flake .#nixxy        # on nixxy
 nix build .#packages.x86_64-linux.myNiri
 nix build .#packages.x86_64-linux.myNoctalia
 
+# Enter the dev shell (Claude Code CLI + Nix dev tools)
+nix develop
+
 # Format all Nix files
 nixfmt-tree
 
@@ -112,6 +115,7 @@ Reusable features exposed as `flake.nixosModules.<feature>` and imported by host
 | `import-tree` | Auto-imports all `.nix` files in `modules/` |
 | `nixos-wsl` | WSL2 NixOS support (pinned to `2511.7.1`) |
 | `wrapper-modules` (BirdeeHub) | Wraps niri and noctalia with declarative settings |
+| `claude-code-nix` (sadjow) | Claude Code CLI package, used in `devShells.default` |
 
 ### Noctalia configuration
 

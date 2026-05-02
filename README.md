@@ -16,6 +16,7 @@ Declarative NixOS flake configuration for two machines, built with `flake-parts`
 | `myNiri` | wrapped package | Niri compositor with keybinds, layout, and startup of `myNoctalia` baked in at build time |
 | `myNoctalia` | wrapped package | Shell bar/launcher; reads `noctalia.json` at build time — edit the JSON to change widgets |
 | `common` | NixOS module | Baseline for all hosts: flakes, core packages, git config, shell aliases, SSH, firewall, locale |
+| `devShells.default` | dev shell | Claude Code CLI + Nix dev tools (nil, nixfmt, treefmt, ripgrep, fd, jq, gh); enter with `nix develop` |
 
 ## Architecture
 
@@ -49,6 +50,9 @@ nix build .#packages.x86_64-linux.myNoctalia
 
 # Format all .nix files
 nixfmt-tree
+
+# Enter the dev shell
+nix develop
 ```
 
 Shell aliases (available on both hosts after switching):

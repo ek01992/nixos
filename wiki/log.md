@@ -27,6 +27,18 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 - Updated: [[index]] (added scaffolding concept row)
 - Key changes: new scaffolding system with three bash scripts (new-host, new-feature, new-devshell) and /nixos-scaffold skill
 
+## [2026-05-01] lint | full pass
+- Orphans: none
+- Stale: none (all sources 2026-05-01, all pages updated: 2026-05-01)
+- Fixed: none
+- No coverage: none (modules/devshells/default.nix now covered by [[modules/devshells]])
+
+## [2026-05-01] ingest | modules/devshells/default.nix
+- Created: [[modules/devshells]]
+- Updated: [[overview]] (added claude-code-nix input, devshells entry in module graph, nix develop command, updated sources frontmatter)
+- Updated: [[index]] (added devshells row under Modules)
+- Key changes: new default devshell exposing devShells.default — Claude Code CLI (claude-code-nix input), dev tools (treefmt, nixfmt-tree, nil, ripgrep, fd, jq, neovim, gh), ANTHROPIC_API_KEY guard in shellHook
+
 ## [2026-05-01] ingest | Retire ARCHITECTURE.md and LLM-WIKI.md
 - Updated: [[concepts/dendritic-pattern]], [[concepts/flake-parts]], [[concepts/wrapper-modules]], [[features/niri]], [[features/noctalia]], [[overview]]
 - Key changes: Removed ARCHITECTURE.md from sources: frontmatter on 6 pages; updated wiki-schema.md example; updated CLAUDE.md to point to wiki instead of ARCHITECTURE.md; added deprecation markers to ARCHITECTURE.md and LLM-WIKI.md

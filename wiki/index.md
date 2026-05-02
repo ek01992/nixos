@@ -1,7 +1,7 @@
 # Wiki Index
 
 Content catalog. Read this first to find relevant pages before drilling in.  
-Last updated: 2026-05-01 (scaffolding concept added)
+Last updated: 2026-05-01 (devshells module added)
 
 ---
 
@@ -49,6 +49,7 @@ Last updated: 2026-05-01 (scaffolding concept added)
 | Page | Summary |
 |---|---|
 | [[modules/common]] | Baseline imported by all hosts: flakes enabled, core pkgs, git, shell aliases, SSH, locale |
+| [[modules/devshells]] | Default devshell — Claude Code CLI, Nix dev tools, ANTHROPIC_API_KEY guard |
 
 ---
 

@@ -5,6 +5,7 @@ updated: 2026-05-01
 sources:
   - flake.nix
   - CLAUDE.md
+  - modules/devshells/default.nix
 ---
 
 # System Overview
@@ -27,8 +28,9 @@ A NixOS flake configuration for two machines, built with [[concepts/flake-parts]
 | `import-tree` | latest | Auto-discovers `modules/` |
 | `nixos-wsl` | 2511.7.1 (pinned) | WSL2 NixOS support |
 | `wrapper-modules` (BirdeeHub) | latest | Declarative app wrappers |
+| `claude-code-nix` (sadjow) | latest | Claude Code CLI for devShells.default |
 
-`nixos-wsl` and `wrapper-modules` both follow `nixpkgs` to avoid duplicate copies of nixpkgs in the closure.
+`nixos-wsl`, `wrapper-modules`, and `claude-code-nix` all follow `nixpkgs` to avoid duplicate copies of nixpkgs in the closure.
 
 ## Module Graph
 
@@ -37,6 +39,8 @@ flake.nix
 └── import-tree → modules/
     ├── parts.nix           (systems: x86_64-linux)
     ├── common.nix          → flake.nixosModules.common
+    ├── devshells/
+    │   └── default.nix     → perSystem.devShells.default
     ├── hosts/wsl/          → flake.nixosConfigurations.nixos-wsl
     │   ├── default.nix
     │   ├── configuration.nix
@@ -67,6 +71,7 @@ nixos-rebuild build --flake .#nixxy
 sudo nixos-rebuild switch --flake .#nixos-wsl
 sudo nixos-rebuild switch --flake .#nixxy
 nixfmt-tree                              # format all .nix files
+nix develop                              # enter the dev shell
 nix build .#packages.x86_64-linux.myNiri
 nix build .#packages.x86_64-linux.myNoctalia
 ```
