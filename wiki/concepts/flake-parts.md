@@ -4,6 +4,7 @@ type: concept
 updated: 2026-05-01
 sources:
   - flake.nix
+  - modules/parts.nix
 ---
 
 # flake-parts
@@ -35,10 +36,10 @@ outputs = inputs:
 `modules/parts.nix` is the only place that sets supported architectures:
 
 ```nix
-{ ... }: { systems = [ "x86_64-linux" "aarch64-linux" ]; }
+{ config = { systems = [ "x86_64-linux" ]; }; }
 ```
 
-Adding a new architecture: edit just this file.
+Currently only `x86_64-linux`. Adding a new architecture: edit just this file.
 
 ## Module Args
 

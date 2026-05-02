@@ -1,7 +1,7 @@
 # Wiki Index
 
 Content catalog. Read this first to find relevant pages before drilling in.  
-Last updated: 2026-05-01
+Last updated: 2026-05-01 (scaffolding concept added)
 
 ---
 
@@ -40,6 +40,7 @@ Last updated: 2026-05-01
 | [[concepts/flake-parts]] | Modular flake framework; perSystem abstraction; option-based merging |
 | [[concepts/import-tree]] | Auto-discovers modules/ recursively; git add required before nix flake check |
 | [[concepts/wrapper-modules]] | BirdeeHub library; bundles app config into derivation; eliminates dotfile dependency |
+| [[concepts/scaffolding]] | Three bash scripts + /nixos-scaffold skill for generating host/feature/devshell boilerplate |
 
 ---
 

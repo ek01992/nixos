@@ -35,7 +35,7 @@ A NixOS flake configuration for two machines, built with [[concepts/flake-parts]
 ```
 flake.nix
 └── import-tree → modules/
-    ├── parts.nix           (systems: x86_64-linux, aarch64-linux)
+    ├── parts.nix           (systems: x86_64-linux)
     ├── common.nix          → flake.nixosModules.common
     ├── hosts/wsl/          → flake.nixosConfigurations.nixos-wsl
     │   ├── default.nix
@@ -72,3 +72,15 @@ nix build .#packages.x86_64-linux.myNoctalia
 ```
 
 Shell aliases (from [[modules/common]]): `nrb`, `nrs`, `nfc`, `nfu`.
+
+## Scaffolding
+
+Bash scripts generate boilerplate for new flake components — templates match exact repo conventions. See [[concepts/scaffolding]] for full documentation.
+
+```bash
+./scripts/new-host.sh <hostname> [bare-metal|wsl]
+./scripts/new-feature.sh <name> [--nixos-module-only|--package-only|--both|--wrapped <wrapper>]
+./scripts/new-devshell.sh <name>
+```
+
+Agent shortcut: `/nixos-scaffold` skill routes to the correct script with guided output.

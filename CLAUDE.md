@@ -27,6 +27,12 @@ nix build .#packages.x86_64-linux.myNoctalia
 # Format all Nix files
 nixfmt-tree
 
+# Shell aliases (defined in modules/common.nix, available on both hosts)
+# nrb  → nixos-rebuild build --flake $HOME/nixos
+# nrs  → sudo nixos-rebuild switch --flake $HOME/nixos
+# nfc  → nix flake check
+# nfu  → nix flake update
+
 # Evaluate a specific config option interactively
 nix repl
 # then inside repl: :lf .
@@ -58,7 +64,7 @@ Scripts `git add` new files automatically and print exact next steps. Use `/nixo
 
 `flake.nix` is intentionally minimal — it passes everything to `flake-parts`, which uses `import-tree` to auto-discover and merge every `.nix` file under `modules/` as a flake-parts module. Adding a new file to `modules/` automatically includes it; no registration step needed.
 
-`modules/parts.nix` sets `systems = ["x86_64-linux" "aarch64-linux"]` — the only file that needs changing to add a new supported architecture.
+`modules/parts.nix` sets `systems = ["x86_64-linux"]` — the only file that needs changing to add a new supported architecture.
 
 ### Module conventions
 
