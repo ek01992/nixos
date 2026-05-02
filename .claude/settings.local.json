@@ -30,13 +30,25 @@
       "Bash(cat *)",
       "Bash(tail *)",
       "Bash(nix-instantiate --parse *)",
-      "Bash(xargs dirname *)"
+      "Bash(xargs dirname *)",
+      "Bash(node *)"
     ]
   },
   "enabledMcpjsonServers": [
     "nixos"
   ],
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/nix-parse-check.sh"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",

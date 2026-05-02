@@ -24,11 +24,13 @@
             name = "Erik";
             email = "erik@cyberworkforce.com";
           };
-          init.defaultBranch = "main";
+          init = {
+            defaultBranch = "main";
+          };
         };
       };
 
-      programs.bash.shellAliases = {
+      environment.shellAliases = {
         nrb = "nixos-rebuild build --flake $HOME/nixos";
         nrs = "sudo nixos-rebuild switch --flake $HOME/nixos";
         nfc = "nix flake check";
@@ -37,7 +39,16 @@
 
       nixpkgs.config.allowUnfree = true;
 
-      services.openssh.enable = true;
+      services.openssh = {
+        enable = true;
+        settings = {
+          PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
+          PermitRootLogin = "no";
+          AllowUsers = [ "erik" ];
+        };
+        extraConfig = "Port 22\nAuthenticationMethods publickey\n";
+      };
 
       networking.firewall = {
         enable = true;
