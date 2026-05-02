@@ -137,6 +137,12 @@ Reusable features exposed as `flake.nixosModules.<feature>` and imported by host
 - **Wiki**: Read `wiki/index.md` first on any codebase question, then navigate to the relevant page. See `wiki/wiki-schema.md` for ingest/query/lint rules.
 - **Architecture concepts**: See [[concepts/dendritic-pattern]], [[concepts/flake-parts]], and [[concepts/wrapper-modules]] in the wiki.
 
+### Efficiency Rules
+
+- **Git-diff first for update tasks**: Before reading any wiki page or source file for a doc-sync task, run `git log --oneline -5 -- modules/` or `git diff --stat HEAD~1` to identify exactly which files changed. Read only the wiki pages whose `sources:` frontmatter lists those files.
+- **Parallel Read over Explore agents**: For any file whose path is known, use parallel `Read` calls — not an Explore agent. Explore returns summaries; `Read` returns exact content. See `.claude/rules/exploration-efficiency.md`.
+- **`nixfmt-tree` availability**: If `nixfmt-tree` is not on PATH, use `nix run nixpkgs#nixfmt-tree` or `nix fmt` (both are in the allow list).
+
 ## ECC Overrides (NixOS-specific)
 
 This is a NixOS flake config repo, not a software project. The following global ECC behaviors do **not** apply here:

@@ -1,17 +1,45 @@
 # Wiki & Data Retrieval Order
 
-## Lookup Hierarchy
+## Lookup Hierarchy (Questions)
 
-For any question about this repo's configuration, hosts, features, modules, or architecture:
+For any **question** about this repo's configuration, hosts, features, modules, or architecture:
 
 1. **Wiki first** — read `wiki/index.md`, then navigate to the relevant page
 2. **Source files second** — only if the wiki page is insufficient or its `updated:` date is older than the source file's last git commit
 3. **nixos MCP tool** — for package/option lookups, channel info, or anything about nixpkgs
 4. **Never**: general web search or training-data guesses for Nix package attributes
 
+## Update Task Hierarchy (Post-Change Doc Sync)
+
+For **update tasks** (syncing docs after code changes) — use this order instead:
+
+1. **Git diff first** — identify what changed:
+   ```bash
+   git log --oneline -5 -- modules/
+   # or
+   git diff --stat HEAD~1
+   ```
+2. **Map to wiki pages** — derive the wiki path directly from the source path:
+   - `modules/features/niri.nix` → `wiki/features/niri.md`
+   - `modules/hosts/nixxy/configuration.nix` → `wiki/hosts/nixxy.md`
+   - No need to read `wiki/index.md` first when the mapping is obvious
+3. **Read only the affected pages** — parallel `Read` calls on the specific files
+4. **Use `/wiki-update <file>`** — never edit wiki pages manually (see below)
+
+## Wiki Updates: Use the Skill
+
+**`/wiki-update <file>` is mandatory for all wiki page edits.** Manual edits bypass `wiki/log.md` and may miss `wiki/index.md` summary updates.
+
+```
+/wiki-update modules/features/niri.nix
+/wiki-update modules/hosts/nixxy/configuration.nix modules/features/niri.nix
+```
+
+The skill handles: page edits, index.md summary refresh, and log.md append in one pass.
+
 ## Staleness Check
 
-Before trusting a wiki page, verify it isn't stale:
+Before trusting a wiki page for a question, verify it isn't stale:
 
 ```bash
 git log -1 --format=%ci -- <source-file-path>
@@ -29,8 +57,20 @@ Always use the `nixos` MCP tool (available via `mcp__nixos__nix`):
 
 Never use `nix search nixpkgs <name>` in a shell call — the MCP is faster and more current.
 
+## Nixpkgs Module Source
+
+For questions about what a NixOS option *actually does* (e.g., what `programs.niri.enable` sets up), check the nixpkgs module source in the store before making MCP lookups:
+
+```bash
+find /nix/store -name "<module>.nix" -path "*/nixos/modules/*" 2>/dev/null | head -3
+```
+
+This avoids a round-trip MCP call when the module is already on disk.
+
 ## What Not to Do
 
-- Do not read `.nix` source files to answer structural questions the wiki already covers
+- Do not spawn Explore agents to read files with known paths — use parallel `Read` calls
+- Do not read `wiki/index.md` for update tasks when the wiki path is derivable from the source path
+- Do not manually edit wiki pages — use `/wiki-update <file>`
 - Do not run `nix search` via Bash when the MCP is available
 - Do not use `documentation-lookup` or `deep-research` skills — not configured for this project

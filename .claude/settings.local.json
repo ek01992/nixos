@@ -26,7 +26,9 @@
       "Bash(./scripts/new-feature.sh mywrapper *)",
       "Bash(./scripts/new-devshell.sh mydev *)",
       "Bash(nix run *)",
-      "Bash(nix fmt *)"
+      "Bash(nix fmt *)",
+      "Bash(cat *)",
+      "Bash(tail *)"
     ]
   },
   "enabledMcpjsonServers": [
