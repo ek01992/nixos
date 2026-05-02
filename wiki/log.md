@@ -42,3 +42,9 @@ Parse with: `grep "^## \[" wiki/log.md | tail -10`
 ## [2026-05-01] ingest | Retire ARCHITECTURE.md and LLM-WIKI.md
 - Updated: [[concepts/dendritic-pattern]], [[concepts/flake-parts]], [[concepts/wrapper-modules]], [[features/niri]], [[features/noctalia]], [[overview]]
 - Key changes: Removed ARCHITECTURE.md from sources: frontmatter on 6 pages; updated wiki-schema.md example; updated CLAUDE.md to point to wiki instead of ARCHITECTURE.md; added deprecation markers to ARCHITECTURE.md and LLM-WIKI.md
+
+## [2026-05-02] lint | full pass (nixos-audit Domain B)
+- Orphans: none
+- Stale: [[hosts/nixxy]] (missing home/shell/editor imports); [[hosts/nixos-wsl]] (same); [[overview]] (missing editor/home/shell in module graph, missing home-manager input); [[features/niri]] (keybinds section documents 3 of ~20 binds)
+- Fixed: none (audit is read-only; fixes scheduled in .claude/audit/audit-plan.md)
+- No coverage: modules/features/editor.nix, modules/features/home.nix, modules/features/shell.nix
