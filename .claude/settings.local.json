@@ -29,7 +29,8 @@
       "Bash(nix fmt *)",
       "Bash(cat *)",
       "Bash(tail *)",
-      "Bash(nix-instantiate --parse *)"
+      "Bash(nix-instantiate --parse *)",
+      "Bash(xargs dirname *)"
     ]
   },
   "enabledMcpjsonServers": [

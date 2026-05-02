@@ -134,6 +134,7 @@ Reusable features exposed as `flake.nixosModules.<feature>` and imported by host
 | Before ANY commit | `/verification-loop` |
 | Update flake inputs | `/nix-update` |
 | Long session nearing context limit | `/strategic-compact` |
+| Comprehensive config audit (tokens, wiki, automation, modules, scripts) | `/nixos-audit` |
 
 ### Lookups
 

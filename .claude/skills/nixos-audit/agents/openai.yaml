@@ -1,0 +1,7 @@
+interface:
+  display_name: "NixOS Audit"
+  short_description: "Comprehensive audit of NixOS flake config — produces audit-report.md and audit-plan.md"
+  brand_color: "#5277C3"
+  default_prompt: "Use /nixos-audit to run a comprehensive audit of this NixOS flake config"
+policy:
+  allow_implicit_invocation: false
