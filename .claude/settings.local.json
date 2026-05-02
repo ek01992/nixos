@@ -5,10 +5,26 @@
       "Read(/tmp/everything-claude-code/.agents/skills/**)",
       "Read(/home/erik/.claude/**)",
       "Read(/home/erik/.claude/rules/**)",
+      "Read(/home/erik/nixos/**)",
       "Bash(nix flake *)",
+      "Bash(nix build *)",
+      "Bash(nix eval *)",
+      "Bash(nix repl *)",
+      "Bash(nixos-rebuild *)",
+      "Bash(nixfmt-tree)",
       "Bash(gh api *)",
       "Bash(git *)",
-      "mcp__nixos__nix"
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "mcp__nixos__nix",
+      "mcp__nixos__nix_versions",
+      "Bash(chmod +x *)",
+      "Bash(./scripts/new-host.sh testbox *)",
+      "Bash(./scripts/new-host.sh testwsl *)",
+      "Bash(./scripts/new-feature.sh myfeature *)",
+      "Bash(./scripts/new-feature.sh mywrapper *)",
+      "Bash(./scripts/new-devshell.sh mydev *)"
     ]
   },
   "enabledMcpjsonServers": [

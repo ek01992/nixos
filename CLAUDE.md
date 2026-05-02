@@ -35,6 +35,23 @@ nix repl
 nix eval .#nixosConfigurations.nixxy.config.<option>
 ```
 
+## Scaffolding
+
+Generate boilerplate for new components — templates match exact repo conventions:
+
+```bash
+# New host (creates modules/hosts/<hostname>/{default,configuration,hardware}.nix)
+./scripts/new-host.sh <hostname> [bare-metal|wsl]
+
+# New feature module
+./scripts/new-feature.sh <name> [--nixos-module-only|--package-only|--both|--wrapped <wrapper>]
+
+# New devShell (creates modules/devshells/<name>.nix)
+./scripts/new-devshell.sh <name>
+```
+
+Scripts `git add` new files automatically and print exact next steps. Use `/nixos-scaffold` for guided usage.
+
 ## Architecture
 
 ### Flake structure
@@ -98,4 +115,16 @@ Reusable features exposed as `flake.nixosModules.<feature>` and imported by host
 
 - **Package lookups**: Use the `nixos` MCP server (available in this session) — faster and more current than `nix search` or manual nixpkgs browsing.
 - **Repo patterns**: Run `/nixos-patterns` to recall structural conventions, module templates, and commit style before making changes.
-- **Deeper reference**: See `ARCHITECTURE.md` for background on the dendritic pattern, flake-parts internals, and wrapper-modules design.
+- **Architecture concepts**: See [[concepts/dendritic-pattern]], [[concepts/flake-parts]], and [[concepts/wrapper-modules]] in the wiki for background on structural patterns.
+- **Wiki**: See `wiki/wiki-schema.md` for how to maintain and query the wiki. Read `wiki/index.md` first on any wiki query.
+- **Wiki maintenance**: `/wiki-lint` — validate the wiki (broken links, stale dates, missing coverage). `/wiki-update <file>` — ingest a changed source file into the wiki.
+- **Scaffolding**: `/nixos-scaffold` — generate a new host, feature module, or devShell from repo-pattern templates. Faster than reconstructing boilerplate from scratch.
+
+## ECC Overrides (NixOS-specific)
+
+This is a NixOS flake config repo, not a software project. The following global ECC behaviors do **not** apply here:
+
+- **No code-reviewer, security-reviewer, or tdd-guide agents** for `.nix` file edits — they add cost without actionable output on config files. Config correctness is validated by `nix flake check` and `nixos-rebuild build`.
+- **No 80% test coverage or TDD requirements** — NixOS configs don't have unit tests. Use `nix flake check` + build validation instead.
+- **No development-workflow research phase** (gh search, library docs, package registries) for Nix module changes — the `nixos` MCP tool is the correct lookup path.
+- **Wiki-first lookups**: For any question about host configs, module structure, feature details, or architecture — read `wiki/index.md` first and navigate to the relevant page. Read source files directly only when the wiki page is insufficient or marked stale.
