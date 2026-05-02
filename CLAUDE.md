@@ -89,7 +89,7 @@ Note: the directory name (`wsl`, `nixxy`) differs from the flake output name (`n
 | `configuration.nix` | Defines `flake.nixosModules.<host>Configuration` — imports hardware + features, sets users/packages/services |
 | `hardware.nix` | Defines `flake.nixosModules.<host>Hardware` — boot, filesystems, swap, platform |
 
-Hosts currently defined: `nixos-wsl` (WSL2, no display server, dir: `wsl/`) and `nixxy` (bare metal, niri Wayland, pipewire, dir: `nixxy/`).
+Hosts currently defined: `nixos-wsl` (WSL2, no display server, dir: `wsl/`) and `nixxy` (bare metal, greetd + niri Wayland, pipewire, dir: `nixxy/`).
 
 ### Shared modules (`modules/`)
 
@@ -100,7 +100,7 @@ Hosts currently defined: `nixos-wsl` (WSL2, no display server, dir: `wsl/`) and 
 
 Reusable features exposed as `flake.nixosModules.<feature>` and imported by host configurations:
 
-- **`niri.nix`** — defines both `flake.nixosModules.niri` (enables the compositor) and `perSystem.packages.myNiri` (the wrapped niri package with keybinds, layout, and startup of myNoctalia); configures xwayland-satellite and kitty as terminal
+- **`niri.nix`** — defines both `flake.nixosModules.niri` (enables the compositor, installs `xwayland-satellite` and `polkit_gnome` as system packages) and `perSystem.packages.myNiri` (the wrapped niri package with keybinds, layout, and startup of myNoctalia); configures xwayland-satellite and kitty as terminal
 - **`noctalia/noctalia.nix`** — defines `perSystem.packages.myNoctalia`; reads `noctalia.json` with `builtins.fromJSON` at build time and passes `.settings` to the `wrapper-modules` noctalia wrapper
 
 ### Key inputs

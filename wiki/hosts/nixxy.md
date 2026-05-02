@@ -44,10 +44,28 @@ imports = [
 - Network manager: `networkmanager`
 - SSH enabled (port 22), from [[modules/common]]
 
+## Display Manager
+
+greetd + tuigreet — handles the login screen before the niri session starts:
+
+```nix
+services.greetd = {
+  enable = true;
+  useTextGreeter = true;  # suppresses systemd boot messages behind the TUI
+  settings.default_session = {
+    command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
+    user = "greeter";
+  };
+};
+```
+
+`niri-session` is registered in `services.displayManager.sessionPackages` by `programs.niri.enable`.
+
 ## Desktop Stack
 
 | Layer | Package |
 |---|---|
+| Login | `greetd` + `tuigreet` |
 | Compositor | [[features/niri]] (`myNiri`, wrapper-modules) |
 | Shell/bar | [[features/noctalia]] (`myNoctalia`, wrapper-modules) |
 | Terminal | `kitty` (launched via niri keybind `Mod+Return`) |
@@ -71,7 +89,7 @@ security.rtkit.enable = true; # real-time scheduling for pipewire
 
 ```nix
 fonts.enableDefaultPackages = true;
-fonts.packages = [ pkgs.noto-fonts pkgs.noto-fonts-emoji ];
+fonts.packages = [ pkgs.noto-fonts pkgs.noto-fonts-color-emoji ];
 ```
 
 ## Hardware

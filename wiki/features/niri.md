@@ -26,7 +26,32 @@ programs.niri = {
 };
 ```
 
-The system-level `programs.niri.enable` hooks niri into PAM, session management, and the system path.
+`programs.niri.enable` automatically wires up a set of system-level services (sourced from `nixos/modules/programs/wayland/niri.nix` in nixpkgs):
+
+| What | How |
+|---|---|
+| xdg.portal | gnome + gtk portals configured; screencast support enabled |
+| gnome-keyring | enabled by default (required for portal Secret interface) |
+| polkit daemon | `security.polkit.enable = true` (from `wayland-session.nix`) |
+| dconf | `programs.dconf.enable = true` |
+| session registration | niri appears in `services.displayManager.sessionPackages` |
+| graphical-desktop | `services.graphical-desktop.enable = true` |
+| XDG autostart | `services.xserver.desktopManager.runXdgAutostartIfNone = true` |
+
+Note: `programs.niri` explicitly sets `enableXWayland = false` — X11 is handled by `xwayland-satellite` instead (see below).
+
+## System Packages
+
+The `nixosModules.niri` module also installs:
+
+```nix
+environment.systemPackages = with pkgs; [
+  xwayland-satellite  # must be on PATH; wrapper config references it via lib.getExe
+  polkit_gnome        # graphical auth agent; autostarted via XDG autostart in user session
+];
+```
+
+`polkit_gnome` ships an XDG autostart `.desktop` file. With `runXdgAutostartIfNone = true` set by `programs.niri`, it is launched automatically when the niri session starts.
 
 ## Package: myNiri
 

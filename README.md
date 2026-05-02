@@ -7,7 +7,7 @@ Declarative NixOS flake configuration for two machines, built with `flake-parts`
 | Host | Type | Display | Notable |
 |------|------|---------|---------|
 | `nixos-wsl` | WSL2 on Windows 11 | headless | shared `/mnt/d/wsl/shared`, systemd enabled |
-| `nixxy` | bare-metal Intel desktop | Niri (Wayland) | Pipewire, Firefox, xwayland-satellite |
+| `nixxy` | bare-metal Intel desktop | Niri (Wayland) | greetd + tuigreet, Pipewire, Firefox, xwayland-satellite |
 
 ## Features & Packages
 
