@@ -19,6 +19,7 @@
           ripgrep
           fd
           jq
+          python3
         ];
 
         shellHook = ''
