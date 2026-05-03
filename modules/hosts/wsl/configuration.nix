@@ -33,6 +33,13 @@
         mount-nvidia-executables = true;
       };
 
+      # Windows OpenSSH holds port 22 on WSL2; disable to avoid bind conflict
+      services.openssh.enable = lib.mkForce false;
+      networking.firewall.enable = lib.mkForce false;
+
+      # CDI generator requires NVML kernel access not available in WSL2
+      systemd.services.nvidia-container-toolkit-cdi-generator.enable = lib.mkForce false;
+
       environment.variables = {
         LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
         CUDA_PATH = "/usr/lib/wsl";

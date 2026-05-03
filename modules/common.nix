@@ -47,7 +47,6 @@
           PermitRootLogin = "no";
           AllowUsers = [ "erik" ];
         };
-        extraConfig = "Port 22\nAuthenticationMethods publickey\n";
       };
 
       networking.firewall = {

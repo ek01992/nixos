@@ -33,7 +33,10 @@
       "Bash(nix-instantiate --parse *)",
       "Bash(xargs dirname *)",
       "Bash(node *)",
-      "Read(//home/erik/.claude/skills/learned/**)"
+      "Read(//home/erik/.claude/skills/learned/**)",
+      "Bash(journalctl *)",
+      "Bash(fuser 22/tcp)",
+      "Bash(systemctl status *)"
     ]
   },
   "enabledMcpjsonServers": [
