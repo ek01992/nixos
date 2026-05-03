@@ -45,7 +45,13 @@
         };
       };
 
-      swapDevices = [ { device = "/dev/disk/by-uuid/fd82a5ac-a68d-4ecb-b50d-ddcc66a96bde"; } ];
+      boot.kernel.sysctl = {
+        "vm.swappiness" = 10;
+        "vm.dirty_ratio" = 15;
+        "vm.dirty_background_ratio" = 5;
+        "kernel.sched_autogroup_enabled" = 1;
+      };
+
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     };
 }

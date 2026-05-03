@@ -90,7 +90,9 @@
               cliphist
             ];
             openssh = {
-              authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAFlPT1jGxLHKRxId53rGNGWT6pI8HzGQ2nyKcG4RGBa erik@home-desktop" ];
+              authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAFlPT1jGxLHKRxId53rGNGWT6pI8HzGQ2nyKcG4RGBa erik@home-desktop"
+              ];
             };
           };
         };

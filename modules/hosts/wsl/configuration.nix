@@ -27,6 +27,23 @@
 
       networking.hostName = "nixos-wsl";
 
+      hardware.nvidia-container-toolkit = {
+        enable = true;
+        suppressNvidiaDriverAssertion = true;
+        mount-nvidia-executables = true;
+      };
+
+      environment.variables = {
+        LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
+        CUDA_PATH = "/usr/lib/wsl";
+      };
+
+      nix.settings = {
+        cores = 12;
+        max-jobs = 2;
+        auto-optimise-store = true;
+      };
+
       users = {
         users = {
           erik = {
