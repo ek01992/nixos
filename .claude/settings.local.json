@@ -15,6 +15,7 @@
       "Bash(gh api *)",
       "Bash(git *)",
       "Bash(grep *)",
+      "Bash(mgrep *)",
       "Bash(find *)",
       "Bash(ls *)",
       "mcp__nixos__nix",
@@ -57,6 +58,10 @@
           {
             "type": "command",
             "command": "/home/erik/nixos/.claude/hooks/nixfmt-on-nix-write.sh"
+          },
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/wiki-remind.sh"
           }
         ]
       }

@@ -66,6 +66,9 @@ Generate boilerplate for new components — templates match exact repo conventio
 
 # New devShell (creates modules/devshells/<name>.nix)
 ./scripts/new-devshell.sh <name>
+
+# New wiki page stub (creates wiki/<category>/<name>.md)
+./scripts/new-wiki-stub.sh <name> [category]
 ```
 
 Scripts `git add` new files automatically and print exact next steps. Use `/nixos-scaffold` for guided usage.
@@ -96,6 +99,7 @@ Full reference: [[overview]] in wiki. Quick map:
 | Update flake inputs | `/nix-update` |
 | Long session nearing context limit | `/strategic-compact` |
 | Comprehensive config audit (tokens, wiki, automation, modules, scripts) | `/nixos-audit` |
+| Search across .nix files or the web | `/mgrep` |
 
 ### Lookups
 
@@ -108,3 +112,4 @@ Full reference: [[overview]] in wiki. Quick map:
 - **Git-diff first for update tasks**: Before reading any wiki page or source file for a doc-sync task, run `git log --oneline -5 -- modules/` or `git diff --stat HEAD~1` to identify exactly which files changed. Read only the wiki pages whose `sources:` frontmatter lists those files.
 - **Parallel Read over Explore agents**: For any file whose path is known, use parallel `Read` calls — not an Explore agent. Explore returns summaries; `Read` returns exact content. See `.claude/rules/exploration-efficiency.md`.
 - **`nixfmt-tree` availability**: If `nixfmt-tree` is not on PATH, use `nix run nixpkgs#nixfmt-tree` or `nix fmt` (both are in the allow list).
+- **mgrep over grep for code search**: Use `/mgrep` (or `mgrep` in Bash) for any symbol/pattern search across `.nix` files — semantic search with ~50% fewer tokens than grep. Use `mgrep --web --answer "query"` for web lookups when the nixos MCP is insufficient.

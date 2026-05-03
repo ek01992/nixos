@@ -5,13 +5,13 @@ set -euo pipefail
 input=$(cat)
 
 # Extract file_path
-file_path=$(echo "$input" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('file_path',''), end='')" 2>/dev/null || true)
+file_path=$(echo "$input" | jq -r '.file_path // ""' 2>/dev/null || true)
 
 # Only check .nix files
 [[ "$file_path" == *.nix ]] || exit 0
 
 # For Write: validate the new content before it's written
-content=$(echo "$input" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('content',''), end='')" 2>/dev/null || true)
+content=$(echo "$input" | jq -r '.content // ""' 2>/dev/null || true)
 
 if [[ -n "$content" ]]; then
     tmp=$(mktemp /tmp/nix-parse-check-XXXXXX.nix)
