@@ -8,14 +8,6 @@ For NixOS flake configurations, testing means:
 3. **nixos-test modules** — for complex service configurations, write NixOS test modules using `nixosTest`
 4. **Lint/format** — `nixpkgs-fmt` or `alejandra` for formatting; `nix flake check` for structural validity
 
-## Verification Before Commits
-
-Before committing NixOS config changes:
-1. Run `nix flake check` to validate flake outputs
-2. Run `nixos-rebuild build --flake .#nixos-wsl` and `nixos-rebuild build --flake .#nixxy`
-3. Run `nixfmt-tree` to format all .nix files
-4. For destructive changes, test in a VM first (`nixos-rebuild build-vm`)
-
 ## Test-Driven Approach for NixOS
 
 When adding new modules or options:

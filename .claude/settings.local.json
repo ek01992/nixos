@@ -31,7 +31,8 @@
       "Bash(tail *)",
       "Bash(nix-instantiate --parse *)",
       "Bash(xargs dirname *)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Read(//home/erik/.claude/skills/learned/**)"
     ]
   },
   "enabledMcpjsonServers": [

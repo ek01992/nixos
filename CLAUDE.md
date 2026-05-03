@@ -72,56 +72,15 @@ Scripts `git add` new files automatically and print exact next steps. Use `/nixo
 
 ## Architecture
 
-### Flake structure
-
-`flake.nix` is intentionally minimal — it passes everything to `flake-parts`, which uses `import-tree` to auto-discover and merge every `.nix` file under `modules/` as a flake-parts module. Adding a new file to `modules/` automatically includes it; no registration step needed.
-
-`modules/parts.nix` sets `systems = ["x86_64-linux"]` — the only file that needs changing to add a new supported architecture.
-
-### Module conventions
-
-Each `.nix` file receives `{ self, inputs, ... }` (flake-parts module args) and exposes outputs under `flake.*` or `perSystem`. The common patterns used here:
-
-- **`flake.nixosModules.<name>`** — a NixOS module, importable by any `nixosConfiguration`
-- **`perSystem.packages.<name>`** — a per-architecture package (e.g., wrapped niri, noctalia)
-
-Cross-referencing packages from within modules:
-- Inside `perSystem`: use `self'.packages.myTool` (auto-resolves to current system)
-- Inside `flake.*` (system-agnostic context): use `self.packages.${pkgs.stdenv.hostPlatform.system}.myTool`
-
-> **Pure eval gotcha**: flakes ignore unstaged files. After creating a new `.nix` file under `modules/`, run `git add <file>` before `nix flake check` or any build will see it.
-
-### Host layout (`modules/hosts/<dir>/`)
-
-Note: the directory name (`wsl`, `nixxy`) differs from the flake output name (`nixos-wsl`, `nixxy`).
-
-| File | Role |
-|---|---|
-| `default.nix` | Defines `flake.nixosConfigurations.<host>`, wires together the modules |
-| `configuration.nix` | Defines `flake.nixosModules.<host>Configuration` — imports hardware + features, sets users/packages/services |
-| `hardware.nix` | Defines `flake.nixosModules.<host>Hardware` — boot, filesystems, swap, platform |
-
-Hosts currently defined: `nixos-wsl` (WSL2, no display server, dir: `wsl/`) and `nixxy` (bare metal, greetd + niri Wayland, pipewire, dir: `nixxy/`).
-
-### Shared modules (`modules/`)
-
-- **`common.nix`** — `flake.nixosModules.common`: baseline settings imported by every host (nix flakes enabled, core packages, openssh, timezone, locale)
-- **`parts.nix`** — sets supported `systems` for all `perSystem` outputs
-
-### Feature modules (`modules/features/`)
-
-Reusable features exposed as `flake.nixosModules.<feature>` and imported by host configurations:
-
-- **`niri.nix`** — see [[features/niri]]
-- **`noctalia/noctalia.nix`** — see [[features/noctalia]]
-
-### Key inputs
-
-See `flake.nix` for current inputs.
-
-### Noctalia configuration
-
-`modules/features/noctalia/noctalia.json` holds all bar/widget settings. Edit the JSON directly; the `.nix` file reads it at build time.
+Full reference: [[overview]] in wiki. Quick map:
+- `flake.nix` → delegates to flake-parts + import-tree (no manual imports needed)
+- `modules/parts.nix` → declares supported systems (`x86_64-linux`)
+- Hosts: [[hosts/nixos-wsl]] (WSL2, dir: `wsl/`), [[hosts/nixxy]] (bare-metal + niri, dir: `nixxy/`)
+- Features: `modules/features/` → [[features/niri]], [[features/noctalia]]
+- Shared: `modules/common.nix` (baseline for all hosts)
+- Noctalia config: edit `modules/features/noctalia/noctalia.json` directly (the `.nix` reads it at build time)
+- Pure eval gotcha: `git add <file>` before `nix flake check` for any new `.nix` file
+- Cross-ref in `perSystem`: `self'.packages.X`; in `flake.*`: `self.packages.${pkgs.stdenv.hostPlatform.system}.X`
 
 ## Claude Code Guidance
 

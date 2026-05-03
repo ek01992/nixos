@@ -19,10 +19,7 @@ For **update tasks** (syncing docs after code changes) — use this order instea
    # or
    git diff --stat HEAD~1
    ```
-2. **Map to wiki pages** — derive the wiki path directly from the source path:
-   - `modules/features/niri.nix` → `wiki/features/niri.md`
-   - `modules/hosts/nixxy/configuration.nix` → `wiki/hosts/nixxy.md`
-   - No need to read `wiki/index.md` first when the mapping is obvious
+2. **Map to wiki pages** — derive the wiki path directly from the source path (e.g., `modules/features/niri.nix` → `wiki/features/niri.md`); do not read `wiki/index.md` first when the mapping is obvious
 3. **Read only the affected pages** — parallel `Read` calls on the specific files
 4. **Use `/wiki-update <file>`** — never edit wiki pages manually (see below)
 
@@ -67,10 +64,7 @@ find /nix/store -name "<module>.nix" -path "*/nixos/modules/*" 2>/dev/null | hea
 
 This avoids a round-trip MCP call when the module is already on disk.
 
-## What Not to Do
+## Additional Notes
 
-- Do not spawn Explore agents to read files with known paths — use parallel `Read` calls
-- Do not read `wiki/index.md` for update tasks when the wiki path is derivable from the source path
-- Do not manually edit wiki pages — use `/wiki-update <file>`
-- Do not run `nix search` via Bash when the MCP is available
-- Do not use `documentation-lookup` or `deep-research` skills — not configured for this project
+- For flake-parts or wrapper-modules API questions, check the nixpkgs module source on-disk first (`find /nix/store -name "*.nix" -path "*/nixos/modules/*"`) before making MCP calls
+- For any file whose path is known, use parallel `Read` calls — do not spawn Explore agents
