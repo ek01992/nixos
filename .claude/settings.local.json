@@ -36,7 +36,9 @@
       "Read(//home/erik/.claude/skills/learned/**)",
       "Bash(journalctl *)",
       "Bash(fuser 22/tcp)",
-      "Bash(systemctl status *)"
+      "Bash(systemctl status *)",
+      "Bash(python3 -c \"import sys; print\\(sys.version\\)\")",
+      "Bash(python3 -c ' *)"
     ]
   },
   "enabledMcpjsonServers": [
