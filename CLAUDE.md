@@ -43,6 +43,8 @@ nil diagnostics             # LSP-based checks
 - `nixos-wsl` — WSL2, NVIDIA CUDA, no SSH/firewall, shared mount at `/mnt/d/wsl/shared`
 - `nixxy` — desktop, Intel, systemd-boot EFI, Niri Wayland compositor, PipeWire, greetd+tuigreet
 
+**Host layout** (`modules/hosts/<name>/`): three files — `default.nix` (imports), `hardware.nix` (boot/filesystems/hostname), `configuration.nix` (home-manager + system config). Dirs: `wsl/`, `nixxy/`.
+
 **Feature modules** (`modules/features/`): Each is a self-contained NixOS module that configures both system and `home-manager.users.erik` in one place.
 - `home.nix` — bootstraps home-manager (`useGlobalPkgs`, `useUserPackages`)
 - `shell.nix` — Fish shell + Starship; defines shell aliases (`nrb`, `nrs`, `nfc`, `nfu`)
@@ -51,7 +53,9 @@ nil diagnostics             # LSP-based checks
 
 **Common module** (`modules/common.nix`): shared across all hosts — experimental nix features, base packages, git config, SSH hardening, timezone/locale, firewall.
 
-**Adding a new feature:** Create `modules/features/myfeature.nix` exporting `flake.nixosModules.myfeature`, then reference it in the host file under `imports`.
+**Adding a new feature:** Use `/new-feature` skill, or manually create `modules/features/myfeature.nix` exporting `flake.nixosModules.myfeature` and add to host `imports`.
+
+**Devshells** (`modules/devshells/`): perSystem devShells via `pkgs.mkShell`. Each shell is a separate `.nix` file; auto-discovered by import-tree.
 
 **Nix channel:** `nixpkgs` tracks `nixos-unstable`. State version: `26.05`.
 
@@ -61,6 +65,8 @@ nil diagnostics             # LSP-based checks
 **Nix packages/options:** Use `mcp__nixos__nix` MCP tool — faster and more current than web search.
 **Memory:** `mem-search` skill for cross-session context; `ctx_search` for current session only.
 **File reads:** Use the `Read` tool — not `cat` via Bash.
+**Scaffolding skills:** `/new-feature`, `/new-host`, `/new-devenv` — scaffold new modules following repo patterns; `/update-inputs` — safe flake input updates with diff preview.
+
 **Planning skills:**
 - `writing-plans` — use when you have a spec/requirements for a multi-step implementation task
 - `pathfinder` — use for codebase architecture exploration and navigation
