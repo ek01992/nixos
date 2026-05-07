@@ -6,7 +6,7 @@
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           inputs.claude-code-nix.packages.${system}.default
-          mgrep
+          bun
           treefmt
           nixfmt-tree
           nixfmt
@@ -17,6 +17,7 @@
           deadnix
           statix
           nodejs
+          mgrep
           ripgrep
           fd
           jq
