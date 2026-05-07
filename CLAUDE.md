@@ -28,6 +28,10 @@ nixfmt-tree .               # or treefmt
 deadnix .                   # find dead code
 statix check .              # find anti-patterns
 nil diagnostics             # LSP-based checks
+
+# Verify
+nrb                          # dry-run build before switching
+# Hooks auto-run on every .nix write: nixfmt → parse check → deadnix+statix → flake eval on stop
 ```
 
 ## Architecture
@@ -59,6 +63,14 @@ nil diagnostics             # LSP-based checks
 
 **Nix channel:** `nixpkgs` tracks `nixos-unstable`. State version: `26.05`.
 
+## Nix Style
+
+- **`with pkgs;` scope:** Acceptable inside list literals (`environment.systemPackages = with pkgs; [ ... ]`). Avoid at let/module scope — use `inherit (pkgs) foo;` or `pkgs.foo`.
+- **Conditionals:** `lib.mkIf cond { ... }` over `if cond then { ... } else {}` at module top-level.
+- **Module naming:** Features → `flake.nixosModules.<filename-stem>`. Host files → `flake.nixosModules.<hostname>Configuration` / `<hostname>Hardware`.
+- **No hardcoded paths:** Use `config.users.users.erik.home` (system) or `config.home.homeDirectory` (HM). Never `/home/erik/`.
+- **One concern per module.** System config + home-manager config for the same feature belongs in one file.
+
 ## Tool Reference
 
 **Search:** Use `mgrep "natural language query"` — never raw `grep`. Web lookups: `mgrep --web --answer "query"`.
@@ -66,6 +78,7 @@ nil diagnostics             # LSP-based checks
 **Memory:** `mem-search` skill for cross-session context; `ctx_search` for current session only.
 **File reads:** Use the `Read` tool — not `cat` via Bash.
 **Scaffolding skills:** `/new-feature`, `/new-host`, `/new-devenv` — scaffold new modules following repo patterns; `/update-inputs` — safe flake input updates with diff preview.
+**Code review:** After writing/editing `.nix` modules, invoke the `nix-reviewer` subagent — checks conventions, `with pkgs;` scope, import-tree export pattern, hardcoded paths.
 
 **Planning skills:**
 - `writing-plans` — use when you have a spec/requirements for a multi-step implementation task

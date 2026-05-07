@@ -20,8 +20,10 @@ When the user invokes /new-feature [name], create the file
 }
 ```
 
-Then remind the user to add it to their host file under `imports`:
-- `nixos-wsl`: `modules/hosts/nixos-wsl.nix`
-- `nixxy`: `modules/hosts/nixxy.nix`
+Then remind the user to add `self.nixosModules.<name>` to the `imports` list in:
+- WSL host: `modules/hosts/wsl/configuration.nix`
+- nixxy host: `modules/hosts/nixxy/configuration.nix`
 
 Finally, run `nfc` (nix flake check) to verify the module is valid.
+
+Then invoke the `nix-reviewer` subagent on the new file to check for convention issues.

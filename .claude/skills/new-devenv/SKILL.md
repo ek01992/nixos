@@ -7,7 +7,7 @@ When the user invokes /new-devenv [name], create the file
 `modules/devshells/<name>.nix` with this boilerplate:
 
 ```nix
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   perSystem =
     { pkgs, system, ... }:

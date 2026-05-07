@@ -6,68 +6,100 @@ description: Scaffold a new NixOS host configuration for this flake repo, follow
 When the user invokes /new-host [name], create the directory
 `modules/hosts/<name>/` with these three files:
 
-**`modules/hosts/<name>/default.nix`:**
+**`modules/hosts/<name>/default.nix`** — flake output entry point:
 ```nix
-{ ... }:
+{ self, inputs, ... }:
 {
-  imports = [ ./configuration.nix ./hardware.nix ];
-}
-```
-
-**`modules/hosts/<name>/hardware.nix`:**
-```nix
-{ config, lib, pkgs, ... }:
-{
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/REPLACE-WITH-ACTUAL-UUID";
-    fsType = "ext4";
+  flake.nixosConfigurations.<name> = inputs.nixpkgs.lib.nixosSystem {
+    modules = [ self.nixosModules.<name>Configuration ];
   };
-
-  swapDevices = [ ];
-
-  networking.hostName = "<name>";
-  networking.networkmanager.enable = true;
 }
 ```
 
-**`modules/hosts/<name>/configuration.nix`:**
+**`modules/hosts/<name>/hardware.nix`** — hardware/filesystem module:
 ```nix
-{ config, inputs, lib, pkgs, self, ... }:
+{ self, inputs, ... }:
 {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    self.nixosModules.common
-    self.nixosModules.shell
-  ];
+  flake.nixosModules.<name>Hardware =
+    { config, lib, modulesPath, ... }:
+    {
+      imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  system.stateVersion = "26.05";
+      fileSystems."/" = {
+        device = "/dev/disk/by-uuid/REPLACE-ROOT-UUID";
+        fsType = "ext4";
+      };
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.erik = { config, ... }: {
-      home.stateVersion = "26.05";
-      home.packages = with pkgs; [ ];
+      fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/REPLACE-BOOT-UUID";
+        fsType = "vfat";
+        options = [
+          "fmask=0077"
+          "dmask=0077"
+        ];
+      };
+
+      swapDevices = [ ];
+      nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     };
-  };
+}
+```
+
+**`modules/hosts/<name>/configuration.nix`** — system + home-manager config:
+```nix
+{ self, inputs, ... }:
+{
+  flake.nixosModules.<name>Configuration =
+    { config, pkgs, lib, ... }:
+    {
+      imports = [
+        self.nixosModules.<name>Hardware
+        inputs.home-manager.nixosModules.home-manager
+        self.nixosModules.common
+        self.nixosModules.home
+        self.nixosModules.shell
+      ];
+
+      networking.hostName = "<name>";
+
+      users.users.erik = {
+        isNormalUser = true;
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
+        packages = with pkgs; [ ];
+      };
+
+      system.stateVersion = "26.05";
+    };
 }
 ```
 
 Then remind the user to:
-- Replace `REPLACE-WITH-ACTUAL-UUID` in `hardware.nix` with the real disk UUID
-  (run `lsblk -f` on the target machine to find it)
-- For WSL hosts: remove the boot loader block and add instead:
+- Replace `REPLACE-ROOT-UUID` and `REPLACE-BOOT-UUID` in `hardware.nix` with real UUIDs
+  (run `lsblk -f` on the target machine to find them)
+- For WSL hosts: replace the `hardware.nix` fileSystems block and `default.nix` nixosConfigurations
+  with WSL equivalents, and replace `configuration.nix` imports with:
+  ```nix
+  imports = [
+    self.nixosModules.<name>Hardware
+    inputs.nixos-wsl.nixosModules.default
+    self.nixosModules.common
+    self.nixosModules.home
+    self.nixosModules.shell
+  ];
+  ```
+  and add the wsl block:
   ```nix
   wsl = {
     enable = true;
     defaultUser = "erik";
   };
   ```
-  and add `inputs.nixos-wsl.nixosModules.wsl` to the `imports` list in `configuration.nix`
 - Add any additional feature modules to the `imports` list in `configuration.nix`
-  (e.g. `self.nixosModules.niri` for the desktop compositor)
+  (e.g. `self.nixosModules.niri` for the Wayland compositor)
 
 Finally, run `nfc` (nix flake check) to verify the host is syntactically valid.
+
+Then invoke the `nix-reviewer` subagent on the new configuration files to check for convention issues.
