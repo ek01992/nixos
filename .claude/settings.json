@@ -1,0 +1,85 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nix *)",
+      "Bash(nixfmt *)",
+      "Bash(nixfmt-tree *)",
+      "Bash(treefmt *)",
+      "Bash(deadnix *)",
+      "Bash(statix *)",
+      "Bash(nil *)",
+      "Bash(nix-instantiate *)",
+      "Bash(git *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(mgrep *)",
+      "Bash(jq *)",
+      "mcp__nixos__nix",
+      "mcp__nixos__nix_versions",
+      "mcp__plugin_context-mode_context-mode__ctx_search",
+      "mcp__plugin_context-mode_context-mode__ctx_batch_execute",
+      "mcp__plugin_context-mode_context-mode__ctx_execute",
+      "mcp__plugin_context-mode_context-mode__ctx_execute_file",
+      "mcp__plugin_context-mode_context-mode__ctx_fetch_and_index",
+      "mcp__plugin_context-mode_context-mode__ctx_stats",
+      "mcp__plugin_context-mode_context-mode__ctx_insight",
+      "mcp__plugin_claude-mem_mcp-search__get_observations",
+      "mcp__plugin_claude-mem_mcp-search__search",
+      "mcp__plugin_claude-mem_mcp-search__smart_search",
+      "mcp__plugin_claude-mem_mcp-search__smart_outline",
+      "mcp__plugin_claude-mem_mcp-search__smart_unfold",
+      "mcp__plugin_claude-mem_mcp-search__timeline",
+      "Bash(node *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/auto-nixfmt.sh"
+          },
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/post-syntax-check.sh"
+          },
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/nix-lint.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/protect-flake-lock.sh"
+          },
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/pre-syntax-check.sh"
+          },
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/host-guard.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/erik/nixos/.claude/hooks/stop-flake-eval.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
